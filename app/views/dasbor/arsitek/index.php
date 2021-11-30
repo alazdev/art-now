@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        <!-- <div class="row">
+        <div class="row">
             <div class="col-lg-12">
                 <div class="card dashboard-area-tabs" id="dashboard-area-tabs">
                     <div class="card-header p-0 bg-white nav">
@@ -60,7 +60,7 @@
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
     </div>
 </div>
 <?php include(__DIR__ . '/../layouts/footer.php'); ?>

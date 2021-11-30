@@ -23,6 +23,43 @@ class pengguna extends Controller
         $data['pesanans'] = $this->model('PesananModel')->semua_bypengguna();
         $this->view('dasbor/pengguna/index', $data);
     }
+
+    public function pesan($id_produk)
+    {
+        $produk = $this->model('ProdukModel')->single_byguest($id_produk);
+        if($produk){
+            $pesanan = $this->model('PesananModel')->sedang_bypengguna();
+
+            $status = true;
+            foreach($pesanan as $data){
+                if($data['id_arsitek'] == $produk['id_user']){
+                    $status = false;
+                }
+            }
+
+            if(count($pesanan) >= 2 || $status == false){
+                $this->alert('Batasan Proyek yang dikerjakan adalah 2 Proyek dengan 2 Arsitek yang berbeda.', null);
+                echo "<script>window.location.href='".$_SERVER['HTTP_REFERER']."';</script>";
+            } else {
+                $data = [
+                    'id_user' => $_SESSION['id_user'],
+                    'id_produk' => $id_produk,
+                    'status' => 0
+                ];
+                $this->model('PesananModel')->tambah($data);
+                $pesan = [
+                    'id_user' => $produk['id_user'],
+                    'judul' => 'Anda memiliki pesanan baru',
+                    'keterangan' => 'Anda baru saja memiliki pesanan baru. <a href="'.BASEURL.'/arsitek/pesanan">Klik di sini untuk melihat.</a>.',
+                    'link' => 'arsitek/pesanan'
+                ];
+                $this->model('NotifikasiModel')->notifikasi($pesan);
+                $this->alert('Berhasil memesan, harap tunggu konfirmasi dari arsitek.', 'pengguna/index');
+            }
+        }else{
+            $this->controller('alert')->message('Not Found', '404 | Not Found');
+        }
+    }
     
     public function imb_pesanan($id_pesanan)
     {
@@ -113,7 +150,7 @@ class pengguna extends Controller
             
             $pesanan = $this->model('PesananModel')->pesanan_bypengguna($id_pesanan);
             $pesan = [
-                'id_user' => $pesanan['id_user'],
+                'id_user' => $pesanan['id_arsitek'],
                 'judul' => 'Pembayaran Berhasil',
                 'keterangan' => 'Selamat Gajian! Pengguna baru saja membayar pesanannya. cek <a href="'.BASEURL.'/arsitek/pesanan">di sini</a>.',
                 'link' => '/arsitek/pesanan'

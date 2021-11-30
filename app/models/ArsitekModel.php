@@ -21,6 +21,19 @@ class ArsitekModel{
         $this->db->bind('diperbaharui_pada',date("Y-m-d H:i:s"));
         $this->db->execute();
     }
+    
+    // Arsitek by guest
+    public function semua_arsitek()
+    {
+		$res = $this->db->query("SELECT user.*, arsitek.id_arsitek, arsitek.deskripsi, arsitek.alamat, (SELECT avg(rating) FROM rating LEFT JOIN produk on rating.id_produk = produk.id_produk WHERE produk.id_user = user.id_user) AS rating, (SELECT count(rating) FROM rating LEFT JOIN produk on rating.id_produk = produk.id_produk WHERE produk.id_user = user.id_user) AS total_rating FROM user LEFT JOIN arsitek ON user.id_user = arsitek.id_user WHERE user.status = 1 AND level = 1 LIMIT 20");
+        return $this->db->resultSet();
+    }
+
+    public function profile_arsitek($id_user)
+    {
+		$res = $this->db->query("SELECT user.*, arsitek.id_arsitek, arsitek.deskripsi, arsitek.alamat, (SELECT avg(rating) FROM rating LEFT JOIN produk on rating.id_produk = produk.id_produk WHERE produk.id_user = user.id_user) AS rating, (SELECT count(rating) FROM rating LEFT JOIN produk on rating.id_produk = produk.id_produk WHERE produk.id_user = user.id_user) AS total_rating FROM user LEFT JOIN arsitek ON user.id_user = arsitek.id_user WHERE user.status = 1 AND level = 1 AND user.id_user = '".$id_user."'");
+        return $this->db->single();
+    }
 
     // Arsitek cek
     public function cek_user(){

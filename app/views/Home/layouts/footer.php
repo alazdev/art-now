@@ -2,7 +2,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-12 col-sm-12 col-12">
-                    <p>Copyright &copy; 2021 <a href="#">ArtNow</a>. All Right Reserved.</p>
+                    <p>Copyright &copy; 2021 <a href="<?= BASEURL?>">ArtNow</a>. All Right Reserved.</p>
                 </div>
                 <div class="col-lg-6 col-md-12 col-sm-12 col-12">
                     <ul class="blog_footer_menu">

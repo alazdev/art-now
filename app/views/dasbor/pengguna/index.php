@@ -48,7 +48,7 @@
                                 <?php foreach($data['pesanans'] as $pesanan) { ?>
                                 <tr>
                                     <td><a href="<?= BASEURL.'/user/profile_arsitek/'.$pesanan['id_arsitek'];?>"><?= $pesanan['nama_lengkap_arsitek']; ?></a></td>
-                                    <td><a href="<?= BASEURL.'/arsitek/detail_produk/'.$pesanan['id_produk'];?>"><?= $pesanan['judul']; ?></a></td>
+                                    <td><a href="<?= BASEURL.'/home/produk/'.$pesanan['id_produk'];?>"><?= $pesanan['judul']; ?></a></td>
                                     <td align="center">
                                         <?php if($pesanan['status'] == -1 ) { ?>
                                             <span class="badge badge-danger">DITOLAK</span>

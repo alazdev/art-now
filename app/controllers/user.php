@@ -117,6 +117,7 @@ class user extends Controller
     public function logout()
     {
         session_destroy();
-        $this->route('auth/login');
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        // $this->route('auth/login');
     }
 }

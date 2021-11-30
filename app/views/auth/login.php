@@ -52,6 +52,12 @@
             </div>
         </div>
         <div class="form-group">
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" onclick="myFunction()" id="show" checked>
+                <label class="custom-control-label" for="show">Sembunyikan Kata Sandi</label>
+            </div>
+        </div>
+        <div class="form-group">
             <button class="btn btn-block btn-primary" type="submit">Login</button>
         </div>
         <div class="form-group text-center">
@@ -66,4 +72,14 @@
         </div>
     </form>
 </div>
+<script>
+    function myFunction() {
+        var x = document.getElementById("password_2");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
 <?php include('layouts/footer.php'); ?>

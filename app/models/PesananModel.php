@@ -20,6 +20,10 @@ class PesananModel{
         $this->db->query("SELECT pesanan.*, user.nama_lengkap as nama_lengkap_arsitek, user.id_user as id_arsitek, produk.judul, imb.dokumen FROM pesanan LEFT JOIN produk ON produk.id_produk = pesanan.id_produk LEFT JOIN user on user.id_user = produk.id_user LEFT JOIN imb on imb.id_pesanan = pesanan.id_pesanan WHERE pesanan.id_user = '".$this->cek_user()['id_user']."' ORDER BY pesanan.dibuat_pada DESC");
         return $this->db->resultSet();
     }
+    public function sedang_bypengguna(){
+        $this->db->query("SELECT pesanan.*, user.nama_lengkap as nama_lengkap_arsitek, user.id_user as id_arsitek, produk.judul, imb.dokumen FROM pesanan LEFT JOIN produk ON produk.id_produk = pesanan.id_produk LEFT JOIN user on user.id_user = produk.id_user LEFT JOIN imb on imb.id_pesanan = pesanan.id_pesanan WHERE pesanan.id_user = '".$this->cek_user()['id_user']."' AND pesanan.status BETWEEN 1 AND 2");
+        return $this->db->resultSet();
+    }
     public function pesanan_bypengguna($id_pesanan){
         $this->db->query("SELECT pesanan.*, user.nama_lengkap as nama_lengkap_arsitek, user.id_user as id_arsitek, produk.judul, imb.dokumen, produk.harga FROM pesanan LEFT JOIN produk ON produk.id_produk = pesanan.id_produk LEFT JOIN user on user.id_user = produk.id_user LEFT JOIN imb on imb.id_pesanan = pesanan.id_pesanan WHERE pesanan.id_user = '".$this->cek_user()['id_user']."' AND pesanan.id_pesanan = ".$id_pesanan."");
         return $this->db->single();
@@ -32,6 +36,18 @@ class PesananModel{
     public function pesanan($id_produk){
         $this->db->query("SELECT pesanan.*, user.nama_lengkap, produk.judul, imb.dokumen FROM pesanan LEFT JOIN user on user.id_user = pesanan.id_user LEFT JOIN produk ON produk.id_produk = pesanan.id_produk LEFT JOIN imb on imb.id_pesanan = pesanan.id_pesanan WHERE produk.id_user = '".$this->cek_user()['id_user']."'");
         return $this->db->single();
+    }
+
+    public function tambah($data)
+    {
+        $user = $this->cek_user();
+        $this->db->query('INSERT INTO pesanan (id_user, id_produk, status, dibuat_pada, diperbaharui_pada) VALUES(:id_user, :id_produk, :status, :dibuat_pada, :diperbaharui_pada)');
+        $this->db->bind('id_user',$user['id_user']);
+        $this->db->bind('id_produk',$data['id_produk']);
+        $this->db->bind('status',$data['status']);
+        $this->db->bind('dibuat_pada',date("Y-m-d H:i:s"));
+        $this->db->bind('diperbaharui_pada',date("Y-m-d H:i:s"));
+        $this->db->execute();
     }
 
     public function update_status($id_pesanan, $status){

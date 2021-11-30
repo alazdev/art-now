@@ -103,13 +103,13 @@ class UserModel{
 		$telepon    = $_POST['telepon'];
 		
 		$res = $this->db->query("SELECT * FROM ".$this->table." WHERE email = '".$email."' OR telepon = '".$telepon."'");
-        return $this->db->single();;
+        return $this->db->single();
     }
     
     public function profile()
     {
 		$res = $this->db->query("SELECT user.*, arsitek.id_arsitek, arsitek.deskripsi, arsitek.alamat FROM ".$this->table." LEFT JOIN arsitek ON user.id_user = arsitek.id_user WHERE email = '".$_SESSION['email']."'");
-        return $this->db->single();;
+        return $this->db->single();
     }
     
     public function update_profile($data)
@@ -150,14 +150,15 @@ class UserModel{
     public function profile_pengguna($id_user)
     {
 		$res = $this->db->query("SELECT * FROM user WHERE id_user = '".$id_user."'");
-        return $this->db->single();;
+        return $this->db->single();
     }
     
     public function profile_arsitek($id_user)
     {
 		$res = $this->db->query("SELECT user.*, arsitek.id_arsitek, arsitek.deskripsi, arsitek.alamat, (SELECT avg(rating) FROM rating LEFT JOIN produk on rating.id_produk = produk.id_produk WHERE produk.id_user = user.id_user) AS rating, (SELECT count(rating) FROM rating LEFT JOIN produk on rating.id_produk = produk.id_produk WHERE produk.id_user = user.id_user) AS total_rating FROM user LEFT JOIN arsitek ON user.id_user = arsitek.id_user WHERE user.id_user = '".$id_user."'");
-        return $this->db->single();;
+        return $this->db->single();
     }
+    
     
     public function login()
     {

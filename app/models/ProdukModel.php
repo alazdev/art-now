@@ -15,6 +15,24 @@ class ProdukModel{
         return $this->db->resultSet();
     }
 
+    // By Guest
+    public function index_byguest($order = null){
+        $this->db->query("SELECT produk.*, user.nama_lengkap, user.foto, (SELECT avg(rating) FROM rating WHERE rating.id_produk = produk.id_produk ) AS rating, (SELECT count(rating) FROM rating WHERE rating.id_produk = produk.id_produk ) AS total_rating FROM produk LEFT JOIN user ON produk.id_user = user.id_user WHERE produk.status = 1 AND user.status = 1 ORDER BY produk.dibuat_pada ".(($order == NULL) ? "DESC" : "ASC")." LIMIT 20");
+        return $this->db->resultSet();
+    }
+    public function cari_byguest($cari){
+        $this->db->query("SELECT produk.*, user.nama_lengkap, user.foto, (SELECT avg(rating) FROM rating WHERE rating.id_produk = produk.id_produk ) AS rating, (SELECT count(rating) FROM rating WHERE rating.id_produk = produk.id_produk ) AS total_rating FROM produk LEFT JOIN user ON produk.id_user = user.id_user LEFT JOIN arsitek ON user.id_user = arsitek.id_arsitek WHERE (produk.status = 1 AND user.status = 1) AND (nama_lengkap LIKE '%".$cari."%' OR user.email LIKE '%".$cari."%' OR user.telepon LIKE '%".$cari."%' OR arsitek.alamat LIKE '%".$cari."%' OR arsitek.deskripsi LIKE '%".$cari."%' OR produk.deskripsi LIKE '%".$cari."%' OR produk.judul LIKE '%".$cari."%')");
+        return $this->db->resultSet();
+    }
+    public function semua_byguest($id_user){
+        $this->db->query("SELECT produk.*, user.nama_lengkap, user.foto, (SELECT avg(rating) FROM rating WHERE rating.id_produk = produk.id_produk ) AS rating, (SELECT count(rating) FROM rating WHERE rating.id_produk = produk.id_produk ) AS total_rating FROM produk LEFT JOIN user ON produk.id_user = user.id_user WHERE produk.id_user = '".$id_user."' AND produk.status = 1 ORDER BY produk.dibuat_pada DESC");
+        return $this->db->resultSet();
+    }
+    public function single_byguest($id_produk){
+        $this->db->query("SELECT produk.*, user.nama_lengkap, user.foto, user.email, user.telepon, user.dibuat_pada as user_dibuat_pada, arsitek.id_arsitek, arsitek.deskripsi as arsitek_deskripsi, arsitek.alamat, (SELECT avg(rating) FROM rating WHERE rating.id_produk = produk.id_produk ) AS rating, (SELECT count(rating) FROM rating WHERE rating.id_produk = produk.id_produk ) AS total_rating FROM produk LEFT JOIN user ON produk.id_user = user.id_user LEFT JOIN arsitek ON user.id_user = arsitek.id_user WHERE produk.id_produk = '".$id_produk."'");
+        return $this->db->single();
+    }
+
     // Laporan by Admib
     public function semua_byadmin(){
         $this->db->query("SELECT produk.*, user.nama_lengkap, user.email, user.telepon, (SELECT avg(rating) FROM rating WHERE rating.id_produk = produk.id_produk ) AS rating, (SELECT count(rating) FROM rating WHERE rating.id_produk = produk.id_produk ) AS total_rating FROM produk LEFT JOIN user ON user.id_user = produk.id_user WHERE produk.status >= 0 ORDER BY dibuat_pada DESC");

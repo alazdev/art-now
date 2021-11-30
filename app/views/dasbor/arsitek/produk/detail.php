@@ -30,7 +30,7 @@
                     </div>
 
                     <div class="mb-4">
-                        <a href="../rating_produk/<?= $data['id_produk'];?>" class="btn btn-light btn-block">Lihat Komen</a>
+                        <a href="../../home/produk/<?= $data['id_produk'];?>" class="btn btn-light btn-block">Lihat Komen</a>
                         <a href="../rating_produk/<?= $data['id_produk'];?>" class="btn btn-light btn-block">Lihat Rating</a>
                     </div>
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <title>ArtNow <?php $data['title'];?></title>
+    <title>ArtNow</title>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta name="description" content="Blog">
@@ -32,7 +32,7 @@
 			<div class="blog_date_div"></div>
 			<div class="blog_temperature_div"></div>
 			<div class="blog_logo">
-				<a href="index.html"><img src="<?= BASEURL; ?>/assets-user/images/logo.png" class="img-fluid" alt="logo"></a>
+				<a href="<?=BASEURL?>"><img src="<?= BASEURL; ?>/assets-user/images/logo.png" class="img-fluid" alt="logo"></a>
 				<div class="blog_menu_toggle">
 					<span>
 						<i class="fa fa-bars" aria-hidden="true"></i>
@@ -84,13 +84,12 @@
 						<a href="javascript:;"><svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px"><path fill-rule="evenodd"  fill="#000000" d="M15.750,14.573 L11.807,10.612 C12.821,9.449 13.376,7.984 13.376,6.459 C13.376,2.898 10.376,-0.000 6.687,-0.000 C2.999,-0.000 -0.002,2.898 -0.002,6.459 C-0.002,10.021 2.999,12.919 6.687,12.919 C8.072,12.919 9.391,12.516 10.520,11.750 L14.493,15.741 C14.659,15.907 14.882,15.999 15.121,15.999 C15.348,15.999 15.563,15.916 15.726,15.764 C16.073,15.442 16.084,14.908 15.750,14.573 ZM6.687,1.685 C9.414,1.685 11.631,3.827 11.631,6.459 C11.631,9.092 9.414,11.234 6.687,11.234 C3.961,11.234 1.743,9.092 1.743,6.459 C1.743,3.827 3.961,1.685 6.687,1.685 Z"/></svg></a>
 						<div class="blog_search_popup">
 							<a class="search_close"></a>
-							<form class="form-inline">
+							<form class="form-inline" method="POST" action="<?= BASEURL?>/home/cari">
 								<h3>Masukkan kata kunci yang ingin kamu cari dan tekan enter...</h3>
 								<div class="blog_form_group">
-									<input type="text" class="form-control" placeholder="Cari disini...">
-									<button type="button" class="blog_header_search">Cari</button>
+									<input type="text" name="cari" class="form-control" placeholder="Cari disini...">
+									<button type="submit" class="blog_header_search">Cari</button>
 								</div>
-								
 							</form>
 						</div>
 					</li>
