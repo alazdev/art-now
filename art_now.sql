@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2021 at 01:10 PM
+-- Generation Time: Dec 01, 2021 at 05:07 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.4.20
 
@@ -32,6 +32,7 @@ CREATE TABLE `arsitek` (
   `id_user` int(11) NOT NULL,
   `deskripsi` text DEFAULT NULL,
   `alamat` text NOT NULL,
+  `dokumen` varchar(255) NOT NULL,
   `dibuat_pada` timestamp NULL DEFAULT NULL,
   `diperbaharui_pada` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -61,6 +62,7 @@ CREATE TABLE `komen` (
   `id_reply_komen` int(11) DEFAULT NULL,
   `id_produk` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
+  `komen` text NOT NULL,
   `dibuat_pada` timestamp NULL DEFAULT NULL,
   `diperbaharui_pada` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -110,9 +112,7 @@ CREATE TABLE `pesan` (
   `id_user_to` int(11) NOT NULL,
   `tipe` tinyint(1) NOT NULL,
   `pesan` varchar(200) NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  `dibuat_pada` timestamp NULL DEFAULT NULL,
-  `dihapus_pada` timestamp NULL DEFAULT NULL
+  `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -166,19 +166,6 @@ CREATE TABLE `rating` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sukai`
---
-
-CREATE TABLE `sukai` (
-  `id_sukai` int(11) NOT NULL,
-  `id_produk` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `dibuat_pada` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `user`
 --
 
@@ -200,7 +187,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `email`, `password`, `level`, `nama_lengkap`, `telepon`, `foto`, `status`, `dibuat_pada`, `diperbaharui_pada`) VALUES
-(1, 'admin@gmail.com', '5c90b96a75d4f9d5a1cfaa6f532afdc8', 2, 'Super Admin', '085156055277', 'whatsapp-logo-png-2263-1637316288.png', 1, '2021-11-19 10:02:06', '2021-11-19 10:04:48');
+(1, 'admin@gmail.com', '5c90b96a75d4f9d5a1cfaa6f532afdc8', 2, 'Super Admin', '085156055277', NULL, 1, '2021-11-19 10:02:06', '2021-11-19 10:04:48');
 
 --
 -- Indexes for dumped tables
@@ -277,14 +264,6 @@ ALTER TABLE `rating`
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indexes for table `sukai`
---
-ALTER TABLE `sukai`
-  ADD PRIMARY KEY (`id_sukai`),
-  ADD KEY `id_produk` (`id_produk`),
-  ADD KEY `id_user` (`id_user`);
-
---
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -300,31 +279,31 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `arsitek`
 --
 ALTER TABLE `arsitek`
-  MODIFY `id_arsitek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_arsitek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `imb`
 --
 ALTER TABLE `imb`
-  MODIFY `id_imb` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_imb` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `komen`
 --
 ALTER TABLE `komen`
-  MODIFY `id_komen` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_komen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `notifikasi`
 --
 ALTER TABLE `notifikasi`
-  MODIFY `id_notifikasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_notifikasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `pesan`
@@ -336,31 +315,25 @@ ALTER TABLE `pesan`
 -- AUTO_INCREMENT for table `pesanan`
 --
 ALTER TABLE `pesanan`
-  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `rating`
 --
 ALTER TABLE `rating`
-  MODIFY `id_rating` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT for table `sukai`
---
-ALTER TABLE `sukai`
-  MODIFY `id_sukai` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_rating` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Constraints for dumped tables
@@ -382,7 +355,6 @@ ALTER TABLE `imb`
 -- Constraints for table `komen`
 --
 ALTER TABLE `komen`
-  ADD CONSTRAINT `komen_ibfk_1` FOREIGN KEY (`id_komen`) REFERENCES `komen` (`id_reply_komen`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `komen_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `komen_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -397,6 +369,13 @@ ALTER TABLE `notifikasi`
 --
 ALTER TABLE `pembayaran`
   ADD CONSTRAINT `pembayaran_ibfk_1` FOREIGN KEY (`id_pesanan`) REFERENCES `pesanan` (`id_pesanan`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `pesan`
+--
+ALTER TABLE `pesan`
+  ADD CONSTRAINT `pesan_ibfk_1` FOREIGN KEY (`id_user_from`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pesan_ibfk_2` FOREIGN KEY (`id_user_to`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `pesanan`
@@ -417,13 +396,6 @@ ALTER TABLE `produk`
 ALTER TABLE `rating`
   ADD CONSTRAINT `rating_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `rating_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `sukai`
---
-ALTER TABLE `sukai`
-  ADD CONSTRAINT `sukai_ibfk_1` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `sukai_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

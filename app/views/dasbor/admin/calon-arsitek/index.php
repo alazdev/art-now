@@ -53,8 +53,10 @@
                                         <?php } ?>
                                     </td>
                                     <td align="right">
-                                        <a href="detail_calon_arsitek/<?= $calon_arsitek['id_user']; ?>" class="text-muted"><i class="material-icons">receipt</i></a>
+                                        <?php if(isset($calon_arsitek['status_produk'])) { ?>
+                                            <a href="detail_calon_arsitek/<?= $calon_arsitek['id_user']; ?>" class="text-muted"><i class="material-icons">receipt</i></a>
                                         <a href="terima_calon_arsitek/<?= $calon_arsitek['id_user']; ?>" class="text-success"><i class="material-icons">check</i></a>
+                                        <?php } ?>
                                         <a href="tolak_calon_arsitek/<?= $calon_arsitek['id_user']; ?>" class="text-danger"><i class="material-icons">block</i></a>
                                     </td>
                                 </tr>
