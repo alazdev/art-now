@@ -43,9 +43,29 @@ class arsitek extends Controller
     {
         if(isset($_POST['deskripsi']) && isset($_POST['alamat']))
         {
+            // Memasukkan Dokumen Baru
+            $output_dir = dirname(getcwd())."/public/dokumen/";
+            $RandomNum  = time();
+            $DokumenName  = str_replace(' ','-',strtolower($_FILES['dokumen']['name'][0]));
+            $DokumenType  = $_FILES['dokumen']['type'][0];
+        
+            $DokumenExt   = substr($DokumenName, strrpos($DokumenName, '.'));
+            $DokumenExt   = str_replace('.','',$DokumenExt);
+            $DokumenName  = preg_replace("/\.[^.\s]{3,4}$/", "", $DokumenName);
+            $NewDokumenName = $DokumenName.'-'.$RandomNum.'.'.$DokumenExt;
+            $ret[$NewDokumenName] = $output_dir.$NewDokumenName;
+
+            if (!file_exists($output_dir))
+            {
+                @mkdir($output_dir, 0777);
+            }     
+
+            move_uploaded_file($_FILES["dokumen"]["tmp_name"][0], $output_dir.$NewDokumenName );
+
             $data = [
                 'deskripsi' => $_POST['deskripsi'],
-                'alamat'    => $_POST['alamat']
+                'alamat'    => $_POST['alamat'],
+                'dokumen'   => $NewDokumenName
             ];
             $this->model('ArsitekModel')->tambah($data);
             $this->route('arsitek/deskripsi');

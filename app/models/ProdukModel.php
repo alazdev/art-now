@@ -40,7 +40,7 @@ class ProdukModel{
     }
 
     public function produk($id_produk){
-        $this->db->query("SELECT *, (SELECT avg(rating) FROM rating WHERE rating.id_produk = produk.id_produk ) AS rating, (SELECT count(rating) FROM rating WHERE rating.id_produk = produk.id_produk ) AS total_rating FROM produk WHERE id_user = '".$this->cek_user()['id_user']."' AND id_produk = '".$id_produk."'");
+        $this->db->query("SELECT *, (SELECT avg(rating) FROM rating WHERE rating.id_produk = produk.id_produk ) AS rating, (SELECT count(rating) FROM rating WHERE rating.id_produk = produk.id_produk ) AS total_rating, (SELECT pesanan.status FROM pesanan WHERE pesanan.id_produk = produk.id_produk AND pesanan.status BETWEEN 0 AND 2 LIMIT 1) as status_pesanan FROM produk WHERE id_user = '".$this->cek_user()['id_user']."' AND id_produk = '".$id_produk."'");
         return $this->db->single();
     }
 

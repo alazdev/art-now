@@ -60,6 +60,9 @@ class produk extends arsitek
     {
         if($this->model('ProdukModel')->produk($id_produk) != null){
             $data = $this->model('ProdukModel')->produk($id_produk);
+            if($data['status_pesanan'] != null ){
+                $this->alert('Tidak dapat mengedit Produk. Selesaikan Proyek atau tolak semua pesanan mengenai Produk ini terlebih dahulu.', 'arsitek/produk');
+            }
             $this->view('dasbor/arsitek/produk/edit', $data);
         }else{
             $this->controller('alert')->message('Not Found', '404 | Not Found');

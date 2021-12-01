@@ -209,43 +209,17 @@
                         </a>
                         <ul class="nav navbar-nav ml-auto d-none d-md-flex">
                             <li class="nav-item dropdown">
-                                <a href="#notifications_menu" class="nav-link dropdown-toggle" data-toggle="dropdown" data-caret="false">
-                                    <i class="material-icons nav-icon navbar-notifications-indicator">notifications</i>
+                                <a onclick="lihat()" href="#notifications_menu" class="nav-link dropdown-toggle" data-toggle="dropdown" data-caret="false">
+                                    <i class="material-icons nav-icon" id="indikator">notifications</i>
                                 </a>
                                 <div id="notifications_menu" class="dropdown-menu dropdown-menu-right navbar-notifications-menu">
                                     <div class="dropdown-item d-flex align-items-center py-2">
                                         <span class="flex navbar-notifications-menu__title m-0">Notifikasi</span>
-                                        <a href="javascript:void(0)" class="text-muted"><small>Bersihkan</small></a>
+                                        <a onclick="bersihkan()" href="javascript:void(0)" class="text-muted"><small>Bersihkan</small></a>
                                     </div>
                                     <div class="navbar-notifications-menu__content" data-simplebar>
-                                        <div class="py-2">
-                                            <?php if($_SESSION['level'] == 1){?>
-                                                <div class="dropdown-item d-flex">
-                                                    <div class="flex">
-                                                        Kamu memiliki pesanan terbaru. Klik <a href="#">di sini</a>.<br>
-                                                        <small class="text-muted">1 minute ago</small>
-                                                    </div>
-                                                </div>
-                                                <div class="dropdown-item d-flex">
-                                                    <div class="flex">
-                                                        Selamat Gajian! Pesananmu baru saja dibayar<br>
-                                                        <small class="text-muted">1 hour ago</small>
-                                                    </div>
-                                                </div>
-                                            <?php } else if($_SESSION['level'] == 0) { ?>
-                                                <div class="dropdown-item d-flex">
-                                                    <div class="flex">
-                                                        Pesanan anda baru saja diterima arsitek. Klik <a href="#">di sini</a>.<br>
-                                                        <small class="text-muted">1 minute ago</small>
-                                                    </div>
-                                                </div>
-                                                <div class="dropdown-item d-flex">
-                                                    <div class="flex">
-                                                        Pesanan anda ditolak arsitek. Temukan produk lain di <a href="#">di sini</a>.<br>
-                                                        <small class="text-muted">1 hour ago</small>
-                                                    </div>
-                                                </div>
-                                            <?php } ?>
+                                        <div class="py-2 notifikasi-div">
+                                            
                                         </div>
                                     </div>
                                 </div>

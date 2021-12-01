@@ -12,7 +12,12 @@ class PembayaranModel{
     
     // Untuk Dasboard Arsitek
     public function total_pembayaran(){
-        $this->db->query("SELECT pembayaran.total_dibayar FROM pembayaran LEFT JOIN pesanan ON pembayaran.id_pesanan = pesanan.id_pesanan LEFT JOIN produk ON produk.id_produk = pesanan.id_produk LEFT JOIN user on produk.id_user = user.id_user WHERE user.id_user = '".$this->cek_user()['id_user']."' AND pembayaran.status = 1");
+        $this->db->query("SELECT pembayaran.total_dibayar FROM pembayaran LEFT JOIN pesanan ON pembayaran.id_pesanan = pesanan.id_pesanan LEFT JOIN produk ON produk.id_produk = pesanan.id_produk LEFT JOIN user on produk.id_user = user.id_user WHERE user.id_user = '".$this->cek_user()['id_user']."' AND (pembayaran.status = 1 OR pembayaran.status = -1)");
+        return $this->db->resultSet();
+    }
+
+    public function cek_dp($id_pesanan){
+        $this->db->query("SELECT * FROM pembayaran WHERE id_pesanan = ".$id_pesanan," AND status = -1");
         return $this->db->resultSet();
     }
 
@@ -32,7 +37,7 @@ class PembayaranModel{
             LEFT JOIN produk ON produk.id_produk = pesanan.id_produk 
             LEFT JOIN user pengguna on pesanan.id_user = pengguna.id_user 
             LEFT JOIN user arsitek on produk.id_user = arsitek.id_user 
-            WHERE pembayaran.status = 1");
+            WHERE pembayaran.status = 1 OR pembayaran.status = -1");
         return $this->db->resultSet();
     }
 
@@ -57,7 +62,7 @@ class PembayaranModel{
                 LEFT JOIN pesanan ON pembayaran.id_pesanan = pesanan.id_pesanan 
                 LEFT JOIN produk ON produk.id_produk = pesanan.id_produk 
                 LEFT JOIN user on produk.id_user = user.id_user 
-                WHERE (user.id_user = '".$this->cek_user()['id_user']."' AND pembayaran.status = 1) 
+                WHERE (user.id_user = '".$this->cek_user()['id_user']."' AND (pembayaran.status = 1 OR pembayaran.status = -1)) 
                 AND (pembayaran.dibuat_pada <= NOW() AND pembayaran.dibuat_pada >= Date_add(Now(),interval - 12 month)) 
                 GROUP BY DATE_FORMAT(pembayaran.dibuat_pada, '%m-%Y')
             ) as sub

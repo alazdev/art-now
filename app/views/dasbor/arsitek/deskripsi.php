@@ -29,6 +29,10 @@
                         </div>
                         <label>Deskripsi</label>
                         <div style="height: 150px;" data-toggle="quill" id="deskripsi" data-quill-placeholder="Deskripsi Produk..."></div>
+                        <div class="form-group">
+                            <label for="dokumen">Dokumen<sup>(Foto KTP, Sertifikasi Arsitek, dll dalam satu pdf/word)</sup>:</label>
+                            <input type="file" name="dokumen[]" class="form-control" id="dokumen" accept="application/msword, application/pdf" required>
+                        </div>
                         <button type="submit" class="btn btn-primary">Kirim</button>
                     </form>
                 </div>

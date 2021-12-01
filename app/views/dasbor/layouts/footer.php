@@ -204,6 +204,52 @@
         });
     })()
 </script>
+<script>
+    function load_notification(view = '')
+    {
+        $.ajax({
+            url:"<?=BASEURL?>/user/notifikasi",
+            method:"POST",
+            data:{view:view},
+            dataType:"json",
+            success:function(data)
+            {
+                $('.notifikasi-div').html(data.notifikasi);
+                if(data.belum_dilihat > 0)
+                {
+                    $('#indikator').addClass("navbar-notifications-indicator");
+                }
+            }
+        });
+    }
+    $(document).ready(function(){
+        load_notification();
+    });
+    function lihat(view = ''){
+        $.ajax({
+            url:"<?=BASEURL?>/user/lihat_notifikasi",
+            method:"POST",
+            data:{view:view},
+            dataType:"json",
+            success:function(data)
+            {
+                $('#indikator').removeClass("navbar-notifications-indicator");
+            }
+        });
+    }
+    function bersihkan(view = ''){
+        $.ajax({
+            url:"<?=BASEURL?>/user/bersihkan_notifikasi",
+            method:"POST",
+            data:{view:view},
+            dataType:"json",
+            success:function(data)
+            {
+                load_notification();
+            }
+        });
+    }
+</script>
 
 </body>
 

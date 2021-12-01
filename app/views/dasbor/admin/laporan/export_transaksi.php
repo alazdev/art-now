@@ -43,6 +43,7 @@
             <th>Metode Transaksi</th>
             <th>Nomor Pembayaran/Rekening</th>
             <th>Total Dibayar</th>
+            <th>Pembayaran</th>
             <th>Nama Pengguna</th>
             <th>Email Pengguna</th>
             <th>Telepon Pengguna</th>
@@ -59,6 +60,7 @@
                 <td><?= $transaksi['metode_pembayaran']; ?></td>
                 <td><?= $transaksi['nomor_pembayaran']; ?></td>
                 <td>Rp <?= number_format($transaksi['total_dibayar'], 0, ',', '.'); ?></td>
+                <td><?= ($transaksi['status']==1) ? 'Penuh':'DP/Uang Muka' ?></td>
                 <td><?= $transaksi['nama_lengkap_pengguna']; ?></td>
                 <td><?= $transaksi['email_pengguna']; ?></td>
                 <td><?= $transaksi['telepon_pengguna']; ?></td>

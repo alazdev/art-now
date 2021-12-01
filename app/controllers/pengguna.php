@@ -38,7 +38,7 @@ class pengguna extends Controller
             }
 
             if(count($pesanan) >= 2 || $status == false){
-                $this->alert('Batasan Proyek yang dikerjakan adalah 2 Proyek dengan 2 Arsitek yang berbeda.', null);
+                $this->alert('Batasan Proyek yang dikerjakan serta jumlah pemesanan adalah 2 Proyek dengan 2 Arsitek yang berbeda. Anda bisa menyelesaikan proyek saat ini atau membatalkan pesanan yang memiliki status menunggu. cek pesanan di dasbor!', null);
                 echo "<script>window.location.href='".$_SERVER['HTTP_REFERER']."';</script>";
             } else {
                 $data = [
@@ -142,7 +142,7 @@ class pengguna extends Controller
                 'metode_pembayaran' => $_POST['metode_pembayaran'],
                 'nomor_pembayaran' => $_POST['nomor_pembayaran'],
                 'status' => 1,
-                'total_dibayar' => $this->model('PesananModel')->pesanan_bypengguna($id_pesanan)['harga'],
+                'total_dibayar' => $this->model('PesananModel')->pesanan_bypengguna($id_pesanan)['harga']*80/100,
             ];
             $this->model('PembayaranModel')->tambah($data);
             $this->add_rating($id_pesanan);
@@ -158,6 +158,33 @@ class pengguna extends Controller
             $this->model('NotifikasiModel')->notifikasi($pesan);
             $this->model('PesananModel')->update_status($id_pesanan, 3);
             $this->alert('Pembayaran berhasil dilakukan.', 'pengguna/index');
+            exit();
+        }else{
+            $this->controller('alert')->message('Not Found', '404 | Not Found');
+        }
+    }
+    public function pembayaran_dp($id_pesanan)
+    {
+        $data = $this->model('PesananModel')->pesanan_bypengguna($id_pesanan);
+        if($data != null){
+            $this->view('dasbor/pengguna/pembayaran_dp', $data);
+        }else{
+            $this->controller('alert')->message('Not Found', '404 | Not Found');
+        }
+    }
+    public function kirim_pembayaran_dp($id_pesanan){
+        if (isset($_POST['kirim']))
+        {
+            $data = [
+                'id_pesanan' => $id_pesanan,
+                'nomor_transaksi' => rand(1000000000,9999999999),
+                'metode_pembayaran' => $_POST['metode_pembayaran'],
+                'nomor_pembayaran' => $_POST['nomor_pembayaran'],
+                'status' => -1,
+                'total_dibayar' => $this->model('PesananModel')->pesanan_bypengguna($id_pesanan)['harga']*20/100,
+            ];
+            $this->model('PembayaranModel')->tambah($data);
+            $this->alert('Pembayaran DP berhasil dilakukan.', 'pengguna/index');
             exit();
         }else{
             $this->controller('alert')->message('Not Found', '404 | Not Found');

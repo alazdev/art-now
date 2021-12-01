@@ -25,6 +25,7 @@
                                     <th>Email</th>
                                     <th>Telepon</th>
                                     <th align="center">Status</th>
+                                    <th align="center">Dokumen</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -42,6 +43,13 @@
                                             <span class="badge badge-info">MENUNGGU</span>
                                         <?php } } else { ?>
                                             <span class="badge badge-warning">PRODUK BELUM DITEMUKAN</span>
+                                        <?php } ?>
+                                    </td>
+                                    <td align="center">
+                                        <?php if ($calon_arsitek['dokumen'] != null) {?>
+                                            <a class="badge badge-success" href="<?= BASEURL.'/dokumen/'.$calon_arsitek['dokumen']; ?>" download="<?= 'CALON ARSITEK-'.$calon_arsitek['nama_lengkap'].'-'.$calon_arsitek['dokumen'];?>">ADA</a>
+                                        <?php } else { ?>
+                                            <span class="badge badge-danger">BELUM ADA</span>
                                         <?php } ?>
                                     </td>
                                     <td align="right">
@@ -63,6 +71,7 @@
     $(document).ready( function () {
         $('.table').DataTable({
             "columns": [
+                null,
                 null,
                 null,
                 null,

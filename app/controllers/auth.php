@@ -76,6 +76,43 @@ class auth extends Controller
 
     public function lupa_sandi()
     {
+        if(isset($_POST['email'])){
+            $user = $this->model('UserModel')->lupa_password($_POST['email']);
+            if($user)
+            {
+                header('location: '.BASEURL.'/auth/reset_sandi?email='.$user['email'].'&token='.$user['password']);
+            }else{
+                $data['type'] = 'danger';
+                $data['desc'] = 'Email tidak ditemukan';
+                $this->view('auth/lupa_sandi', $data);
+            }
+        }
         $this->view('auth/lupa_sandi');
+    }
+
+    public function reset_sandi(){
+        if(isset($_POST['email'])){
+            if($_POST['npw'] === $_POST['cpw']){
+                $this->model('UserModel')->reset($_POST['email'], $_POST['cpw']);
+                $this->alert('Kata Sandi berhasil diubah.', 'auth/login');
+            }else{
+                $data['type'] = 'danger';
+                $data['desc'] = 'Kata Sandi tidak cocok';
+                $this->view('auth/lupa_sandi?email='.$_POST['email'].'&token='.$_POST['token'], $data);
+            }
+        }
+        
+        $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $components = parse_url($actual_link);
+        parse_str($components['query'], $results);
+        
+        $user = $this->model('UserModel')->cek_reset($results['email'], $results['token']);
+        if($user){
+            $data = $user;
+            
+            $this->view('auth/reset_sandi', $data);
+        }else{
+            $this->controller('alert')->message('Not Found', '404 | Not Found');
+        }
     }
 }

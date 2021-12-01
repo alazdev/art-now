@@ -22,7 +22,7 @@ class UserModel{
 
     // Untuk admin
     public function semua_calon_arsitek(){
-        $this->db->query("SELECT user.*, (SELECT produk.status from produk WHERE produk.id_user = user.id_user ORDER BY dibuat_pada DESC LIMIT 1) AS status_produk FROM user WHERE level = -1");
+        $this->db->query("SELECT user.*, (SELECT produk.status from produk WHERE produk.id_user = user.id_user ORDER BY dibuat_pada DESC LIMIT 1) AS status_produk, arsitek.dokumen FROM user LEFT JOIN arsitek ON arsitek.id_user = user.id_user WHERE level = -1");
         return $this->db->resultSet();
     }
     public function cek_user($id_user, $level = null){
@@ -179,5 +179,20 @@ class UserModel{
     public function logined_user(){
         $this->db->query("SELECT * FROM user WHERE email = '".$_SESSION['email']."'");
         return $this->db->single();
+    }
+    
+    public function lupa_password($email){
+        $this->db->query("SELECT * FROM user WHERE email = '".$email."'");
+        return $this->db->single();
+    }
+
+    public function cek_reset($email, $password){
+        $this->db->query("SELECT * FROM user WHERE email = '".$email."' AND password='".$password."'");
+        return $this->db->single();
+    }
+
+    public function reset($email, $password){
+        $this->db->query("UPDATE user SET password = '".md5($password)."' WHERE email = '".$email."'");
+        return $this->db->execute();
     }
 }

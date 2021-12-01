@@ -60,6 +60,9 @@
                                             <?php } else { ?>
                                                 <span class="badge badge-danger">BELUM ADA IMB</span>
                                             <?php } ?>
+                                            <?php if($pesanan['status_pembayaran'] == NULL) { ?>
+                                                <span class="badge badge-danger">DP BELUM DIBAYAR PENGGUNA</span>
+                                            <?php } ?>
                                         <?php } else if($pesanan['status'] == 2 ) { ?>
                                             <span class="badge badge-warning">MENUNGGU PEMBAYARAN</span>
                                         <?php } else if($pesanan['status'] == 3 ) { ?>

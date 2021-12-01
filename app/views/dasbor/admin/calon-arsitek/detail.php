@@ -6,7 +6,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item" aria-current="page"><a href="<?= BASEURL; ?>/admin/calon_arsitek">Calon Arsitek</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><?= $data['calon_arsitek']['nama_lengkap'] ?></li>
+                        <li class="breadcrumb-item active" aria-current="page">Detail Calon Arsitek dan Produk</li>
                     </ol>
                 </nav>
                 <h1 class="m-0"><?= $data['calon_arsitek']['nama_lengkap'] ?></h1>

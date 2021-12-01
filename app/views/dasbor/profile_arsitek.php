@@ -29,7 +29,7 @@
             <div class="col-lg-4">
                 <div class="card card-body">
                     <div class="mb-4">
-                        <a href="../produk/<?= $data['id_user'];?>" class="btn btn-light btn-block">Lihat Produk</a>
+                        <a href="../../home/arsitek/<?= $data['id_user'];?>" class="btn btn-light btn-block">Lihat Produk</a>
                     </div>
 
                     <div class="mb-4 text-center">

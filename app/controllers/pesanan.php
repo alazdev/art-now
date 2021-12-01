@@ -29,7 +29,7 @@ class pesanan extends arsitek
                 $pesan = [
                     'id_user' => $pesanan['id_user'],
                     'judul' => 'Pesanan Diterima',
-                    'keterangan' => 'Pesanan Anda kepada Arsitek dengan Produk <a href="'.BASEURL.'/home/produk/'.$pesanan['id_produk'].'">'.$pesanan->judul.'</a> telah diterima, harap masukkan <a href="'.BASEURL.'/pengguna/imb_pesanan/'.$id_pesanan.'">IMB</a> Anda secepatnya.',
+                    'keterangan' => 'Pesanan Anda kepada Arsitek dengan Produk <a href="'.BASEURL.'/home/produk/'.$pesanan['id_produk'].'">'.$pesanan['judul'].'</a> telah diterima, harap masukkan <a href="'.BASEURL.'/pengguna/imb_pesanan/'.$id_pesanan.'">IMB</a> Anda secepatnya.',
                     'link' => '/pengguna/imb_pesanan/'.$id_pesanan
                 ];
                 $this->model('NotifikasiModel')->notifikasi($pesan);
@@ -51,7 +51,7 @@ class pesanan extends arsitek
             $pesan = [
                 'id_user' => $pesanan['id_user'],
                 'judul' => 'Pesanan Ditolak',
-                'keterangan' => 'Pesanan Anda kepada Arsitek dengan Produk <a href="'.BASEURL.'/home/produk/'.$pesanan['id_produk'].'">'.$pesanan->judul.'</a> telah ditolak, <a href="'.BASEURL.'/index">klik</a> untuk temukan arsitek lain.',
+                'keterangan' => 'Pesanan Anda kepada Arsitek dengan Produk <a href="'.BASEURL.'/home/produk/'.$pesanan['id_produk'].'">'.$pesanan['judul'].'</a> telah ditolak, <a href="'.BASEURL.'/index">klik</a> untuk temukan arsitek lain.',
                 'link' => 'index'
             ];
             $this->model('NotifikasiModel')->notifikasi($pesan);

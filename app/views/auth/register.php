@@ -94,7 +94,7 @@
         </div>
         <div class="form-group mb-5">
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" checked="" class="custom-control-input" id="terms" />
+                <input type="checkbox" checked="" class="custom-control-input" id="terms" required/>
                 <label class="custom-control-label" for="terms">Saya bersedia menerima <a href="#">Syarat dan Ketentuan</a></label>
             </div>
         </div>

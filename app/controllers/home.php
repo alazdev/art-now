@@ -30,6 +30,8 @@ class home extends Controller
     public function produk($id_produk)
     {
         $data = $this->model('ProdukModel')->single_byguest($id_produk);
+        $data['komens'] = $this->model('KomenModel')->semua($id_produk);    
+        $data['reply_komens'] = $this->model('KomenModel')->semua($id_produk, 1);
         if($data){
             $this->view('Home/produk', $data);
         }else{
@@ -42,5 +44,23 @@ class home extends Controller
         $cari = $_POST["cari"];
         $data = $this->model('ProdukModel')->cari_byguest($cari);
         $this->view('Home/cari', $data);
+    }
+
+    // Komentar
+    public function komen()
+    {
+        $komen = ($_POST['id_reply_komen'] == 'NULL') ? NULL:$_POST['id_reply_komen'];
+        $data = [
+            'id_produk' => $_POST['id_produk'],
+            'id_reply_komen' => $komen,
+            'komen' => $_POST['komen']
+        ];
+        $this->model('KomenModel')->tambah($data);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+    }
+    public function hapus_komen($id_komen)
+    {
+        $this->model('KomenModel')->hapus($id_komen);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
 }

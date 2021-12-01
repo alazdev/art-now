@@ -114,6 +114,33 @@ class user extends Controller
         }
     }
 
+    public function notifikasi(){
+        $data = $this->model('NotifikasiModel')->semua();
+        $output = '';
+        foreach($data as $n){
+            $output .=
+            '<div class="dropdown-item d-flex">'.
+                '<div class="flex">'.
+                    $n['keterangan'].'<br>'.
+                    '<small class="text-muted">'.date('d-m-Y H:i', strtotime($n['dibuat_pada'])).'</small>'.
+                '</div>'.
+            '</div>';
+        }
+        $belum_dilihat = $this->model('NotifikasiModel')->belum_dilihat();
+        
+        echo json_encode($data= [ 'notifikasi' => $output, 'belum_dilihat' => count($belum_dilihat)]);
+    }
+
+    public function lihat_notifikasi(){
+        $this->model('NotifikasiModel')->lihat();
+        echo json_encode($data = ['status'=>'sukses']);
+    }
+
+    public function bersihkan_notifikasi(){
+        $this->model('NotifikasiModel')->bersihkan();
+        echo json_encode($data = ['status'=>'sukses']);
+    }
+
     public function logout()
     {
         session_destroy();

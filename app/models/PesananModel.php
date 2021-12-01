@@ -11,17 +11,17 @@ class PesananModel{
     }
 
     public function semua(){
-        $this->db->query("SELECT pesanan.*, user.nama_lengkap, produk.judul, imb.dokumen FROM pesanan LEFT JOIN user on user.id_user = pesanan.id_user LEFT JOIN produk ON produk.id_produk = pesanan.id_produk LEFT JOIN imb on imb.id_pesanan = pesanan.id_pesanan WHERE produk.id_user = '".$this->cek_user()['id_user']."' ORDER BY pesanan.dibuat_pada DESC");
+        $this->db->query("SELECT pesanan.*, user.nama_lengkap, produk.judul, imb.dokumen, (SELECT pembayaran.status FROM pembayaran WHERE pembayaran.id_pesanan = pesanan.id_pesanan AND pembayaran.status=-1 LIMIT 1) as status_pembayaran FROM pesanan LEFT JOIN user on user.id_user = pesanan.id_user LEFT JOIN produk ON produk.id_produk = pesanan.id_produk LEFT JOIN imb on imb.id_pesanan = pesanan.id_pesanan WHERE produk.id_user = '".$this->cek_user()['id_user']."' ORDER BY pesanan.dibuat_pada DESC");
         return $this->db->resultSet();
     }
 
     // Untuk pengguna
     public function semua_bypengguna(){
-        $this->db->query("SELECT pesanan.*, user.nama_lengkap as nama_lengkap_arsitek, user.id_user as id_arsitek, produk.judul, imb.dokumen FROM pesanan LEFT JOIN produk ON produk.id_produk = pesanan.id_produk LEFT JOIN user on user.id_user = produk.id_user LEFT JOIN imb on imb.id_pesanan = pesanan.id_pesanan WHERE pesanan.id_user = '".$this->cek_user()['id_user']."' ORDER BY pesanan.dibuat_pada DESC");
+        $this->db->query("SELECT pesanan.*, user.nama_lengkap as nama_lengkap_arsitek, user.id_user as id_arsitek, produk.judul, imb.dokumen, (SELECT pembayaran.status FROM pembayaran WHERE pembayaran.id_pesanan = pesanan.id_pesanan AND pembayaran.status=-1 LIMIT 1) as status_pembayaran FROM pesanan LEFT JOIN produk ON produk.id_produk = pesanan.id_produk LEFT JOIN user on user.id_user = produk.id_user LEFT JOIN imb on imb.id_pesanan = pesanan.id_pesanan WHERE pesanan.id_user = '".$this->cek_user()['id_user']."' ORDER BY pesanan.dibuat_pada DESC");
         return $this->db->resultSet();
     }
     public function sedang_bypengguna(){
-        $this->db->query("SELECT pesanan.*, user.nama_lengkap as nama_lengkap_arsitek, user.id_user as id_arsitek, produk.judul, imb.dokumen FROM pesanan LEFT JOIN produk ON produk.id_produk = pesanan.id_produk LEFT JOIN user on user.id_user = produk.id_user LEFT JOIN imb on imb.id_pesanan = pesanan.id_pesanan WHERE pesanan.id_user = '".$this->cek_user()['id_user']."' AND pesanan.status BETWEEN 1 AND 2");
+        $this->db->query("SELECT pesanan.*, user.nama_lengkap as nama_lengkap_arsitek, user.id_user as id_arsitek, produk.judul, imb.dokumen FROM pesanan LEFT JOIN produk ON produk.id_produk = pesanan.id_produk LEFT JOIN user on user.id_user = produk.id_user LEFT JOIN imb on imb.id_pesanan = pesanan.id_pesanan WHERE pesanan.id_user = '".$this->cek_user()['id_user']."' AND pesanan.status BETWEEN 0 AND 2");
         return $this->db->resultSet();
     }
     public function pesanan_bypengguna($id_pesanan){
