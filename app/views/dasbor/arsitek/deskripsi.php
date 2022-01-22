@@ -30,8 +30,16 @@
                         <label>Deskripsi</label>
                         <div style="height: 150px;" data-toggle="quill" id="deskripsi" data-quill-placeholder="Deskripsi Produk..."></div>
                         <div class="form-group">
-                            <label for="dokumen">Dokumen<sup>(Foto KTP, Sertifikasi Arsitek, dll dalam satu pdf/word)</sup>:</label>
-                            <input type="file" name="dokumen[]" class="form-control" id="dokumen" accept="application/msword, application/pdf" required>
+                            <label for="ktp">KTP<sup>(gambar/pdf/word)</sup>:</label>
+                            <input type="file" name="ktp[]" class="form-control" id="ktp" accept="application/msword, application/pdf, image/jpg, image/jpeg, image/png" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ijazah">Ijazah Terakhir<sup>(gambar/pdf/word)</sup>:</label>
+                            <input type="file" name="ijazah[]" class="form-control" id="ijazah" accept="application/msword, application/pdf, image/jpg, image/jpeg, image/png" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sertifikasi_arsitek">Sertifikasi Arsitek<sup>(gambar/pdf/word)</sup>:</label>
+                            <input type="file" name="sertifikasi_arsitek[]" class="form-control" id="sertifikasi_arsitek" accept="application/msword, application/pdf, image/jpg, image/jpeg, image/png" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Kirim</button>
                     </form>

@@ -244,9 +244,9 @@
                                         <div><?= $_SESSION['email']; ?></div>
                                     </div>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="<?= BASEURL; ?>/user/profile">Profile</a>
+                                    <a class="dropdown-item" href="<?= BASEURL; ?>/user/profile">Profil</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="<?= BASEURL; ?>/user/logout">Logout</a>
+                                    <a class="dropdown-item" href="<?= BASEURL; ?>/user/logout">Keluar</a>
                                 </div>
                             </li>
                         </ul>

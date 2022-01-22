@@ -77,11 +77,13 @@
                             <div class="sidebar-heading">Pengguna</div>
                             <div class="sidebar-block p-0">
                                 <ul class="sidebar-menu">
+                                    <?php if($_SESSION['id'] == 1){ ?>
                                     <li class="sidebar-menu-item">
                                         <a class="sidebar-menu-button" href="<?= BASEURL; ?>/admin/data_admin">
                                             <span class="sidebar-menu-text">Admin</span>
                                         </a>
                                     </li>
+                                    <?php } ?>
                                     <li class="sidebar-menu-item">
                                         <a class="sidebar-menu-button" href="<?= BASEURL; ?>/admin/data_arsitek">
                                             <span class="sidebar-menu-text">Arsitek</span>

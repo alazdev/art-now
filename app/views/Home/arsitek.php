@@ -22,7 +22,7 @@
                                 </div>
                             <?php } else { ?>
                                 <div class="col-md-12">
-                                    <a href="<?= BASEURL?>/auth/login" class="btn btn-light col-md-12">Login untuk melihat kontak Arsitek</a>
+                                    <a href="<?= BASEURL?>/auth/login" class="btn btn-light col-md-12">Masuk untuk melihat kontak Arsitek</a>
                                 </div>
                             <?php } ?>
 						</div>
@@ -95,7 +95,7 @@
 							<div class="blog_post_slider_content"> 
 								<div class="blog_post_slider_content_inner">
 									<h2><a href="<?= BASEURL.'/home/produk/'.$produk['id_produk']?>"><?=$produk['judul']?></a></h2>
-									<div class="blog_author_data"><a href="<?= BASEURL.'/home/arsitek/'.$produk['id_user']?>"><img src="<?= BASEURL.'/image/profile/'.$produk['foto']?>" class="img-fluid" alt="" width="34" height="34"> <?= $produk['nama_lengkap'] ?></a></div> 
+									<div class="blog_author_data"><a href="<?= BASEURL.'/home/arsitek/'.$produk['id_user']?>"><img src="<?= ($produk['foto'] != NULL ? BASEURL.'/image/profile/'.$produk['foto']:'https://via.placeholder.com/34x34') ?>" class="img-fluid" alt="" width="34" height="34"> <?= $produk['nama_lengkap'] ?></a></div> 
 									<ul class="blog_meta_tags">
 										<li>
 											<span class="blog_bg_blue" height="25px">

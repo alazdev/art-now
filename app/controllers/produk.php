@@ -145,12 +145,23 @@ class produk extends arsitek
     public function hapus($id_produk)
     {
         if($this->model('ProdukModel')->produk($id_produk) != null){
-            $gambar = dirname(getcwd())."/public/image/produk/".$this->model('ProdukModel')->produk($id_produk)['gambar'];
-            if(file_exists($gambar)){
-                unlink($gambar);
+            $data = $this->model('ProdukModel')->produk($id_produk);
+            if($data['status_pesanan'] != null ){
+                $this->alert('Tidak dapat menghapus Produk. Selesaikan Proyek atau tolak semua pesanan mengenai Produk ini terlebih dahulu.', 'arsitek/produk');
+            }else{
+                try {
+                    $gambar = $this->model('ProdukModel')->produk($id_produk)['gambar'];
+                    $this->model('ProdukModel')->hapus($id_produk);
+                    $path = dirname(getcwd())."/public/image/produk/".$gambar;
+                    
+                    if(file_exists($path)){
+                        unlink($path);
+                    }
+                    $this->alert('Data produk berhasil dihapus.', 'arsitek/produk');
+                } catch (\Throwable $th) {
+                    $this->alert('Data produk yang pernah dipesan tidak dapat dihapus. Cukup nonaktifkan produk supaya pengguna tidak dapat memesannya.', 'arsitek/produk');
+                }
             }
-            $this->model('ProdukModel')->hapus($id_produk);
-            $this->alert('Data produk berhasil dihapus.', 'arsitek/produk');
         }else{
             $this->controller('alert')->message('Not Found', '404 | Not Found');
         }

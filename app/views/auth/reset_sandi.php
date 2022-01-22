@@ -42,7 +42,7 @@
             <button class="btn btn-block btn-primary" type="submit">Reset</button>
         </div>
         <div class="form-group text-center">
-            <a class="text-body text-underline" href="<?= BASEURL;?>/auth/login">Login!</a> 
+            <a class="text-body text-underline" href="<?= BASEURL;?>/auth/login">Masuk!</a> 
         </div>
     </form>
 </div>

@@ -15,7 +15,7 @@
 
     <form action="<?= BASEURL; ?>/auth/lupa_sandi" method="POST">
         <div class="form-group">
-            <label class="text-label" for="email_2">Email Address:</label>
+            <label class="text-label" for="email_2">Email:</label>
             <div class="input-group input-group-merge">
                 <input id="email_2" type="email" required="" name="email" class="form-control form-control-prepended" placeholder="john@doe.com">
                 <div class="input-group-prepend">
@@ -29,7 +29,7 @@
             <button class="btn btn-block btn-primary" type="submit">Reset</button>
         </div>
         <div class="form-group text-center">
-            <a class="text-body text-underline" href="<?= BASEURL;?>/auth/login">Login!</a> 
+            <a class="text-body text-underline" href="<?= BASEURL;?>/auth/login">Masuk!</a> 
             <a class="text-body text-underline" href="<?= BASEURL;?>/auth/register">Daftar!</a>
         </div>
     </form>

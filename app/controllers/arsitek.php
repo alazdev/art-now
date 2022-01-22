@@ -46,26 +46,46 @@ class arsitek extends Controller
             // Memasukkan Dokumen Baru
             $output_dir = dirname(getcwd())."/public/dokumen/";
             $RandomNum  = time();
-            $DokumenName  = str_replace(' ','-',strtolower($_FILES['dokumen']['name'][0]));
-            $DokumenType  = $_FILES['dokumen']['type'][0];
+
+            // KTP, Ijazah, Sertifikasi Arsitek
+            $KtpName  = str_replace(' ','-',strtolower($_FILES['ktp']['name'][0]));
+            $KtpType  = $_FILES['ktp']['type'][0];
+            $IjazahName  = str_replace(' ','-',strtolower($_FILES['ijazah']['name'][0]));
+            $IjazahType  = $_FILES['ijazah']['type'][0];
+            $SertifikasiArsitekName  = str_replace(' ','-',strtolower($_FILES['sertifikasi_arsitek']['name'][0]));
+            $SertifikasiArsitekType  = $_FILES['sertifikasi_arsitek']['type'][0];
         
-            $DokumenExt   = substr($DokumenName, strrpos($DokumenName, '.'));
-            $DokumenExt   = str_replace('.','',$DokumenExt);
-            $DokumenName  = preg_replace("/\.[^.\s]{3,4}$/", "", $DokumenName);
-            $NewDokumenName = $DokumenName.'-'.$RandomNum.'.'.$DokumenExt;
-            $ret[$NewDokumenName] = $output_dir.$NewDokumenName;
+            // KTP
+            $KtpExt   = substr($KtpName, strrpos($KtpName, '.'));
+            $KtpExt   = str_replace('.','',$KtpExt);
+            $NewKtpName = rand(100,999).$RandomNum.'.'.$KtpExt;
+            $ret[$NewKtpName] = $output_dir.$NewKtpName;
+            //Ijazah
+            $IjazahExt   = substr($IjazahName, strrpos($IjazahName, '.'));
+            $IjazahExt   = str_replace('.','',$IjazahExt);
+            $NewIjazahName = rand(100,999).$RandomNum.'.'.$IjazahExt;
+            $ret[$NewIjazahName] = $output_dir.$NewIjazahName;
+            //Arsitek
+            $SertifikasiArsitekExt   = substr($SertifikasiArsitekName, strrpos($SertifikasiArsitekName, '.'));
+            $SertifikasiArsitekExt   = str_replace('.','',$SertifikasiArsitekExt);
+            $NewSertifikasiArsitekName = rand(100,999).$RandomNum.'.'.$SertifikasiArsitekExt;
+            $ret[$NewSertifikasiArsitekName] = $output_dir.$NewSertifikasiArsitekName;
 
             if (!file_exists($output_dir))
             {
                 @mkdir($output_dir, 0777);
-            }     
+            }
 
-            move_uploaded_file($_FILES["dokumen"]["tmp_name"][0], $output_dir.$NewDokumenName );
+            move_uploaded_file($_FILES["ktp"]["tmp_name"][0], $output_dir.$NewKtpName );
+            move_uploaded_file($_FILES["ijazah"]["tmp_name"][0], $output_dir.$NewIjazahName );
+            move_uploaded_file($_FILES["sertifikasi_arsitek"]["tmp_name"][0], $output_dir.$NewSertifikasiArsitekName );
 
             $data = [
                 'deskripsi' => $_POST['deskripsi'],
                 'alamat'    => $_POST['alamat'],
-                'dokumen'   => $NewDokumenName
+                'ktp'       => $NewKtpName,
+                'ijazah'    => $NewIjazahName,
+                'sertifikasi_arsitek'   => $NewSertifikasiArsitekName
             ];
             $this->model('ArsitekModel')->tambah($data);
             $this->route('arsitek/deskripsi');
@@ -124,18 +144,44 @@ class arsitek extends Controller
         foreach($total_pembayaran as $pembayaran){
             $data['total_pembayaran'] = $data['total_pembayaran']+$pembayaran['total_dibayar'];
         }
-        $data['tahunan_pembayaran'] = $this->model('PembayaranModel')->tahunan_pembayaran();
+        $data['tahunan_pembayaran'] = $this->model('PembayaranModel')->tahunan_pembayaran()[0];
         $data['total_pesanan'] = count($this->model('PesananModel')->total_pesanan());
-        $data['tahunan_pesanan'] = $this->model('PesananModel')->tahunan_pesanan();
+        $data['tahunan_pesanan'] = $this->model('PesananModel')->tahunan_pesanan()[0];
         
+        $tahunan_pembayaran_sementara = [];
+        $tahunan_pesanan_sementara = [];
+
         $start = $month = date('Y-m-d');
         $end = date('Y-m-d', strtotime('-12 month'));
         while($month > $end)
         {
             $data['nama_bulan'][] = date('M', strtotime($month));
             $data['tahun'][] = date('Y', strtotime($month));
+            foreach($data['tahunan_pembayaran'] as $tpem => $value){
+                if($tpem == date('M', strtotime($month))){
+                    $tahunan_pembayaran_sementara[] = $value;
+                }
+            }
+            foreach($data['tahunan_pesanan'] as $tpes => $value){
+                if($tpes == date('M', strtotime($month))){
+                    $tahunan_pesanan_sementara[] = $value;
+                }
+            }
             $month = date('Y-m-d', strtotime('-1 months', strtotime($month)));
         }
+        for($i = 0; $i < count($data['nama_bulan']); $i++){
+            if($data['nama_bulan'][$i] == 'May'){
+                $data['nama_bulan'][$i] = 'Mei';
+            }else if($data['nama_bulan'][$i] == 'Aug'){
+                $data['nama_bulan'][$i] = 'Agu';
+            }else if($data['nama_bulan'][$i] == 'Oct'){
+                $data['nama_bulan'][$i] = 'Okt';
+            }else if($data['nama_bulan'][$i] == 'Dec'){
+                $data['nama_bulan'][$i] = 'Des';
+            }
+        }
+        $data['tahunan_pembayaran'] = array_reverse($tahunan_pembayaran_sementara);
+        $data['tahunan_pesanan'] = array_reverse($tahunan_pesanan_sementara);
         $this->view('dasbor/arsitek/index', $data);
     }
 

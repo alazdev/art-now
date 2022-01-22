@@ -22,7 +22,7 @@ class UserModel{
 
     // Untuk admin
     public function semua_calon_arsitek(){
-        $this->db->query("SELECT user.*, (SELECT produk.status from produk WHERE produk.id_user = user.id_user ORDER BY dibuat_pada DESC LIMIT 1) AS status_produk, arsitek.dokumen FROM user LEFT JOIN arsitek ON arsitek.id_user = user.id_user WHERE level = -1");
+        $this->db->query("SELECT user.*, (SELECT produk.status from produk WHERE produk.id_user = user.id_user ORDER BY dibuat_pada DESC LIMIT 1) AS status_produk, arsitek.ktp, arsitek.ijazah, arsitek.sertifikasi_arsitek FROM user LEFT JOIN arsitek ON arsitek.id_user = user.id_user WHERE level = -1");
         return $this->db->resultSet();
     }
     public function cek_user($id_user, $level = null){

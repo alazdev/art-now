@@ -5,10 +5,10 @@
             <div class="flex">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                        <li class="breadcrumb-item active" aria-current="page">Profil</li>
                     </ol>
                 </nav>
-                <h1 class="m-0">Profile</h1>
+                <h1 class="m-0">Profil</h1>
             </div>
         </div>
     </div>
@@ -31,14 +31,14 @@
                         </div>
                         <div class="form-group">
                             <label for="telepon">Telepon</label>
-                            <input id="telepon" name="telepon" type="text" class="form-control" placeholder="Telepon..." value="<?= $data['telepon']?>" required>
+                            <input id="telepon" name="telepon" type="number" class="form-control" placeholder="Telepon..." value="<?= $data['telepon']?>" required>
                         </div>
                         <div class="form-group">
                             <label for="foto">Foto <sup>*optional, pilih gambar untuk mengganti</sup></label>
                             <input id="foto" name="foto[]" type="file" class="form-control"  accept="image/png, image/jpeg">
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary" name="update_profile">Update Profile</button>
+                            <button type="submit" class="btn btn-primary" name="update_profile">Ubah Profil</button>
                         </div>
                     </form>
                 </div>
@@ -60,7 +60,7 @@
                         </div>
                         <label>Deskripsi</label>
                         <div style="height: 150px;" data-toggle="quill" id="deskripsi" data-quill-placeholder="Deskripsi Produk..."><?=$data['deskripsi'];?></div>
-                        <button type="submit" class="btn btn-primary" name="update_lanjutan">Update</button>
+                        <button type="submit" class="btn btn-primary" name="update_lanjutan">Ubah Informasi</button>
                     </form>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                             <label for="cpass">Konfirmasi Kata Sandi</label>
                             <input style="width: 270px;" id="cpass" name="cpass" type="password" class="form-control" placeholder="Konfirmasi Kata Sandi" required>
                         </div>
-                        <button type="submit" class="btn btn-primary" name="update_password">Update</button>
+                        <button type="submit" class="btn btn-primary" name="update_password">Ubah Kata Sandi</button>
                     </form>
                 </div>
             </div>

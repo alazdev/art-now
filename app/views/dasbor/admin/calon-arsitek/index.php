@@ -25,7 +25,9 @@
                                     <th>Email</th>
                                     <th>Telepon</th>
                                     <th align="center">Status</th>
-                                    <th align="center">Dokumen</th>
+                                    <th align="center">KTP</th>
+                                    <th align="center">Ijazah Terakhir</th>
+                                    <th align="center">Sertifikasi Arsitek</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -46,8 +48,22 @@
                                         <?php } ?>
                                     </td>
                                     <td align="center">
-                                        <?php if ($calon_arsitek['dokumen'] != null) {?>
-                                            <a class="badge badge-success" href="<?= BASEURL.'/dokumen/'.$calon_arsitek['dokumen']; ?>" download="<?= 'CALON ARSITEK-'.$calon_arsitek['nama_lengkap'].'-'.$calon_arsitek['dokumen'];?>">ADA</a>
+                                        <?php if ($calon_arsitek['ktp'] != null) {?>
+                                            <a class="badge badge-success" href="<?= BASEURL.'/dokumen/'.$calon_arsitek['ktp']; ?>" download="<?= 'CALON ARSITEK-'.$calon_arsitek['nama_lengkap'].'-KTP-'.$calon_arsitek['ktp'];?>">ADA</a>
+                                        <?php } else { ?>
+                                            <span class="badge badge-danger">BELUM ADA</span>
+                                        <?php } ?>
+                                    </td>
+                                    <td align="center">
+                                        <?php if ($calon_arsitek['ijazah'] != null) {?>
+                                            <a class="badge badge-success" href="<?= BASEURL.'/dokumen/'.$calon_arsitek['ijazah']; ?>" download="<?= 'CALON ARSITEK-'.$calon_arsitek['nama_lengkap'].'-Ijazah-'.$calon_arsitek['ijazah'];?>">ADA</a>
+                                        <?php } else { ?>
+                                            <span class="badge badge-danger">BELUM ADA</span>
+                                        <?php } ?>
+                                    </td>
+                                    <td align="center">
+                                        <?php if ($calon_arsitek['sertifikasi_arsitek'] != null) {?>
+                                            <a class="badge badge-success" href="<?= BASEURL.'/dokumen/'.$calon_arsitek['sertifikasi_arsitek']; ?>" download="<?= 'CALON ARSITEK-'.$calon_arsitek['nama_lengkap'].'-Sertifikasi Arsitek-'.$calon_arsitek['sertifikasi_arsitek'];?>">ADA</a>
                                         <?php } else { ?>
                                             <span class="badge badge-danger">BELUM ADA</span>
                                         <?php } ?>
@@ -78,8 +94,15 @@
                 null,
                 null,
                 null,
+                null,
+                null,
                 { "searchable": false, "orderable": false},
-            ]
+            ],
+            'aaSorting': [],
+            'order': [],
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Indonesian.json"
+            }
         });
     } );
     

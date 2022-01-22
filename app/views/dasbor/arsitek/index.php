@@ -39,12 +39,12 @@
                 <div class="card dashboard-area-tabs" id="dashboard-area-tabs">
                     <div class="card-header p-0 bg-white nav">
                         <div class="row no-gutters flex" role="tablist">
-                            <div class="col" data-toggle="chart" data-target="#earningsTrafficChart" data-update='{"data":{"labels": ["<?php for($i = 11; $i >= 0; $i--) { echo $data['nama_bulan'][$i].' '.$data['tahun'][$i].'", "'; }?>"],"datasets":[{"label": "Traffic", "data":[<?=implode(',', $data['tahunan_pembayaran'][0])?>]}]}}' data-prefix="Rp. " data-suffix="">
+                            <div class="col" data-toggle="chart" data-target="#earningsTrafficChart" data-update='{"data":{"labels": ["<?php for($i = 11; $i >= 0; $i--) { echo $data['nama_bulan'][$i].' '.$data['tahun'][$i].'", "'; }?>"],"datasets":[{"label": "Traffic", "data":[<?=implode(',', $data['tahunan_pembayaran'])?>]}]}}' data-prefix="Rp. " data-suffix="">
                                 <a href="#" data-toggle="tab" role="tab" aria-selected="true" onclick="show()" class="dashboard-area-tabs__tab card-body text-center active">
                                     <span class="card-header__title m-0">Pendapatan</span>
                                 </a>
                             </div>
-                            <div class="col border-left" data-toggle="chart" data-target="#earningsTrafficChart" data-update='{"data":{"datasets":[{"label": "Earnings", "data":[<?=implode(',', $data['tahunan_pesanan'][0])?>]}]}}' data-prefix="" data-suffix="">
+                            <div class="col border-left" data-toggle="chart" data-target="#earningsTrafficChart" data-update='{"data":{"datasets":[{"label": "Earnings", "data":[<?=implode(',', $data['tahunan_pesanan'])?>]}]}}' data-prefix="" data-suffix="">
                                 <a href="#" data-toggle="tab" role="tab" aria-selected="false" onclick="show()" class="dashboard-area-tabs__tab card-body text-center">
                                     <span class="card-header__title m-0">Pesanan</span>
                                 </a>

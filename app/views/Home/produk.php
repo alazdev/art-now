@@ -6,14 +6,16 @@
 					<div class="blog_post_style2 blog_single_div">
 						<div class="blog_post_style2_img wow fadeInUp">
                             <?php if($data['gambar'] != null ) {?>
-							    <img src="<?= BASEURL.'/image/produk/'.$data['gambar']?>" class="img-fluid" alt="">
+							    <img src="<?= BASEURL.'/image/produk/'.$data['gambar']?>" class="img-fluid" alt="" style="width: 1170px;">
                             <?php } else {?>
 							    <img src="https://via.placeholder.com/1170x560/ffc0cb" class="img-fluid" alt="">
                             <?php } ?>
 						</div>
 						<div class="blog_post_style2_content wow fadeInUp">
 							<?= $data['deskripsi'] ?>
-                            <br/><p>- Rating Produk: <?= number_format($data['rating'],1,'.',',') ?>/5 dari total <?= $data['total_rating'] ?> rating.</p>
+                            <br/>
+                            <p>- Rating Produk: <?= number_format($data['rating'],1,'.',',') ?>/5 dari total <?= $data['total_rating'] ?> rating.</p>
+                            <p>- Harga: <?= number_format($data['harga'],0,',','.') ?></p>
                             <div class="col-md-12">
                                 <?php if (isset($_SESSION['email'])) { if($_SESSION['level'] == 0 && $data['status'] == 1) { ?>
                                     <a href="<?= BASEURL.'/pengguna/pesan/'.$data['id_produk']?>" class="btn btn-primary col-md-12">Pesan Sekarang</a>
@@ -56,7 +58,7 @@
                                 </div>
                             <?php } else { ?>
                                 <div class="col-md-12">
-                                    <a href="<?= BASEURL?>/auth/login" class="btn btn-light col-md-12">Login untuk melihat kontak Arsitek</a>
+                                    <a href="<?= BASEURL?>/auth/login" class="btn btn-light col-md-12">Masuk untuk melihat kontak Arsitek</a>
                                 </div>
                             <?php } ?>
                         </div>
@@ -151,7 +153,7 @@
                                 </div>
                             <?php } else {?>
                                 <div class="blog_row">
-                                    <a href="<?= BASEURL?>/auth/login" class="blog_btn blog_bg_pink col-md-12">Login Untuk Meninggalkan Komentar</a>
+                                    <a href="<?= BASEURL?>/auth/login" class="blog_btn blog_bg_pink col-md-12">Masuk Untuk Meninggalkan Komentar</a>
                                 </div>
                             <?php } ?>
 						</form>

@@ -5,7 +5,7 @@
             <div class="flex">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item active" aria-current="page">Profile Arsitek</li>
+                        <li class="breadcrumb-item active" aria-current="page">Profil Arsitek</li>
                     </ol>
                 </nav>
                 <h1 class="m-0"><?= $data['nama_lengkap'] ?></h1>

@@ -5,7 +5,7 @@
         <a href="<?= BASEURL; ?>/index" class="navbar-brand flex-column mb-2 align-items-center mr-0" style="min-width: 0">
             <img class="navbar-brand-icon mr-0 mb-2" src="<?= BASEURL; ?>/assets-user/images/logo.png" width="100%" alt="ArtNow">
         </a>
-        <p class="m-0">Login untuk mengakses Akun ArtNow </p>
+        <p class="m-0">Masuk untuk mengakses Akun ArtNow </p>
     </div>
     
     <?php if($data){ ?>
@@ -16,12 +16,12 @@
 
     <a href="" class="btn btn-light btn-block">
         <span class="fab fa-google mr-2"></span>
-        Continue with Google
+        Masuk dengan Google
     </a>
 
     <a href="" class="btn btn-light btn-block">
         <span class="fab fa-facebook mr-2"></span>
-        Continue with Facebook
+        Masuk dengan Facebook
     </a>
 
     <div class="page-separator">
@@ -30,7 +30,7 @@
 
     <form action="<?= BASEURL; ?>/auth/login" method="POST">
         <div class="form-group">
-            <label class="text-label" for="email_2">Email Address:</label>
+            <label class="text-label" for="email_2">Email:</label>
             <div class="input-group input-group-merge">
                 <input id="email_2" type="email" required="" name="email" class="form-control form-control-prepended" placeholder="john@doe.com">
                 <div class="input-group-prepend">
@@ -43,7 +43,7 @@
         <div class="form-group">
             <label class="text-label" for="password_2">Kata Sandi:</label>
             <div class="input-group input-group-merge">
-                <input id="password_2" type="password" name="password" required="" class="form-control form-control-prepended" placeholder="Enter your password">
+                <input id="password_2" type="password" name="password" required="" class="form-control form-control-prepended" placeholder="Masukkan Kata Sandi">
                 <div class="input-group-prepend">
                     <div class="input-group-text">
                         <span class="fa fa-key"></span>
@@ -58,7 +58,7 @@
             </div>
         </div>
         <div class="form-group">
-            <button class="btn btn-block btn-primary" type="submit">Login</button>
+            <button class="btn btn-block btn-primary" type="submit">Masuk</button>
         </div>
         <div class="form-group text-center">
             <div class="custom-control custom-checkbox">
