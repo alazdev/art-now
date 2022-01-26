@@ -15,30 +15,40 @@
     <div class="container page__container">
         <div class="card card-form">
             <div class="row no-gutters">
+                <div class="col-lg-4 card-body">
+                    <p><strong class="headings-color">Transfer Ke</strong></p>
+                    <p class="text-muted mb-0">Silakan lakukan pembayaran ke salah satu rekening bank berikut dengan nominal yang tertera dan unggah bukti pembayaran.</p>
+                </div>
+                <div class="col-lg-8 card-form__body card-body">
+                    <?php foreach($data['rekening'] as $rekening) { ?>
+                    <div class="form-group d-flex flex-column">
+                        <img alt="PayPal Logo" src="<?= BASEURL."/image/logo-rekening/".$rekening['logo'];?>" style="display: block; margin-left: auto; margin-right: auto;" width="140">
+                        <div>
+                            <?=$rekening['nama']?>, <?=$rekening['nomor']?> A/N <?=$rekening['pemegang']?>
+                        </div>
+                    </div><hr>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+        <div class="card card-form">
+            <div class="row no-gutters">
                 <div class="col-lg-12 card-form__body card-body">
+                    <h3>
+                        Bukti Pembayaran <?= ($data['pembayaran'] == NULL) ? 'dan Ulasan':'' ?>
+                    </h3>
                     <form method="POST" id="form" action="<?= BASEURL . '/pengguna/kirim_pembayaran_pesanan/' . $data['id_pesanan']; ?>" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="total_dibayar">Total Pembayaran:</label>
-                            <input type="text" id="total_dibayar" value="Rp <?= number_format($data['harga']*80/100, 0, ",", ".") ?>" class="form-control"/>
+                            <input type="text" id="total_dibayar" value="Rp <?= number_format($data['harga']*80/100, 0, ",", ".") ?>" class="form-control" disabled/>
                         </div>
                         <div class="form-group">
-                            <label for="metode_pembayaran">Metode Pembayaran:</label>
-                            <select name="metode_pembayaran" id="metode_pembayaran" class="form-control" required>
-                                <option value="">-- Pilih Metode Pembayaran --</option>
-                                <option value="gopay">GoPay</option>
-                                <option value="ovo">OVO</option>
-                                <option value="dana">Dana</option>
-                                <option value="BCA">Bank BCA</option>
-                                <option value="BRI">Bank BRI</option>
-                                <option value="BNI">Bank BNI</option>
-                            </select>
+                            <label for="bukti_pembayaran">Bukti Pembayaran:</label>
+                            <input type="file" name="bukti_pembayaran[]" id="bukti_pembayaran" class="form-control" accept="image/png, image/jpeg" required />
                         </div>
+                        <?php if($data['pembayaran'] == NULL){ ?>
                         <div class="form-group">
-                            <label for="nomor_pembayaran">Nomor/No. Rekening:</label>
-                            <input type="text" name="nomor_pembayaran" id="nomor_pembayaran" class="form-control" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="rating">Rating Layanan/Produk:</label>
+                            <label for="rating">Ulasan Layanan/Produk:</label>
                             <select name="rating" id="rating" class="form-control" required>
                                 <option value="5">5 Bintang - Bagus Sekali</option>
                                 <option value="4">4 Bintang - Bagus</option>
@@ -51,6 +61,7 @@
                             <label for="komen">Komentari Layanan:</label>
                             <textarea type="text" name="komen" id="komen" class="form-control" required></textarea>
                         </div>
+                        <?php } ?>
                         <button type="submit" class="btn btn-primary" name="kirim">Kirim</button>
                     </form>
                 </div>

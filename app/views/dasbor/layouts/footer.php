@@ -30,12 +30,32 @@
                                     <span class="sidebar-menu-text">Calon Arsitek</span>
                                 </a>
                             </li>
+                            <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Validasi Pembayaran Pengguna" data-placement="right" data-container="body" data-boundary="window">
+                                <a class="sidebar-menu-button" href="<?= BASEURL; ?>/admin/validasi_pembayaran_pengguna">
+                                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">assignment_turned_in</i>
+                                    <span class="sidebar-menu-text">Validasi Pembayaran Pengguna</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Pesanan Arsitek" data-placement="right" data-container="body" data-boundary="window">
+                                <a class="sidebar-menu-button" href="<?= BASEURL; ?>/admin/pesanan_arsitek">
+                                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">playlist_add_check</i>
+                                    <span class="sidebar-menu-text">Pesanan Arsitek</span>
+                                </a>
+                            </li>
                             <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Pengguna" data-placement="right" data-container="body" data-boundary="window">
                                 <a class="sidebar-menu-button" href="#mn_pengguna" data-toggle="tab" role="tab" aria-controls="mn_pengguna">
                                     <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">list</i>
                                     <span class="sidebar-menu-text">Pengguna</span>
                                 </a>
                             </li>
+                            <?php if($_SESSION['id_user'] == 1){ ?>
+                            <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Rekening Bank" data-placement="right" data-container="body" data-boundary="window">
+                                <a class="sidebar-menu-button" href="<?= BASEURL; ?>/admin/rekening_bank">
+                                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_balance</i>
+                                    <span class="sidebar-menu-text">Rekening Bank</span>
+                                </a>
+                            </li>
+                            <?php } ?>
                             <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Laporan" data-placement="right" data-container="body" data-boundary="window">
                                 <a class="sidebar-menu-button" href="#mn_laporan" data-toggle="tab" role="tab" aria-controls="mn_laporan">
                                     <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">description</i>
@@ -77,7 +97,7 @@
                             <div class="sidebar-heading">Pengguna</div>
                             <div class="sidebar-block p-0">
                                 <ul class="sidebar-menu">
-                                    <?php if($_SESSION['id'] == 1){ ?>
+                                    <?php if($_SESSION['id_user'] == 1){ ?>
                                     <li class="sidebar-menu-item">
                                         <a class="sidebar-menu-button" href="<?= BASEURL; ?>/admin/data_admin">
                                             <span class="sidebar-menu-text">Admin</span>

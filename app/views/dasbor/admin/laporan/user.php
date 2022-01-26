@@ -36,7 +36,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-info form-control col-md-12">Export Laporan</button>
+                            <button type="submit" class="btn btn-info form-control col-md-12">Ekspor Laporan</button>
                         </div>
                     </form>
                     <div class="table-responsive border-bottom" data-toggle="lists" data-lists-values='["js-lists-values-employee-name"]'>

@@ -68,7 +68,7 @@
                                             <span class="badge badge-danger">BELUM ADA</span>
                                         <?php } ?>
                                     </td>
-                                    <td align="right">
+                                    <td align="right" style="white-space: nowrap;">
                                         <?php if(isset($calon_arsitek['status_produk'])) { ?>
                                             <a href="detail_calon_arsitek/<?= $calon_arsitek['id_user']; ?>" class="text-muted"><i class="material-icons">receipt</i></a>
                                         <a href="terima_calon_arsitek/<?= $calon_arsitek['id_user']; ?>" class="text-success"><i class="material-icons">check</i></a>

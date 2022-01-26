@@ -27,14 +27,14 @@
                             <input type="email" name="email" class="form-control" id="email" placeholder="Masukkan Email..." value="<?= $data['email']?>" required>
                         </div>
                         <div class="form-group">
-                            <label for="password">Password<sup>*optional, masukkan untuk mengganti</sup>:</label>
+                            <label for="password">Password<sup>(pilihan, masukkan untuk mengganti)</sup>:</label>
                             <input type="text" name="password" class="form-control" id="password" placeholder="Masukkan Password...">
                         </div>
                         <div class="form-group">
                             <label for="telepon">Telepon:</label>
                             <input type="text" name="telepon" class="form-control" id="telepon" placeholder="Masukkan Telepon..." value="<?= $data['telepon']?>" required>
                         </div>
-                        <button type="submit" class="btn btn-primary" name="update">Update</button>
+                        <button type="submit" class="btn btn-primary" name="update">Ubah</button>
                     </form>
                 </div>
             </div>

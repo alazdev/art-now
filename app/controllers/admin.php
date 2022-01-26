@@ -157,6 +157,202 @@ class admin extends Controller
         $this->view('dasbor/admin/pengguna/index', $data);
     }
 
+    // Validasi Pembayaran Pengguna
+    public function validasi_pembayaran_pengguna()
+    {
+        $data = [
+            'pembayarans' => $this->model('PembayaranModel')->semua_byadmin(0)
+        ];
+        $this->view('dasbor/admin/validasi-pembayaran-pengguna/index', $data);
+    }
+
+    public function riwayat_pembayaran_pengguna($id_pesanan)
+    {
+        $data = $this->model('PembayaranModel')->riwayat_pembayaran_byadmin($id_pesanan);
+        $data = [
+            'pembayarans' => $data
+        ];
+        $this->view('dasbor/admin/validasi-pembayaran-pengguna/riwayat', $data);
+    }
+
+    public function detail_pembayaran_pengguna($id_pembayaran)
+    {
+        $data = $this->model('PembayaranModel')->pembayaran_byadmin($id_pembayaran);
+        if($data != null){
+            $this->view('dasbor/admin/validasi-pembayaran-pengguna/detail', $data);
+        }else{
+            $this->controller('alert')->message('Not Found', '404 | Not Found');
+        }
+    }
+
+    public function terima_pembayaran_pengguna($id_pembayaran)
+    {
+        $data = $this->model('PembayaranModel')->pembayaran_byadmin($id_pembayaran);
+        if($data != null){
+            $this->model('PembayaranModel')->update_status($id_pembayaran, 1);
+            if($data['pembayaran'] == 1){
+                // ==============[Aksi yang dikomentari akan menjadi milik Admin]===============
+                $pesan = [
+                    'id_user' => $data['id_arsitek'],
+                    'judul' => 'Pembayaran Berhasil',
+                    'keterangan' => 'Selamat Gajian! Pengguna baru saja membayar pesanannya. cek <a href="'.BASEURL.'/arsitek/pesanan">di sini</a>.',
+                    'link' => '/arsitek/pesanan'
+                ];
+                $this->model('NotifikasiModel')->notifikasi($pesan);
+                $this->model('PesananModel')->update_status($data['id_pesanan'], 3);
+            }
+            $this->alert('Pembayaran berhasil diterima dan divalidasi.', 'admin/validasi_pembayaran_pengguna');
+        }else{
+            $this->controller('alert')->message('Not Found', '404 | Not Found');
+        }
+    }
+
+    public function tolak_pembayaran_pengguna($id_pembayaran)
+    {
+        if($this->model('PembayaranModel')->pembayaran_byadmin($id_pembayaran) != null){
+            $this->model('PembayaranModel')->update_status($id_pembayaran, -1);
+            $this->alert('Pembayaran ditolak.', 'admin/validasi_pembayaran_pengguna');
+        }else{
+            $this->controller('alert')->message('Not Found', '404 | Not Found');
+        }
+    }
+
+    // Semua Pesanan Arsitek
+    public function pesanan_arsitek()
+    {
+        $data = [
+            'pesanans' => $this->model('PesananModel')->semua_byadmin()
+        ];
+        $this->view('dasbor/admin/pesanan-arsitek/index', $data);
+    }
+
+    // CRUD Data Rekening Bank
+    public function rekening_bank()
+    {
+        $data = [
+            'rekenings' => $this->model('RekeningBankModel')->semua()
+        ];
+        $this->view('dasbor/admin/rekening-bank/index', $data);
+    }
+    public function tambah_rekening_bank()
+    {
+        // Memasukkan Logo Baru
+        $output_dir = dirname(getcwd())."/public/image/logo-rekening/";
+        $RandomNum  = time();
+
+        // Logo
+        $LogoName  = str_replace(' ','-',strtolower($_FILES['logo']['name'][0]));
+        $LogoType  = $_FILES['logo']['type'][0];
+    
+        // Nama Logo Baru
+        $LogoExt   = substr($LogoName, strrpos($LogoName, '.'));
+        $LogoExt   = str_replace('.','',$LogoExt);
+        $NewLogoName = rand(100,999).$RandomNum.'.'.$LogoExt;
+        $ret[$NewLogoName] = $output_dir.$NewLogoName;
+
+        if (!file_exists($output_dir))
+        {
+            @mkdir($output_dir, 0777);
+        }
+
+        move_uploaded_file($_FILES["logo"]["tmp_name"][0], $output_dir.$NewLogoName );
+
+        $data = [
+            'logo'      => $NewLogoName,
+            'nama'      => $_POST['nama'],
+            'nomor'     => $_POST['nomor'],
+            'pemegang'  => $_POST['pemegang'],
+        ];
+        $this->model('RekeningBankModel')->tambah($data);
+        $this->alert('Rekening berhasil ditambahkan.', 'admin/rekening_bank');
+    }
+    public function edit_rekening_bank($id_user)
+    {
+        if ($this->model('RekeningBankModel')->rekening($id_user) != null){
+            $data = $this->model('RekeningBankModel')->rekening($id_user);
+            $this->view('dasbor/admin/rekening-bank/edit', $data);
+        } else {
+            $this->controller('alert')->message('Not Found', '404 | Not Found');
+        }
+    }
+
+    public function update_rekening_bank($id_rekening)
+    {
+        if($this->model('RekeningBankModel')->rekening($id_rekening) != null){
+            if (isset($_POST['update']))
+            {
+                if($_FILES['logo']["name"][0]){
+                    // Memasukkan Logo Baru
+                    $output_dir = dirname(getcwd())."/public/image/logo-rekening/";
+                    $RandomNum  = time();
+            
+                    // Logo
+                    $LogoName  = str_replace(' ','-',strtolower($_FILES['logo']['name'][0]));
+                    $LogoType  = $_FILES['logo']['type'][0];
+                
+                    // Nama Logo Baru
+                    $LogoExt   = substr($LogoName, strrpos($LogoName, '.'));
+                    $LogoExt   = str_replace('.','',$LogoExt);
+                    $NewLogoName = rand(100,999).$RandomNum.'.'.$LogoExt;
+                    $ret[$NewLogoName] = $output_dir.$NewLogoName;
+            
+                    if (!file_exists($output_dir))
+                    {
+                        @mkdir($output_dir, 0777);
+                    }
+            
+                    move_uploaded_file($_FILES["logo"]["tmp_name"][0], $output_dir.$NewLogoName );
+
+                    $data['logo'] = $NewLogoName;
+
+                    // Penghapusan Gambar
+                    $logo = $output_dir.$this->model('RekeningBankModel')->rekening($id_rekening)['logo'];
+                    if(file_exists($logo)){
+                        unlink($logo);
+                    }
+                }else{
+                    $data['logo'] = $this->model('RekeningBankModel')->rekening($id_rekening)['logo'];
+                }
+
+                $data += [
+                    'id_rekening' => $id_rekening,
+                    'nama'      => $_POST['nama'],
+                    'nomor'     => $_POST['nomor'],
+                    'pemegang'  => $_POST['pemegang']
+                ];
+                $this->model('RekeningBankModel')->update($data);
+                $this->alert('Data user berhasil diupdate.', 'admin/rekening_bank');
+                exit();
+            }else{
+                $this->controller('alert')->message('Not Found', '404 | Not Found');
+            }
+        }else{
+            $this->controller('alert')->message('Not Found', '404 | Not Found');
+        }
+    }
+    
+
+    public function hapus_rekening_bank($id_rekening)
+    {
+        if($this->model('RekeningBankModel')->rekening($id_rekening) != null){
+            $data = $this->model('RekeningBankModel')->rekening($id_rekening);
+            try {
+                $logo = $this->model('RekeningBankModel')->rekening($id_rekening)['logo'];
+                $this->model('RekeningBankModel')->hapus($id_rekening);
+                $path = dirname(getcwd())."/public/image/logo-rekening/".$logo;
+                
+                if(file_exists($path)){
+                    unlink($path);
+                }
+                $this->alert('Data rekening bank berhasil dihapus.', 'admin/rekening_bank');
+            } catch (\Throwable $th) {
+                $this->alert('505 | Internal Server Error', 'admin/rekening_bank');
+            }
+        }else{
+            $this->controller('alert')->message('Not Found', '404 | Not Found');
+        }
+    }
+
     // Laporan
     public function laporan_user()
     {
@@ -216,14 +412,14 @@ class admin extends Controller
     public function laporan_transaksi()
     {
         $data = [
-            'transaksis' => $this->model('PembayaranModel')->semua_byadmin()
+            'transaksis' => $this->model('PembayaranModel')->semua_byadmin(1)
         ];
         $this->view('dasbor/admin/laporan/transaksi', $data);
     }
     public function export_transaksi()
     {
         $data = [
-            'transaksis' => $this->model('PembayaranModel')->semua_byadmin()
+            'transaksis' => $this->model('PembayaranModel')->semua_byadmin(1)
         ];
         $this->view('dasbor/admin/laporan/export_transaksi', $data);
     }

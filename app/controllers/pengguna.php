@@ -124,49 +124,11 @@ class pengguna extends Controller
         $this->alert('Pesanan berhasil diselesaikan, harap lakukan pembayaran secepatnya.', 'pengguna/index');
     }
 
-    public function pembayaran_pesanan($id_pesanan)
-    {
-        $data = $this->model('PesananModel')->pesanan_bypengguna($id_pesanan);
-        if($data != null){
-            $this->view('dasbor/pengguna/pembayaran_pesanan', $data);
-        }else{
-            $this->controller('alert')->message('Not Found', '404 | Not Found');
-        }
-    }
-    public function kirim_pembayaran_pesanan($id_pesanan){
-        if (isset($_POST['kirim']))
-        {
-            $data = [
-                'id_pesanan' => $id_pesanan,
-                'nomor_transaksi' => rand(1000000000,9999999999),
-                'metode_pembayaran' => $_POST['metode_pembayaran'],
-                'nomor_pembayaran' => $_POST['nomor_pembayaran'],
-                'status' => 1,
-                'total_dibayar' => $this->model('PesananModel')->pesanan_bypengguna($id_pesanan)['harga']*80/100,
-            ];
-            $this->model('PembayaranModel')->tambah($data);
-            $this->add_rating($id_pesanan);
-            
-            
-            $pesanan = $this->model('PesananModel')->pesanan_bypengguna($id_pesanan);
-            $pesan = [
-                'id_user' => $pesanan['id_arsitek'],
-                'judul' => 'Pembayaran Berhasil',
-                'keterangan' => 'Selamat Gajian! Pengguna baru saja membayar pesanannya. cek <a href="'.BASEURL.'/arsitek/pesanan">di sini</a>.',
-                'link' => '/arsitek/pesanan'
-            ];
-            $this->model('NotifikasiModel')->notifikasi($pesan);
-            $this->model('PesananModel')->update_status($id_pesanan, 3);
-            $this->alert('Pembayaran berhasil dilakukan.', 'pengguna/index');
-            exit();
-        }else{
-            $this->controller('alert')->message('Not Found', '404 | Not Found');
-        }
-    }
     public function pembayaran_dp($id_pesanan)
     {
         $data = $this->model('PesananModel')->pesanan_bypengguna($id_pesanan);
         if($data != null){
+            $data['rekening'] = $this->model('RekeningBankModel')->semua();
             $this->view('dasbor/pengguna/pembayaran_dp', $data);
         }else{
             $this->controller('alert')->message('Not Found', '404 | Not Found');
@@ -175,16 +137,118 @@ class pengguna extends Controller
     public function kirim_pembayaran_dp($id_pesanan){
         if (isset($_POST['kirim']))
         {
-            $data = [
-                'id_pesanan' => $id_pesanan,
-                'nomor_transaksi' => rand(1000000000,9999999999),
-                'metode_pembayaran' => $_POST['metode_pembayaran'],
-                'nomor_pembayaran' => $_POST['nomor_pembayaran'],
-                'status' => -1,
-                'total_dibayar' => $this->model('PesananModel')->pesanan_bypengguna($id_pesanan)['harga']*20/100,
-            ];
-            $this->model('PembayaranModel')->tambah($data);
+            $cek_dp = $this->model('PembayaranModel')->cek_pembayaran($id_pesanan, -1);
+
+            // Memasukkan BuktiPembayaran Baru
+            $output_dir = dirname(getcwd())."/public/image/bukti-pembayaran/";
+            $RandomNum  = time();
+    
+            // BuktiPembayaran
+            $BuktiPembayaranName  = str_replace(' ','-',strtolower($_FILES['bukti_pembayaran']['name'][0]));
+            $BuktiPembayaranType  = $_FILES['bukti_pembayaran']['type'][0];
+        
+            // Nama BuktiPembayaran Baru
+            $BuktiPembayaranExt   = substr($BuktiPembayaranName, strrpos($BuktiPembayaranName, '.'));
+            $BuktiPembayaranExt   = str_replace('.','',$BuktiPembayaranExt);
+            $NewBuktiPembayaranName = rand(100,999).$RandomNum.'.'.$BuktiPembayaranExt;
+            $ret[$NewBuktiPembayaranName] = $output_dir.$NewBuktiPembayaranName;
+    
+            if (!file_exists($output_dir))
+            {
+                @mkdir($output_dir, 0777);
+            }
+    
+            move_uploaded_file($_FILES["bukti_pembayaran"]["tmp_name"][0], $output_dir.$NewBuktiPembayaranName );
+            $data['bukti_pembayaran'] = $NewBuktiPembayaranName;
+
+            if($cek_dp != null){
+                // Penghapusan Gambar
+                $logo = $output_dir.$cek_dp['bukti_pembayaran'];
+                if(file_exists($logo)){
+                    unlink($logo);
+                }
+                $data += [
+                    'id_pembayaran' => $cek_dp['id_pembayaran'],
+                    'status' => 0,
+                ];
+                $this->model('PembayaranModel')->update($data);
+            }else{
+                $data += [
+                    'id_pesanan' => $id_pesanan,
+                    'total_dibayar' => $this->model('PesananModel')->pesanan_bypengguna($id_pesanan)['harga']*20/100,
+                    'pembayaran' => -1,
+                    'status' => 0,
+                ];
+                $this->model('PembayaranModel')->tambah($data);
+            }
+
             $this->alert('Pembayaran DP berhasil dilakukan.', 'pengguna/index');
+            exit();
+        }else{
+            $this->controller('alert')->message('Not Found', '404 | Not Found');
+        }
+    }
+    public function pembayaran_pesanan($id_pesanan)
+    {
+        $data = $this->model('PesananModel')->pesanan_bypengguna($id_pesanan);
+        if($data != null){
+            $data['rekening'] = $this->model('RekeningBankModel')->semua();
+            $data['pembayaran'] = $this->model('PembayaranModel')->cek_pembayaran($id_pesanan, 1);
+            $this->view('dasbor/pengguna/pembayaran_pesanan', $data);
+        }else{
+            $this->controller('alert')->message('Not Found', '404 | Not Found');
+        }
+    }
+    public function kirim_pembayaran_pesanan($id_pesanan){
+        if (isset($_POST['kirim']))
+        {
+            $cek_pembayaran = $this->model('PembayaranModel')->cek_pembayaran($id_pesanan, 1);
+
+            // Memasukkan BuktiPembayaran Baru
+            $output_dir = dirname(getcwd())."/public/image/bukti-pembayaran/";
+            $RandomNum  = time();
+    
+            // BuktiPembayaran
+            $BuktiPembayaranName  = str_replace(' ','-',strtolower($_FILES['bukti_pembayaran']['name'][0]));
+            $BuktiPembayaranType  = $_FILES['bukti_pembayaran']['type'][0];
+        
+            // Nama BuktiPembayaran Baru
+            $BuktiPembayaranExt   = substr($BuktiPembayaranName, strrpos($BuktiPembayaranName, '.'));
+            $BuktiPembayaranExt   = str_replace('.','',$BuktiPembayaranExt);
+            $NewBuktiPembayaranName = rand(100,999).$RandomNum.'.'.$BuktiPembayaranExt;
+            $ret[$NewBuktiPembayaranName] = $output_dir.$NewBuktiPembayaranName;
+    
+            if (!file_exists($output_dir))
+            {
+                @mkdir($output_dir, 0777);
+            }
+    
+            move_uploaded_file($_FILES["bukti_pembayaran"]["tmp_name"][0], $output_dir.$NewBuktiPembayaranName );
+            $data['bukti_pembayaran'] = $NewBuktiPembayaranName;
+
+            if($cek_pembayaran != null){
+                // Penghapusan Gambar
+                $logo = $output_dir.$cek_pembayaran['bukti_pembayaran'];
+                if(file_exists($logo)){
+                    unlink($logo);
+                }
+
+                $data += [
+                    'id_pembayaran' => $cek_pembayaran['id_pembayaran'],
+                    'status' => 0,
+                ];
+                $this->model('PembayaranModel')->update($data);
+            }else{
+                $data += [
+                    'id_pesanan' => $id_pesanan,
+                    'total_dibayar' => $this->model('PesananModel')->pesanan_bypengguna($id_pesanan)['harga']*80/100,
+                    'pembayaran' => 1,
+                    'status' => 0,
+                ];
+                $this->model('PembayaranModel')->tambah($data);
+                $this->add_rating($id_pesanan);
+            }
+            $this->alert('Pembayaran berhasil dilakukan.', 'pengguna/index');
             exit();
         }else{
             $this->controller('alert')->message('Not Found', '404 | Not Found');

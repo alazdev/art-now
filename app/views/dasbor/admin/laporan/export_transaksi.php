@@ -39,9 +39,6 @@
 	<table border="1">
 		<tr>
             <th>No</th>
-            <th>Nomor Transaksi</th>
-            <th>Metode Transaksi</th>
-            <th>Nomor Pembayaran/Rekening</th>
             <th>Total Dibayar</th>
             <th>Pembayaran</th>
             <th>Nama Pengguna</th>
@@ -56,11 +53,8 @@
         <?php $i = 1; foreach($data['transaksis'] as $transaksi) { ?>
             <tr>
                 <td><?= $i; ?></td>
-                <td><?= $transaksi['nomor_transaksi']; ?></td>
-                <td><?= $transaksi['metode_pembayaran']; ?></td>
-                <td><?= $transaksi['nomor_pembayaran']; ?></td>
                 <td>Rp <?= number_format($transaksi['total_dibayar'], 0, ',', '.'); ?></td>
-                <td><?= ($transaksi['status']==1) ? 'Penuh':'DP/Uang Muka' ?></td>
+                <td><?= ($transaksi['pembayaran']==1) ? 'Penuh':'DP/Uang Muka' ?></td>
                 <td><?= $transaksi['nama_lengkap_pengguna']; ?></td>
                 <td><?= $transaksi['email_pengguna']; ?></td>
                 <td><?= $transaksi['telepon_pengguna']; ?></td>

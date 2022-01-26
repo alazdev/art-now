@@ -50,7 +50,7 @@ class auth extends Controller
                     $this->view('auth/login', $data);
                 }else{
                     $_SESSION['login']          = TRUE;
-                    $_SESSION['id']             = $data['id_user'];
+                    $_SESSION['id_user']        = $data['id_user'];
                     $_SESSION['email']          = $data['email'];
                     $_SESSION['level']          = $data['level'];
                     $_SESSION['nama_lengkap']   = $data['nama_lengkap'];

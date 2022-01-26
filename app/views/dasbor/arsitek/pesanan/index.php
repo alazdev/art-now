@@ -10,7 +10,7 @@
                 </nav>
                 <h1 class="m-0">Pesanan</h1>
             </div>
-            <a href="laporan_pesanan" class="btn btn-success ml-3">Export Pesanan</a>
+            <a href="laporan_pesanan" class="btn btn-success ml-3">Ekspor Pesanan</a>
         </div>
     </div>
     <div class="container page__container">
@@ -18,7 +18,7 @@
             <div class="alert alert-soft-warning d-flex align-items-center card-margin" role="alert">
                 <i class="material-icons mr-3">error_outline</i>
                 <div class="text-body"><strong> 
-                    Sedang Mengerjakan Pesanan <a href="<?= BASEURL.'/user/pengguna/'.$pesanan['id_user'];?>"><?= $pesanan['nama_lengkap']; ?></a>.</strong> 
+                    Sedang Mengerjakan Pesanan <a href="<?= BASEURL.'/user/profile_pengguna/'.$pesanan['id_user'];?>"><?= $pesanan['nama_lengkap']; ?></a>.</strong> 
                     <?php if($pesanan['dokumen']) { ?>
                         Lihat <a class="badge badge-success" href="<?= BASEURL.'/dokumen/'.$pesanan['dokumen']; ?>" download="<?= 'IMB-'.$pesanan['nama_lengkap'].'-'.$pesanan['dokumen'];?>">IMB</a>
                     <?php } else { ?>
@@ -60,18 +60,24 @@
                                             <?php } else { ?>
                                                 <span class="badge badge-danger">BELUM ADA IMB</span>
                                             <?php } ?>
-                                            <?php if($pesanan['status_pembayaran'] == NULL) { ?>
-                                                <span class="badge badge-danger">DP BELUM DIBAYAR PENGGUNA</span>
+                                            <?php if($pesanan['status_pembayaran_dp'] == NULL) { ?>
+                                                <na class="badge badge-danger">DP BELUM DIBAYAR</span>
+                                            <?php } else if($pesanan['status_pembayaran_dp'] == -1 || $pesanan['status_pembayaran_dp'] == 0) { ?>
+                                                <span class="badge badge-warning">DP SEDANG DIVALIDASI</span>
+                                            <?php } else if($pesanan['status_pembayaran_dp'] == 1) { ?>
+                                                <a class="badge badge-success" href="javascript:void(0)">DP TELAH DIBAYAR</span>
                                             <?php } ?>
-                                        <?php } else if($pesanan['status'] == 2 ) { ?>
-                                            <span class="badge badge-warning">MENUNGGU PEMBAYARAN</span>
-                                        <?php } else if($pesanan['status'] == 3 ) { ?>
+                                        <?php } else if($pesanan['status_pembayaran'] == NULL ) { ?>
+                                            <span class="badge badge-danger">MENUNGGU PEMBAYARAN</span>
+                                        <?php } else if($pesanan['status_pembayaran'] == -1 || $pesanan['status_pembayaran'] == 0 ) { ?>
+                                            <span class="badge badge-warning">PEMBAYARAN SEDANG DIVALIDASI</span>
+                                        <?php } else if($pesanan['status'] == 3 && $pesanan['status_pembayaran'] == 1) { ?>
                                             <span class="badge badge-success">SELESAI</span>
                                         <?php } ?>
                                     </td>
                                     <td><?= date('d F Y H:i', strtotime($pesanan['dibuat_pada']));?></td>
                                     <td><?= date('d F Y H:i', strtotime($pesanan['diperbaharui_pada']));?></td>
-                                    <td align="right">
+                                    <td align="right" style="white-space: nowrap;">
                                             <a href="../chat/index?ke=<?= $pesanan['id_user']; ?>" class="text-success"><i class="material-icons">chat</i></a>
                                         <?php if($pesanan['status'] == 0 ) { ?>
                                             <a href="terima_pesanan/<?= $pesanan['id_pesanan']; ?>" class="text-success"><i class="material-icons">check</i></a>

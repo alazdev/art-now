@@ -147,6 +147,21 @@ class arsitek extends Controller
         $data['tahunan_pembayaran'] = $this->model('PembayaranModel')->tahunan_pembayaran()[0];
         $data['total_pesanan'] = count($this->model('PesananModel')->total_pesanan());
         $data['tahunan_pesanan'] = $this->model('PesananModel')->tahunan_pesanan()[0];
+
+        if (array_sum($data['tahunan_pembayaran']) == 0){
+            $data['tahunan_pembayaran'] = [
+                'Jan'=>0,'Feb'=>0,'Mar'=>0,'Apr'=>0,
+                'May'=>0,'Jun'=>0,'Jul'=>0,'Aug'=>0,
+                'Sep'=>0,'Oct'=>0,'Nov'=>0,'Dec'=>0
+            ];
+        }
+        if (array_sum($data['tahunan_pesanan']) == 0){
+            $data['tahunan_pesanan'] = [
+                'Jan'=>0,'Feb'=>0,'Mar'=>0,'Apr'=>0,
+                'May'=>0,'Jun'=>0,'Jul'=>0,'Aug'=>0,
+                'Sep'=>0,'Oct'=>0,'Nov'=>0,'Dec'=>0
+            ];
+        }
         
         $tahunan_pembayaran_sementara = [];
         $tahunan_pesanan_sementara = [];

@@ -23,10 +23,22 @@
                     <?php } else { ?>
                         <span class="badge badge-danger">BELUM ADA IMB</span> <a href="<?= BASEURL.'/pengguna/imb_pesanan/'.$pesanan['id_pesanan'];?>">Klik di sini untuk memasukkan IMB.</a>
                     <?php } } else if ($pesanan['status'] == 2) { ?>
-                        <a href="<?= BASEURL.'/pengguna/pembayaran_pesanan/'.$pesanan['id_pesanan'];?>">Klik di sini untuk membayar.</a>
+                        <?php if($pesanan['status_pembayaran'] == NULL ) { ?>
+                            <a href="pembayaran_pesanan/<?= $pesanan['id_pesanan']; ?>"><span class="badge badge-danger">MENUNGGU PEMBAYARAN</span> Klik di sini untuk membayar.</a>
+                        <?php } else if($pesanan['status_pembayaran'] == -1 ) { ?>
+                            <a href="pembayaran_pesanan/<?= $pesanan['id_pesanan']; ?>"><span class="badge badge-danger">BUKTI PEMBAYARAN SEBELUMNYA DITOLAK</span></a> Silakan masukkan kembali bukti pembayaran yang benar.
+                        <?php } else if($pesanan['status_pembayaran'] == 0 ) { ?>
+                            <a href="pembayaran_pesanan/<?= $pesanan['id_pesanan']; ?>"><span class="badge badge-warning">PEMBAYARAN SEDANG DIVALIDASI</span></a>
+                        <?php } else if($pesanan['status'] == 3 && $pesanan['status_pembayaran'] == 1) { ?>
+                            <span class="badge badge-success">SELESAI</span>
+                        <?php } ?>
                     <?php } ?>
-                    <?php if($pesanan['status_pembayaran'] == NULL) { ?>
-                        <a class="badge badge-danger" href="<?= BASEURL.'/pembayaran_dp/'.$pesanan['id_pesanan']; ?>">DP BELUM DIBAYAR</a>
+                    <?php if($pesanan['status_pembayaran_dp'] == NULL) { ?>
+                        <a class="badge badge-danger" href="<?= BASEURL.'/pengguna/pembayaran_dp/'.$pesanan['id_pesanan']; ?>">DP BELUM DIBAYAR</a>
+                    <?php } else if($pesanan['status_pembayaran_dp'] == -1) { ?>
+                        <a class="badge badge-danger" href="<?= BASEURL.'/pengguna/pembayaran_dp/'.$pesanan['id_pesanan']; ?>">BUKTI PEMBAYARAN SEBELUMNYA DITOLAK</a> Silakan masukkan kembali bukti pembayaran yang benar.
+                    <?php } else if($pesanan['status_pembayaran_dp'] == 0) { ?>
+                        <a class="badge badge-warning" href="<?= BASEURL.'/pengguna/pembayaran_dp/'.$pesanan['id_pesanan']; ?>">DP SEDANG DIVALIDASI</a>
                     <?php } ?>
                 </div>
             </div>
@@ -64,23 +76,33 @@
                                             <?php } else { ?>
                                                 <span class="badge badge-danger">BELUM ADA IMB</span>
                                             <?php } ?>
-                                            <?php if($pesanan['status_pembayaran'] == NULL) { ?>
-                                                <a class="badge badge-danger" href="<?= BASEURL.'/pembayaran_dp/'.$pesanan['id_pesanan']; ?>">DP BELUM DIBAYAR</a>
+                                            <?php if($pesanan['status_pembayaran_dp'] == NULL) { ?>
+                                                <a class="badge badge-danger" href="<?= BASEURL.'/pengguna/pembayaran_dp/'.$pesanan['id_pesanan']; ?>">DP BELUM DIBAYAR</a>
+                                            <?php } else if($pesanan['status_pembayaran_dp'] == -1) { ?>
+                                                <a class="badge badge-danger" href="<?= BASEURL.'/pengguna/pembayaran_dp/'.$pesanan['id_pesanan']; ?>">BUKTI PEMBAYARAN DP SEBELUMNYA DITOLAK</a>
+                                            <?php } else if($pesanan['status_pembayaran_dp'] == 0) { ?>
+                                                <a class="badge badge-warning" href="<?= BASEURL.'/pengguna/pembayaran_dp/'.$pesanan['id_pesanan']; ?>">DP SEDANG DIVALIDASI</a>
+                                            <?php } else if($pesanan['status_pembayaran_dp'] == 1) { ?>
+                                                <a class="badge badge-success" href="javascript:void(0)">DP TELAH DIBAYAR</a>
                                             <?php } ?>
-                                        <?php } else if($pesanan['status'] == 2 ) { ?>
-                                            <span class="badge badge-warning">MENUNGGU PEMBAYARAN</span>
-                                        <?php } else if($pesanan['status'] == 3 ) { ?>
+                                        <?php } else if($pesanan['status_pembayaran'] == NULL ) { ?>
+                                            <a href="pembayaran_pesanan/<?= $pesanan['id_pesanan']; ?>"><span class="badge badge-danger">MENUNGGU PEMBAYARAN</span></a>
+                                        <?php } else if($pesanan['status_pembayaran'] == -1 ) { ?>
+                                            <a href="pembayaran_pesanan/<?= $pesanan['id_pesanan']; ?>"><span class="badge badge-danger">BUKTI PEMBAYARAN SEBELUMNYA DITOLAK</span></a>
+                                        <?php } else if($pesanan['status_pembayaran'] == 0 ) { ?>
+                                            <a href="pembayaran_pesanan/<?= $pesanan['id_pesanan']; ?>"><span class="badge badge-warning">PEMBAYARAN SEDANG DIVALIDASI</span></a>
+                                        <?php } else if($pesanan['status'] == 3 && $pesanan['status_pembayaran'] == 1) { ?>
                                             <span class="badge badge-success">SELESAI</span>
                                         <?php } ?>
                                     </td>
                                     <td><?= date('d F Y H:i', strtotime($pesanan['dibuat_pada']));?></td>
                                     <td><?= date('d F Y H:i', strtotime($pesanan['diperbaharui_pada']));?></td>
-                                    <td align="right">
+                                    <td align="right" style="white-space: nowrap;">
                                         <a href="../chat/index?ke=<?= $pesanan['id_arsitek']; ?>" class="text-success"><i class="material-icons">chat</i></a>
-                                        <?php if($pesanan['status'] == 1 && $pesanan['status_pembayaran'] == NULL ) { ?>
+                                        <?php if($pesanan['status'] == 1 && ($pesanan['status_pembayaran_dp'] == NULL OR $pesanan['status_pembayaran_dp'] < 1) ) { ?>
                                             <a href="imb_pesanan/<?= $pesanan['id_pesanan']; ?>" class="text-success"><i class="material-icons">receipt</i></a>
                                             <a href="pembayaran_dp/<?= $pesanan['id_pesanan']; ?>" class="text-warning"><i class="material-icons">payment</i></a>
-                                        <?php } else if($pesanan['status'] == 1 && $pesanan['status_pembayaran'] != NULL ) { ?>
+                                        <?php } else if($pesanan['status'] == 1 && $pesanan['status_pembayaran_dp'] != NULL ) { ?>
                                             <a href="imb_pesanan/<?= $pesanan['id_pesanan']; ?>" class="text-success"><i class="material-icons">receipt</i></a>
                                             <a href="selesaikan_pesanan/<?= $pesanan['id_pesanan']; ?>" class="text-success"><i class="material-icons">check</i></a>
                                         <?php } else if($pesanan['status'] == 2 ) { ?>

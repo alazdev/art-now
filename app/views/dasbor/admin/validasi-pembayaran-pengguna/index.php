@@ -5,10 +5,10 @@
             <div class="flex">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item active" aria-current="page">Laporan Transaksi</li>
+                        <li class="breadcrumb-item active" aria-current="page">Validasi Pembayaran Pengguna</li>
                     </ol>
                 </nav>
-                <h1 class="m-0">Laporan Transaksi</h1>
+                <h1 class="m-0">Validasi Pembayaran Pengguna</h1>
             </div>
         </div>
     </div>
@@ -16,11 +16,6 @@
         <div class="card card-form">
             <div class="row no-gutters">
                 <div class="col-lg-12 card-body">
-                    <form action="<?= BASEURL ?>/admin/export_transaksi" method="post">
-                        <div class="card-body">
-                            <button type="submit" class="btn btn-info form-control col-md-12">Ekspor Laporan</button>
-                        </div>
-                    </form>
                     <div class="table-responsive border-bottom" data-toggle="lists" data-lists-values='["js-lists-values-employee-name"]'>
                         <table class="table mb-0 thead-border-top-0">
                             <thead>
@@ -28,28 +23,22 @@
                                     <th>Total Dibayar</th>
                                     <th>Pembayaran</th>
                                     <th>Nama Pengguna</th>
-                                    <th>Email Pengguna</th>
-                                    <th>Telepon Pengguna</th>
                                     <th>Nama Arsitek</th>
-                                    <th>Email Arsitek</th>
-                                    <th>Telepon Arsitek</th>
                                     <th>Judul Produk</th>
-                                    <th>Waktu</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody class="list" id="staff02">
-                                <?php foreach($data['transaksis'] as $transaksi) { ?>
+                                <?php foreach($data['pembayarans'] as $pembayaran) { ?>
                                 <tr>
-                                    <td>Rp <?= number_format($transaksi['total_dibayar'], 0, ',', '.'); ?></td>
-                                    <td><?= ($transaksi['pembayaran']==1) ? 'Penuh':'DP/Uang Muka' ?></td>
-                                    <td><?= $transaksi['nama_lengkap_pengguna']; ?></td>
-                                    <td><?= $transaksi['email_pengguna']; ?></td>
-                                    <td><?= $transaksi['telepon_pengguna']; ?></td>
-                                    <td><?= $transaksi['nama_lengkap_arsitek']; ?></td>
-                                    <td><?= $transaksi['email_arsitek']; ?></td>
-                                    <td><?= $transaksi['telepon_arsitek']; ?></td>
-                                    <td><?= $transaksi['judul_produk']; ?></td>
-                                    <td><?= date('Y-m-d H:i', strtotime($transaksi['dibuat_pada']));?></td>
+                                    <td>Rp <?= number_format($pembayaran['total_dibayar'], 0, ',', '.'); ?></td>
+                                    <td><?= ($pembayaran['pembayaran']==1) ? 'Penuh':'DP/Uang Muka' ?></td>
+                                    <td><?= $pembayaran['nama_lengkap_pengguna']; ?></td>
+                                    <td><?= $pembayaran['nama_lengkap_arsitek']; ?></td>
+                                    <td><?= $pembayaran['judul_produk']; ?></td>
+                                    <td align="right" style="white-space: nowrap;">
+                                        <a href="detail_pembayaran_pengguna/<?= $pembayaran['id_pembayaran']; ?>" class="text-muted"><i class="material-icons">visibility</i></a>
+                                    </td>
                                 </tr>
                                 <?php } ?>
                             </tbody>
@@ -63,7 +52,14 @@
 <script>
     $(document).ready( function () {
         $('.table').DataTable({
-            "searching":false,
+            "columns": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                { "searchable": false, "orderable": false},
+            ],
             'aaSorting': [],
             'order': [],
             "language": {

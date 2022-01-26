@@ -18,7 +18,7 @@
                 <div class="col-lg-12 card-body">
                     <form action="<?= BASEURL ?>/admin/export_produk" method="post">
                         <div class="card-body">
-                            <button type="submit" class="btn btn-info form-control col-md-12">Export Laporan</button>
+                            <button type="submit" class="btn btn-info form-control col-md-12">Ekspor Laporan</button>
                         </div>
                     </form>
                     <div class="table-responsive border-bottom" data-toggle="lists" data-lists-values='["js-lists-values-employee-name"]'>

@@ -171,6 +171,48 @@
             </div>
         </div>
     </div>
+    <div id="modal-tambah-rekening" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-large-title" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-large-title">Form Tambah Rekening Bank</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST" action="<?= BASEURL.'/admin/tambah_rekening_bank'?>" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="card card-form">
+                            <div class="row no-gutters">
+                                <div class="col-lg-12 card-form__body card-body">
+                                    <div class="form-group">
+                                        <label for="logo">Logo:</label>
+                                        <input type="file" name="logo[]" class="form-control" id="logo" accept="image/png, image/jpeg" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nama">Nama:</label>
+                                        <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan Nama..." required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nomor">Nomor:</label>
+                                        <input type="number" name="nomor" class="form-control" id="nomor" placeholder="Masukkan Nomor..." required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pemegang">Pemegang:</label>
+                                        <input type="text" name="pemegang" class="form-control" id="pemegang" placeholder="Masukkan Pemegang..." required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary" name="tambah">Tambahkan Rekening Bank</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div id="modal-delete" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-sm">
             <div class="modal-content bg-danger">
@@ -230,7 +272,7 @@
                             <li class="nav-item dropdown">
                                 <a href="#account_menu" class="nav-link dropdown-toggle" data-toggle="dropdown" data-caret="false">
                                     <?php if($_SESSION['foto'] == null) { ?>
-                                        <img src="https://via.placeholder.com/32x32" class="rounded-circle" width="32" height="34px" alt="Frontted">
+                                        <img src="https://via.placeholder.com/32x32" class="rounded-circle" width="32" height="34px" alt="foto profil">
                                     <?php } else { ?>
                                         <img src="<?= BASEURL.'/image/profile/'.$_SESSION['foto'];?>" class="rounded-circle" width="32" height="34px" alt="img">
                                     <?php }?>
