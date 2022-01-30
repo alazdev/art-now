@@ -48,7 +48,7 @@
 					<?php if($_SESSION['foto'] == null) { ?>
 					<img src="https://via.placeholder.com/34x34" class="rounded-circle" alt="">
 					<?php } else { ?>
-					<img src="<?= BASEURL.'/image/profile/'.$_SESSION['foto'];?>" width="34px" class="rounded-circle" height="34px" alt="">
+					<img src="<?= BASEURL.'/image/profile/'.$_SESSION['foto'];?>" width="34px" class="rounded-circle" height="34px" style="object-fit: cover;" alt="">
 					<?php }?>
 					<?= $_SESSION['nama_lengkap'];?> <i class="fa fa-angle-down" aria-hidden="true"></i>
 				</a>

@@ -2,14 +2,14 @@ Awal
 01. Copy Folder ini (art-now) pindahkan ke folder htdocs. Nama Folder harus art-now
     Contoh: jika folder htdocs di C:/xampp/htdocs
     File Directory
-    |- |C:
-    |--- |xampp
-    |----- |htdocs
-    |------- |art-now
-    |-------- |app
-    |-------- |public
-    |---------- |index.php
-    |-------- |konfigurasi.txt (File sekarang)
+    |C:
+    |└───xampp
+    |    └───htdocs
+    |        └───art-now
+    |            ├───app
+    |            ├───public
+    |            │   └───index.php
+    |            └───konfigurasi.txt (File sekarang)
 
 02. Buat database baru di PHPMyAdmin (http://localhost/phpmyadmin) dengan nama art_now 
     *note: Hidupkan MySQL dan Apache di aplikasi XAMPP Control Panel terlebih dahulu

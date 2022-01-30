@@ -11,10 +11,10 @@
                                     <span class="sidebar-menu-text">Pesanan</span>
                                 </a>
                             </li>
-                            <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Chat" data-placement="right" data-container="body" data-boundary="window">
+                            <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Pesan" data-placement="right" data-container="body" data-boundary="window">
                                 <a class="sidebar-menu-button" href="<?= BASEURL; ?>/chat/index">
                                     <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">slideshow</i>
-                                    <span class="sidebar-menu-text">Chat</span>
+                                    <span class="sidebar-menu-text">Pesan</span>
                                 </a>
                             </li>
                         <?php } else if ($_SESSION['level'] == 2) { ?>
@@ -81,10 +81,10 @@
                                     <span class="sidebar-menu-text">Pesanan</span>
                                 </a>
                             </li>
-                            <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Chat" data-placement="right" data-container="body" data-boundary="window">
+                            <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Pesan" data-placement="right" data-container="body" data-boundary="window">
                                 <a class="sidebar-menu-button" href="<?= BASEURL; ?>/chat/index">
                                     <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">slideshow</i>
-                                    <span class="sidebar-menu-text">Chat</span>
+                                    <span class="sidebar-menu-text">Pesan</span>
                                 </a>
                             </li>
                         <?php } ?>

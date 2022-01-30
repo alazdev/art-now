@@ -31,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133433427-1"></script>
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133433427-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -41,11 +41,11 @@
         gtag('js', new Date());
 
         gtag('config', 'UA-133433427-1');
-    </script>
+    </script> -->
 
 
     <!-- Facebook Pixel Code -->
-    <script>
+    <!-- <script>
         ! function(f, b, e, v, n, t, s) {
             if (f.fbq) return;
             n = f.fbq = function() {
@@ -67,7 +67,7 @@
         fbq('init', '327167911228268');
         fbq('track', 'PageView');
     </script>
-    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=327167911228268&ev=PageView&noscript=1" /></noscript>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=327167911228268&ev=PageView&noscript=1" /></noscript> -->
     <!-- End Facebook Pixel Code -->
 
     <!-- Quill Theme -->
@@ -93,7 +93,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modal-large-title">Form Tambah Produk</h5>
+                    <h5 class="modal-title" id="modal-large-title">Tambah Produk</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -133,7 +133,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modal-large-title">Form Tambah Admin</h5>
+                    <h5 class="modal-title" id="modal-large-title">Tambah Admin</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -175,7 +175,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modal-large-title">Form Tambah Rekening Bank</h5>
+                    <h5 class="modal-title" id="modal-large-title">Tambah Rekening Bank</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -274,7 +274,7 @@
                                     <?php if($_SESSION['foto'] == null) { ?>
                                         <img src="https://via.placeholder.com/32x32" class="rounded-circle" width="32" height="34px" alt="foto profil">
                                     <?php } else { ?>
-                                        <img src="<?= BASEURL.'/image/profile/'.$_SESSION['foto'];?>" class="rounded-circle" width="32" height="34px" alt="img">
+                                        <img src="<?= BASEURL.'/image/profile/'.$_SESSION['foto'];?>" class="rounded-circle" width="32" height="34px" style="object-fit: cover;" alt="img">
                                     <?php }?>
                                     <span class="ml-1 d-flex-inline">
                                         <span class="text-light"><?= $_SESSION['nama_lengkap']; ?></span>

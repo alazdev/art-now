@@ -6,7 +6,7 @@
 					<div class="blog_post_style2 blog_single_div">
 						<div class="blog_post_style2_img wow fadeInUp">
                             <?php if($data['gambar'] != null ) {?>
-							    <img src="<?= BASEURL.'/image/produk/'.$data['gambar']?>" class="img-fluid" alt="" style="width: 1170px;">
+							    <img src="<?= BASEURL.'/image/produk/'.$data['gambar']?>" class="img-fluid col-12" alt="" style="">
                             <?php } else {?>
 							    <img src="https://via.placeholder.com/1170x560/ffc0cb" class="img-fluid" alt="">
                             <?php } ?>
@@ -28,7 +28,7 @@
 					<div class="blog_author_div wow fadeInUp">
 						<div class="blog_author_img">
                             <?php if($data['foto'] != null) { ?>
-							    <img src="<?= BASEURL.'/image/profile/'.$data['foto']?>" class="img-fluid" alt="Arsitek">
+							    <img src="<?= BASEURL.'/image/profile/'.$data['foto']?>" class="img-fluid" alt="Arsitek" style="width: 122px; height: 122px; object-fit: cover;">
                             <?php } else { ?>
 							    <img src="https://via.placeholder.com/122x122" class="img-fluid" alt="">
                             <?php } ?>
@@ -71,7 +71,7 @@
                                     <div class="blog_comment">
                                         <div class="blog_comment_img">
                                             <?php if($komen['foto'] != null) {?>
-                                                <img src="<?=BASEURL.'/image/profile/'.$komen['foto']?>" class="img-fluid" width="70px" height="70px" alt="">
+                                                <img src="<?=BASEURL.'/image/profile/'.$komen['foto']?>" class="img-fluid" width="70px" height="70px" style="width: 70px; height: 70px; object-fit: cover;" alt="">
                                             <?php } else { ?>
                                                 <img src="https://via.placeholder.com/70x70" class="img-fluid" alt="">
                                             <?php } ?>
@@ -102,7 +102,7 @@
                                                 <div class="blog_comment">
                                                     <div class="blog_comment_img">
                                                         <?php if($reply_komen['foto'] != null) {?>
-                                                            <img src="<?=BASEURL.'/image/profile/'.$reply_komen['foto']?>" class="img-fluid" width="70px" height="70px" alt="">
+                                                            <img src="<?=BASEURL.'/image/profile/'.$reply_komen['foto']?>" class="img-fluid" width="70px" height="70px" style="width: 70px; height: 70px; object-fit: cover;" alt="">
                                                         <?php } else { ?>
                                                             <img src="https://via.placeholder.com/70x70" class="img-fluid" alt="">
                                                         <?php } ?>

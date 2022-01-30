@@ -17,7 +17,7 @@
                                     </div>
                                     <div class="blog_post_style2_content">
                                         <h3><a href="<?= BASEURL.'/home/produk/'.$produk['id_produk']?>"><?=$produk['judul']?></a></h3>
-									    <div class="blog_author_data"><a href="<?= BASEURL.'/home/arsitek/'.$produk['id_user']?>"><img src="<?= BASEURL.'/image/profile/'.$produk['foto']?>" class="img-fluid" alt="" width="34" height="34"> <?= $produk['nama_lengkap'] ?></a></div> 
+									    <div class="blog_author_data"><a href="<?= BASEURL.'/home/arsitek/'.$produk['id_user']?>"><img src="<?= $produk['foto'] == null ? 'https://via.placeholder.com/34x34':BASEURL.'/image/profile/'.$produk['foto']?>" class="img-fluid" alt="" style="width: 34px; height: 34px; object-fit: cover;"> <?= $produk['nama_lengkap'] ?></a></div> 
                                             <ul class="blog_meta_tags">
                                                 <li>
                                                     <span class="blog_bg_blue" height="25px">

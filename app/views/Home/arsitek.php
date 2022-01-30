@@ -6,7 +6,7 @@
 					<div class="blog_author_div wow fadeInUp">
 						<div class="blog_author_img">
                             <?php if($data['foto'] != null) { ?>
-							    <img src="<?= BASEURL.'/image/profile/'.$data['foto']?>" class="img-fluid" alt="Arsitek">
+							    <img src="<?= BASEURL.'/image/profile/'.$data['foto']?>" class="img-fluid" alt="Arsitek" style="width: 122px; height: 122px; object-fit: cover;">
                             <?php } else { ?>
 							    <img src="https://via.placeholder.com/122x122" class="img-fluid" alt="">
                             <?php } ?>
@@ -95,7 +95,7 @@
 							<div class="blog_post_slider_content"> 
 								<div class="blog_post_slider_content_inner">
 									<h2><a href="<?= BASEURL.'/home/produk/'.$produk['id_produk']?>"><?=$produk['judul']?></a></h2>
-									<div class="blog_author_data"><a href="<?= BASEURL.'/home/arsitek/'.$produk['id_user']?>"><img src="<?= ($produk['foto'] != NULL ? BASEURL.'/image/profile/'.$produk['foto']:'https://via.placeholder.com/34x34') ?>" class="img-fluid" alt="" width="34" height="34"> <?= $produk['nama_lengkap'] ?></a></div> 
+									<div class="blog_author_data"><a href="<?= BASEURL.'/home/arsitek/'.$produk['id_user']?>"><img src="<?= ($produk['foto'] != NULL ? BASEURL.'/image/profile/'.$produk['foto']:'https://via.placeholder.com/34x34') ?>" class="img-fluid" alt="" width="34" height="34" style="width: 34px; height: 34px; object-fit: cover;"> <?= $produk['nama_lengkap'] ?></a></div> 
 									<ul class="blog_meta_tags">
 										<li>
 											<span class="blog_bg_blue" height="25px">

@@ -34,7 +34,7 @@
                             <input id="telepon" name="telepon" type="number" class="form-control" placeholder="Telepon..." value="<?= $data['telepon']?>" required>
                         </div>
                         <div class="form-group">
-                            <label for="foto">Foto <sup>*optional, pilih gambar untuk mengganti</sup></label>
+                            <label for="foto">Foto <sup>*masukkan gambar untuk mengganti</sup></label>
                             <input id="foto" name="foto[]" type="file" class="form-control"  accept="image/png, image/jpeg">
                         </div>
                         <div class="form-group">
