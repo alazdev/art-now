@@ -188,15 +188,6 @@
             $('#customFile').prop('disabled', true);
             $('#kirim-chat').prop('disabled', true);
         }
-
-        // $("#form-chat").on("submit", function () {
-        //     var id_user_to = $("#name-id-user-to").val();
-        //     var tipe = 1;
-        //     var pesan = $("#name-pesan").val();
-        //     $.post("<?=BASEURL;?>/chat/kirim_chat", { id_user_to: id_user_to, tipe: tipe, pesan: pesan });
-        //     var pesan = $("#name-pesan").val("");
-        //     return false;
-        // });
     });
 </script>
 <?php include(__DIR__ . '/../layouts/footer.php'); ?>

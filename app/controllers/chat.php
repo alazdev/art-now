@@ -39,8 +39,7 @@ class chat extends Controller
                             $this->alert('User tidak ditemukan', 'chat/index');
                             return;
                         }
-                    }
-                    if($_SESSION['level'] == 1){
+                    }else if($_SESSION['level'] == 1){
                         if($id_user['level'] != 0){
                             $this->alert('User tidak ditemukan', 'chat/index');
                             return;
