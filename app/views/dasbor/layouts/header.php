@@ -246,8 +246,8 @@
 
                         <!-- Navbar Brand -->
                         <a href="<?= BASEURL; ?>/index" class="navbar-brand ">
-                            <img class="navbar-brand-icon" src="<?= BASEURL; ?>/assets-user/images/favicon.png" width="22" alt="Stack">
-                            <span>Stack</span>
+                            <img class="navbar-brand-icon" src="<?= BASEURL; ?>/assets-user/images/favicon.png" width="22" alt="ArtNow">
+                            <span>ArtNow</span>
                         </a>
                         <ul class="nav navbar-nav ml-auto d-none d-md-flex">
                             <li class="nav-item dropdown">

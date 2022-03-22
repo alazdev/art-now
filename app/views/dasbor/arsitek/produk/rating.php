@@ -7,10 +7,10 @@
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item" aria-current="page"><a href="<?= BASEURL; ?>/arsitek/produk">Produk</a></li>
                         <li class="breadcrumb-item" aria-current="page"><a href="<?= BASEURL.'/arsitek/detail_produk/'.$data['id_produk']; ?>"><?= $data['judul'] ?></a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Rating</li>
+                        <li class="breadcrumb-item active" aria-current="page">Penilaian</li>
                     </ol>
                 </nav>
-                <h1 class="m-0">Rating - <?= $data['judul'] ?></h1>
+                <h1 class="m-0">Penilaian - <?= $data['judul'] ?></h1>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
                             <thead>
                                 <tr>
                                     <th>Nama Pengguna</th>
-                                    <th>Rating</th>
+                                    <th>Penilaian</th>
                                     <th>Komentar</th>
                                 </tr>
                             </thead>

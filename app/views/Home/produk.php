@@ -14,7 +14,7 @@
 						<div class="blog_post_style2_content wow fadeInUp">
 							<?= $data['deskripsi'] ?>
                             <br/>
-                            <p>- Rating Produk: <?= number_format($data['rating'],1,'.',',') ?>/5 dari total <?= $data['total_rating'] ?> rating.</p>
+                            <p>- Penilaian Produk: <?= number_format($data['rating'],1,'.',',') ?>/5 dari total <?= $data['total_rating'] ?> penilaian.</p>
                             <p>- Harga: <?= number_format($data['harga'],0,',','.') ?></p>
                             <div class="col-md-12">
                                 <?php if (isset($_SESSION['email'])) { if($_SESSION['level'] == 0 && $data['status'] == 1) { ?>

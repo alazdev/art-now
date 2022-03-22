@@ -31,7 +31,7 @@
 
                     <div class="mb-4">
                         <a href="../../home/produk/<?= $data['id_produk'];?>" class="btn btn-light btn-block">Lihat Komen</a>
-                        <a href="../rating_produk/<?= $data['id_produk'];?>" class="btn btn-light btn-block">Lihat Rating</a>
+                        <a href="../rating_produk/<?= $data['id_produk'];?>" class="btn btn-light btn-block">Lihat Penilaian</a>
                     </div>
 
                     <div class="mb-4 text-center">
@@ -75,7 +75,7 @@
                             </span>
                             <div class="d-flex align-items-center">
                                 <strong><?= number_format($data['rating'], 1); ?>/5</strong>
-                                <span class="text-muted ml-1">&mdash; <?= $data['total_rating']; ?> rating</span>
+                                <span class="text-muted ml-1">&mdash; <?= $data['total_rating']; ?> penilaian</span>
                             </div>
 
                         </div>

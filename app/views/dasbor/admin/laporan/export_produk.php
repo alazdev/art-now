@@ -41,7 +41,7 @@
             <th>No</th>
             <th>Judul Produk</th>
             <th>Harga Produk</th>
-            <th>Rating</th>
+            <th>Penilaian</th>
             <th>Status</th>
             <th>Nama Arsitek</th>
             <th>Email Arsitek</th>
@@ -54,7 +54,7 @@
                 <td><?= $i; ?></td>
                 <td><?= $produk['judul']; ?></td>
                 <td>Rp <?= number_format($produk['harga'], 0, ',', '.'); ?></td>
-                <td><?= number_format($produk['rating'], 1); ?>/5 dari <?= $produk['total_rating']; ?> rating</td>
+                <td><?= number_format($produk['rating'], 1); ?>/5 dari <?= $produk['total_rating']; ?> penilaian</td>
                 <td align="center">
                     <?php if($produk['status'] == 1 ) { ?>
                         AKTIF

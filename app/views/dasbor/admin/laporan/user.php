@@ -5,10 +5,10 @@
             <div class="flex">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item active" aria-current="page">Laporan User</li>
+                        <li class="breadcrumb-item active" aria-current="page">Laporan Pengguna</li>
                     </ol>
                 </nav>
-                <h1 class="m-0">Laporan User</h1>
+                <h1 class="m-0">Laporan Pengguna</h1>
             </div>
         </div>
     </div>

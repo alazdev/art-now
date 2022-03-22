@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>User</title>
+	<title>Pengguna</title>
 </head>
 <body>
 	<style type="text/css">
@@ -29,11 +29,11 @@
  
 	<?php
 	header("Content-type: application/vnd-ms-excel");
-	header("Content-Disposition: attachment; filename=Laporan User.xls");
+	header("Content-Disposition: attachment; filename=Laporan Pengguna.xls");
 	?>
  
 	<center>
-		<h3>Laporan User</h3>
+		<h3>Laporan Pengguna</h3>
 	</center>
  
     <table>

@@ -44,15 +44,15 @@
                                     </td>
                                     <td align="right">
                                         <?php if($admin['status'] == 1 ) { ?>
-                                            <a href="nonaktifkan_user/<?= $admin['id_user']; ?>" class="text-danger"><i class="material-icons">block</i></a>
+                                            <a href="nonaktifkan_user/<?= $admin['id_user']; ?>" class="text-danger"><i class="material-icons">block</i> Nonaktifkan</a>
                                         <?php } else { ?>
-                                            <a href="aktifkan_user/<?= $admin['id_user']; ?>" class="text-success"><i class="material-icons">check</i></a>
+                                            <a href="aktifkan_user/<?= $admin['id_user']; ?>" class="text-success"><i class="material-icons">check</i> Aktifkan</a>
                                         <?php } ?>
-                                        <a href="edit_admin/<?= $admin['id_user']; ?>" class="text-info"><i class="material-icons">edit</i></a>
+                                        <a href="edit_admin/<?= $admin['id_user']; ?>" class="text-info"><i class="material-icons">edit</i> Edit</a>
                                         <a onclick="deleteData()" href="#"
                                             data-value="<?= $admin['id_user']; ?>" data-nama="<?= $admin['nama_lengkap']; ?>"
                                             data-toggle="modal" data-target="#modal-delete" class="text-danger">
-                                                <i class="material-icons">delete</i>
+                                                <i class="material-icons">delete</i> Hapus
                                         </a>
                                     </td>
                                 </tr>

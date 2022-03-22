@@ -48,7 +48,7 @@
                         </div>
                         <?php if($data['pembayaran'] == NULL){ ?>
                         <div class="form-group">
-                            <label for="rating">Ulasan Layanan/Produk:</label>
+                            <label for="rating">Penilaian:</label>
                             <select name="rating" id="rating" class="form-control" required>
                                 <option value="5">5 Bintang - Bagus Sekali</option>
                                 <option value="4">4 Bintang - Bagus</option>

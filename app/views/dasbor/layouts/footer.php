@@ -123,7 +123,7 @@
                                 <ul class="sidebar-menu">
                                     <li class="sidebar-menu-item">
                                         <a class="sidebar-menu-button" href="<?= BASEURL; ?>/admin/laporan_user">
-                                            <span class="sidebar-menu-text">User</span>
+                                            <span class="sidebar-menu-text">Pengguna</span>
                                         </a>
                                     </li>
                                     <li class="sidebar-menu-item">

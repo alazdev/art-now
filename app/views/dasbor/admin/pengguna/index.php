@@ -42,11 +42,11 @@
                                         <?php } ?>
                                     </td>
                                     <td align="right">
-                                        <a href="../user/profile_pengguna/<?= $pengguna['id_user']; ?>" class="text-muted"><i class="material-icons">visibility</i></a>
+                                        <a href="../user/profile_pengguna/<?= $pengguna['id_user']; ?>" class="text-muted"><i class="material-icons">visibility</i> Lihat</a>
                                         <?php if($pengguna['status'] == 1 ) { ?>
-                                            <a href="nonaktifkan_user/<?= $pengguna['id_user']; ?>" class="text-danger"><i class="material-icons">block</i></a>
+                                            <a href="nonaktifkan_user/<?= $pengguna['id_user']; ?>" class="text-danger"><i class="material-icons">block</i> Nonaktifkan</a>
                                         <?php } else { ?>
-                                            <a href="aktifkan_user/<?= $pengguna['id_user']; ?>" class="text-success"><i class="material-icons">check</i></a>
+                                            <a href="aktifkan_user/<?= $pengguna['id_user']; ?>" class="text-success"><i class="material-icons">check</i> Aktifkan</a>
                                         <?php } ?>
                                     </td>
                                 </tr>

@@ -13,7 +13,7 @@
 						</div>
 						<div class="blog_author_content">
 							<h3><?= $data['nama_lengkap'] ?></h3>
-							<p><?= $data['nama_lengkap'] ?> memiliki rating <?= number_format($data['rating'], 1, '.', ',') ?>/5 dari <?= $data['total_rating'] ?> total rating. Telah berkontribusi dan bekerja sama dengan ArtNow sejak <?= date('d F Y', strtotime($data['dibuat_pada'])) ?></p>
+							<p><?= $data['nama_lengkap'] ?> memiliki penilaian <?= number_format($data['rating'], 1, '.', ',') ?>/5 dari <?= $data['total_rating'] ?> total penilaian. Telah berkontribusi dan bekerja sama dengan ArtNow sejak <?= date('d F Y', strtotime($data['dibuat_pada'])) ?></p>
                             <?php if(isset($_SESSION['email'])) { ?>
                                 <div class="col-md-12">
                                     <?php if($_SESSION['level'] == 0){?>

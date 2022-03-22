@@ -73,7 +73,7 @@
                             </span>
                             <div class="d-flex align-items-center">
                                 <strong><?= number_format($data['rating'], 1); ?>/5</strong>
-                                <span class="text-muted ml-1">&mdash; <?= $data['total_rating']; ?> rating</span>
+                                <span class="text-muted ml-1">&mdash; <?= $data['total_rating']; ?> penilaian</span>
                             </div>
 
                         </div>

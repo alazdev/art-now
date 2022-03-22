@@ -98,20 +98,20 @@
                                     <td><?= date('d F Y H:i', strtotime($pesanan['dibuat_pada']));?></td>
                                     <td><?= date('d F Y H:i', strtotime($pesanan['diperbaharui_pada']));?></td>
                                     <td align="right" style="white-space: nowrap;">
-                                        <a href="../chat/index?ke=<?= $pesanan['id_arsitek']; ?>" class="text-success"><i class="material-icons">chat</i></a>
+                                        <a href="../chat/index?ke=<?= $pesanan['id_arsitek']; ?>" class="text-success"><i class="material-icons">chat</i> Pesan</a>
                                         <?php if($pesanan['status'] == 1 && ($pesanan['status_pembayaran_dp'] == NULL OR $pesanan['status_pembayaran_dp'] < 1) ) { ?>
-                                            <a href="imb_pesanan/<?= $pesanan['id_pesanan']; ?>" class="text-success"><i class="material-icons">receipt</i></a>
-                                            <a href="pembayaran_dp/<?= $pesanan['id_pesanan']; ?>" class="text-warning"><i class="material-icons">payment</i></a>
+                                            <a href="imb_pesanan/<?= $pesanan['id_pesanan']; ?>" class="text-success"><i class="material-icons">receipt</i> Unggah IMB</a>
+                                            <a href="pembayaran_dp/<?= $pesanan['id_pesanan']; ?>" class="text-warning"><i class="material-icons">payment</i> Bayar Uang Muka</a>
                                         <?php } else if($pesanan['status'] == 1 && $pesanan['status_pembayaran_dp'] != NULL ) { ?>
-                                            <a href="imb_pesanan/<?= $pesanan['id_pesanan']; ?>" class="text-success"><i class="material-icons">receipt</i></a>
-                                            <a href="selesaikan_pesanan/<?= $pesanan['id_pesanan']; ?>" class="text-success"><i class="material-icons">check</i></a>
+                                            <a href="imb_pesanan/<?= $pesanan['id_pesanan']; ?>" class="text-success"><i class="material-icons">receipt</i> Unggah IMB</a>
+                                            <a href="selesaikan_pesanan/<?= $pesanan['id_pesanan']; ?>" class="text-success"><i class="material-icons">check</i> Selesaikan</a>
                                         <?php } else if($pesanan['status'] == 2 ) { ?>
-                                            <a href="pembayaran_pesanan/<?= $pesanan['id_pesanan']; ?>" class="text-warning"><i class="material-icons">payment</i></a>
+                                            <a href="pembayaran_pesanan/<?= $pesanan['id_pesanan']; ?>" class="text-warning"><i class="material-icons">payment</i> Bayar</a>
                                         <?php } else if($pesanan['status'] == 0 ) { ?>
                                             <a onclick="deleteData()" href="#"
                                                 data-value="<?= $pesanan['id_pesanan']; ?>" data-judul="<?= $pesanan['judul']; ?>"
                                                 data-toggle="modal" data-target="#modal-delete" class="text-danger">
-                                                    <i class="material-icons">delete</i>
+                                                    <i class="material-icons">delete</i> Hapus
                                             </a>
                                         <?php } ?>
                                     </td>

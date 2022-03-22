@@ -51,7 +51,7 @@
                                     <td><?= date('d-m-Y H:i', strtotime($pesanan['dibuat_pada'])); ?></td>
                                     <td><?= date('d-m-Y H:i', strtotime($pesanan['diperbaharui_pada'])); ?></td>
                                     <td align="right" style="white-space: nowrap;">
-                                        <a href="riwayat_pembayaran_pengguna/<?= $pesanan['id_pesanan']; ?>" class="text-muted"><i class="material-icons">assignment_turned_in</i></a>
+                                        <a href="riwayat_pembayaran_pengguna/<?= $pesanan['id_pesanan']; ?>" class="text-muted"><i class="material-icons">assignment_turned_in</i> Riwayat Pembayaran</a>
                                     </td>
                                 </tr>
                                 <?php } ?>

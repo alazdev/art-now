@@ -24,7 +24,7 @@
                                 <tr>
                                     <th>Judul</th>
                                     <th>Harga</th>
-                                    <th align="center">Rating</th>
+                                    <th align="center">Penilaian</th>
                                     <th align="center">Status</th>
                                     <th></th>
                                 </tr>
@@ -43,18 +43,18 @@
                                         <?php } ?>
                                     </td>
                                     <td align="right">
-                                        <a href="detail_produk/<?= $produk['id_produk']; ?>" class="text-muted"><i class="material-icons">visibility</i></a>
-                                        <a href="rating_produk/<?= $produk['id_produk']; ?>" class="text-warning"><i class="material-icons">star</i></a>
+                                        <a href="detail_produk/<?= $produk['id_produk']; ?>" class="text-muted"><i class="material-icons">visibility</i> Lihat</a>
+                                        <a href="rating_produk/<?= $produk['id_produk']; ?>" class="text-warning"><i class="material-icons">star</i> Penilaian</a>
                                         <?php if($produk['status'] == 1 ) { ?>
-                                            <a href="nonaktifkan_produk/<?= $produk['id_produk']; ?>" class="text-danger"><i class="material-icons">block</i></a>
+                                            <a href="nonaktifkan_produk/<?= $produk['id_produk']; ?>" class="text-danger"><i class="material-icons">block</i> Nonaktifkan</a>
                                         <?php } else { ?>
-                                            <a href="aktifkan_produk/<?= $produk['id_produk']; ?>" class="text-success"><i class="material-icons">check</i></a>
+                                            <a href="aktifkan_produk/<?= $produk['id_produk']; ?>" class="text-success"><i class="material-icons">check</i> Aktifkan</a>
                                         <?php } ?>
-                                        <a href="edit_produk/<?= $produk['id_produk']; ?>" class="text-info"><i class="material-icons">edit</i></a>
+                                        <a href="edit_produk/<?= $produk['id_produk']; ?>" class="text-info"><i class="material-icons">edit</i> Edit</a>
                                         <a onclick="deleteData()" href="#"
                                             data-value="<?= $produk['id_produk']; ?>" data-judul="<?= $produk['judul']; ?>"
                                             data-toggle="modal" data-target="#modal-delete" class="text-danger">
-                                                <i class="material-icons">delete</i>
+                                                <i class="material-icons">delete</i> Hapus
                                         </a>
                                     </td>
                                 </tr>

@@ -35,12 +35,12 @@
                                     <td><?= $rekening['nomor']; ?></td>
                                     <td><?= $rekening['pemegang']; ?></td>
                                     <td align="right">
-                                        <a href="edit_rekening_bank/<?= $rekening['id_rekening']; ?>" class="text-info"><i class="material-icons">edit</i></a>
+                                        <a href="edit_rekening_bank/<?= $rekening['id_rekening']; ?>" class="text-info"><i class="material-icons">edit</i> Edit</a>
                                         <a onclick="deleteData()" href="#"
                                             data-value="<?= $rekening['id_rekening']; ?>" data-nama="<?= $rekening['nama']; ?>" 
                                             data-nomor="<?= $rekening['nomor']; ?>" data-pemegang="<?= $rekening['pemegang']; ?>"
                                             data-toggle="modal" data-target="#modal-delete" class="text-danger">
-                                                <i class="material-icons">delete</i>
+                                                <i class="material-icons">delete</i> Hapus
                                         </a>
                                     </td>
                                 </tr>
