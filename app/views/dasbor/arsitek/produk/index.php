@@ -42,7 +42,7 @@
                                             <span class="badge badge-danger">NONAKTIF</span>
                                         <?php } ?>
                                     </td>
-                                    <td align="right">
+                                    <td style="white-space: nowrap;" align="right">
                                         <a href="detail_produk/<?= $produk['id_produk']; ?>" class="text-muted"><i class="material-icons">visibility</i> Lihat</a>
                                         <a href="rating_produk/<?= $produk['id_produk']; ?>" class="text-warning"><i class="material-icons">star</i> Penilaian</a>
                                         <?php if($produk['status'] == 1 ) { ?>

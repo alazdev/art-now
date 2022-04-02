@@ -76,7 +76,7 @@
                     <?php if($user['level'] == -1 ) { ?>
                         CALON ARSITEK
                     <?php } else if($user['level'] == 0 ) { ?>
-                        PENGGUNA
+                        PELANGGAN
                     <?php } else if($user['level'] == 1 ) { ?>
                         ARSITEK
                     <?php } else { ?>

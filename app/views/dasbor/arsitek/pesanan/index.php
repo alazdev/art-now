@@ -35,7 +35,7 @@
                         <table class="table mb-0 thead-border-top-0">
                             <thead>
                                 <tr>
-                                    <th>Pengguna</th>
+                                    <th>Pelanggan</th>
                                     <th>Produk</th>
                                     <th align="center">Status</th>
                                     <th>Tanggal Pesanan</th>

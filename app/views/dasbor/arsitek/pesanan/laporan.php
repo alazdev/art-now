@@ -39,7 +39,7 @@
 	<table border="1">
 		<tr>
 			<th>No</th>
-			<th>Nama Pengguna</th>
+			<th>Nama Pelanggan</th>
 			<th>Judul Produk</th>
 			<th>Status Pesanan</th>
 			<th>Tanggal Pesanan</th>

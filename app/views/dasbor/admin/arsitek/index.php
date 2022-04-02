@@ -41,7 +41,7 @@
                                             <span class="badge badge-danger">NONAKTIF</span>
                                         <?php } ?>
                                     </td>
-                                    <td align="right">
+                                    <td style="white-space: nowrap;" align="right">
                                         <a href="../user/profile_arsitek/<?= $arsitek['id_user']; ?>" class="text-muted"><i class="material-icons">visibility</i> Lihat</a>
                                         <?php if($arsitek['status'] == 1 ) { ?>
                                             <a href="nonaktifkan_user/<?= $arsitek['id_user']; ?>" class="text-danger"><i class="material-icons">block</i> Nonaktifkan</a>

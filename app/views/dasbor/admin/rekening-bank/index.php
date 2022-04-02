@@ -34,7 +34,7 @@
                                     <td><?= $rekening['nama']; ?></td>
                                     <td><?= $rekening['nomor']; ?></td>
                                     <td><?= $rekening['pemegang']; ?></td>
-                                    <td align="right">
+                                    <td style="white-space: nowrap;" align="right">
                                         <a href="edit_rekening_bank/<?= $rekening['id_rekening']; ?>" class="text-info"><i class="material-icons">edit</i> Edit</a>
                                         <a onclick="deleteData()" href="#"
                                             data-value="<?= $rekening['id_rekening']; ?>" data-nama="<?= $rekening['nama']; ?>" 

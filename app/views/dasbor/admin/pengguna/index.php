@@ -5,10 +5,10 @@
             <div class="flex">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item active" aria-current="page">Data Pengguna</li>
+                        <li class="breadcrumb-item active" aria-current="page">Data Pelanggan</li>
                     </ol>
                 </nav>
-                <h1 class="m-0">Data Pengguna</h1>
+                <h1 class="m-0">Data Pelanggan</h1>
             </div>
         </div>
     </div>
@@ -41,7 +41,7 @@
                                             <span class="badge badge-danger">NONAKTIF</span>
                                         <?php } ?>
                                     </td>
-                                    <td align="right">
+                                    <td style="white-space: nowrap;" align="right">
                                         <a href="../user/profile_pengguna/<?= $pengguna['id_user']; ?>" class="text-muted"><i class="material-icons">visibility</i> Lihat</a>
                                         <?php if($pengguna['status'] == 1 ) { ?>
                                             <a href="nonaktifkan_user/<?= $pengguna['id_user']; ?>" class="text-danger"><i class="material-icons">block</i> Nonaktifkan</a>

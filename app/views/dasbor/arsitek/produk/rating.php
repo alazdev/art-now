@@ -23,7 +23,7 @@
                         <table class="table mb-0 thead-border-top-0">
                             <thead>
                                 <tr>
-                                    <th>Nama Pengguna</th>
+                                    <th>Nama Pelanggan</th>
                                     <th>Penilaian</th>
                                     <th>Komentar</th>
                                 </tr>

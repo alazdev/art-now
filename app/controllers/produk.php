@@ -159,7 +159,7 @@ class produk extends arsitek
                     }
                     $this->alert('Data produk berhasil dihapus.', 'arsitek/produk');
                 } catch (\Throwable $th) {
-                    $this->alert('Data produk yang pernah dipesan tidak dapat dihapus. Cukup nonaktifkan produk supaya pengguna tidak dapat memesannya.', 'arsitek/produk');
+                    $this->alert('Data produk yang pernah dipesan tidak dapat dihapus. Cukup nonaktifkan produk supaya pelanggan tidak dapat memesannya.', 'arsitek/produk');
                 }
             }
         }else{

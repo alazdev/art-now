@@ -195,7 +195,7 @@ class admin extends Controller
                 $pesan = [
                     'id_user' => $data['id_arsitek'],
                     'judul' => 'Pembayaran Berhasil',
-                    'keterangan' => 'Selamat Gajian! Pengguna baru saja membayar pesanannya. cek <a href="'.BASEURL.'/arsitek/pesanan">di sini</a>.',
+                    'keterangan' => 'Selamat Gajian! Pelanggan baru saja membayar pesanannya. cek <a href="'.BASEURL.'/arsitek/pesanan">di sini</a>.',
                     'link' => '/arsitek/pesanan'
                 ];
                 $this->model('NotifikasiModel')->notifikasi($pesan);
@@ -382,7 +382,7 @@ class admin extends Controller
             if ($level == -1){
                 $data['level'] = 'Calon Arsitek';
             }else if ($level == 0){
-                $data['level'] = 'Pengguna';
+                $data['level'] = 'Pelanggan';
             }else if ($level == 1){
                 $data['level'] = 'Arsitek';
             }else if ($level == 2){

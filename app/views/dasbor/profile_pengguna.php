@@ -5,7 +5,7 @@
             <div class="flex">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item active" aria-current="page">Profil Pengguna</li>
+                        <li class="breadcrumb-item active" aria-current="page">Profil Pelanggan</li>
                     </ol>
                 </nav>
                 <h1 class="m-0"><?= $data['nama_lengkap'] ?></h1>
@@ -19,7 +19,7 @@
                     <?php if ($data['foto'] != null) { ?>
                         <img src="<?= BASEURL."/image/profile/".$data['foto'];?>" alt="profile" class="img-fluid">
                     <?php } else { ?>
-                        <p>[Pengguna tidak memiliki foto]</p>
+                        <p>[Pelanggan tidak memiliki foto]</p>
                     <?php } ?>
                 </a>
             </div>

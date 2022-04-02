@@ -74,7 +74,7 @@ class chat extends Controller
                     '<div class="media-body">'.
                         '<p class="m-0">'.
                             '<a href="javascript:void(0)" class="text-body mulai-chat" data-id="'.$data['id_user_dari'].'"><strong>'.$data['nama_pengirim'].'</strong></a>'.(($data['jumlah_belum_dibaca'] > 0) ? ' <span class="badge badge-info rounded-circle">'.$data['jumlah_belum_dibaca'].'</span>':'').'<br>'.
-                            '<span class="text-muted">'.(($data['level_pengirim'] == 0) ?'Pengguna':'' ).(($data['level_pengirim'] == 1) ?'Arsitek':'' ).(($data['level_pengirim'] == -1) ?'Calon Arsitek':'' ).(($data['level_pengirim'] == 2) ?'Admin':'' ).'</span>'.
+                            '<span class="text-muted">'.(($data['level_pengirim'] == 0) ?'Pelanggan':'' ).(($data['level_pengirim'] == 1) ?'Arsitek':'' ).(($data['level_pengirim'] == -1) ?'Calon Arsitek':'' ).(($data['level_pengirim'] == 2) ?'Admin':'' ).'</span>'.
                         '</p>'.
                     '</div>'.
                 '</div>';
@@ -87,7 +87,7 @@ class chat extends Controller
                         '<div class="media-body">'.
                             '<p class="m-0">'.
                                 '<a href="javascript:void(0)" class="text-body mulai-chat" data-id="'.$data['id_user_kepada'].'"><strong>'.$data['nama_penerima'].'</strong></a>'.(($data['jumlah_belum_dibaca'] > 0) ? ' <span class="badge badge-info rounded-circle">'.$data['jumlah_belum_dibaca'].'</span>':'').'<br>'.
-                                '<span class="text-muted">'.(($data['level_penerima'] == 0) ?'Pengguna':'' ).(($data['level_penerima'] == 1) ?'Arsitek':'' ).(($data['level_penerima'] == -1) ?'Calon Arsitek':'' ).(($data['level_penerima'] == 2) ?'Admin':'' ).'</span>'.
+                                '<span class="text-muted">'.(($data['level_penerima'] == 0) ?'Pelanggan':'' ).(($data['level_penerima'] == 1) ?'Arsitek':'' ).(($data['level_penerima'] == -1) ?'Calon Arsitek':'' ).(($data['level_penerima'] == 2) ?'Admin':'' ).'</span>'.
                             '</p>'.
                         '</div>'.
                     '</div>';

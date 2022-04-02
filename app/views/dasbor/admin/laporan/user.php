@@ -30,7 +30,7 @@
                                     <select id="levelFilter" name="level" class="form-control">
                                         <option value="">Semua Level</option>
                                         <option value="-1">Calon Arsitek</option>
-                                        <option value="0">Pengguna</option>
+                                        <option value="0">Pelanggan</option>
                                         <option value="1">Arsitek</option>
                                         <option value="2">Admin</option>
                                     </select>
@@ -69,7 +69,7 @@
                                         <?php if($user['level'] == -1 ) { ?>
                                             <span class="badge badge-light">CALON ARSITEK</span>
                                         <?php } else if($user['level'] == 0 ) { ?>
-                                            <span class="badge badge-info">PENGGUNA</span>
+                                            <span class="badge badge-info">PELANGGAN</span>
                                         <?php } else if($user['level'] == 1 ) { ?>
                                             <span class="badge badge-warning">ARSITEK</span>
                                         <?php } else { ?>

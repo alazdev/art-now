@@ -33,7 +33,7 @@
                             <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Validasi Pembayaran Pengguna" data-placement="right" data-container="body" data-boundary="window">
                                 <a class="sidebar-menu-button" href="<?= BASEURL; ?>/admin/validasi_pembayaran_pengguna">
                                     <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">assignment_turned_in</i>
-                                    <span class="sidebar-menu-text">Validasi Pembayaran Pengguna</span>
+                                    <span class="sidebar-menu-text">Validasi Pembayaran Pelanggan</span>
                                 </a>
                             </li>
                             <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Pesanan Arsitek" data-placement="right" data-container="body" data-boundary="window">
@@ -111,7 +111,7 @@
                                     </li>
                                     <li class="sidebar-menu-item">
                                         <a class="sidebar-menu-button" href="<?= BASEURL; ?>/admin/data_pengguna">
-                                            <span class="sidebar-menu-text">Pengguna</span>
+                                            <span class="sidebar-menu-text">Pelanggan</span>
                                         </a>
                                     </li>
                                 </ul>

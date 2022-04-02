@@ -41,9 +41,9 @@
             <th>No</th>
             <th>Total Dibayar</th>
             <th>Pembayaran</th>
-            <th>Nama Pengguna</th>
-            <th>Email Pengguna</th>
-            <th>Telepon Pengguna</th>
+            <th>Nama Pelanggan</th>
+            <th>Email Pelanggan</th>
+            <th>Telepon Pelanggan</th>
             <th>Nama Arsitek</th>
             <th>Email Arsitek</th>
             <th>Telepon Arsitek</th>

@@ -42,7 +42,7 @@
                                             <span class="badge badge-danger">NONAKTIF</span>
                                         <?php } ?>
                                     </td>
-                                    <td align="right">
+                                    <td style="white-space: nowrap;" align="right">
                                         <?php if($admin['status'] == 1 ) { ?>
                                             <a href="nonaktifkan_user/<?= $admin['id_user']; ?>" class="text-danger"><i class="material-icons">block</i> Nonaktifkan</a>
                                         <?php } else { ?>

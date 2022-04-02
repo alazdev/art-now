@@ -26,7 +26,7 @@
             <div class="col-lg-4 col-md-4 card-group-row__col">
                 <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
                     <div class="flex">
-                        <div class="card-header__title text-muted mb-2">Pengguna/Pelanggan</div>
+                        <div class="card-header__title text-muted mb-2">Pelanggan</div>
                         <div class="text-amount"><?= $data['total_pengguna']; ?></div>
                     </div>
                     <div><i class="material-icons icon-muted icon-40pt ml-3">perm_identity</i></div>
