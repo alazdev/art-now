@@ -254,6 +254,11 @@
                                 <a onclick="lihat()" href="#notifications_menu" class="nav-link dropdown-toggle" data-toggle="dropdown" data-caret="false">
                                     <i class="material-icons nav-icon" id="indikator">notifications</i>
                                 </a>
+                                <?php if ($_SESSION['level'] == 0 || $_SESSION['level'] == 2) { ?>
+                                <a href="<?= BASEURL; ?>/tips/tips_1" class="nav-link">
+                                    <i class="material-icons nav-icon" id="indikator">help</i> Tips Membangun Rumah
+                                </a>
+                                <?php } ?>
                                 <div id="notifications_menu" class="dropdown-menu dropdown-menu-right navbar-notifications-menu">
                                     <div class="dropdown-item d-flex align-items-center py-2">
                                         <span class="flex navbar-notifications-menu__title m-0">Notifikasi</span>

@@ -71,9 +71,13 @@
                                     <td align="right" style="white-space: nowrap;">
                                         <?php if(isset($calon_arsitek['status_produk'])) { ?>
                                             <a href="detail_calon_arsitek/<?= $calon_arsitek['id_user']; ?>" class="text-muted"><i class="material-icons">receipt</i> Lihat</a>
-                                        <a href="terima_calon_arsitek/<?= $calon_arsitek['id_user']; ?>" class="text-success"><i class="material-icons">check</i> Terima</a>
                                         <?php } ?>
-                                        <a href="tolak_calon_arsitek/<?= $calon_arsitek['id_user']; ?>" class="text-danger"><i class="material-icons">block</i> Tolak</a>
+                                        <?php if(isset($calon_arsitek['status_produk']) && $calon_arsitek['status_produk'] != -1) { ?>
+                                            <a href="terima_calon_arsitek/<?= $calon_arsitek['id_user']; ?>" class="text-success"><i class="material-icons">check</i> Terima</a>
+                                        <?php } ?>
+                                        <?php if($calon_arsitek['status_produk'] != -1) { ?>
+                                            <a href="tolak_calon_arsitek/<?= $calon_arsitek['id_user']; ?>" class="text-danger"><i class="material-icons">block</i> Tolak</a>
+                                        <?php } ?>
                                     </td>
                                 </tr>
                                 <?php } ?>

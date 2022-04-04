@@ -6,7 +6,7 @@
         </a>
         <p class="m-0">Daftarkan Akun</p>
     </div>
-    
+
     <?php if($data){ ?>
     <div class="alert alert-soft-<?= $data['type']; ?> d-flex" role="alert">
         <div class="text-body"><?= $data['desc']; ?></div>
@@ -82,7 +82,7 @@
             <label class="text-label" for="level_2">Mendaftar Sebagai:</label>
             <div class="input-group input-group-merge">
                 <select name="level" id="level_2" class="form-control form-control-prepended">
-                    <option value="0">Pengguna</option>
+                    <option value="0">Pelanggan</option>
                     <option value="-1">Arsitek</option>
                 </select>
                 <div class="input-group-prepend">
@@ -95,7 +95,7 @@
         <div class="form-group mb-5">
             <div class="custom-control custom-checkbox">
                 <input type="checkbox" checked="" class="custom-control-input" id="terms" required/>
-                <label class="custom-control-label" for="terms">Saya bersedia menerima <a href="#">Syarat dan Ketentuan</a></label>
+                <label class="custom-control-label" for="terms">Saya bersedia menerima <a href="<?= BASEURL ?>/syarat_dan_ketentuan">Syarat dan Ketentuan</a></label>
             </div>
         </div>
         <div class="form-group text-center">
