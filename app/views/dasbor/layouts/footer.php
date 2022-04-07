@@ -62,6 +62,12 @@
                                     <span class="sidebar-menu-text">Laporan</span>
                                 </a>
                             </li>
+                            <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Artikel" data-placement="right" data-container="body" data-boundary="window">
+                                <a class="sidebar-menu-button" href="<?= BASEURL; ?>/artikel/index">
+                                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">web</i>
+                                    <span class="sidebar-menu-text">Artikel</span>
+                                </a>
+                            </li>
                         <?php } else { ?>
                             <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Dasbor" data-placement="right" data-container="body" data-boundary="window">
                                 <a class="sidebar-menu-button" href="<?= BASEURL; ?>/arsitek/index">

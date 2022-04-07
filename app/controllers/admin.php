@@ -118,7 +118,7 @@ class admin extends Controller
                     $data['password'] = null;
                 }
                 $this->model('UserModel')->update_user($data);
-                $this->alert('Data user berhasil diupdate.', 'admin/data_admin');
+                $this->alert('Data user berhasil diubah.', 'admin/data_admin');
                 exit();
             }else{
                 $this->controller('alert')->message('Not Found', '404 | Not Found');
@@ -321,7 +321,7 @@ class admin extends Controller
                     'pemegang'  => $_POST['pemegang']
                 ];
                 $this->model('RekeningBankModel')->update($data);
-                $this->alert('Data user berhasil diupdate.', 'admin/rekening_bank');
+                $this->alert('Data user berhasil diubah.', 'admin/rekening_bank');
                 exit();
             }else{
                 $this->controller('alert')->message('Not Found', '404 | Not Found');

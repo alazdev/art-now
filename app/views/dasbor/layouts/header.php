@@ -213,6 +213,44 @@
             </div>
         </div>
     </div>
+    <div id="modal-tambah-artikel" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-large-title" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-large-title">Tambah Artikel</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST" action="<?= BASEURL.'/artikel/tambah'?>" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="card card-form">
+                            <div class="row no-gutters">
+                                <div class="col-lg-12 card-form__body card-body">
+                                    <div class="form-group">
+                                        <label for="judul">Judul:</label>
+                                        <input type="text" name="judul" class="form-control" id="judul" placeholder="Masukkan Judul..." required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="gambar">Gambar:</label>
+                                        <input type="file" name="gambar[]" class="form-control" id="gambar" accept="image/png, image/jpeg" required>
+                                    </div>
+                                    <div class="ql-artikel">
+                                        <label>Isi</label>
+                                        <div style="height: 150px;" data-toggle="quill" id="isi" data-quill-placeholder="Isi Artikel..."></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary" name="tambah">Tambahkan Artikel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div id="modal-delete" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-sm">
             <div class="modal-content bg-danger">
@@ -254,9 +292,9 @@
                                 <a onclick="lihat()" href="#notifications_menu" class="nav-link dropdown-toggle" data-toggle="dropdown" data-caret="false">
                                     <i class="material-icons nav-icon" id="indikator">notifications</i>
                                 </a>
-                                <?php if ($_SESSION['level'] == 0 || $_SESSION['level'] == 2) { ?>
-                                <a href="<?= BASEURL; ?>/tips/tips_1" class="nav-link">
-                                    <i class="material-icons nav-icon" id="indikator">help</i> Tips Membangun Rumah
+                                <?php if ($_SESSION['level'] == 0) { ?>
+                                <a href="<?= BASEURL; ?>/artikel/index" class="nav-link">
+                                    <i class="material-icons nav-icon" id="indikator">web</i> Temukan Artikel Menarik
                                 </a>
                                 <?php } ?>
                                 <div id="notifications_menu" class="dropdown-menu dropdown-menu-right navbar-notifications-menu">

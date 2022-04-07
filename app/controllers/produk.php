@@ -112,7 +112,7 @@ class produk extends arsitek
                     'deskripsi' => $_POST['deskripsi']
                 ];
                 $this->model('ProdukModel')->update($data);
-                $this->alert('Data produk berhasil diupdate.', 'arsitek/produk');
+                $this->alert('Data produk berhasil diubah.', 'arsitek/produk');
                 exit();
             }else{
                 $this->controller('alert')->message('Not Found', '404 | Not Found');
