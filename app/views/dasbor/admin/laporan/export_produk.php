@@ -40,7 +40,7 @@
 		<tr>
             <th>No</th>
             <th>Judul Produk</th>
-            <th>Harga Produk</th>
+            <th>Harga Jasa</th>
             <th>Penilaian</th>
             <th>Status</th>
             <th>Nama Arsitek</th>

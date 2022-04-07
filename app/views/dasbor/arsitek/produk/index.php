@@ -23,7 +23,7 @@
                             <thead>
                                 <tr>
                                     <th>Judul</th>
-                                    <th>Harga</th>
+                                    <th>Harga Jasa</th>
                                     <th align="center">Penilaian</th>
                                     <th align="center">Status</th>
                                     <th></th>

@@ -26,7 +26,7 @@
                             <thead>
                                 <tr>
                                     <th>Judul Produk</th>
-                                    <th>Harga Produk</th>
+                                    <th>Harga Jasa</th>
                                     <th>Penilaian</th>
                                     <th align="center">Status</th>
                                     <th>Nama Arsitek</th>

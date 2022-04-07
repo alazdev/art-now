@@ -10,12 +10,13 @@
                             <?php } else {?>
 							    <img src="https://via.placeholder.com/1170x560/ffc0cb" class="img-fluid" alt="">
                             <?php } ?>
+                            <p class="text-muted"><i>*Mohon untuk tidak mengunduh, menyalahgunakan, dan menyebarluaskan gambar maupun karya orang lain.</i></p>
 						</div>
 						<div class="blog_post_style2_content wow fadeInUp">
 							<?= $data['deskripsi'] ?>
                             <br/>
                             <p>- Penilaian Produk: <?= number_format($data['rating'],1,'.',',') ?>/5 dari total <?= $data['total_rating'] ?> penilaian.</p>
-                            <p>- Harga: <?= number_format($data['harga'],0,',','.') ?></p>
+                            <p>- Harga Jasa: <?= number_format($data['harga'],0,',','.') ?></p>
                             <div class="col-md-12">
                                 <?php if (isset($_SESSION['email'])) { if($_SESSION['level'] == 0 && $data['status'] == 1) { ?>
                                     <a href="<?= BASEURL.'/pengguna/pesan/'.$data['id_produk']?>" class="btn btn-primary col-md-12">Pesan Sekarang</a>

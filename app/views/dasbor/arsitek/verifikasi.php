@@ -47,8 +47,8 @@
                             <input type="file" name="gambar[]" class="form-control" id="gambar" accept="image/png, image/jpeg" required>
                         </div>
                         <div class="form-group">
-                            <label for="harga">Harga:</label>
-                            <input type="number" name="harga" class="form-control" id="harga" min="1000" placeholder="Masukkan Harga..." required>
+                            <label for="harga">Harga Jasa:</label>
+                            <input type="number" name="harga" class="form-control" id="harga" min="1000" placeholder="Masukkan Harga Jasa..." required>
                         </div>
                         <label>Deskripsi</label>
                         <div style="height: 150px;" data-toggle="quill" id="deskripsi" data-quill-placeholder="Deskripsi Produk..."></div>

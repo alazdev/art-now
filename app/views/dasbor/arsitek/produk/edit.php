@@ -27,13 +27,14 @@
                             <input type="file" name="gambar[]" class="form-control" id="gambar" accept="image/png, image/jpeg">
                         </div>
                         <div class="form-group">
-                            <label for="harga">Harga:</label>
-                            <input type="number" name="harga" class="form-control" id="harga" min="1000" value="<?= $data['harga']; ?>" placeholder="Masukkan Harga..." required>
+                            <label for="harga">Harga Jasa:</label>
+                            <input type="number" name="harga" class="form-control" id="harga" min="1000" value="<?= $data['harga']; ?>" placeholder="Masukkan Harga Jasa..." required readonly>
                         </div>
                         <label>Deskripsi</label>
                         <div style="height: 150px;" data-toggle="quill" id="deskripsi" data-quill-placeholder="Deskripsi Produk...">
                             
                         </div>
+                        <p class="text-muted"><i>*Penting: Mohon untuk tidak melakukan plagiat atas karya, gambar, maupun deskripsi produk Arsitek lain. Jika Anda terbukti melanggar, kami terpaksa melakukan ban permanen terhadap akun Anda.</i></p>
                         <button type="submit" class="btn btn-primary" name="update">Ubah</button>
                     </form>
                 </div>
