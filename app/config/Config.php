@@ -9,3 +9,4 @@ define('DB_PASS', '');
 define('DB_NAME', 'art_now');
 
 date_default_timezone_set("Asia/Jakarta");
+setlocale (LC_TIME, 'id_id');

@@ -47,7 +47,7 @@
                                         <?php } ?>
                                     </td>
                                     <td align="right" style="white-space: nowrap;">
-                                        <a href="../detail_pembayaran_pengguna/<?= $pembayaran['id_pembayaran']; ?>" class="text-muted"><i class="material-icons">visibility</i></a>
+                                        <a href="../detail_pembayaran_pengguna/<?= $pembayaran['id_pembayaran']; ?>" class="text-muted"><i class="material-icons">visibility</i>Lihat</a>
                                     </td>
                                 </tr>
                                 <?php } ?>

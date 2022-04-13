@@ -24,7 +24,7 @@
                         <span class="badge badge-danger">BELUM ADA IMB</span> <a href="<?= BASEURL.'/pengguna/imb_pesanan/'.$pesanan['id_pesanan'];?>">Klik di sini untuk memasukkan IMB.</a>
                     <?php } } else if ($pesanan['status'] == 2) { ?>
                         <?php if($pesanan['status_pembayaran'] == NULL ) { ?>
-                            <a href="pembayaran_pesanan/<?= $pesanan['id_pesanan']; ?>"><span class="badge badge-danger">MENUNGGU PEMBAYARAN</span> Klik di sini untuk membayar.</a>
+                            <a href="pembayaran_pesanan/<?= $pesanan['id_pesanan']; ?>"><span class="badge badge-danger">HARAP BAYAR SEBELUM <?= strtoupper(strftime('%d %B %Y', strtotime('+7 days', strtotime($pesanan['diperbaharui_pada'])))); ?> 23:59</span> Klik di sini untuk membayar.</a>
                         <?php } else if($pesanan['status_pembayaran'] == -1 ) { ?>
                             <a href="pembayaran_pesanan/<?= $pesanan['id_pesanan']; ?>"><span class="badge badge-danger">BUKTI PEMBAYARAN SEBELUMNYA DITOLAK</span></a> Silakan masukkan kembali bukti pembayaran yang benar.
                         <?php } else if($pesanan['status_pembayaran'] == 0 ) { ?>
@@ -34,7 +34,7 @@
                         <?php } ?>
                     <?php } ?>
                     <?php if($pesanan['status_pembayaran_dp'] == NULL) { ?>
-                        <a class="badge badge-danger" href="<?= BASEURL.'/pengguna/pembayaran_dp/'.$pesanan['id_pesanan']; ?>">DP BELUM DIBAYAR</a>
+                        <a class="badge badge-danger" href="<?= BASEURL.'/pengguna/pembayaran_dp/'.$pesanan['id_pesanan']; ?>">HARAP BAYAR DP SEBELUM <?= strtoupper(strftime('%d %B %Y', strtotime('+5 days', strtotime($pesanan['diperbaharui_pada'])))); ?> 23:59</a>
                     <?php } else if($pesanan['status_pembayaran_dp'] == -1) { ?>
                         <a class="badge badge-danger" href="<?= BASEURL.'/pengguna/pembayaran_dp/'.$pesanan['id_pesanan']; ?>">BUKTI PEMBAYARAN SEBELUMNYA DITOLAK</a> Silakan masukkan kembali bukti pembayaran yang benar.
                     <?php } else if($pesanan['status_pembayaran_dp'] == 0) { ?>
@@ -77,7 +77,7 @@
                                                 <span class="badge badge-danger">BELUM ADA IMB</span>
                                             <?php } ?>
                                             <?php if($pesanan['status_pembayaran_dp'] == NULL) { ?>
-                                                <a class="badge badge-danger" href="<?= BASEURL.'/pengguna/pembayaran_dp/'.$pesanan['id_pesanan']; ?>">DP BELUM DIBAYAR</a>
+                                                <a class="badge badge-danger" href="<?= BASEURL.'/pengguna/pembayaran_dp/'.$pesanan['id_pesanan']; ?>">HARAP BAYAR DP SEBELUM <?= strtoupper(strftime('%d %B %Y', strtotime('+5 days', strtotime($pesanan['diperbaharui_pada'])))); ?> 23:59</a>
                                             <?php } else if($pesanan['status_pembayaran_dp'] == -1) { ?>
                                                 <a class="badge badge-danger" href="<?= BASEURL.'/pengguna/pembayaran_dp/'.$pesanan['id_pesanan']; ?>">BUKTI PEMBAYARAN DP SEBELUMNYA DITOLAK</a>
                                             <?php } else if($pesanan['status_pembayaran_dp'] == 0) { ?>
@@ -86,7 +86,7 @@
                                                 <a class="badge badge-success" href="javascript:void(0)">DP TELAH DIBAYAR</a>
                                             <?php } ?>
                                         <?php } else if($pesanan['status_pembayaran'] == NULL ) { ?>
-                                            <a href="pembayaran_pesanan/<?= $pesanan['id_pesanan']; ?>"><span class="badge badge-danger">MENUNGGU PEMBAYARAN</span></a>
+                                            <a href="pembayaran_pesanan/<?= $pesanan['id_pesanan']; ?>"><span class="badge badge-danger">HARAP BAYAR SEBELUM <?= strtoupper(strftime('%d %B %Y', strtotime('+7 days', strtotime($pesanan['diperbaharui_pada'])))); ?> 23:59</span></a>
                                         <?php } else if($pesanan['status_pembayaran'] == -1 ) { ?>
                                             <a href="pembayaran_pesanan/<?= $pesanan['id_pesanan']; ?>"><span class="badge badge-danger">BUKTI PEMBAYARAN SEBELUMNYA DITOLAK</span></a>
                                         <?php } else if($pesanan['status_pembayaran'] == 0 ) { ?>

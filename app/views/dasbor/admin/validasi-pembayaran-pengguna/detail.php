@@ -41,7 +41,7 @@
                             </div>
                         </div>
                         <div class="list-group-item bg-transparent d-flex align-items-center px-0">
-                            <strong>Diuanggah</strong>
+                            <strong>Diunggah</strong>
                             <div class="ml-auto"><?= date('d-m-Y H:i', strtotime($data['diperbaharui_pada'])); ?></div>
                         </div>
                         <div class="list-group-item bg-transparent d-flex align-items-center px-0">

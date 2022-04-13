@@ -1,4 +1,42 @@
-<?php include(__DIR__ . '/../layouts/header.php'); ?>
+<?php
+    include(__DIR__ . '/../layouts/header.php'); 
+    function penyebut($nilai) {
+		$nilai = abs($nilai);
+		$huruf = array("", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas");
+		$temp = "";
+		if ($nilai < 12) {
+			$temp = " ". $huruf[$nilai];
+		} else if ($nilai <20) {
+			$temp = penyebut($nilai - 10). " belas";
+		} else if ($nilai < 100) {
+			$temp = penyebut($nilai/10)." puluh". penyebut($nilai % 10);
+		} else if ($nilai < 200) {
+			$temp = " seratus" . penyebut($nilai - 100);
+		} else if ($nilai < 1000) {
+			$temp = penyebut($nilai/100) . " ratus" . penyebut($nilai % 100);
+		} else if ($nilai < 2000) {
+			$temp = " seribu" . penyebut($nilai - 1000);
+		} else if ($nilai < 1000000) {
+			$temp = penyebut($nilai/1000) . " ribu" . penyebut($nilai % 1000);
+		} else if ($nilai < 1000000000) {
+			$temp = penyebut($nilai/1000000) . " juta" . penyebut($nilai % 1000000);
+		} else if ($nilai < 1000000000000) {
+			$temp = penyebut($nilai/1000000000) . " milyar" . penyebut(fmod($nilai,1000000000));
+		} else if ($nilai < 1000000000000000) {
+			$temp = penyebut($nilai/1000000000000) . " trilyun" . penyebut(fmod($nilai,1000000000000));
+		}     
+		return $temp;
+	}
+ 
+	function terbilang($nilai) {
+		if($nilai<0) {
+			$hasil = "minus ". trim(penyebut($nilai));
+		} else {
+			$hasil = trim(penyebut($nilai));
+		}     		
+		return $hasil;
+	}
+?>
 <div class="mdk-drawer-layout__content page">
     <div class="container page__heading-container">
         <div class="page__heading d-flex align-items-center">
@@ -35,12 +73,16 @@
             <div class="row no-gutters">
                 <div class="col-lg-12 card-form__body card-body">
                     <h3>
-                        Bukti Pembayaran <?= ($data['pembayaran'] == NULL) ? 'dan Ulasan':'' ?>
+                        Pengunggahan Bukti Pembayaran <?= ($data['pembayaran'] == NULL) ? 'dan Ulasan':'' ?>
                     </h3>
                     <form method="POST" id="form" action="<?= BASEURL . '/pengguna/kirim_pembayaran_pesanan/' . $data['id_pesanan']; ?>" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="total_dibayar">Total Pembayaran:</label>
                             <input type="text" id="total_dibayar" value="Rp <?= number_format($data['harga']*80/100, 0, ",", ".") ?>" class="form-control" disabled/>
+                        </div>
+                        <div class="form-group">
+                            <label for="total_terbilang">Terbilang:</label>
+                            <input type="text" id="total_terbilang" value="<?= ucfirst(terbilang($data['harga']*20/100)) ?> rupiah" class="form-control" disabled/>
                         </div>
                         <div class="form-group">
                             <label for="bukti_pembayaran">Bukti Pembayaran:</label>
