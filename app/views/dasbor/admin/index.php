@@ -17,7 +17,7 @@
             <div class="col-lg-12 col-md-12 card-group-row__col">
                 <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
                     <div class="flex">
-                        <div class="card-header__title text-muted mb-2">Semua User</div>
+                        <div class="card-header__title text-muted mb-2">Semua Pengguna</div>
                         <div class="text-amount"><?= $data['total_user']; ?></div>
                     </div>
                     <div><i class="material-icons icon-muted icon-40pt ml-3">perm_identity</i></div>

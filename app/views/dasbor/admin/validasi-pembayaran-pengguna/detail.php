@@ -22,10 +22,19 @@
             </div>
             <div class="col-lg-4">
                 <div class="card card-body">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="ml-auto h2 mb-0"><strong>Rp <?= number_format($data['total_dibayar'], 0 ,",", ".") ?></strong></div>
+                    <div class="list-group list-group-flush mb-4">
+                        <h5>Informasi Produk</h5>
+                        <div class="list-group-item bg-transparent d-flex align-items-center px-0">
+                            <strong>Produk</strong>
+                        </div>
+                        <div class="list-group-item bg-transparent d-flex align-items-center px-0">
+                            <div class="ml-auto"><a href="../../home/produk/<?= $data['id_produk'] ?>" target="_blank"><?= $data['judul_produk'] ?></a></div>
+                        </div>
+                        <div class="list-group-item bg-transparent d-flex align-items-center px-0">
+                            <strong>Total Harga Jasa</strong>
+                            <div class="ml-auto">Rp <?= number_format($data['harga_produk'], 0 ,",", ".") ?></div>
+                        </div>
                     </div>
-
                     <div class="list-group list-group-flush mb-4">
                         <h5>Informasi Pembayaran</h5>
                         <div class="list-group-item bg-transparent d-flex align-items-center px-0">
@@ -39,6 +48,14 @@
                                     <span class="badge badge-success">Pembayaran Diterima</span>
                                 <?php } ?>
                             </div>
+                        </div>
+                        <div class="list-group-item bg-transparent d-flex align-items-center px-0">
+                            <strong>Pembayaran</strong>
+                            <div class="ml-auto"><?= ($data['pembayaran'] == 1) ? 'Penuh':'DP/Uang Muka' ?></div>
+                        </div>
+                        <div class="list-group-item bg-transparent d-flex align-items-center px-0">
+                            <strong>Total harus dibayar</strong>
+                            <div class="ml-auto">Rp <?= number_format($data['total_dibayar'], 0 ,",", ".") ?></div>
                         </div>
                         <div class="list-group-item bg-transparent d-flex align-items-center px-0">
                             <strong>Diunggah</strong>

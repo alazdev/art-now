@@ -37,6 +37,9 @@
                     </div>
                     <div class="list-group list-group-flush mb-4">
                         <div class="list-group-item bg-transparent d-flex align-items-center px-0">
+                            <h5>Informasi Dasar</h5>
+                        </div>
+                        <div class="list-group-item bg-transparent d-flex align-items-center px-0">
                             <strong>Email</strong>
                             <div class="ml-auto"><?= $data['calon_arsitek']['email']; ?></div>
                         </div>
@@ -51,6 +54,44 @@
                             <div class="ml-auto"><?= $data['calon_arsitek']['alamat']; ?></div>
                         </div>
                     </div>
+                    <?php if ($_SESSION['level'] == 2) { ?>
+                        <br><br>
+                        <div class="list-group list-group-flush mb-4">
+                            <div class="list-group-item bg-transparent d-flex align-items-center px-0">
+                                <h5>Dokumen</h5>
+                            </div>
+                            <div class="list-group-item bg-transparent d-flex align-items-center px-0">
+                                <strong>KTP</strong>
+                                <div class="ml-auto">
+                                    <?php if ($data['calon_arsitek']['ktp'] != null) {?>
+                                        <a class="badge badge-success" href="<?= BASEURL.'/dokumen/'.$data['calon_arsitek']['ktp']; ?>" download="<?= 'CALON ARSITEK-'.$data['calon_arsitek']['nama_lengkap'].'-KTP-'.$data['calon_arsitek']['ktp'];?>">ADA</a>
+                                    <?php } else { ?>
+                                        <span class="badge badge-danger">BELUM ADA</span>
+                                    <?php } ?>    
+                                </div>
+                            </div>
+                            <div class="list-group-item bg-transparent d-flex align-items-center px-0">
+                                <strong>Ijazah Terakhir</strong>
+                                <div class="ml-auto">
+                                    <?php if ($data['calon_arsitek']['ijazah'] != null) {?>
+                                        <a class="badge badge-success" href="<?= BASEURL.'/dokumen/'.$data['calon_arsitek']['ijazah']; ?>" download="<?= 'CALON ARSITEK-'.$data['calon_arsitek']['nama_lengkap'].'-Ijazah-'.$data['calon_arsitek']['ijazah'];?>">ADA</a>
+                                    <?php } else { ?>
+                                        <span class="badge badge-danger">BELUM ADA</span>
+                                    <?php } ?>  
+                                </div>
+                            </div>
+                            <div class="list-group-item bg-transparent d-flex align-items-center px-0">
+                                <strong>Sertifikasi Arsitek</strong>
+                                <div class="ml-auto">
+                                    <?php if ($data['calon_arsitek']['sertifikasi_arsitek'] != null) {?>
+                                        <a class="badge badge-success" href="<?= BASEURL.'/dokumen/'.$data['calon_arsitek']['sertifikasi_arsitek']; ?>" download="<?= 'CALON ARSITEK-'.$data['calon_arsitek']['nama_lengkap'].'-Sertifikasi Arsitek-'.$data['calon_arsitek']['sertifikasi_arsitek'];?>">ADA</a>
+                                    <?php } else { ?>
+                                        <span class="badge badge-danger">BELUM ADA</span>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>

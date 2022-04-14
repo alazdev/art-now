@@ -54,7 +54,9 @@ class PembayaranModel{
             arsitek.nama_lengkap as nama_lengkap_arsitek, 
             arsitek.email as email_arsitek, 
             arsitek.telepon as telepon_arsitek, 
-            produk.judul as judul_produk
+            produk.id_produk as id_produk,
+            produk.judul as judul_produk,
+            produk.harga as harga_produk
             FROM pembayaran 
             LEFT JOIN pesanan ON pembayaran.id_pesanan = pesanan.id_pesanan 
             LEFT JOIN produk ON produk.id_produk = pesanan.id_produk 
@@ -75,7 +77,9 @@ class PembayaranModel{
             arsitek.nama_lengkap as nama_lengkap_arsitek, 
             arsitek.email as email_arsitek, 
             arsitek.telepon as telepon_arsitek, 
-            produk.judul as judul_produk
+            produk.id_produk as id_produk,
+            produk.judul as judul_produk,
+            produk.harga as harga_produk
             FROM pembayaran 
             LEFT JOIN pesanan ON pembayaran.id_pesanan = pesanan.id_pesanan 
             LEFT JOIN produk ON produk.id_produk = pesanan.id_produk 

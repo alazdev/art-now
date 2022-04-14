@@ -155,7 +155,7 @@ class UserModel{
     
     public function profile_arsitek($id_user)
     {
-		$res = $this->db->query("SELECT user.*, arsitek.id_arsitek, arsitek.deskripsi, arsitek.alamat, (SELECT avg(rating) FROM rating LEFT JOIN produk on rating.id_produk = produk.id_produk WHERE produk.id_user = user.id_user) AS rating, (SELECT count(rating) FROM rating LEFT JOIN produk on rating.id_produk = produk.id_produk WHERE produk.id_user = user.id_user) AS total_rating FROM user LEFT JOIN arsitek ON user.id_user = arsitek.id_user WHERE user.id_user = '".$id_user."'");
+		$res = $this->db->query("SELECT user.*, arsitek.id_arsitek, arsitek.deskripsi, arsitek.alamat, (SELECT avg(rating) FROM rating LEFT JOIN produk on rating.id_produk = produk.id_produk WHERE produk.id_user = user.id_user) AS rating, (SELECT count(rating) FROM rating LEFT JOIN produk on rating.id_produk = produk.id_produk WHERE produk.id_user = user.id_user) AS total_rating, arsitek.ktp, arsitek.ijazah, arsitek.sertifikasi_arsitek FROM user LEFT JOIN arsitek ON user.id_user = arsitek.id_user WHERE user.id_user = '".$id_user."'");
         return $this->db->single();
     }
     

@@ -16,7 +16,7 @@
         <?php if ($data['status'] == 'belum') { ?>
             <div class="alert alert-soft-info d-flex align-items-center card-margin" role="alert">
                 <i class="material-icons mr-3">error_outline</i>
-                <div class="text-body"><strong>Masukkan produk pertamamu.</strong> Ini merupakan langkah penting yang harus dilakuakan, untuk memverfikasi akunmu.</div>
+                <div class="text-body"><strong>Masukkan produk pertamamu.</strong> Ini merupakan langkah penting yang harus dilakukan, untuk memverfikasi akunmu.</div>
             </div>
         <?php } ?>
         <?php if ($data['status'] == 'diproses') { ?>
@@ -52,6 +52,7 @@
                         </div>
                         <label>Deskripsi</label>
                         <div style="height: 150px;" data-toggle="quill" id="deskripsi" data-quill-placeholder="Deskripsi Produk..."></div>
+                        <p class="text-muted"><i>*Penting: Mohon untuk tidak melakukan plagiat atas karya, gambar, maupun deskripsi produk Arsitek lain. Jika Anda terbukti melanggar, kami terpaksa melakukan ban permanen terhadap akun Anda.</i></p>
                         <button type="submit" class="btn btn-primary" name="verifikasi">Kirim</button>
                     </form>
                 </div>

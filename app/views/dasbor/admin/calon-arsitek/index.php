@@ -70,7 +70,7 @@
                                     </td>
                                     <td align="right" style="white-space: nowrap;">
                                         <?php if(isset($calon_arsitek['status_produk'])) { ?>
-                                            <a href="detail_calon_arsitek/<?= $calon_arsitek['id_user']; ?>" class="text-muted"><i class="material-icons">receipt</i> Lihat</a>
+                                            <a href="detail_calon_arsitek/<?= $calon_arsitek['id_user']; ?>" class="text-muted"><i class="material-icons">receipt</i> Detail</a>
                                         <?php } ?>
                                         <?php if(isset($calon_arsitek['status_produk']) && $calon_arsitek['status_produk'] != -1) { ?>
                                             <a href="terima_calon_arsitek/<?= $calon_arsitek['id_user']; ?>" class="text-success"><i class="material-icons">check</i> Terima</a>

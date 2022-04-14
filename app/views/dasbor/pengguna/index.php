@@ -21,7 +21,7 @@
                     <?php if ($pesanan['status'] == 1) { if($pesanan['dokumen']) { ?>
                         Lihat <a class="badge badge-success" href="<?= BASEURL.'/dokumen/'.$pesanan['dokumen']; ?>" download="<?= 'IMB-'.$_SESSION['nama_lengkap'].'-'.$pesanan['dokumen'];?>">IMB</a>. 
                     <?php } else { ?>
-                        <span class="badge badge-danger">BELUM ADA IMB</span> <a href="<?= BASEURL.'/pengguna/imb_pesanan/'.$pesanan['id_pesanan'];?>">Klik di sini untuk memasukkan IMB.</a>
+                        <span class="badge badge-danger">IMB BELUM DIUNGGAH</span> <a href="<?= BASEURL.'/pengguna/imb_pesanan/'.$pesanan['id_pesanan'];?>">Klik di sini untuk mengunggah IMB.</a>
                     <?php } } else if ($pesanan['status'] == 2) { ?>
                         <?php if($pesanan['status_pembayaran'] == NULL ) { ?>
                             <a href="pembayaran_pesanan/<?= $pesanan['id_pesanan']; ?>"><span class="badge badge-danger">HARAP BAYAR SEBELUM <?= strtoupper(strftime('%d %B %Y', strtotime('+7 days', strtotime($pesanan['diperbaharui_pada'])))); ?> 23:59</span> Klik di sini untuk membayar.</a>
@@ -66,15 +66,15 @@
                                     <td><a href="<?= BASEURL.'/home/produk/'.$pesanan['id_produk'];?>"><?= $pesanan['judul']; ?></a></td>
                                     <td align="center">
                                         <?php if($pesanan['status'] == -1 ) { ?>
-                                            <span class="badge badge-danger">DITOLAK</span>
+                                            <span class="badge badge-danger">PERMINTAAN PESANAN DITOLAK ARSITEK</span>
                                         <?php } else if($pesanan['status'] == 0 ) { ?>
-                                            <span class="badge badge-info">MENUNGGU</span>
+                                            <span class="badge badge-info">MENUNGGU KONFIRMASI ARSITEK</span>
                                         <?php } else if($pesanan['status'] == 1 ) { ?>
-                                            <span class="badge badge-warning">SEDANG</span>
+                                            <span class="badge badge-warning">SEDANG MENGERJAKAN PROYEK DENGAN ARSITEK</span>
                                             <?php if($pesanan['dokumen']) { ?>
                                                 <a class="badge badge-success" href="<?= BASEURL.'/dokumen/'.$pesanan['dokumen']; ?>" download="<?= 'IMB-'.$pesanan['nama_lengkap'].'-'.$pesanan['dokumen'];?>">IMB</a>
                                             <?php } else { ?>
-                                                <span class="badge badge-danger">BELUM ADA IMB</span>
+                                                <span class="badge badge-danger">IMB BELUM DIUNGGAH</span>
                                             <?php } ?>
                                             <?php if($pesanan['status_pembayaran_dp'] == NULL) { ?>
                                                 <a class="badge badge-danger" href="<?= BASEURL.'/pengguna/pembayaran_dp/'.$pesanan['id_pesanan']; ?>">HARAP BAYAR DP SEBELUM <?= strtoupper(strftime('%d %B %Y', strtotime('+5 days', strtotime($pesanan['diperbaharui_pada'])))); ?> 23:59</a>
@@ -86,8 +86,10 @@
                                                 <a class="badge badge-success" href="javascript:void(0)">DP TELAH DIBAYAR</a>
                                             <?php } ?>
                                         <?php } else if($pesanan['status_pembayaran'] == NULL ) { ?>
+                                            <span class="badge badge-warning">MENUNGGU PEMBAYARAN</span>
                                             <a href="pembayaran_pesanan/<?= $pesanan['id_pesanan']; ?>"><span class="badge badge-danger">HARAP BAYAR SEBELUM <?= strtoupper(strftime('%d %B %Y', strtotime('+7 days', strtotime($pesanan['diperbaharui_pada'])))); ?> 23:59</span></a>
                                         <?php } else if($pesanan['status_pembayaran'] == -1 ) { ?>
+                                            <span class="badge badge-warning">MENUNGGU PEMBAYARAN</span>
                                             <a href="pembayaran_pesanan/<?= $pesanan['id_pesanan']; ?>"><span class="badge badge-danger">BUKTI PEMBAYARAN SEBELUMNYA DITOLAK</span></a>
                                         <?php } else if($pesanan['status_pembayaran'] == 0 ) { ?>
                                             <a href="pembayaran_pesanan/<?= $pesanan['id_pesanan']; ?>"><span class="badge badge-warning">PEMBAYARAN SEDANG DIVALIDASI</span></a>
@@ -111,7 +113,7 @@
                                             <a onclick="deleteData()" href="#"
                                                 data-value="<?= $pesanan['id_pesanan']; ?>" data-judul="<?= $pesanan['judul']; ?>"
                                                 data-toggle="modal" data-target="#modal-delete" class="text-danger">
-                                                    <i class="material-icons">delete</i> Hapus
+                                                    <i class="material-icons">delete</i> Batalkan
                                             </a>
                                         <?php } ?>
                                     </td>

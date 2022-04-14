@@ -4,6 +4,7 @@
 			<div class="row">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-12">
 					<div class="blog_post_style2 blog_single_div">
+                        <h1><?= $data['judul'] ?></h1>
 						<div class="blog_post_style2_img wow fadeInUp">
                             <?php if($data['gambar'] != null ) {?>
 							    <img src="<?= BASEURL.'/image/produk/'.$data['gambar']?>" class="img-fluid col-12" alt="" style="">

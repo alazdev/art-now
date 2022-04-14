@@ -22,7 +22,7 @@
                     <?php if($pesanan['dokumen']) { ?>
                         Lihat <a class="badge badge-success" href="<?= BASEURL.'/dokumen/'.$pesanan['dokumen']; ?>" download="<?= 'IMB-'.$pesanan['nama_lengkap'].'-'.$pesanan['dokumen'];?>">IMB</a>
                     <?php } else { ?>
-                        <span class="badge badge-danger">BELUM ADA IMB</span>
+                        <span class="badge badge-danger">IMB BELUM DIUNGGAH PELANGGAN</span>
                     <?php } ?>
                 </div>
             </div>
@@ -50,15 +50,15 @@
                                     <td><a href="<?= BASEURL.'/arsitek/detail_produk/'.$pesanan['id_produk'];?>"><?= $pesanan['judul']; ?></a></td>
                                     <td align="center">
                                         <?php if($pesanan['status'] == -1 ) { ?>
-                                            <span class="badge badge-danger">DITOLAK</span>
+                                            <span class="badge badge-danger">PESANAN DITOLAK</span>
                                         <?php } else if($pesanan['status'] == 0 ) { ?>
-                                            <span class="badge badge-info">MENUNGGU</span>
+                                            <span class="badge badge-info">MENUNGGU DIKONFIRMASI</span>
                                         <?php } else if($pesanan['status'] == 1 ) { ?>
-                                            <span class="badge badge-warning">SEDANG</span>
+                                            <span class="badge badge-warning">SEDANG MENGERJAKAN PROYEK</span>
                                             <?php if($pesanan['dokumen']) { ?>
                                                 <a class="badge badge-success" href="<?= BASEURL.'/dokumen/'.$pesanan['dokumen']; ?>" download="<?= 'IMB-'.$pesanan['nama_lengkap'].'-'.$pesanan['dokumen'];?>">IMB</a>
                                             <?php } else { ?>
-                                                <span class="badge badge-danger">BELUM ADA IMB</span>
+                                                <span class="badge badge-danger">IMB BELUM DIUNGGAH PELANGGAN</span>
                                             <?php } ?>
                                             <?php if($pesanan['status_pembayaran_dp'] == NULL) { ?>
                                                 <na class="badge badge-danger">DP BELUM DIBAYAR</span>
@@ -68,7 +68,7 @@
                                                 <a class="badge badge-success" href="javascript:void(0)">DP TELAH DIBAYAR</span>
                                             <?php } ?>
                                         <?php } else if($pesanan['status_pembayaran'] == NULL ) { ?>
-                                            <span class="badge badge-danger">MENUNGGU PEMBAYARAN</span>
+                                            <span class="badge badge-danger">MENUNGGU PEMBAYARAN DARI PELANGGAN</span>
                                         <?php } else if($pesanan['status_pembayaran'] == -1 || $pesanan['status_pembayaran'] == 0 ) { ?>
                                             <span class="badge badge-warning">PEMBAYARAN SEDANG DIVALIDASI</span>
                                         <?php } else if($pesanan['status'] == 3 && $pesanan['status_pembayaran'] == 1) { ?>

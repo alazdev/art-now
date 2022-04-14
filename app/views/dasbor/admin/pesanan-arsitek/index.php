@@ -34,15 +34,15 @@
                                 <tr>
                                     <td>
                                         <?php if($pesanan['status'] == -1) { ?>
-                                            <span class="badge badge-danger">Ditolak</span>
+                                            <span class="badge badge-danger">PERMINTAAN PESANAN DITOLAK ARSITEK</span>
                                         <?php } else if($pesanan['status'] == 0) { ?>
-                                            <span class="badge badge-info">Menunggu</span>
+                                            <span class="badge badge-info">MENUNGGU KONFRIMASI PERMINTAAN OLEH ARSITEK</span>
                                         <?php } else if($pesanan['status'] == 1) { ?>
-                                            <span class="badge badge-warning">Sedang</span>
+                                            <span class="badge badge-warning">PROYEK/PESANAN SEDANG DIKERJAKAN</span>
                                         <?php } else if($pesanan['status'] == 2) { ?>
-                                            <span class="badge badge-warning">Pembayaran</span>
+                                            <span class="badge badge-warning">MENUNGGU PEMBAYARAN DARI PELANGGAN</span>
                                         <?php } else if($pesanan['status'] == 3) { ?>
-                                            <span class="badge badge-success">Selesai</span>
+                                            <span class="badge badge-success">SELESAI</span>
                                         <?php } ?>
                                     </td>
                                     <td><a href="../user/profile_pengguna/<?= $pesanan['id_pengguna']?>" target="_blank"><?= $pesanan['nama_lengkap_pengguna']; ?></td></a>

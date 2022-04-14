@@ -25,6 +25,46 @@
                 <div>
                     <?= $data['deskripsi']; ?>
                 </div>
+                <?php if($_SESSION['level'] == 2) { ?>
+                <hr><br><br>
+                <div class="card card-body">
+                    <div class="card-title">
+                        <h1>Produk</h1>
+                    </div>
+                    <div class="table-responsive border-bottom" data-toggle="lists" data-lists-values='["js-lists-values-employee-name"]'>
+                        <table class="table mb-0 thead-border-top-0">
+                            <thead>
+                                <tr>
+                                    <th>Judul Produk</th>
+                                    <th>Harga Jasa</th>
+                                    <th>Penilaian</th>
+                                    <th align="center">Status</th>
+                                    <th>Dibuat Pada</th>
+                                    <th>Diperbaharui Pada</th>
+                                </tr>
+                            </thead>
+                            <tbody class="list" id="staff02">
+                                <?php foreach($data['produks'] as $produk) { ?>
+                                <tr>
+                                    <td><?= $produk['judul']; ?></td>
+                                    <td>Rp <?= number_format($produk['harga'], 0, ',', '.'); ?></td>
+                                    <td><span class="badge badge-warning"><?= number_format($produk['rating'], 1); ?></span></td>
+                                    <td align="center">
+                                        <?php if($produk['status'] == 1 ) { ?>
+                                            <span class="badge badge-success">AKTIF</span>
+                                        <?php } else { ?>
+                                            <span class="badge badge-danger">NONAKTIF</span>
+                                        <?php } ?>
+                                    </td>
+                                    <td><?= date('Y-m-d H:i', strtotime($produk['dibuat_pada']));?></td>
+                                    <td><?= date('Y-m-d H:i', strtotime($produk['diperbaharui_pada']));?></td>
+                                </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <?php } ?>
             </div>
             <div class="col-lg-4">
                 <div class="card card-body">
@@ -81,6 +121,9 @@
 
                     <div class="list-group list-group-flush mb-4">
                         <div class="list-group-item bg-transparent d-flex align-items-center px-0">
+                            <h5>Informasi Dasar</h5>
+                        </div>
+                        <div class="list-group-item bg-transparent d-flex align-items-center px-0">
                             <strong>Email</strong>
                             <div class="ml-auto"><?= $data['email']; ?></div>
                         </div>
@@ -95,9 +138,59 @@
                             <div class="ml-auto"><?= $data['alamat']; ?></div>
                         </div>
                     </div>
+                    <?php if ($_SESSION['level'] == 2) { ?>
+                        <br><br>
+                        <div class="list-group list-group-flush mb-4">
+                            <div class="list-group-item bg-transparent d-flex align-items-center px-0">
+                                <h5>Dokumen</h5>
+                            </div>
+                            <div class="list-group-item bg-transparent d-flex align-items-center px-0">
+                                <strong>KTP</strong>
+                                <div class="ml-auto">
+                                    <?php if ($data['ktp'] != null) {?>
+                                        <a class="badge badge-success" href="<?= BASEURL.'/dokumen/'.$data['ktp']; ?>" download="<?= 'CALON ARSITEK-'.$data['nama_lengkap'].'-KTP-'.$data['ktp'];?>">ADA</a>
+                                    <?php } else { ?>
+                                        <span class="badge badge-danger">BELUM ADA</span>
+                                    <?php } ?>    
+                                </div>
+                            </div>
+                            <div class="list-group-item bg-transparent d-flex align-items-center px-0">
+                                <strong>Ijazah Terakhir</strong>
+                                <div class="ml-auto">
+                                    <?php if ($data['ijazah'] != null) {?>
+                                        <a class="badge badge-success" href="<?= BASEURL.'/dokumen/'.$data['ijazah']; ?>" download="<?= 'CALON ARSITEK-'.$data['nama_lengkap'].'-Ijazah-'.$data['ijazah'];?>">ADA</a>
+                                    <?php } else { ?>
+                                        <span class="badge badge-danger">BELUM ADA</span>
+                                    <?php } ?>  
+                                </div>
+                            </div>
+                            <div class="list-group-item bg-transparent d-flex align-items-center px-0">
+                                <strong>Sertifikasi Arsitek</strong>
+                                <div class="ml-auto">
+                                    <?php if ($data['sertifikasi_arsitek'] != null) {?>
+                                        <a class="badge badge-success" href="<?= BASEURL.'/dokumen/'.$data['sertifikasi_arsitek']; ?>" download="<?= 'CALON ARSITEK-'.$data['nama_lengkap'].'-Sertifikasi Arsitek-'.$data['sertifikasi_arsitek'];?>">ADA</a>
+                                    <?php } else { ?>
+                                        <span class="badge badge-danger">BELUM ADA</span>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    $(document).ready( function () {
+        $('.table').DataTable({
+            "searching":false,
+            'aaSorting': [],
+            'order': [],
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Indonesian.json"
+            }
+        });
+    } );
+</script>
 <?php include('layouts/footer.php'); ?>

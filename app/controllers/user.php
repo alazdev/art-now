@@ -108,6 +108,9 @@ class user extends Controller
     public function profile_arsitek($id_arsitek){
         $data = $this->model('UserModel')->profile_arsitek($id_arsitek);
         if($data != null && $data['level'] == 1){
+            if($_SESSION['level'] == 2){
+                $data['produks'] = $this->model('ProdukModel')->produk_arsitek_byadmin($id_arsitek);
+            }
             $this->view('dasbor/profile_arsitek', $data);
         }else{
             $this->controller('alert')->message('Not Found', '404 | Not Found');

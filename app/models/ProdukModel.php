@@ -33,9 +33,13 @@ class ProdukModel{
         return $this->db->single();
     }
 
-    // Laporan by Admib
+    // Laporan by Admin
     public function semua_byadmin(){
         $this->db->query("SELECT produk.*, user.nama_lengkap, user.email, user.telepon, (SELECT avg(rating) FROM rating WHERE rating.id_produk = produk.id_produk ) AS rating, (SELECT count(rating) FROM rating WHERE rating.id_produk = produk.id_produk ) AS total_rating FROM produk LEFT JOIN user ON user.id_user = produk.id_user WHERE produk.status >= 0 ORDER BY dibuat_pada DESC");
+        return $this->db->resultSet();
+    }
+    public function produk_arsitek_byadmin($id_user){
+        $this->db->query("SELECT produk.*, user.nama_lengkap, user.email, user.telepon, (SELECT avg(rating) FROM rating WHERE rating.id_produk = produk.id_produk ) AS rating, (SELECT count(rating) FROM rating WHERE rating.id_produk = produk.id_produk ) AS total_rating FROM produk LEFT JOIN user ON user.id_user = produk.id_user WHERE produk.status >= 0 AND produk.id_user = '".$id_user."' ORDER BY dibuat_pada DESC");
         return $this->db->resultSet();
     }
 
