@@ -30,6 +30,25 @@
                             <label for="harga">Harga Jasa:</label>
                             <input type="number" name="harga" class="form-control" id="harga" min="1000" value="<?= $data['harga']; ?>" placeholder="Masukkan Harga Jasa..." required readonly>
                         </div>
+                        <div class="form-group">
+                            <label for="dokumen">Desain<sup>(pilih dokumen untuk mengganti)</sup>:</label>
+                            <input type="file" name="dokumen[]" class="form-control" id="dokumen" accept="application/pdf">
+                        </div>
+                        <div class="form-group">
+                            <label for="tautan_video">Tautan Video<sup>(Boleh kosong)</sup> :</label>
+                            <input type="text" name="tautan_video" class="form-control" id="tautan_video" value="<?= $data['tautan_video']; ?>" placeholder="https://www.youtube.com/embed/contohlinkvideo">
+                            <p class="text-muted">*Tautan video dimasukkan harus berupa penyematan tautan YouTube.</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="kategori">Kategori:</label>
+                            <select name="kategori" id="kategori" class="form-control" required>
+                                <option value="1" <?= $data['kategori'] == "1" ? "selected":""; ?>>Desain Rumah Terbaru</option>
+                                <option value="2" <?= $data['kategori'] == "2" ? "selected":""; ?>>Desain Rumah Minimalis</option>
+                                <option value="3" <?= $data['kategori'] == "3" ? "selected":""; ?>>Desain Rumah Mewah</option>
+                                <option value="4" <?= $data['kategori'] == "4" ? "selected":""; ?>>Desain Interior</option>
+                                <option value="0" <?= $data['kategori'] == "0" ? "selected":""; ?>>Desain Bangunan Lainnya</option>
+                            </select>
+                        </div>
                         <label>Deskripsi</label>
                         <div style="height: 150px;" data-toggle="quill" id="deskripsi" data-quill-placeholder="Deskripsi Produk...">
                             

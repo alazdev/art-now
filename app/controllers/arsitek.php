@@ -97,6 +97,7 @@ class arsitek extends Controller
     {
         if (isset($_POST['verifikasi']))
         {
+            // Gambar
             $output_dir = dirname(getcwd())."/public/image/produk/";
             $RandomNum  = time();
             $ImageName  = str_replace(' ','-',strtolower($_FILES['gambar']['name'][0]));
@@ -114,11 +115,33 @@ class arsitek extends Controller
             }     
 
             move_uploaded_file($_FILES["gambar"]["tmp_name"][0], $output_dir.$NewImageName );
+            
+            //Dokumen
+            $output_dir = dirname(getcwd())."/public/dokumen/produk/";
+            $RandomNum  = time();
+            $DokumenName  = str_replace(' ','-',strtolower($_FILES['dokumen']['name'][0]));
+            $DokumenType  = $_FILES['dokumen']['type'][0];
+        
+            $DokumenExt   = substr($DokumenName, strrpos($DokumenName, '.'));
+            $DokumenExt   = str_replace('.','',$DokumenExt);
+            $DokumenName  = preg_replace("/\.[^.\s]{3,4}$/", "", $DokumenName);
+            $NewDokumenName = $DokumenName.'-'.$RandomNum.'.'.$DokumenExt;
+            $ret[$NewDokumenName] = $output_dir.$NewDokumenName;
+
+            if (!file_exists($output_dir))
+            {
+                @mkdir($output_dir, 0777);
+            }     
+
+            move_uploaded_file($_FILES["dokumen"]["tmp_name"][0], $output_dir.$NewDokumenName );
 
             $data = [
                 'judul'     => $_POST['judul'],
                 'gambar'    => $NewImageName,
                 'harga'     => $_POST['harga'],
+                'dokumen'   => $NewDokumenName,
+                'tautan_video'=> $_POST['tautan_video'],
+                'kategori'  => $_POST['kategori'],
                 'deskripsi' => $_POST['deskripsi'],
                 'status'    => 0,
             ];

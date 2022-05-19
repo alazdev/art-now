@@ -42,7 +42,9 @@
             <th>Judul Produk</th>
             <th>Harga Jasa</th>
             <th>Penilaian</th>
-            <th>Status</th>
+			<th>Tautan Video</th>
+			<th>Kategori</th>
+            <th>Status Jasa</th>
             <th>Nama Arsitek</th>
             <th>Email Arsitek</th>
             <th>Telepon Arsitek</th>
@@ -55,6 +57,22 @@
                 <td><?= $produk['judul']; ?></td>
                 <td>Rp <?= number_format($produk['harga'], 0, ',', '.'); ?></td>
                 <td><?= number_format($produk['rating'], 1); ?>/5 dari <?= $produk['total_rating']; ?> penilaian</td>
+				<td><?= $produk['tautan_video']; ?></td>
+				<td>
+					<?php if($produk['kategori'] == "1") { ?>
+						Desain Rumah Terbaru
+					<?php } else if($produk['kategori'] == "2") { ?>
+						Desain Rumah Minimalis
+					<?php } else if($produk['kategori'] == "3") { ?>
+						Desain Rumah Mewah
+					<?php } else if($produk['kategori'] == "4") { ?>
+						Desain Interior
+					<?php } else if($produk['kategori'] == "0") { ?>
+						Desain Bangunan Lainnya
+					<?php } else { ?>
+
+					<?php } ?>
+				</td>
                 <td align="center">
                     <?php if($produk['status'] == 1 ) { ?>
                         AKTIF

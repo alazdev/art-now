@@ -11,11 +11,29 @@
                             <?php } else {?>
 							    <img src="https://via.placeholder.com/1170x560/ffc0cb" class="img-fluid" alt="">
                             <?php } ?>
-                            <p class="text-muted"><i>*Mohon untuk tidak mengunduh, menyalahgunakan, dan menyebarluaskan gambar maupun karya orang lain.</i></p>
 						</div>
 						<div class="blog_post_style2_content wow fadeInUp">
+                            <p class="text-muted"><i>*Mohon untuk tidak mengunduh, menyalahgunakan, dan menyebarluaskan gambar maupun karya orang lain.</i></p>
+                            <?php if($data['tautan_video']) { ?>
+                                <iframe width="560" height="315" src="<?= $data['tautan_video'] ?>" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <?php } ?>
 							<?= $data['deskripsi'] ?>
                             <br/>
+                            <p>- Kategori Produk: 
+                                <?php if($data['kategori'] == "1") { ?>
+                                    Desain Rumah Terbaru
+                                <?php } else if($data['kategori'] == "2") { ?>
+                                    Desain Rumah Minimalis
+                                <?php } else if($data['kategori'] == "3") { ?>
+                                    Desain Rumah Mewah
+                                <?php } else if($data['kategori'] == "4") { ?>
+                                    Desain Interior
+                                <?php } else if($data['kategori'] == "0") { ?>
+                                    Desain Bangunan Lainnya
+                                <?php } else { ?>
+
+                                <?php } ?>
+                            </p>
                             <p>- Penilaian Produk: <?= number_format($data['rating'],1,'.',',') ?>/5 dari total <?= $data['total_rating'] ?> penilaian.</p>
                             <p>- Harga Jasa: <?= number_format($data['harga'],0,',','.') ?></p>
                             <div class="col-md-12">
@@ -25,6 +43,7 @@
                                     <a href="#" class="btn btn-danger col-md-12">Produk Tidak AKtif</a>
                                 <?php } ?>
                             </div>
+                            <a href="<?= BASEURL ?>/dokumen/produk/<?= $data['dokumen'] ?>" class="col-12 btn btn-light btn-block" download="Desain Lengkap <?= $data['judul'] ?>">Unduh Desain Lengkap</a>
                         </div>
 					</div>
 					<div class="blog_author_div wow fadeInUp">

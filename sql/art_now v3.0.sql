@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2022 at 07:19 PM
+-- Generation Time: Apr 02, 2022 at 10:19 AM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.4.20
 
@@ -37,21 +37,6 @@ CREATE TABLE `arsitek` (
   `sertifikasi_arsitek` varchar(255) NOT NULL,
   `dibuat_pada` timestamp NULL DEFAULT NULL,
   `diperbaharui_pada` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `artikel`
---
-
-CREATE TABLE `artikel` (
-  `id_artikel` int(11) NOT NULL,
-  `judul` varchar(255) NOT NULL,
-  `gambar` varchar(255) NOT NULL,
-  `isi` text NOT NULL,
-  `dibuat_pada` timestamp NULL DEFAULT current_timestamp(),
-  `diperbaharui_pada` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -160,9 +145,6 @@ CREATE TABLE `produk` (
   `judul` varchar(100) NOT NULL,
   `gambar` varchar(255) NOT NULL,
   `harga` bigint(20) NOT NULL,
-  `dokumen` varchar(255) DEFAULT NULL,
-  `tautan_video` varchar(255) DEFAULT NULL,
-  `kategori` int(11) DEFAULT NULL,
   `deskripsi` text NOT NULL,
   `status` tinyint(1) NOT NULL,
   `dibuat_pada` timestamp NULL DEFAULT NULL,
@@ -244,12 +226,6 @@ ALTER TABLE `arsitek`
   ADD PRIMARY KEY (`id_arsitek`),
   ADD UNIQUE KEY `id_user_2` (`id_user`),
   ADD KEY `id_user` (`id_user`);
-
---
--- Indexes for table `artikel`
---
-ALTER TABLE `artikel`
-  ADD PRIMARY KEY (`id_artikel`);
 
 --
 -- Indexes for table `imb`
@@ -337,12 +313,6 @@ ALTER TABLE `arsitek`
   MODIFY `id_arsitek` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `artikel`
---
-ALTER TABLE `artikel`
-  MODIFY `id_artikel` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `imb`
 --
 ALTER TABLE `imb`
@@ -376,7 +346,7 @@ ALTER TABLE `pesan`
 -- AUTO_INCREMENT for table `pesanan`
 --
 ALTER TABLE `pesanan`
-  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `produk`
@@ -400,7 +370,7 @@ ALTER TABLE `rekening_bank`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- Constraints for dumped tables

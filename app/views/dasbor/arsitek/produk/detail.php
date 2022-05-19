@@ -19,6 +19,11 @@
                 <a href="#" class="dp-preview card mb-4">
                     <img src="<?= BASEURL."/image/produk/".$data['gambar'];?>" alt="digital product" class="img-fluid">
                 </a>
+                <?php if($data['tautan_video'] != NULL) { ?>
+                <div class="col-12">
+                    <iframe width="560" height="315" src="<?= $data['tautan_video'] ?>" title="Pengenalan Produk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <?php } ?>
                 <div>
                     <?= $data['deskripsi']; ?>
                 </div>
@@ -82,6 +87,16 @@
                     </div>
 
                     <div class="list-group list-group-flush mb-4">
+                        <div class="list-group-item bg-transparent d-flex align-items-center px-0">
+                            <strong>Kategori Produk</strong>
+                            <div class="ml-auto">
+                                <?= $data['kategori'] == "1" ? "Desain Rumah Terbaru":""; ?>
+                                <?= $data['kategori'] == "2" ? "Desain Rumah Minimalis":""; ?>
+                                <?= $data['kategori'] == "3" ? "Desain Rumah Mewah":""; ?>
+                                <?= $data['kategori'] == "4" ? "Desain Interior":""; ?>
+                                <?= $data['kategori'] == "0" ? "Desain Bangunan Lainnya":""; ?>
+                            </div>
+                        </div>
                         <div class="list-group-item bg-transparent d-flex align-items-center px-0">
                             <strong>Status Produk</strong>
                             <div class="ml-auto"><?= ($data['status'] == 0) ? 'Nonaktif':'Aktif'; ?></div>

@@ -38,9 +38,12 @@
                                     <th>Judul Produk</th>
                                     <th>Harga Jasa</th>
                                     <th>Penilaian</th>
+                                    <th>Tautan Video</th>
+                                    <th>Kategori</th>
                                     <th align="center">Status</th>
                                     <th>Dibuat Pada</th>
                                     <th>Diperbaharui Pada</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody class="list" id="staff02">
@@ -49,6 +52,22 @@
                                     <td><?= $produk['judul']; ?></td>
                                     <td>Rp <?= number_format($produk['harga'], 0, ',', '.'); ?></td>
                                     <td><span class="badge badge-warning"><?= number_format($produk['rating'], 1); ?></span></td>
+                                    <td><?= $produk['tautan_video']; ?></td>
+                                    <td>
+                                        <?php if($produk['kategori'] == "1") { ?>
+                                            Desain Rumah Terbaru
+                                        <?php } else if($produk['kategori'] == "2") { ?>
+                                            Desain Rumah Minimalis
+                                        <?php } else if($produk['kategori'] == "3") { ?>
+                                            Desain Rumah Mewah
+                                        <?php } else if($produk['kategori'] == "4") { ?>
+                                            Desain Interior
+                                        <?php } else if($produk['kategori'] == "0") { ?>
+                                            Desain Bangunan Lainnya
+                                        <?php } else { ?>
+
+                                        <?php } ?>
+                                    </td>
                                     <td align="center">
                                         <?php if($produk['status'] == 1 ) { ?>
                                             <span class="badge badge-success">AKTIF</span>
@@ -58,6 +77,11 @@
                                     </td>
                                     <td><?= date('Y-m-d H:i', strtotime($produk['dibuat_pada']));?></td>
                                     <td><?= date('Y-m-d H:i', strtotime($produk['diperbaharui_pada']));?></td>
+                                    <td style="white-space: nowrap;" align="right">
+                                        <?php if($produk['status'] == 1 ) { ?>
+                                        <a href="<?= BASEURL ?>/home/produk/<?= $produk['id_produk']; ?>" class="text-muted"><i class="material-icons">visibility</i> Lihat</a>
+                                        <?php } ?>
+                                    </td>
                                 </tr>
                                 <?php } ?>
                             </tbody>

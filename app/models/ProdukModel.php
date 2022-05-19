@@ -56,11 +56,14 @@ class ProdukModel{
     public function tambah($data)
     {
         $user = $this->cek_user();
-        $this->db->query('INSERT INTO '.$this->table.' (id_user, judul, gambar, harga, deskripsi, status, dibuat_pada, diperbaharui_pada) VALUES(:id_user, :judul, :gambar, :harga, :deskripsi, :status, :dibuat_pada, :diperbaharui_pada)');
+        $this->db->query('INSERT INTO '.$this->table.' (id_user, judul, gambar, harga,  dokumen,  tautan_video,  kategori, deskripsi, status, dibuat_pada, diperbaharui_pada) VALUES(:id_user, :judul, :gambar, :harga, :dokumen, :tautan_video, :kategori, :deskripsi, :status, :dibuat_pada, :diperbaharui_pada)');
         $this->db->bind('id_user',$user['id_user']);
         $this->db->bind('judul',$data['judul']);
         $this->db->bind('gambar',$data['gambar']);
         $this->db->bind('harga',$data['harga']);
+        $this->db->bind('dokumen',$data['dokumen']);
+        $this->db->bind('tautan_video',$data['tautan_video']);
+        $this->db->bind('kategori',$data['kategori']);
         $this->db->bind('deskripsi',$data['deskripsi']);
         $this->db->bind('status',$data['status']);
         $this->db->bind('dibuat_pada',date("Y-m-d H:i:s"));
@@ -70,17 +73,19 @@ class ProdukModel{
 
     public function update($data)
     {
+        $this->db->query('UPDATE '.$this->table.' SET judul= :judul, '. ($data['gambar'] ? "gambar = :gambar,":"") .' harga = :harga, '. ($data['dokumen'] ? "dokumen = :dokumen,":"") .' tautan_video = :tautan_video, kategori = :kategori, deskripsi = :deskripsi, diperbaharui_pada = :diperbaharui_pada WHERE id_produk = '.$data['id_produk']);
+        $this->db->bind('judul',$data['judul']);
         if($data['gambar'] != null)
         {
-            $this->db->query('UPDATE '.$this->table.' SET judul= :judul, gambar = :gambar, harga = :harga, deskripsi = :deskripsi, diperbaharui_pada = :diperbaharui_pada WHERE id_produk = '.$data['id_produk']);
             $this->db->bind('gambar',$data['gambar']);
         }
-        else
-        {
-            $this->db->query('UPDATE '.$this->table.' SET judul= :judul, harga = :harga, deskripsi = :deskripsi, diperbaharui_pada = :diperbaharui_pada WHERE id_produk = '.$data['id_produk']);
-        }
-        $this->db->bind('judul',$data['judul']);
         $this->db->bind('harga',$data['harga']);
+        if($data['dokumen'] != null)
+        {
+            $this->db->bind('dokumen',$data['dokumen']);
+        }
+        $this->db->bind('tautan_video',$data['tautan_video']);
+        $this->db->bind('kategori',$data['kategori']);
         $this->db->bind('deskripsi',$data['deskripsi']);
         $this->db->bind('diperbaharui_pada',date("Y-m-d H:i:s"));
         $this->db->execute();

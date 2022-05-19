@@ -50,6 +50,25 @@
                             <label for="harga">Harga Jasa:</label>
                             <input type="number" name="harga" class="form-control" id="harga" min="1000" placeholder="Masukkan Harga Jasa..." required>
                         </div>
+                        <div class="form-group">
+                            <label for="dokumen">Desain:</label>
+                            <input type="file" name="dokumen[]" class="form-control" id="dokumen" accept="application/pdf" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tautan_video">Tautan Video<sup>(Boleh kosong)</sup> :</label>
+                            <input type="text" name="tautan_video" class="form-control" id="tautan_video" placeholder="https://www.youtube.com/embed/contohlinkvideo">
+                            <p class="text-muted">*Tautan video dimasukkan harus berupa penyematan tautan YouTube.</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="kategori">Kategori:</label>
+                            <select name="kategori" id="kategori" class="form-control" required>
+                                <option value="1">Desain Rumah Terbaru</option>
+                                <option value="2">Desain Rumah Minimalis</option>
+                                <option value="3">Desain Rumah Mewah</option>
+                                <option value="4">Desain Interior</option>
+                                <option value="0">Desain Bangunan Lainnya</option>
+                            </select>
+                        </div>
                         <label>Deskripsi</label>
                         <div style="height: 150px;" data-toggle="quill" id="deskripsi" data-quill-placeholder="Deskripsi Produk..."></div>
                         <p class="text-muted"><i>*Penting: Mohon untuk tidak melakukan plagiat atas karya, gambar, maupun deskripsi produk Arsitek lain. Jika Anda terbukti melanggar, kami terpaksa melakukan ban permanen terhadap akun Anda.</i></p>

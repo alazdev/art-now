@@ -29,47 +29,7 @@
     <link type="text/css" href="<?= BASEURL; ?>/assets-admin/css/vendor-fontawesome-free.rtl.css" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133433427-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-133433427-1');
-    </script> -->
-
-
-    <!-- Facebook Pixel Code -->
-    <!-- <script>
-        ! function(f, b, e, v, n, t, s) {
-            if (f.fbq) return;
-            n = f.fbq = function() {
-                n.callMethod ?
-                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-            };
-            if (!f._fbq) f._fbq = n;
-            n.push = n;
-            n.loaded = !0;
-            n.version = '2.0';
-            n.queue = [];
-            t = b.createElement(e);
-            t.async = !0;
-            t.src = v;
-            s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s)
-        }(window, document, 'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '327167911228268');
-        fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=327167911228268&ev=PageView&noscript=1" /></noscript> -->
-    <!-- End Facebook Pixel Code -->
-
+    
     <!-- Quill Theme -->
     <link type="text/css" href="<?= BASEURL; ?>/assets-admin/css/vendor-quill.css" rel="stylesheet">
     <link type="text/css" href="<?= BASEURL; ?>/assets-admin/css/vendor-quill.rtl.css" rel="stylesheet">
@@ -115,9 +75,28 @@
                                         <label for="harga">Harga Jasa:</label>
                                         <input type="number" name="harga" class="form-control" id="harga" min="1000" placeholder="Masukkan Harga Jasa..." required>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="dokumen">Desain:</label>
+                                        <input type="file" name="dokumen[]" class="form-control" id="dokumen" accept="application/pdf" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tautan_video">Tautan Video<sup>(Boleh kosong)</sup> :</label>
+                                        <input type="text" name="tautan_video" class="form-control" id="tautan_video" placeholder="https://www.youtube.com/embed/contohlinkvideo">
+                                        <p class="text-muted">*Tautan video dimasukkan harus berupa penyematan tautan YouTube.</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="kategori">Kategori:</label>
+                                        <select name="kategori" id="kategori" class="form-control" required>
+                                            <option value="1">Desain Rumah Terbaru</option>
+                                            <option value="2">Desain Rumah Minimalis</option>
+                                            <option value="3">Desain Rumah Mewah</option>
+                                            <option value="4">Desain Interior</option>
+                                            <option value="0">Desain Bangunan Lainnya</option>
+                                        </select>
+                                    </div>
                                     <label>Deskripsi</label>
                                     <div style="height: 150px;" data-toggle="quill" id="deskripsi" data-quill-placeholder="Deskripsi Produk..."></div>
-                        <p class="text-muted"><i>*Penting: Mohon untuk tidak melakukan plagiat atas karya, gambar, maupun deskripsi produk Arsitek lain. Jika Anda terbukti melanggar, kami terpaksa melakukan ban permanen terhadap akun Anda.</i></p>
+                                    <p class="text-muted"><i>*Penting: Mohon untuk tidak melakukan plagiat atas karya, gambar, maupun deskripsi produk Arsitek lain. Jika Anda terbukti melanggar, kami terpaksa melakukan ban permanen terhadap akun Anda.</i></p>
                                 </div>
                             </div>
                         </div>

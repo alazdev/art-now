@@ -16,15 +16,39 @@
     <div class="container page__container">
         <div class="row">
             <div class="col-lg-8">
+                <h3><?= $data['produk']['judul']; ?></h3>
                 <a href="#" class="dp-preview card mb-4">
                     <img src="<?= BASEURL."/image/produk/".$data['produk']['gambar'];?>" alt="digital product" class="img-fluid">
                 </a>
+                <?php if($data['produk']['tautan_video']) { ?>
+                    <iframe width="560" height="315" src="<?= $data['produk']['tautan_video'] ?>" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <?php } ?>
                 <div>
                     <?= $data['produk']['deskripsi']; ?>
+                    
+                    <p>- Kategori Produk: 
+                        <?php if($data['produk']['kategori'] == "1") { ?>
+                            Desain Rumah Terbaru
+                        <?php } else if($data['produk']['kategori'] == "2") { ?>
+                            Desain Rumah Minimalis
+                        <?php } else if($data['produk']['kategori'] == "3") { ?>
+                            Desain Rumah Mewah
+                        <?php } else if($data['produk']['kategori'] == "4") { ?>
+                            Desain Interior
+                        <?php } else if($data['produk']['kategori'] == "0") { ?>
+                            Desain Bangunan Lainnya
+                        <?php } else { ?>
+
+                        <?php } ?>
+                    </p>
+                    <p>- Harga Jasa: <?= number_format($data['produk']['harga'],0,',','.') ?></p>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="card card-body">
+                    <div class="list-group list-group-flush mb-4">
+                        <a href="<?= BASEURL ?>/dokumen/produk/<?= $data['produk']['dokumen'] ?>" class="col-12 btn btn-light btn-block" download="Desain Lengkap <?= $data['calon_arsitek']['nama_lengkap'] ?>">Unduh Desain Lengkap</a>
+                    </div>
                     <div class="list-group list-group-flush mb-4">
                         <div class="list-group-item bg-transparent d-flex align-items-center px-0">
                             <strong>Tanggal Produk Dibuat</strong>
