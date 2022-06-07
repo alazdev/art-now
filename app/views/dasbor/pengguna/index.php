@@ -17,14 +17,10 @@
             <div class="alert alert-soft-warning d-flex align-items-center card-margin" role="alert">
                 <i class="material-icons mr-3">error_outline</i>
                 <div class="text-body"><strong> 
-                    Sedang Mengerjakan Proyek bersama <a href="<?= BASEURL.'/user/profile_arsitek/'.$pesanan['id_arsitek'];?>"><?= $pesanan['nama_lengkap_arsitek']; ?></a>.</strong> 
-                    <?php if ($pesanan['status'] == 1) { if($pesanan['dokumen']) { ?>
-                        Lihat <a class="badge badge-success" href="<?= BASEURL.'/dokumen/'.$pesanan['dokumen']; ?>" download="<?= 'IMB-'.$_SESSION['nama_lengkap'].'-'.$pesanan['dokumen'];?>">IMB</a>. 
-                    <?php } else { ?>
-                        <span class="badge badge-danger">IMB BELUM DIUNGGAH</span> <a href="<?= BASEURL.'/pengguna/imb_pesanan/'.$pesanan['id_pesanan'];?>">Klik di sini untuk mengunggah IMB.</a>
-                    <?php } } else if ($pesanan['status'] == 2) { ?>
+                    Sedang Mengerjakan Proyek bersama <a href="<?= BASEURL.'/user/profile_arsitek/'.$pesanan['id_arsitek'];?>"><?= $pesanan['nama_lengkap_arsitek']; ?></a>.</strong>
+                    <?php if ($pesanan['status'] == 2) { ?>
                         <?php if($pesanan['status_pembayaran'] == NULL ) { ?>
-                            <a href="pembayaran_pesanan/<?= $pesanan['id_pesanan']; ?>"><span class="badge badge-danger">HARAP BAYAR SEBELUM <?= strtoupper(strftime('%d %B %Y', strtotime('+7 days', strtotime($pesanan['diperbaharui_pada'])))); ?> 23:59</span> Klik di sini untuk membayar.</a>
+                            <a href="pembayaran_pesanan/<?= $pesanan['id_pesanan']; ?>"><span class="badge badge-danger">HARAP BAYAR PEMBAYARAN KEDUA SEBELUM <?= strtoupper(strftime('%d %B %Y', strtotime('+7 days', strtotime($pesanan['diperbaharui_pada'])))); ?> 23:59</span> Klik di sini untuk membayar.</a>
                         <?php } else if($pesanan['status_pembayaran'] == -1 ) { ?>
                             <a href="pembayaran_pesanan/<?= $pesanan['id_pesanan']; ?>"><span class="badge badge-danger">BUKTI PEMBAYARAN SEBELUMNYA DITOLAK</span></a> Silakan masukkan kembali bukti pembayaran yang benar.
                         <?php } else if($pesanan['status_pembayaran'] == 0 ) { ?>
@@ -71,11 +67,6 @@
                                             <span class="badge badge-info">MENUNGGU KONFIRMASI ARSITEK</span>
                                         <?php } else if($pesanan['status'] == 1 ) { ?>
                                             <span class="badge badge-warning">SEDANG MENGERJAKAN PROYEK DENGAN ARSITEK</span>
-                                            <?php if($pesanan['dokumen']) { ?>
-                                                <a class="badge badge-success" href="<?= BASEURL.'/dokumen/'.$pesanan['dokumen']; ?>" download="<?= 'IMB-'.$pesanan['nama_lengkap'].'-'.$pesanan['dokumen'];?>">IMB</a>
-                                            <?php } else { ?>
-                                                <span class="badge badge-danger">IMB BELUM DIUNGGAH</span>
-                                            <?php } ?>
                                             <?php if($pesanan['status_pembayaran_dp'] == NULL) { ?>
                                                 <a class="badge badge-danger" href="<?= BASEURL.'/pengguna/pembayaran_dp/'.$pesanan['id_pesanan']; ?>">HARAP BAYAR DP SEBELUM <?= strtoupper(strftime('%d %B %Y', strtotime('+5 days', strtotime($pesanan['diperbaharui_pada'])))); ?> 23:59</a>
                                             <?php } else if($pesanan['status_pembayaran_dp'] == -1) { ?>
@@ -87,7 +78,7 @@
                                             <?php } ?>
                                         <?php } else if($pesanan['status_pembayaran'] == NULL ) { ?>
                                             <span class="badge badge-warning">MENUNGGU PEMBAYARAN</span>
-                                            <a href="pembayaran_pesanan/<?= $pesanan['id_pesanan']; ?>"><span class="badge badge-danger">HARAP BAYAR SEBELUM <?= strtoupper(strftime('%d %B %Y', strtotime('+7 days', strtotime($pesanan['diperbaharui_pada'])))); ?> 23:59</span></a>
+                                            <a href="pembayaran_pesanan/<?= $pesanan['id_pesanan']; ?>"><span class="badge badge-danger">HARAP BAYAR PEMBAYARAN KEDUA SEBELUM <?= strtoupper(strftime('%d %B %Y', strtotime('+7 days', strtotime($pesanan['diperbaharui_pada'])))); ?> 23:59</span></a>
                                         <?php } else if($pesanan['status_pembayaran'] == -1 ) { ?>
                                             <span class="badge badge-warning">MENUNGGU PEMBAYARAN</span>
                                             <a href="pembayaran_pesanan/<?= $pesanan['id_pesanan']; ?>"><span class="badge badge-danger">BUKTI PEMBAYARAN SEBELUMNYA DITOLAK</span></a>
@@ -102,10 +93,8 @@
                                     <td align="right" style="white-space: nowrap;">
                                         <a href="../chat/index?ke=<?= $pesanan['id_arsitek']; ?>" class="text-success"><i class="material-icons">chat</i> Pesan</a>
                                         <?php if($pesanan['status'] == 1 && ($pesanan['status_pembayaran_dp'] == NULL OR $pesanan['status_pembayaran_dp'] < 1) ) { ?>
-                                            <a href="imb_pesanan/<?= $pesanan['id_pesanan']; ?>" class="text-success"><i class="material-icons">receipt</i> Unggah IMB</a>
                                             <a href="pembayaran_dp/<?= $pesanan['id_pesanan']; ?>" class="text-warning"><i class="material-icons">payment</i> Bayar Uang Muka</a>
                                         <?php } else if($pesanan['status'] == 1 && $pesanan['status_pembayaran_dp'] != NULL ) { ?>
-                                            <a href="imb_pesanan/<?= $pesanan['id_pesanan']; ?>" class="text-success"><i class="material-icons">receipt</i> Unggah IMB</a>
                                             <a href="selesaikan_pesanan/<?= $pesanan['id_pesanan']; ?>" class="text-success"><i class="material-icons">check</i> Selesaikan</a>
                                         <?php } else if($pesanan['status'] == 2 ) { ?>
                                             <a href="pembayaran_pesanan/<?= $pesanan['id_pesanan']; ?>" class="text-warning"><i class="material-icons">payment</i> Bayar</a>

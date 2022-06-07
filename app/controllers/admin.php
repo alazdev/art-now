@@ -412,14 +412,14 @@ class admin extends Controller
     public function laporan_transaksi()
     {
         $data = [
-            'transaksis' => $this->model('PembayaranModel')->semua_byadmin(1)
+            'transaksis' => $this->model('PembayaranModel')->laporan(1)
         ];
         $this->view('dasbor/admin/laporan/transaksi', $data);
     }
     public function export_transaksi()
     {
         $data = [
-            'transaksis' => $this->model('PembayaranModel')->semua_byadmin(1)
+            'transaksis' => $this->model('PembayaranModel')->laporan(1)
         ];
         $this->view('dasbor/admin/laporan/export_transaksi', $data);
     }

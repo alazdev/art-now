@@ -9,7 +9,7 @@
                         <li class="breadcrumb-item active" aria-current="page">Detail Pembayaran Pengguna</li>
                     </ol>
                 </nav>
-                <h1 class="m-0">Pembayaran <?= ($data['pembayaran'] == 1) ? 'Penuh':'DP/Uang Muka' ?></h1>
+                <h1 class="m-0">Pembayaran <?= ($data['pembayaran'] == 1) ? 'Kedua':'DP/Uang Muka' ?></h1>
             </div>
         </div>
     </div>
@@ -51,7 +51,7 @@
                         </div>
                         <div class="list-group-item bg-transparent d-flex align-items-center px-0">
                             <strong>Pembayaran</strong>
-                            <div class="ml-auto"><?= ($data['pembayaran'] == 1) ? 'Penuh':'DP/Uang Muka' ?></div>
+                            <div class="ml-auto"><?= ($data['pembayaran'] == 1) ? 'Kedua':'DP/Uang Muka' ?></div>
                         </div>
                         <div class="list-group-item bg-transparent d-flex align-items-center px-0">
                             <strong>Total harus dibayar</strong>

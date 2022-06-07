@@ -58,13 +58,31 @@
                     <p class="text-muted mb-0">Silakan lakukan pembayaran ke salah satu rekening bank berikut dengan nominal yang tertera dan unggah bukti pembayaran.</p>
                 </div>
                 <div class="col-lg-8 card-form__body card-body">
-                    <?php foreach($data['rekening'] as $rekening) { ?>
-                    <div class="form-group d-flex flex-column">
-                        <img alt="PayPal Logo" src="<?= BASEURL."/image/logo-rekening/".$rekening['logo'];?>" style="display: block; margin-left: auto; margin-right: auto;" width="140">
-                        <div>
-                            <?=$rekening['nama']?>, <?=$rekening['nomor']?> A/N <?=$rekening['pemegang']?>
+                    <div class="row">
+                        <?php $jr = count($data['rekening']); $i = 1; foreach($data['rekening'] as $rekening) { ?>
+                        <div class="<?= ($jr < 2) ? "col-12":"col-6" ?>">
+                            <div class="form-group d-flex flex-column">
+                                <img alt="PayPal Logo" src="<?= BASEURL."/image/logo-rekening/".$rekening['logo'];?>" style="display: block; margin-left: auto; margin-right: auto; width: 140px; height: 57px; object-fit: contain;">
+                                <div>
+                                    <?=$rekening['nama']?>, <?=$rekening['nomor']?> A/N <?=$rekening['pemegang']?>
+                                </div>
+                            </div>
                         </div>
-                    </div><hr>
+                        <?php if ($jr > 6 && $i == 4) { ?>
+                            </div><hr>
+                            <div class="collapse" id="banyakRekening">
+                                <div class="row">
+                        <?php } else if ($i % 2 == 0) { ?>
+                            </div><hr>
+                            <div class="row">
+                        <?php }?>
+                        <?php if ($jr > 6 && $jr == $i) { ?>
+                            </div>
+                        <?php } $i++;?>
+                        <?php } ?>
+                    </div>
+                    <?php if ($jr > 6) { ?>
+                    <button class="btn btn-light col-12" id="banyak-rekening" type="button" data-toggle="collapse" data-target="#banyakRekening" aria-expanded="false" aria-controls="banyakRekening">Tampilkan lebih banyak</button>
                     <?php } ?>
                 </div>
             </div>
@@ -95,4 +113,16 @@
         </div>
     </div>
 </div>
+<script>
+    $('#banyak-rekening').html('Tampilkan lebih banyak');
+    $(document).ready(function(){
+        $('#banyak-rekening').click(function(){
+            if($('#banyak-rekening').html() == 'Tampilkan lebih banyak'){
+                $('#banyak-rekening').html('Tampilkan lebih sedikit');
+            } else {
+                $('#banyak-rekening').html('Tampilkan lebih banyak');
+            }
+        });
+    })
+</script>
 <?php include(__DIR__ . '/../layouts/footer.php'); ?>

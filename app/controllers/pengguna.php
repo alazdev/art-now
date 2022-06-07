@@ -61,63 +61,6 @@ class pengguna extends Controller
         }
     }
     
-    public function imb_pesanan($id_pesanan)
-    {
-        $data = $this->model('PesananModel')->pesanan_bypengguna($id_pesanan);
-        if($data != null){
-            $this->view('dasbor/pengguna/imb_pesanan', $data);
-        }else{
-            $this->controller('alert')->message('Not Found', '404 | Not Found');
-        }
-    }
-    public function simpan_imb_pesanan($id_pesanan)
-    {
-        if (isset($_POST['kirim']))
-        {
-            if($_FILES['dokumen']["name"][0]){
-                // Memasukkan Dokumen Baru
-                $output_dir = dirname(getcwd())."/public/dokumen/";
-                $RandomNum  = time();
-                $DokumenName  = str_replace(' ','-',strtolower($_FILES['dokumen']['name'][0]));
-                $DokumenType  = $_FILES['dokumen']['type'][0];
-            
-                $DokumenExt   = substr($DokumenName, strrpos($DokumenName, '.'));
-                $DokumenExt   = str_replace('.','',$DokumenExt);
-                $DokumenName  = preg_replace("/\.[^.\s]{3,4}$/", "", $DokumenName);
-                $NewDokumenName = $DokumenName.'-'.$RandomNum.'.'.$DokumenExt;
-                $ret[$NewDokumenName] = $output_dir.$NewDokumenName;
-    
-                if (!file_exists($output_dir))
-                {
-                    @mkdir($output_dir, 0777);
-                }     
-    
-                move_uploaded_file($_FILES["dokumen"]["tmp_name"][0], $output_dir.$NewDokumenName );
-
-                $data['dokumen'] = $NewDokumenName;
-
-                if($this->model('ImbModel')->imb($id_pesanan) != null){
-                // Penghapusan Dokumen
-                    $dokumen = dirname(getcwd())."/public/dokumen/".$this->model('ImbModel')->imb($id_pesanan)['dokumen'];
-                    if(file_exists($dokumen)){
-                        unlink($dokumen);
-                    }
-                    $this->model('ImbModel')->hapus($id_pesanan);
-                }
-            }else{
-                $data['dokumen'] = null;
-            }
-
-            $data += [
-                'id_pesanan' => $id_pesanan,
-            ];
-            $this->model('ImbModel')->tambah($data);
-            $this->alert('IMB berhasil dikirim.', 'pengguna/index');
-            exit();
-        }else{
-            $this->controller('alert')->message('Not Found', '404 | Not Found');
-        }
-    }
     public function selesaikan_pesanan($id_pesanan)
     {
         $data = $this->model('PesananModel')->update_status($id_pesanan, 2);

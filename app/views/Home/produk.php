@@ -42,8 +42,8 @@
                                 <?php } } if($data['status'] == 0) { ?>
                                     <a href="#" class="btn btn-danger col-md-12">Produk Tidak AKtif</a>
                                 <?php } ?>
-                            </div>
                             <a href="<?= BASEURL ?>/dokumen/produk/<?= $data['dokumen'] ?>" class="col-12 btn btn-light btn-block" download="Desain Lengkap <?= $data['judul'] ?>">Unduh Desain Lengkap</a>
+                            </div>
                         </div>
 					</div>
 					<div class="blog_author_div wow fadeInUp">

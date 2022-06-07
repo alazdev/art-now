@@ -18,12 +18,7 @@
             <div class="alert alert-soft-warning d-flex align-items-center card-margin" role="alert">
                 <i class="material-icons mr-3">error_outline</i>
                 <div class="text-body"><strong> 
-                    Sedang Mengerjakan Pesanan <a href="<?= BASEURL.'/user/profile_pengguna/'.$pesanan['id_user'];?>"><?= $pesanan['nama_lengkap']; ?></a>.</strong> 
-                    <?php if($pesanan['dokumen']) { ?>
-                        Lihat <a class="badge badge-success" href="<?= BASEURL.'/dokumen/'.$pesanan['dokumen']; ?>" download="<?= 'IMB-'.$pesanan['nama_lengkap'].'-'.$pesanan['dokumen'];?>">IMB</a>
-                    <?php } else { ?>
-                        <span class="badge badge-danger">IMB BELUM DIUNGGAH PELANGGAN</span>
-                    <?php } ?>
+                    Sedang Mengerjakan Pesanan <a href="<?= BASEURL.'/user/profile_pengguna/'.$pesanan['id_user'];?>"><?= $pesanan['nama_lengkap']; ?></a>.</strong>
                 </div>
             </div>
         <?php } } ?>
@@ -55,11 +50,6 @@
                                             <span class="badge badge-info">MENUNGGU DIKONFIRMASI</span>
                                         <?php } else if($pesanan['status'] == 1 ) { ?>
                                             <span class="badge badge-warning">SEDANG MENGERJAKAN PROYEK</span>
-                                            <?php if($pesanan['dokumen']) { ?>
-                                                <a class="badge badge-success" href="<?= BASEURL.'/dokumen/'.$pesanan['dokumen']; ?>" download="<?= 'IMB-'.$pesanan['nama_lengkap'].'-'.$pesanan['dokumen'];?>">IMB</a>
-                                            <?php } else { ?>
-                                                <span class="badge badge-danger">IMB BELUM DIUNGGAH PELANGGAN</span>
-                                            <?php } ?>
                                             <?php if($pesanan['status_pembayaran_dp'] == NULL) { ?>
                                                 <na class="badge badge-danger">DP BELUM DIBAYAR</span>
                                             <?php } else if($pesanan['status_pembayaran_dp'] == -1 || $pesanan['status_pembayaran_dp'] == 0) { ?>

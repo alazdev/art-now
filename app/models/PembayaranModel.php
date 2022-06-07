@@ -42,6 +42,30 @@ class PembayaranModel{
             WHERE pembayaran.status = ".$status);
         return $this->db->resultSet();
     }
+    public function laporan($status){
+        $this->db->query("SELECT
+            SUM(pembayaran.total_dibayar) as total_telah_dibayar,
+            SUM(pembayaran.pembayaran) as status_pembayaran, 
+            pembayaran.*, 
+            pengguna.id_user as id_pengguna,
+            pengguna.nama_lengkap as nama_lengkap_pengguna, 
+            pengguna.email as email_pengguna, 
+            pengguna.telepon as telepon_pengguna, 
+            arsitek.id_user as id_arsitek,
+            arsitek.nama_lengkap as nama_lengkap_arsitek, 
+            arsitek.email as email_arsitek, 
+            arsitek.telepon as telepon_arsitek, 
+            produk.judul as judul_produk
+            FROM pembayaran 
+            LEFT JOIN pesanan ON pembayaran.id_pesanan = pesanan.id_pesanan 
+            LEFT JOIN produk ON produk.id_produk = pesanan.id_produk 
+            LEFT JOIN user pengguna on pesanan.id_user = pengguna.id_user 
+            LEFT JOIN user arsitek on produk.id_user = arsitek.id_user 
+            WHERE pembayaran.status = ".$status."
+            GROUP BY pembayaran.id_pesanan
+        ");
+        return $this->db->resultSet();
+    }
 
     public function riwayat_pembayaran_byadmin($id_pesanan){
         $this->db->query("SELECT 

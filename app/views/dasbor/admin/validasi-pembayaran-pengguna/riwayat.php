@@ -33,7 +33,7 @@
                                 <?php foreach($data['pembayarans'] as $pembayaran) { ?>
                                 <tr>
                                     <td>Rp <?= number_format($pembayaran['total_dibayar'], 0, ',', '.'); ?></td>
-                                    <td><?= ($pembayaran['pembayaran']==1) ? 'Penuh':'DP/Uang Muka' ?></td>
+                                    <td><?= ($pembayaran['pembayaran']==1) ? 'Kedua':'DP/Uang Muka' ?></td>
                                     <td><?= $pembayaran['nama_lengkap_pengguna']; ?></td>
                                     <td><?= $pembayaran['nama_lengkap_arsitek']; ?></td>
                                     <td><?= $pembayaran['judul_produk']; ?></td>

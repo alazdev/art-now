@@ -40,27 +40,23 @@
 		<tr>
             <th>No</th>
             <th>Total Dibayar</th>
-            <th>Pembayaran</th>
+            <th>Status Pembayaran</th>
             <th>Nama Pelanggan</th>
             <th>Email Pelanggan</th>
-            <th>Telepon Pelanggan</th>
             <th>Nama Arsitek</th>
             <th>Email Arsitek</th>
-            <th>Telepon Arsitek</th>
             <th>Judul Produk</th>
             <th>Waktu</th>
 		</tr>
         <?php $i = 1; foreach($data['transaksis'] as $transaksi) { ?>
             <tr>
                 <td><?= $i; ?></td>
-                <td>Rp <?= number_format($transaksi['total_dibayar'], 0, ',', '.'); ?></td>
-                <td><?= ($transaksi['pembayaran']==1) ? 'Penuh':'DP/Uang Muka' ?></td>
+                <td>Rp <?= number_format($transaksi['total_telah_dibayar'], 0, ',', '.'); ?></td>
+                <td><?= ($transaksi['status_pembayaran']==0) ? 'Penuh':'Belum Penuh' ?></td>
                 <td><?= $transaksi['nama_lengkap_pengguna']; ?></td>
                 <td><?= $transaksi['email_pengguna']; ?></td>
-                <td><?= $transaksi['telepon_pengguna']; ?></td>
                 <td><?= $transaksi['nama_lengkap_arsitek']; ?></td>
                 <td><?= $transaksi['email_arsitek']; ?></td>
-                <td><?= $transaksi['telepon_arsitek']; ?></td>
                 <td><?= $transaksi['judul_produk']; ?></td>
                 <td><?= date('Y-m-d H:i', strtotime($transaksi['dibuat_pada']));?></td>
             </tr>
