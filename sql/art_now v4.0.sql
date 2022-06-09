@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 09, 2022 at 01:33 PM
+-- Generation Time: May 19, 2022 at 07:19 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.4.20
 
@@ -32,9 +32,6 @@ CREATE TABLE `arsitek` (
   `id_user` int(11) NOT NULL,
   `deskripsi` text DEFAULT NULL,
   `alamat` text NOT NULL,
-  `saldo` bigint(20) NOT NULL DEFAULT 0,
-  `bank` varchar(30) DEFAULT NULL,
-  `nomor_rekening` varchar(30) DEFAULT NULL,
   `ktp` varchar(255) NOT NULL,
   `ijazah` varchar(255) NOT NULL,
   `sertifikasi_arsitek` varchar(255) NOT NULL,
@@ -55,6 +52,20 @@ CREATE TABLE `artikel` (
   `isi` text NOT NULL,
   `dibuat_pada` timestamp NULL DEFAULT current_timestamp(),
   `diperbaharui_pada` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `imb`
+--
+
+CREATE TABLE `imb` (
+  `id_imb` int(11) NOT NULL,
+  `id_pesanan` int(11) NOT NULL,
+  `dokumen` varchar(255) NOT NULL,
+  `dibuat_pada` timestamp NULL DEFAULT NULL,
+  `diperbaharui_pada` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -104,20 +115,6 @@ CREATE TABLE `pembayaran` (
   `status` tinyint(1) NOT NULL,
   `dibuat_pada` timestamp NULL DEFAULT NULL,
   `diperbaharui_pada` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `permintaan_penarikan`
---
-
-CREATE TABLE `permintaan_penarikan` (
-  `id_permintaan_penarikan` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT 0,
-  `dibuat_pada` datetime DEFAULT current_timestamp(),
-  `diperbaharui_pada` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -194,7 +191,7 @@ CREATE TABLE `rating` (
 --
 
 CREATE TABLE `rekening_bank` (
-  `id_rekening` int(11) NOT NULL,
+  `id_rekening` bigint(20) NOT NULL,
   `logo` varchar(100) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `nomor` bigint(20) NOT NULL,
@@ -209,20 +206,6 @@ CREATE TABLE `rekening_bank` (
 
 INSERT INTO `rekening_bank` (`id_rekening`, `logo`, `nama`, `nomor`, `pemegang`, `dibuat_pada`, `diperbaharui_pada`) VALUES
 (8, '5401643236835.png', 'BNI', 987654321234, 'Bambang', '2022-01-26 22:40:35', '2022-01-26 22:40:35');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `saldo`
---
-
-CREATE TABLE `saldo` (
-  `id_saldo` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `nominal` bigint(20) NOT NULL,
-  `keterangan` varchar(50) NOT NULL,
-  `dibuat_pada` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -269,6 +252,13 @@ ALTER TABLE `artikel`
   ADD PRIMARY KEY (`id_artikel`);
 
 --
+-- Indexes for table `imb`
+--
+ALTER TABLE `imb`
+  ADD PRIMARY KEY (`id_imb`),
+  ADD KEY `id_pesanan` (`id_pesanan`);
+
+--
 -- Indexes for table `komen`
 --
 ALTER TABLE `komen`
@@ -290,13 +280,6 @@ ALTER TABLE `notifikasi`
 ALTER TABLE `pembayaran`
   ADD PRIMARY KEY (`id_pembayaran`),
   ADD KEY `id_pesanan` (`id_pesanan`);
-
---
--- Indexes for table `permintaan_penarikan`
---
-ALTER TABLE `permintaan_penarikan`
-  ADD PRIMARY KEY (`id_permintaan_penarikan`),
-  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indexes for table `pesan`
@@ -336,13 +319,6 @@ ALTER TABLE `rekening_bank`
   ADD PRIMARY KEY (`id_rekening`);
 
 --
--- Indexes for table `saldo`
---
-ALTER TABLE `saldo`
-  ADD PRIMARY KEY (`id_saldo`),
-  ADD KEY `id_user` (`id_user`);
-
---
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -367,6 +343,12 @@ ALTER TABLE `artikel`
   MODIFY `id_artikel` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `imb`
+--
+ALTER TABLE `imb`
+  MODIFY `id_imb` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `komen`
 --
 ALTER TABLE `komen`
@@ -385,12 +367,6 @@ ALTER TABLE `pembayaran`
   MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `permintaan_penarikan`
---
-ALTER TABLE `permintaan_penarikan`
-  MODIFY `id_permintaan_penarikan` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `pesan`
 --
 ALTER TABLE `pesan`
@@ -400,7 +376,7 @@ ALTER TABLE `pesan`
 -- AUTO_INCREMENT for table `pesanan`
 --
 ALTER TABLE `pesanan`
-  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `produk`
@@ -418,13 +394,7 @@ ALTER TABLE `rating`
 -- AUTO_INCREMENT for table `rekening_bank`
 --
 ALTER TABLE `rekening_bank`
-  MODIFY `id_rekening` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
-
---
--- AUTO_INCREMENT for table `saldo`
---
-ALTER TABLE `saldo`
-  MODIFY `id_saldo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_rekening` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -441,6 +411,12 @@ ALTER TABLE `user`
 --
 ALTER TABLE `arsitek`
   ADD CONSTRAINT `arsitek_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `imb`
+--
+ALTER TABLE `imb`
+  ADD CONSTRAINT `imb_ibfk_1` FOREIGN KEY (`id_pesanan`) REFERENCES `pesanan` (`id_pesanan`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `komen`
@@ -460,12 +436,6 @@ ALTER TABLE `notifikasi`
 --
 ALTER TABLE `pembayaran`
   ADD CONSTRAINT `pembayaran_ibfk_1` FOREIGN KEY (`id_pesanan`) REFERENCES `pesanan` (`id_pesanan`) ON UPDATE CASCADE;
-
---
--- Constraints for table `permintaan_penarikan`
---
-ALTER TABLE `permintaan_penarikan`
-  ADD CONSTRAINT `permintaan_penarikan_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
 
 --
 -- Constraints for table `pesan`
@@ -493,12 +463,6 @@ ALTER TABLE `produk`
 ALTER TABLE `rating`
   ADD CONSTRAINT `rating_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `rating_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `saldo`
---
-ALTER TABLE `saldo`
-  ADD CONSTRAINT `saldo_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

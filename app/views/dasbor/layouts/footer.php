@@ -30,10 +30,16 @@
                                     <span class="sidebar-menu-text">Calon Arsitek</span>
                                 </a>
                             </li>
-                            <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Validasi Pembayaran Pengguna" data-placement="right" data-container="body" data-boundary="window">
+                            <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Validasi Pembayaran Pelanggan" data-placement="right" data-container="body" data-boundary="window">
                                 <a class="sidebar-menu-button" href="<?= BASEURL; ?>/admin/validasi_pembayaran_pengguna">
                                     <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">assignment_turned_in</i>
                                     <span class="sidebar-menu-text">Validasi Pembayaran Pelanggan</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Permintaan Penarikan Saldo" data-placement="right" data-container="body" data-boundary="window">
+                                <a class="sidebar-menu-button" href="<?= BASEURL; ?>/admin/permintaan_penarikan">
+                                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">credit_card</i>
+                                    <span class="sidebar-menu-text">Permintaan Penarikan Saldo</span>
                                 </a>
                             </li>
                             <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Pesanan Arsitek" data-placement="right" data-container="body" data-boundary="window">
@@ -142,12 +148,16 @@
                                             <span class="sidebar-menu-text">Transaksi</span>
                                         </a>
                                     </li>
+                                    <li class="sidebar-menu-item">
+                                        <a class="sidebar-menu-button" href="<?= BASEURL; ?>/admin/laporan_saldo">
+                                            <span class="sidebar-menu-text">Saldo Arsitek</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
         <!-- // END drawer -->

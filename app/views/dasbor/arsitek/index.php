@@ -17,7 +17,7 @@
             <div class="col-lg-6 col-md-6 card-group-row__col">
                 <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
                     <div class="flex">
-                        <div class="card-header__title text-muted mb-2">Pendapatan</div>
+                        <div class="card-header__title text-muted mb-2">Total Pendapatan</div>
                         <div class="text-amount">Rp <?= number_format($data['total_pembayaran'], 0, ",", "."); ?></div>
                     </div>
                     <div><i class="material-icons icon-muted icon-40pt ml-3">monetization_on</i></div>
@@ -26,7 +26,7 @@
             <div class="col-lg-6 col-md-6 card-group-row__col">
                 <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
                     <div class="flex">
-                        <div class="card-header__title text-muted mb-2">Pesanan</div>
+                        <div class="card-header__title text-muted mb-2">Total Pesanan</div>
                         <div class="text-amount"><?= $data['total_pesanan']; ?></div>
                     </div>
                     <div><i class="material-icons icon-muted icon-40pt ml-3">perm_identity</i></div>

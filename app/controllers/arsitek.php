@@ -159,6 +159,47 @@ class arsitek extends Controller
         $this->view('dasbor/arsitek/verifikasi', $data);
     }
 
+    public function update_rekening() {
+        if (isset($_POST['bank']))
+        {
+            $data = [
+                'bank'          => $_POST['bank'],
+                'nomor_rekening'=> $_POST['nomor_rekening']
+            ];
+            $this->model('ArsitekModel')->update_rekening($data);
+            $this->alert('Informasi rekening berhasil ditambahkan', 'user/profile');
+            exit();
+        }
+    }
+
+    // Saldo
+    public function saldo()
+    {
+        $user = $this->model('UserModel')->profile();
+        if($user['nomor_rekening'] == NULL){
+            $this->alert('Tambahkan informasi rekening sebelum memasuki menu ini', 'user/profile');
+            exit();
+        }
+        $data = [
+            'user' => $user,
+            'saldo' => $this->model('SaldoModel')->saldo(),
+            'permintaan_penarikan' => $this->model('PermintaanPenarikanModel')->permintaan_penarikan()
+        ];
+        $this->view('dasbor/saldo', $data);
+    }
+    public function tarik_saldo()
+    {
+        $user = $this->model('UserModel')->profile();
+        $pp = $this->model('PermintaanPenarikanModel')->permintaan_penarikan();
+        if($pp == NULL){
+            $this->model('PermintaanPenarikanModel')->tarik_saldo();
+
+            $this->alert('Permintaan akan segera diproses, paling lama 7 hari kerja.', 'arsitek/saldo');
+        }else{
+            $this->alert('Sebelumnya Anda sudah melakukan permintaan penarikan saldo', 'arsitek/saldo');
+        }
+    }
+
     // CRUD Produk
     public function index()
     {

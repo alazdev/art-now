@@ -163,7 +163,21 @@
                         </div>
                     </div>
                     <?php if ($_SESSION['level'] == 2) { ?>
-                        <br><br>
+                        <br>
+                        <div class="list-group list-group-flush mb-4">
+                            <div class="list-group-item bg-transparent d-flex align-items-center px-0">
+                                <h5>Informasi Rekening</h5>
+                            </div>
+                            <div class="list-group-item bg-transparent d-flex align-items-center px-0">
+                                <strong>Bank</strong>
+                                <div class="ml-auto"><?= $data['bank']; ?></div>
+                            </div>
+                            <div class="list-group-item bg-transparent d-flex align-items-center px-0">
+                                <strong>Nomor Rekening</strong>
+                                <div class="ml-auto"><?= $data['nomor_rekening']; ?></div>
+                            </div>
+                        </div>
+                        <br>
                         <div class="list-group list-group-flush mb-4">
                             <div class="list-group-item bg-transparent d-flex align-items-center px-0">
                                 <h5>Dokumen</h5>

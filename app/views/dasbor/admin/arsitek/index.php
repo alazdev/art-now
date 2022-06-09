@@ -48,6 +48,11 @@
                                         <?php } else { ?>
                                             <a href="aktifkan_user/<?= $arsitek['id_user']; ?>" class="text-success"><i class="material-icons">check</i> Aktifkan</a>
                                         <?php } ?>
+                                        <a onclick="kosongkanRekening()" href="#"
+                                            data-value="<?= $arsitek['id_user']; ?>" data-arsitek="<?= $arsitek['nama_lengkap']; ?>"
+                                            data-toggle="modal" data-target="#modal-delete" class="text-danger">
+                                                <i class="material-icons">credit_card</i> Kosongkan Rekening
+                                        </a>
                                     </td>
                                 </tr>
                                 <?php } ?>
@@ -76,5 +81,12 @@
             }
         });
     } );
+    function kosongkanRekening(){
+        var postId = $(event.currentTarget).data('value');
+        var url = "<?= BASEURL;?>/admin/kosongkan_rekening_arsitek/"+postId;
+        $('#delete-url').attr('href', url);
+
+        $('#text-delete').html('Apakah kamu yakin ingin mengosongkan rekening dengan nama Arsitek "'+$(event.currentTarget).data('arsitek')+'"?');
+    }
 </script>
 <?php include(__DIR__ . '/../../layouts/footer.php'); ?>

@@ -43,4 +43,21 @@ class ArsitekModel{
         $this->db->query("SELECT * FROM user WHERE email = '".$_SESSION['email']."'");
         return $this->db->single();
     }
+
+    // Update Rekening
+    public function update_rekening($data) {
+        $user = $this->cek_user();
+        $this->db->query('UPDATE arsitek SET bank= :bank, nomor_rekening = :nomor_rekening, diperbaharui_pada = :diperbaharui_pada WHERE id_user = '.$user['id_user']);
+        $this->db->bind('bank',$data['bank']);
+        $this->db->bind('nomor_rekening',$data['nomor_rekening']);
+        $this->db->bind('diperbaharui_pada',date("Y-m-d H:i:s"));
+        $this->db->execute();
+    }
+
+    // Kosongkan rekening oleh admin
+    public function kosongkan_rekening($data) {
+        $this->db->query('UPDATE arsitek SET bank=NULL, nomor_rekening =NULL, diperbaharui_pada = :diperbaharui_pada WHERE id_user = '.$data['id_user']);
+        $this->db->bind('diperbaharui_pada',date("Y-m-d H:i:s"));
+        $this->db->execute();
+    }
 }

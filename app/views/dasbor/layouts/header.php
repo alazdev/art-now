@@ -237,7 +237,22 @@
                 <div class="modal-body text-center p-4">
                     <i class="material-icons icon-40pt text-white mb-2">report_problem</i>
                     <p class="text-white mt-3" id="text-delete">[data tidak ditemukan]?</p>
-                    <a id="delete-url" href="#" class="btn btn-light my-2">Continue</a>
+                    <a id="delete-url" href="#" class="btn btn-light my-2">Lanjutkan</a>
+                </div> <!-- // END .modal-body -->
+            </div> <!-- // END .modal-content -->
+        </div> <!-- // END .modal-dialog -->
+    </div> <!-- // END .modal -->
+    <div id="modal-verifikasi-rekening" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content bg-warning">
+                <div class="modal-body text-center p-4">
+                    <i class="material-icons icon-40pt text-white mb-2">report_problem</i>
+                    <p class="text-white mt-3" id="text-verifikasi-rekening">[data tidak ditemukan]?</p>
+                    <form method="POST" action="<?=BASEURL?>/arsitek/update_rekening" id="form-update-rekening">
+                        <input type="hidden" id="modal-bank" name="bank" required>
+                        <input type="hidden" id="modal-nomor-rekening" name="nomor_rekening" required>
+                        <button type="submit" id="verifikasi-rekening-button"  class="btn btn-light my-2">Tambahkan</button>
+                    </form>
                 </div> <!-- // END .modal-body -->
             </div> <!-- // END .modal-content -->
         </div> <!-- // END .modal-dialog -->
@@ -272,6 +287,11 @@
                                 <a onclick="lihat()" href="#notifications_menu" class="nav-link dropdown-toggle" data-toggle="dropdown" data-caret="false">
                                     <i class="material-icons nav-icon" id="indikator">notifications</i>
                                 </a>
+                                <?php if ($_SESSION['level'] != 2) { ?>
+                                <a href="mailto:cust@artnow.co.id" class="nav-link">
+                                    <i class="material-icons nav-icon" id="indikator">face</i> Layanan Pengguna
+                                </a>
+                                <?php } ?>
                                 <?php if ($_SESSION['level'] == 0) { ?>
                                 <a href="<?= BASEURL; ?>/artikel/index" class="nav-link">
                                     <i class="material-icons nav-icon" id="indikator">web</i> Temukan Artikel Menarik
@@ -310,6 +330,10 @@
                                     </div>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="<?= BASEURL; ?>/user/profile">Profil</a>
+                                    <?php if ($_SESSION['level'] == 1) { ?>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="<?= BASEURL; ?>/arsitek/saldo">Saldo</a>
+                                    <?php } ?>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="<?= BASEURL; ?>/user/logout">Keluar</a>
                                 </div>

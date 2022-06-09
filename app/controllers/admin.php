@@ -149,6 +149,15 @@ class admin extends Controller
         ];
         $this->view('dasbor/admin/arsitek/index', $data);
     }
+    public function kosongkan_rekening_arsitek($id_user)
+    {
+        $data = [
+            'id_user' => $id_user
+        ];
+        $this->model('ArsitekModel')->kosongkan_rekening($data);
+        $this->alert('Informasi Rekening berhasil dikosongkan', 'admin/data_arsitek');
+        exit();
+    }
     public function data_pengguna()
     {
         $data = [
@@ -195,12 +204,21 @@ class admin extends Controller
                 $pesan = [
                     'id_user' => $data['id_arsitek'],
                     'judul' => 'Pembayaran Berhasil',
-                    'keterangan' => 'Selamat Gajian! Pelanggan baru saja membayar pesanannya. cek <a href="'.BASEURL.'/arsitek/pesanan">di sini</a>.',
-                    'link' => '/arsitek/pesanan'
+                    'keterangan' => 'Selamat! Pelanggan baru saja membayar pesanannya. Cek <a href="'.BASEURL.'/arsitek/saldo">saldo</a> sekarang!',
+                    'link' => '/arsitek/saldo'
                 ];
                 $this->model('NotifikasiModel')->notifikasi($pesan);
                 $this->model('PesananModel')->update_status($data['id_pesanan'], 3);
             }
+
+            // Penambahan Saldo Arsitek
+            $saldo = [
+                'id_user' => $data['id_arsitek'],
+                'nominal' => $data['total_dibayar'],
+                'keterangan' => 'Bayaran dari produk '.$data['judul_produk'].' oleh '.$data['nama_lengkap_pengguna']
+            ];
+            $this->model('SaldoModel')->tambah($saldo);
+
             $this->alert('Pembayaran berhasil diterima dan divalidasi.', 'admin/validasi_pembayaran_pengguna');
         }else{
             $this->controller('alert')->message('Not Found', '404 | Not Found');
@@ -212,6 +230,52 @@ class admin extends Controller
         if($this->model('PembayaranModel')->pembayaran_byadmin($id_pembayaran) != null){
             $this->model('PembayaranModel')->update_status($id_pembayaran, -1);
             $this->alert('Pembayaran ditolak.', 'admin/validasi_pembayaran_pengguna');
+        }else{
+            $this->controller('alert')->message('Not Found', '404 | Not Found');
+        }
+    }
+
+    // Permintaan Penarikan
+    public function permintaan_penarikan()
+    {
+        $data = [
+            'permintaan_penarikan' => $this->model('PermintaanPenarikanModel')->semua()
+        ];
+        $this->view('dasbor/admin/permintaan-penarikan/index', $data);
+    }
+
+    public function detail_permintaan_penarikan($id_permintaan_penarikan)
+    {
+        $data = $this->model('PermintaanPenarikanModel')->detail($id_permintaan_penarikan);
+        if($data != null){
+            $this->view('dasbor/admin/permintaan-penarikan/detail', $data);
+        }else{
+            $this->controller('alert')->message('Not Found', '404 | Not Found');
+        }
+    }
+
+    public function tandai_permintaan_selesai($id_permintaan_penarikan) {
+        $pp = $this->model('PermintaanPenarikanModel')->detail($id_permintaan_penarikan);
+        if($pp != null){
+            // Logika Penarikan uang
+            $pajak = (ceil(($pp['saldo'] * 0.025) / 100) * 100);
+            $saldo = [
+                'id_user' => $pp['id_user'],
+                'nominal' => ($pp['saldo'] - $pajak) * -1,
+                'keterangan' => 'Penarikan saldo'
+            ];
+            $this->model('SaldoModel')->tambah($saldo);
+            
+            $saldo = [
+                'id_user' => $pp['id_user'],
+                'nominal' => $pajak * -1,
+                'keterangan' => 'Biaya admin penarikan saldo'
+            ];
+            $this->model('SaldoModel')->tambah($saldo);
+
+            $this->model('PermintaanPenarikanModel')->update_status($id_permintaan_penarikan, 1);
+
+            $this->alert('Permintaan penarikan telah diselesaikan', 'admin/permintaan_penarikan');
         }else{
             $this->controller('alert')->message('Not Found', '404 | Not Found');
         }
@@ -422,5 +486,25 @@ class admin extends Controller
             'transaksis' => $this->model('PembayaranModel')->laporan(1)
         ];
         $this->view('dasbor/admin/laporan/export_transaksi', $data);
+    }
+    public function laporan_saldo()
+    {
+        $data = [
+            'saldos' => $this->model('SaldoModel')->laporan()
+        ];
+        $this->view('dasbor/admin/laporan/saldo', $data);
+    }
+    public function export_saldo()
+    {
+        $biaya_admin = 0;
+        $saldos = $this->model('SaldoModel')->laporan();
+        foreach($saldos as $saldo) {
+            $biaya_admin += $saldo['biaya_admin'];
+        }
+        $data = [
+            'biaya_admin' => $biaya_admin,
+            'saldos' => $saldos
+        ];
+        $this->view('dasbor/admin/laporan/export_saldo', $data);
     }
 }

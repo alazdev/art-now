@@ -42,7 +42,7 @@
                                 <?php } } if($data['status'] == 0) { ?>
                                     <a href="#" class="btn btn-danger col-md-12">Produk Tidak AKtif</a>
                                 <?php } ?>
-                            <a href="<?= BASEURL ?>/dokumen/produk/<?= $data['dokumen'] ?>" class="col-12 btn btn-light btn-block" download="Desain Lengkap <?= $data['judul'] ?>">Unduh Desain Lengkap</a>
+                            <a href="<?= BASEURL ?>/dokumen/produk/<?= $data['dokumen'] ?>" class="col-12 btn btn-light btn-block" download="Desain <?= $data['judul'] ?>">Unduh Desain</a>
                             </div>
                         </div>
 					</div>
