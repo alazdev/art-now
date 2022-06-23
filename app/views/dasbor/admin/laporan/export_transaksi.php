@@ -40,7 +40,7 @@
 		<tr>
             <th>No</th>
             <th>Total Dibayar</th>
-            <th>Status Pembayaran</th>
+            <th>Pembayaran</th>
             <th>Nama Pelanggan</th>
             <th>Email Pelanggan</th>
             <th>Nama Arsitek</th>
@@ -52,7 +52,7 @@
             <tr>
                 <td><?= $i; ?></td>
                 <td>Rp <?= number_format($transaksi['total_telah_dibayar'], 0, ',', '.'); ?></td>
-                <td><?= ($transaksi['status_pembayaran']==0) ? 'Penuh':'Belum Penuh' ?></td>
+                <td><?= ($transaksi['status_pembayaran']==1) ? 'Kedua':'Pertama' ?></td>
                 <td><?= $transaksi['nama_lengkap_pengguna']; ?></td>
                 <td><?= $transaksi['email_pengguna']; ?></td>
                 <td><?= $transaksi['nama_lengkap_arsitek']; ?></td>

@@ -483,7 +483,7 @@ class admin extends Controller
     public function export_transaksi()
     {
         $data = [
-            'transaksis' => $this->model('PembayaranModel')->laporan(1)
+            'transaksis' => $this->model('PembayaranModel')->detail_laporan(1)
         ];
         $this->view('dasbor/admin/laporan/export_transaksi', $data);
     }

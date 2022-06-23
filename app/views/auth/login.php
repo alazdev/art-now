@@ -5,7 +5,7 @@
         <a href="<?= BASEURL; ?>/index" class="navbar-brand flex-column mb-2 align-items-center mr-0" style="min-width: 0">
             <img class="navbar-brand-icon mr-0 mb-2" src="<?= BASEURL; ?>/assets-user/images/logo.png" width="100%" alt="ArtNow">
         </a>
-        <p class="m-0">Masuk untuk mengakses Akun ArtNow </p>
+        <p class="m-0">Masuk untuk mengakses lebih banyak menu</p>
     </div>
     
     <?php if($data){ ?>
@@ -13,20 +13,6 @@
         <div class="text-body"><?= $data['desc']; ?></div>
     </div>
     <?php } ?>
-
-    <a href="" class="btn btn-light btn-block">
-        <span class="fab fa-google mr-2"></span>
-        Masuk dengan Google
-    </a>
-
-    <a href="" class="btn btn-light btn-block">
-        <span class="fab fa-facebook mr-2"></span>
-        Masuk dengan Facebook
-    </a>
-
-    <div class="page-separator">
-        <div class="page-separator__text">atau</div>
-    </div>
 
     <form action="<?= BASEURL; ?>/auth/login" method="POST">
         <div class="form-group">

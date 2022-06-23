@@ -12,21 +12,7 @@
         <div class="text-body"><?= $data['desc']; ?></div>
     </div>
     <?php } ?>
-
-    <a href="" class="btn btn-light btn-block">
-        <span class="fab fa-google mr-2"></span>
-        Daftar dengan Google
-    </a>
-
-    <a href="" class="btn btn-light btn-block">
-        <span class="fab fa-facebook mr-2"></span>
-        Daftar dengan Facebook
-    </a>
-
-    <div class="page-separator">
-        <div class="page-separator__text">atau</div>
-    </div>
-
+    
     <form action="<?= BASEURL; ?>/auth/register" method="POST">
         <div class="form-group">
             <label class="text-label" for="name_2">Nama:</label>
