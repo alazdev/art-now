@@ -108,7 +108,7 @@ class UserModel{
     
     public function profile()
     {
-		$res = $this->db->query("SELECT user.*, arsitek.* FROM ".$this->table." LEFT JOIN arsitek ON user.id_user = arsitek.id_user WHERE email = '".$_SESSION['email']."'");
+		$res = $this->db->query("SELECT user.*, arsitek.*, user.id_user as id_user FROM ".$this->table." LEFT JOIN arsitek ON user.id_user = arsitek.id_user WHERE email = '".$_SESSION['email']."'");
         return $this->db->single();
     }
     
