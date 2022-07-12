@@ -48,7 +48,7 @@
   
 </head>
 
-<body class="layout-mini">
+<body class="layout-default">
     <div id="modal-large" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-large-title" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">

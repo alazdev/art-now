@@ -1,162 +1,152 @@
         <!-- drawer -->
         <div class="mdk-drawer  js-mdk-drawer" id="default-drawer" data-align="start">
-            <div class="mdk-drawer__content js-sidebar-mini" data-responsive-width="992px">
+            <div class="mdk-drawer__content">
 
-                <div class="sidebar sidebar-mini sidebar-primary sidebar-left simplebar" data-simplebar>
-                    <ul class="nav flex-column sidebar-menu mt-3" id="sidebar-mini-tabs">
+                <div class="sidebar sidebar-light sidebar-left simplebar" data-simplebar>
+                    <div class="sidebar-heading sidebar-m-t">Menu</div>
+                    <ul class="sidebar-menu" id="sidebar-mini-tabs">
                         <?php if ($_SESSION['level'] == 0) { ?>
-                            <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Pesanan" data-placement="right" data-container="body" data-boundary="window">
-                                <a class="sidebar-menu-button" href="<?= BASEURL; ?>/pengguna/index">
+                            <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/pengguna/index' ? 'active':''; ?>">
+                                <a class="sidebar-menu-button" href="<?= BASEURL.'/pengguna/index'; ?>">
                                     <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">description</i>
                                     <span class="sidebar-menu-text">Pesanan</span>
                                 </a>
                             </li>
-                            <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Pesan" data-placement="right" data-container="body" data-boundary="window">
-                                <a class="sidebar-menu-button" href="<?= BASEURL; ?>/chat/index">
+                            <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/chat/index' ? 'active':''; ?>">
+                                <a class="sidebar-menu-button" href="<?= BASEURL.'/chat/index'; ?>">
                                     <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">slideshow</i>
                                     <span class="sidebar-menu-text">Pesan</span>
                                 </a>
                             </li>
                         <?php } else if ($_SESSION['level'] == 2) { ?>
-                            <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Dasbor" data-placement="right" data-container="body" data-boundary="window">
-                                <a class="sidebar-menu-button" href="<?= BASEURL; ?>/admin/index">
+                            <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/admin/index' ? 'active':''; ?>">
+                                <a class="sidebar-menu-button" href="<?= BASEURL.'/admin/index'; ?>">
                                     <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dvr</i>
                                     <span class="sidebar-menu-text">Dasbor</span>
                                 </a>
                             </li>
-                            <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Calon Arsitek" data-placement="right" data-container="body" data-boundary="window">
-                                <a class="sidebar-menu-button" href="<?= BASEURL; ?>/admin/calon_arsitek">
+                            <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/admin/calon_arsitek' ? 'active':''; ?>">
+                                <a class="sidebar-menu-button" href="<?= BASEURL.'/admin/calon_arsitek'; ?>">
                                     <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">group</i>
                                     <span class="sidebar-menu-text">Calon Arsitek</span>
                                 </a>
                             </li>
-                            <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Validasi Pembayaran Pelanggan" data-placement="right" data-container="body" data-boundary="window">
-                                <a class="sidebar-menu-button" href="<?= BASEURL; ?>/admin/validasi_pembayaran_pengguna">
+                            <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/admin/validasi_pembayaran_pengguna' ? 'active':''; ?>">
+                                <a class="sidebar-menu-button" href="<?= BASEURL.'/admin/validasi_pembayaran_pengguna'; ?>">
                                     <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">assignment_turned_in</i>
                                     <span class="sidebar-menu-text">Validasi Pembayaran Pelanggan</span>
                                 </a>
                             </li>
-                            <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Permintaan Penarikan Saldo" data-placement="right" data-container="body" data-boundary="window">
-                                <a class="sidebar-menu-button" href="<?= BASEURL; ?>/admin/permintaan_penarikan">
+                            <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/admin/permintaan_penarikan' ? 'active':''; ?>">
+                                <a class="sidebar-menu-button" href="<?= BASEURL.'/admin/permintaan_penarikan'; ?>">
                                     <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">credit_card</i>
                                     <span class="sidebar-menu-text">Permintaan Penarikan Saldo</span>
                                 </a>
                             </li>
-                            <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Pesanan Arsitek" data-placement="right" data-container="body" data-boundary="window">
-                                <a class="sidebar-menu-button" href="<?= BASEURL; ?>/admin/pesanan_arsitek">
+                            <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/admin/pesanan_arsitek' ? 'active':''; ?>">
+                                <a class="sidebar-menu-button" href="<?= BASEURL.'/admin/pesanan_arsitek'; ?>">
                                     <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">playlist_add_check</i>
                                     <span class="sidebar-menu-text">Pesanan Arsitek</span>
                                 </a>
                             </li>
-                            <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Pengguna" data-placement="right" data-container="body" data-boundary="window">
-                                <a class="sidebar-menu-button" href="#mn_pengguna" data-toggle="tab" role="tab" aria-controls="mn_pengguna">
+                            <li class="sidebar-menu-item <?= in_array(NOWURL, [BASEURL.'/admin/data_admin',BASEURL.'/admin/data_arsitek',BASEURL.'/admin/data_pengguna']) ? 'open active':'' ?> ">
+                                <a class="sidebar-menu-button" data-toggle="collapse" href="#menu_pengguna">
                                     <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">list</i>
                                     <span class="sidebar-menu-text">Pengguna</span>
+                                    <span class="ml-auto sidebar-menu-toggle-icon"></span>
                                 </a>
+                                <ul class="sidebar-submenu collapse <?= in_array(NOWURL, [BASEURL.'/admin/data_admin',BASEURL.'/admin/data_arsitek',BASEURL.'/admin/data_pengguna']) ? 'show':'' ?> " id="menu_pengguna">
+                                    <?php if($_SESSION['id_user'] == 1){ ?>
+                                        <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/admin/data_admin' ? 'active':'' ?>">
+                                            <a class="sidebar-menu-button" href="<?= BASEURL.'/admin/data_admin'; ?>">
+                                                <span class="sidebar-menu-text">Admin</span>
+                                            </a>
+                                        </li>
+                                    <?php } ?>
+                                    <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/admin/data_arsitek' ? 'active':'' ?>">
+                                        <a class="sidebar-menu-button" href="<?= BASEURL.'/admin/data_arsitek'; ?>">
+                                            <span class="sidebar-menu-text">Arsitek</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/admin/data_pengguna' ? 'active':'' ?>">
+                                        <a class="sidebar-menu-button" href="<?= BASEURL.'/admin/data_pengguna'; ?>">
+                                            <span class="sidebar-menu-text">Pelanggan</span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                             <?php if($_SESSION['id_user'] == 1){ ?>
-                            <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Rekening Bank" data-placement="right" data-container="body" data-boundary="window">
-                                <a class="sidebar-menu-button" href="<?= BASEURL; ?>/admin/rekening_bank">
-                                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_balance</i>
-                                    <span class="sidebar-menu-text">Rekening Bank</span>
-                                </a>
-                            </li>
+                                <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/admin/rekening_bank' ? 'active':''; ?>">
+                                    <a class="sidebar-menu-button" href="<?= BASEURL.'/admin/rekening_bank'; ?>">
+                                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_balance</i>
+                                        <span class="sidebar-menu-text">Rekening Bank</span>
+                                    </a>
+                                </li>
                             <?php } ?>
-                            <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Laporan" data-placement="right" data-container="body" data-boundary="window">
-                                <a class="sidebar-menu-button" href="#mn_laporan" data-toggle="tab" role="tab" aria-controls="mn_laporan">
+                            <li class="sidebar-menu-item <?= in_array(NOWURL, [BASEURL.'/admin/laporan_user',BASEURL.'/admin/laporan_produk',BASEURL.'/admin/laporan_transaksi',BASEURL.'/admin/laporan_saldo']) ? 'open active':'' ?> ">
+                                <a class="sidebar-menu-button" data-toggle="collapse" href="#menu_laporan">
                                     <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">description</i>
                                     <span class="sidebar-menu-text">Laporan</span>
+                                    <span class="ml-auto sidebar-menu-toggle-icon"></span>
                                 </a>
+                                <ul class="sidebar-submenu collapse <?= in_array(NOWURL, [BASEURL.'/admin/laporan_user',BASEURL.'/admin/laporan_produk',BASEURL.'/admin/laporan_transaksi',BASEURL.'/admin/laporan_saldo']) ? 'show':'' ?> " id="menu_laporan">
+                                    <?php if($_SESSION['id_user'] == 1){ ?>
+                                        <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/admin/laporan_user' ? 'active':'' ?>">
+                                            <a class="sidebar-menu-button" href="<?= BASEURL.'/admin/laporan_user'; ?>">
+                                                <span class="sidebar-menu-text">Pengguna</span>
+                                            </a>
+                                        </li>
+                                    <?php } ?>
+                                    <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/admin/laporan_produk' ? 'active':'' ?>">
+                                        <a class="sidebar-menu-button" href="<?= BASEURL.'/admin/laporan_produk'; ?>">
+                                            <span class="sidebar-menu-text">Produk</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/admin/laporan_transaksi' ? 'active':'' ?>">
+                                        <a class="sidebar-menu-button" href="<?= BASEURL.'/admin/laporan_transaksi'; ?>">
+                                            <span class="sidebar-menu-text">Transaksi</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/admin/laporan_saldo' ? 'active':'' ?>">
+                                        <a class="sidebar-menu-button" href="<?= BASEURL.'/admin/laporan_saldo'; ?>">
+                                            <span class="sidebar-menu-text">Saldo</span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
-                            <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Artikel" data-placement="right" data-container="body" data-boundary="window">
-                                <a class="sidebar-menu-button" href="<?= BASEURL; ?>/artikel/index">
+                            <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/artikel/index' ? 'active':''; ?>">
+                                <a class="sidebar-menu-button" href="<?= BASEURL.'/artikel/index'; ?>">
                                     <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">web</i>
                                     <span class="sidebar-menu-text">Artikel</span>
                                 </a>
                             </li>
                         <?php } else { ?>
-                            <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Dasbor" data-placement="right" data-container="body" data-boundary="window">
-                                <a class="sidebar-menu-button" href="<?= BASEURL; ?>/arsitek/index">
+                            <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/arsitek/index' ? 'active':''; ?>">
+                                <a class="sidebar-menu-button" href="<?= BASEURL.'/arsitek/index'; ?>">
                                     <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dvr</i>
                                     <span class="sidebar-menu-text">Dasbor</span>
                                 </a>
                             </li>
-                            <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Produk" data-placement="right" data-container="body" data-boundary="window">
-                                <a class="sidebar-menu-button" href="<?= BASEURL; ?>/arsitek/produk">
+                            <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/arsitek/produk' ? 'active':''; ?>">
+                                <a class="sidebar-menu-button" href="<?= BASEURL.'/arsitek/produk'; ?>">
                                     <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">list</i>
                                     <span class="sidebar-menu-text">Produk</span>
                                 </a>
                             </li>
-                            <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Pesanan" data-placement="right" data-container="body" data-boundary="window">
-                                <a class="sidebar-menu-button" href="<?= BASEURL; ?>/arsitek/pesanan">
+                            <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/arsitek/pesanan' ? 'active':''; ?>">
+                                <a class="sidebar-menu-button" href="<?= BASEURL.'/arsitek/pesanan'; ?>">
                                     <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">description</i>
                                     <span class="sidebar-menu-text">Pesanan</span>
                                 </a>
                             </li>
-                            <li class="sidebar-menu-item" data-toggle="tooltip" data-title="Pesan" data-placement="right" data-container="body" data-boundary="window">
-                                <a class="sidebar-menu-button" href="<?= BASEURL; ?>/chat/index">
+                            <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/chat/index' ? 'active':''; ?>">
+                                <a class="sidebar-menu-button" href="<?= BASEURL.'/chat/index'; ?>">
                                     <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">slideshow</i>
                                     <span class="sidebar-menu-text">Pesan</span>
                                 </a>
                             </li>
                         <?php } ?>
                     </ul>
-                </div>
-
-                <div class="sidebar sidebar-light sidebar-left simplebar flex sidebar-secondary" data-simplebar>
-                    <div class="tab-content">
-                        <div class="tab-pane" id="mn_pengguna">
-                            <div class="sidebar-heading">Pengguna</div>
-                            <div class="sidebar-block p-0">
-                                <ul class="sidebar-menu">
-                                    <?php if($_SESSION['id_user'] == 1){ ?>
-                                    <li class="sidebar-menu-item">
-                                        <a class="sidebar-menu-button" href="<?= BASEURL; ?>/admin/data_admin">
-                                            <span class="sidebar-menu-text">Admin</span>
-                                        </a>
-                                    </li>
-                                    <?php } ?>
-                                    <li class="sidebar-menu-item">
-                                        <a class="sidebar-menu-button" href="<?= BASEURL; ?>/admin/data_arsitek">
-                                            <span class="sidebar-menu-text">Arsitek</span>
-                                        </a>
-                                    </li>
-                                    <li class="sidebar-menu-item">
-                                        <a class="sidebar-menu-button" href="<?= BASEURL; ?>/admin/data_pengguna">
-                                            <span class="sidebar-menu-text">Pelanggan</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="mn_laporan">
-                            <div class="sidebar-heading">Laporan</div>
-                            <div class="sidebar-block p-0">
-                                <ul class="sidebar-menu">
-                                    <li class="sidebar-menu-item">
-                                        <a class="sidebar-menu-button" href="<?= BASEURL; ?>/admin/laporan_user">
-                                            <span class="sidebar-menu-text">Pengguna</span>
-                                        </a>
-                                    </li>
-                                    <li class="sidebar-menu-item">
-                                        <a class="sidebar-menu-button" href="<?= BASEURL; ?>/admin/laporan_produk">
-                                            <span class="sidebar-menu-text">Produk Arsitek</span>
-                                        </a>
-                                    </li>
-                                    <li class="sidebar-menu-item">
-                                        <a class="sidebar-menu-button" href="<?= BASEURL; ?>/admin/laporan_transaksi">
-                                            <span class="sidebar-menu-text">Transaksi</span>
-                                        </a>
-                                    </li>
-                                    <li class="sidebar-menu-item">
-                                        <a class="sidebar-menu-button" href="<?= BASEURL; ?>/admin/laporan_saldo">
-                                            <span class="sidebar-menu-text">Saldo Arsitek</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
