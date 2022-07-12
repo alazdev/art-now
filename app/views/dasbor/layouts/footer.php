@@ -8,13 +8,13 @@
                         <?php if ($_SESSION['level'] == 0) { ?>
                             <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/pengguna/index' ? 'active':''; ?>">
                                 <a class="sidebar-menu-button" href="<?= BASEURL.'/pengguna/index'; ?>">
-                                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">description</i>
+                                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">receipt</i>
                                     <span class="sidebar-menu-text">Pesanan</span>
                                 </a>
                             </li>
                             <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/chat/index' ? 'active':''; ?>">
                                 <a class="sidebar-menu-button" href="<?= BASEURL.'/chat/index'; ?>">
-                                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">slideshow</i>
+                                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">chat</i>
                                     <span class="sidebar-menu-text">Pesan</span>
                                 </a>
                             </li>
@@ -27,19 +27,19 @@
                             </li>
                             <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/admin/calon_arsitek' ? 'active':''; ?>">
                                 <a class="sidebar-menu-button" href="<?= BASEURL.'/admin/calon_arsitek'; ?>">
-                                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">group</i>
+                                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">assignment_ind</i>
                                     <span class="sidebar-menu-text">Calon Arsitek</span>
                                 </a>
                             </li>
                             <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/admin/validasi_pembayaran_pengguna' ? 'active':''; ?>">
                                 <a class="sidebar-menu-button" href="<?= BASEURL.'/admin/validasi_pembayaran_pengguna'; ?>">
-                                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">assignment_turned_in</i>
+                                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">assignment</i>
                                     <span class="sidebar-menu-text">Validasi Pembayaran Pelanggan</span>
                                 </a>
                             </li>
                             <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/admin/permintaan_penarikan' ? 'active':''; ?>">
                                 <a class="sidebar-menu-button" href="<?= BASEURL.'/admin/permintaan_penarikan'; ?>">
-                                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">credit_card</i>
+                                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_balance_wallet</i>
                                     <span class="sidebar-menu-text">Permintaan Penarikan Saldo</span>
                                 </a>
                             </li>
@@ -51,7 +51,7 @@
                             </li>
                             <li class="sidebar-menu-item <?= in_array(NOWURL, [BASEURL.'/admin/data_admin',BASEURL.'/admin/data_arsitek',BASEURL.'/admin/data_pengguna']) ? 'open active':'' ?> ">
                                 <a class="sidebar-menu-button" data-toggle="collapse" href="#menu_pengguna">
-                                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">list</i>
+                                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">group</i>
                                     <span class="sidebar-menu-text">Pengguna</span>
                                     <span class="ml-auto sidebar-menu-toggle-icon"></span>
                                 </a>
@@ -85,7 +85,7 @@
                             <?php } ?>
                             <li class="sidebar-menu-item <?= in_array(NOWURL, [BASEURL.'/admin/laporan_user',BASEURL.'/admin/laporan_produk',BASEURL.'/admin/laporan_transaksi',BASEURL.'/admin/laporan_saldo']) ? 'open active':'' ?> ">
                                 <a class="sidebar-menu-button" data-toggle="collapse" href="#menu_laporan">
-                                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">description</i>
+                                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">library_books</i>
                                     <span class="sidebar-menu-text">Laporan</span>
                                     <span class="ml-auto sidebar-menu-toggle-icon"></span>
                                 </a>
@@ -135,13 +135,13 @@
                             </li>
                             <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/arsitek/pesanan' ? 'active':''; ?>">
                                 <a class="sidebar-menu-button" href="<?= BASEURL.'/arsitek/pesanan'; ?>">
-                                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">description</i>
+                                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">receipt</i>
                                     <span class="sidebar-menu-text">Pesanan</span>
                                 </a>
                             </li>
                             <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/chat/index' ? 'active':''; ?>">
                                 <a class="sidebar-menu-button" href="<?= BASEURL.'/chat/index'; ?>">
-                                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">slideshow</i>
+                                    <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">chat</i>
                                     <span class="sidebar-menu-text">Pesan</span>
                                 </a>
                             </li>
