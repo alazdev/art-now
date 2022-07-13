@@ -33,41 +33,134 @@
                 </div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card dashboard-area-tabs" id="dashboard-area-tabs">
-                    <div class="card-header p-0 bg-white nav">
-                        <div class="row no-gutters flex" role="tablist">
-                            <div class="col" data-toggle="chart" data-target="#earningsTrafficChart" data-update='{"data":{"labels": ["<?php for($i = 11; $i >= 0; $i--) { echo $data['nama_bulan'][$i].' '.$data['tahun'][$i].'", "'; }?>"],"datasets":[{"label": "Traffic", "data":[<?=implode(',', $data['tahunan_pembayaran'])?>]}]}}' data-prefix="Rp. " data-suffix="">
-                                <a href="#" data-toggle="tab" role="tab" aria-selected="true" onclick="show()" class="dashboard-area-tabs__tab card-body text-center active">
-                                    <span class="card-header__title m-0">Pendapatan</span>
-                                </a>
-                            </div>
-                            <div class="col border-left" data-toggle="chart" data-target="#earningsTrafficChart" data-update='{"data":{"datasets":[{"label": "Earnings", "data":[<?=implode(',', $data['tahunan_pesanan'])?>]}]}}' data-prefix="" data-suffix="">
-                                <a href="#" data-toggle="tab" role="tab" aria-selected="false" onclick="show()" class="dashboard-area-tabs__tab card-body text-center">
-                                    <span class="card-header__title m-0">Pesanan</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body text-muted" style="height: 280px;">
-                        <div class="chart" style="height: calc(280px - 1.25rem * 2);">
-                            <canvas id="earningsTrafficChart" hidden>
-                                <span style="font-size: 1rem;"><strong>Pendapatan & Pesanan</strong>.</span>
-                            </canvas>
-                            <h4 align="center" id="alert">Tekan Menu untuk menampilkan statistik.</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div>
+            <h3>Grafik Pendapatan Dalam 12 Bulan Terakhir</h3>
+            <canvas id="tahunan_pembayaran" width="300" height="110"></canvas>
+            <br><br>
+            <h3>Grafik Total Pesanan Dalam 12 Bulan Terakhir</h3>
+            <canvas id="tahunan_pesanan" width="300" height="110"></canvas>
         </div>
     </div>
 </div>
+<!-- Global Settings -->
+<script src="<?= BASEURL; ?>/assets-admin/js/settings.js"></script>
+<!-- Chart.js -->
+<script src="<?= BASEURL; ?>/assets-admin/vendor/Chart.min.js"></script>
+
+<!-- App Charts JS -->
+<script src="<?= BASEURL; ?>/assets-admin/js/charts.js"></script>
 <script>
-    function show(){
-        document.getElementById('earningsTrafficChart').hidden = false;
-        document.getElementById('alert').hidden = true;
-    }
+    var tahunan_pembayaran = document.getElementById("tahunan_pembayaran");
+    var PembayaranChart = new Chart(tahunan_pembayaran, {
+        type: 'line',
+        data: {
+            labels: ["<?php for($i = 11; $i >= 0; $i--) { echo $data['nama_bulan'][$i].' '.$data['tahun'][$i].'", "'; }?>"],
+            datasets: [{
+                label: '',
+                data: [<?=implode(',', $data['tahunan_pembayaran'])?>],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        callback: function(value, index, values) {
+                            // Convert the number to a string and splite the string every 3 charaters from the end
+                            value = value.toString();
+                            value = value.split(/(?=(?:...)*$)/);
+                            // Convert the array to a string and format the output
+                            value = value.join('.');
+                            return 'Rp ' + value;
+                        }
+                    }
+                }]
+            },
+            tooltips: {
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                            // Convert the number to a string and splite the string every 3 charaters from the end
+                            value = tooltipItem.yLabel.toString();
+                            value = value.split(/(?=(?:...)*$)/);
+                            // Convert the array to a string and format the output
+                            value = value.join('.');
+                            return 'Rp ' + value;
+                    }
+                }
+            }
+        }
+    });
+    var tahunan_pesanan = document.getElementById("tahunan_pesanan");
+    var PesananChart = new Chart(tahunan_pesanan, {
+        type: 'line',
+        data: {
+            labels: ["<?php for($i = 11; $i >= 0; $i--) { echo $data['nama_bulan'][$i].' '.$data['tahun'][$i].'", "'; }?>"],
+            datasets: [{
+                label: '',
+                data: [<?=implode(',', $data['tahunan_pesanan'])?>],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        callback: function(value, index, values) {
+                            // Convert the number to a string and splite the string every 3 charaters from the end
+                            value = value.toString();
+                            value = value.split(/(?=(?:...)*$)/);
+                            // Convert the array to a string and format the output
+                            value = value.join('.');
+                            return value;
+                        }
+                    }
+                }]
+            },
+            tooltips: {
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                            // Convert the number to a string and splite the string every 3 charaters from the end
+                            value = tooltipItem.yLabel.toString();
+                            value = value.split(/(?=(?:...)*$)/);
+                            // Convert the array to a string and format the output
+                            value = value.join('.');
+                            return value;
+                    }
+                }
+            }
+        }
+    });
 </script>
 <?php include(__DIR__ . '/../layouts/footer.php'); ?>

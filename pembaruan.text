@@ -1,0 +1,16 @@
+Pembaharuan Setelah 14/07/2022
+
+Pembaharuan Setelah Sidang Terakhir
+    Semua
+        01. Memperbaharui Tampilan Navbar Dasbor
+        02. Memperbaharui Tampilan Icon pada setiap Menu
+
+    Admin
+        01. Memperbaharui tampilan Data Pengguna di Dasbor dan menambahkan 'Total Admin'
+        02. Menambahkan 'TOP 3 Pendapatan Terbanyak dan Pesanan Terbanyak Arsitek' di Dasbor
+        03. Menambahkan 'Grafik Pendapatan dan Pesanan Seluruh Arsitek dalam 12 bulan Terakhir' di Dasbor
+
+    Arsitek
+        01. Memperbaharui tampilan 'Grafik'
+
+    *Keterangan: Belum Ada SQL Baru untuk sekarang.

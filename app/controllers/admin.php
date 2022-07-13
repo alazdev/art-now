@@ -20,7 +20,65 @@ class admin extends Controller
     
     public function index()
     {
+        $data['tahunan_semua_pembayaran'] = $this->model('PembayaranModel')->tahunan_semua_pembayaran()[0];
+        $data['tahunan_semua_pesanan'] = $this->model('PesananModel')->tahunan_semua_pesanan()[0];
+
+        if (array_sum($data['tahunan_semua_pembayaran']) == 0){
+            $data['tahunan_semua_pembayaran'] = [
+                'Jan'=>0,'Feb'=>0,'Mar'=>0,'Apr'=>0,
+                'May'=>0,'Jun'=>0,'Jul'=>0,'Aug'=>0,
+                'Sep'=>0,'Oct'=>0,'Nov'=>0,'Dec'=>0
+            ];
+        }
+        if (array_sum($data['tahunan_semua_pesanan']) == 0){
+            $data['tahunan_semua_pesanan'] = [
+                'Jan'=>0,'Feb'=>0,'Mar'=>0,'Apr'=>0,
+                'May'=>0,'Jun'=>0,'Jul'=>0,'Aug'=>0,
+                'Sep'=>0,'Oct'=>0,'Nov'=>0,'Dec'=>0
+            ];
+        }
+        
+        $tahunan_semua_pembayaran_sementara = [];
+        $tahunan_semua_pesanan_sementara = [];
+
+        $start = $month = date('Y-m-d');
+        $end = date('Y-m-d', strtotime('-12 month'));
+        while($month > $end)
+        {
+            $data['nama_bulan'][] = date('M', strtotime($month));
+            $data['tahun'][] = date('Y', strtotime($month));
+            foreach($data['tahunan_semua_pembayaran'] as $tpem => $value){
+                if($tpem == date('M', strtotime($month))){
+                    $tahunan_semua_pembayaran_sementara[] = $value;
+                }
+            }
+            foreach($data['tahunan_semua_pesanan'] as $tpes => $value){
+                if($tpes == date('M', strtotime($month))){
+                    $tahunan_semua_pesanan_sementara[] = $value;
+                }
+            }
+            $month = date('Y-m-d', strtotime('-1 months', strtotime($month)));
+        }
+        for($i = 0; $i < count($data['nama_bulan']); $i++){
+            if($data['nama_bulan'][$i] == 'May'){
+                $data['nama_bulan'][$i] = 'Mei';
+            }else if($data['nama_bulan'][$i] == 'Aug'){
+                $data['nama_bulan'][$i] = 'Agu';
+            }else if($data['nama_bulan'][$i] == 'Oct'){
+                $data['nama_bulan'][$i] = 'Okt';
+            }else if($data['nama_bulan'][$i] == 'Dec'){
+                $data['nama_bulan'][$i] = 'Des';
+            }
+        }
+        // Chart
+        $data['tahunan_semua_pembayaran'] = array_reverse($tahunan_semua_pembayaran_sementara);
+        $data['tahunan_semua_pesanan'] = array_reverse($tahunan_semua_pesanan_sementara);
+        // Top 3
+        $data['top3_pembayaran'] = $this->model('PembayaranModel')->top3_total_pembayaran();
+        $data['top3_pesanan'] = $this->model('PesananModel')->top3_total_pesanan();
+        // Data
         $data['total_user'] = count($this->model('UserModel')->semua_user());
+        $data['total_admin'] = count($this->model('UserModel')->semua_user(2));
         $data['total_pengguna'] = count($this->model('UserModel')->semua_user('0'));
         $data['total_arsitek'] = count($this->model('UserModel')->semua_user(1));
         $data['total_calon_arsitek'] = count($this->model('UserModel')->semua_user(-1));

@@ -10,6 +10,22 @@ class PembayaranModel{
         $this->db = new Database;
     }
     
+    // Untuk Dasboard Admin
+    public function top3_total_pembayaran(){
+        $this->db->query("SELECT SUM(pembayaran.total_dibayar) as total_pendapatan,
+            (SELECT avg(rating) FROM rating LEFT JOIN produk on rating.id_produk = produk.id_produk WHERE produk.id_user = user.id_user) AS rating,
+            (SELECT count(rating) FROM rating LEFT JOIN produk on rating.id_produk = produk.id_produk WHERE produk.id_user = user.id_user) AS total_rating,
+            user.*
+            FROM pembayaran
+            LEFT JOIN pesanan ON pembayaran.id_pesanan = pesanan.id_pesanan
+            LEFT JOIN produk ON produk.id_produk = pesanan.id_produk
+            LEFT JOIN user on produk.id_user = user.id_user
+            WHERE pembayaran.status = 1
+            GROUP BY produk.id_user
+            ORDER BY total_pendapatan DESC
+            LIMIT 3");
+        return $this->db->resultSet();
+    }
     // Untuk Dasboard Arsitek
     public function total_pembayaran(){
         $this->db->query("SELECT pembayaran.total_dibayar FROM pembayaran LEFT JOIN pesanan ON pembayaran.id_pesanan = pesanan.id_pesanan LEFT JOIN produk ON produk.id_produk = pesanan.id_produk LEFT JOIN user on produk.id_user = user.id_user WHERE user.id_user = '".$this->cek_user()['id_user']."' AND (pembayaran.status = 1)");
@@ -140,6 +156,34 @@ class PembayaranModel{
     public function update_status($id_pembayaran, $status){
         $this->db->query("UPDATE pembayaran SET status = ".$status.", diperbaharui_pada = '".date("Y-m-d H:i:s")."' WHERE id_pembayaran = '".$id_pembayaran."'");
         return $this->db->execute();
+    }
+
+    public function tahunan_semua_pembayaran(){
+        $this->db->query("
+            SELECT 
+                SUM(IF(month = 'Jan', total, 0)) AS 'Jan',
+                SUM(IF(month = 'Feb', total, 0)) AS 'Feb',
+                SUM(IF(month = 'Mar', total, 0)) AS 'Mar',
+                SUM(IF(month = 'Apr', total, 0)) AS 'Apr',
+                SUM(IF(month = 'May', total, 0)) AS 'May',
+                SUM(IF(month = 'Jun', total, 0)) AS 'Jun',
+                SUM(IF(month = 'Jul', total, 0)) AS 'Jul',
+                SUM(IF(month = 'Aug', total, 0)) AS 'Aug',
+                SUM(IF(month = 'Sep', total, 0)) AS 'Sep',
+                SUM(IF(month = 'Oct', total, 0)) AS 'Oct',
+                SUM(IF(month = 'Nov', total, 0)) AS 'Nov',
+                SUM(IF(month = 'Dec', total, 0)) AS 'Dec'
+            FROM (
+                SELECT DATE_FORMAT(pembayaran.dibuat_pada, '%b') AS month, SUM(pembayaran.total_dibayar) as total 
+                FROM pembayaran 
+                LEFT JOIN pesanan ON pembayaran.id_pesanan = pesanan.id_pesanan 
+                LEFT JOIN produk ON produk.id_produk = pesanan.id_produk 
+                LEFT JOIN user on produk.id_user = user.id_user 
+                WHERE (pembayaran.dibuat_pada <= NOW() AND pembayaran.dibuat_pada >= Date_add(Now(),interval - 12 month)) 
+                GROUP BY DATE_FORMAT(pembayaran.dibuat_pada, '%m-%Y')
+            ) as sub
+        ");
+        return $this->db->resultSet();
     }
 
     public function tahunan_pembayaran(){
