@@ -100,7 +100,7 @@
                         </div>
                         <div class="form-group">
                             <label for="total_terbilang">Terbilang:</label>
-                            <input type="text" id="total_terbilang" value="<?= ucfirst(terbilang($data['harga']*20/100)) ?> rupiah" class="form-control" disabled/>
+                            <input type="text" id="total_terbilang" value="<?= ucfirst(terbilang($data['harga']*80/100)) ?> rupiah" class="form-control" disabled/>
                         </div>
                         <div class="form-group">
                             <label for="bukti_pembayaran">Bukti Pembayaran:</label>
