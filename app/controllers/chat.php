@@ -107,43 +107,83 @@ class chat extends Controller
         $chat['user'] = $this->model('UserModel')->profile_pengguna(preg_replace('/[^0-9]/', '', $id_user_with));
         $chat['chat'] = '';
         foreach($chats as $data){
-            $chat['chat'] .= 
-                '<div class="media border-bottom py-3">'.
-                    '<div class="media-body">'.
-                        '<div class="d-flex align-items-center">'.
-                            '<div class="flex">'.
-                                '<a href="#" class="text-body bold">'.(($_SESSION['id_user'] == $data['id_user_dari']) ? '<i>Kamu</i>':$data['nama_pengirim'] ).'</a>'.
-                            '</div>'.
-                            '<small class="text-muted">'.date('d-m-Y H:i', strtotime($data['dibuat_pada'])).'</small>'.
-                        '</div>';
+            if ($_SESSION['id_user'] == $data['id_user_dari']) {
+                $chat['chat'] .= 
+                    '<div class="media border-bottom py-3">'.
+                        '<div class="media-body">'.
+                            '<div class="d-flex align-items-center">'.
+                                '<div class="flex">'.
+                                    '<a href="#" class="text-body bold">'.(($_SESSION['id_user'] == $data['id_user_dari']) ? '<i>Kamu</i>':$data['nama_pengirim'] ).'</a>'.
+                                '</div>'.
+                            '</div>';
 
-            if($data['tipe'] != 2){
-                $chat['chat'] .=
-                        '<div>'.$data['pesan'].'</div>';
-            }else{
-                if(in_array(pathinfo($data['pesan'], PATHINFO_EXTENSION), ['png','jpg','jpeg','gif'])){
+                if($data['tipe'] != 2){
                     $chat['chat'] .=
-                        '<a href="'.BASEURL.'/dokumen/chat/'.$data['pesan'].'" class="avatar avatar-xxl avatar-4by3 mt-2" download>'.
-                            '<img src="'.BASEURL.'/dokumen/chat/'.$data['pesan'].'" alt="image" class="avatar-img rounded">'.
-                        '</a>';
+                            '<div>'.$data['pesan'].'</div>';
                 }else{
-                    $chat['chat'] .=
-                        '<a href="'.BASEURL.'/dokumen/chat/'.$data['pesan'].'" class="media align-items-center mt-2 text-underline-0 bg-white p-2" download>
-                        <span class="avatar avatar-xs mr-2">
-                            <span class="avatar-title rounded-circle">
-                                <i class="material-icons">attach_file</i>
+                    if(in_array(pathinfo($data['pesan'], PATHINFO_EXTENSION), ['png','jpg','jpeg','gif'])){
+                        $chat['chat'] .=
+                            '<a href="'.BASEURL.'/dokumen/chat/'.$data['pesan'].'" class="avatar avatar-xxl avatar-4by3 mt-2" download>'.
+                                '<img src="'.BASEURL.'/dokumen/chat/'.$data['pesan'].'" alt="image" class="avatar-img rounded">'.
+                            '</a><br/>';
+                    }else{
+                        $chat['chat'] .=
+                            '<a href="'.BASEURL.'/dokumen/chat/'.$data['pesan'].'" class="media align-items-center mt-2 text-underline-0 bg-white p-2" download>
+                            <span class="avatar avatar-xs mr-2">
+                                <span class="avatar-title rounded-circle">
+                                    <i class="material-icons">attach_file</i>
+                                </span>
                             </span>
-                        </span>
-                        <span class="media-body" style="line-height: 1.5">
-                            <span class="text-primary">'.$data['pesan'].'</span><br>
-                        </span>
-                    </a>';
+                            <span class="media-body" style="line-height: 1.5">
+                                <span class="text-primary">'.$data['pesan'].'</span><br>
+                            </span>
+                        </a>';
+                    }
                 }
+                            
+                $chat['chat'] .=
+                        '<small class="text-muted">'.date('d-m-Y H:i', strtotime($data['dibuat_pada'])).'</small>'.
+                        '</div>'.
+                    '</div>';
+            } else {
+                $chat['chat'] .= 
+                    '<div class="media border-bottom py-3">'.
+                        '<div class="media-body text-right">'.
+                            '<div class="d-flex align-items-center">'.
+                                '<div class="flex">'.
+                                    '<a href="#" class="text-body bold">'.(($_SESSION['id_user'] == $data['id_user_dari']) ? '<i>Kamu</i>':$data['nama_pengirim'] ).'</a>'.
+                                '</div>'.
+                            '</div>';
+
+                if($data['tipe'] != 2){
+                    $chat['chat'] .=
+                            '<div>'.$data['pesan'].'</div>';
+                }else{
+                    if(in_array(pathinfo($data['pesan'], PATHINFO_EXTENSION), ['png','jpg','jpeg','gif'])){
+                        $chat['chat'] .=
+                            '<a href="'.BASEURL.'/dokumen/chat/'.$data['pesan'].'" class="avatar avatar-xxl avatar-4by3 mt-2" download>'.
+                                '<img src="'.BASEURL.'/dokumen/chat/'.$data['pesan'].'" alt="image" class="avatar-img rounded">'.
+                            '</a><br/>';
+                    }else{
+                        $chat['chat'] .=
+                            '<a href="'.BASEURL.'/dokumen/chat/'.$data['pesan'].'" class="media align-items-center mt-2 text-underline-0 bg-white p-2" download>
+                            <span class="media-body" style="line-height: 1.5">
+                                <span class="text-primary">'.$data['pesan'].'</span><br>
+                            </span>
+                            <span class="avatar avatar-xs ml-2">
+                                <span class="avatar-title rounded-circle">
+                                    <i class="material-icons">attach_file</i>
+                                </span>
+                            </span>
+                        </a>';
+                    }
+                }
+                            
+                $chat['chat'] .=
+                        '<small class="text-muted">'.date('d-m-Y H:i', strtotime($data['dibuat_pada'])).'</small>'.
+                        '</div>'.
+                    '</div>';
             }
-                        
-            $chat['chat'] .=
-                    '</div>'.
-                '</div>';
         }
 
         echo json_encode($chat);

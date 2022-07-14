@@ -1,9 +1,10 @@
-Pembaharuan Setelah 14/07/2022
+Pembaharuan Setelah 14/07/2022 20:00
 
 Pembaharuan Setelah Sidang Terakhir
     Semua
         01. Memperbaharui Tampilan Navbar Dasbor
         02. Memperbaharui Tampilan Icon pada setiap Menu
+        03. Memperbaharui Tampilan Chat ketika kamu / lawan bicaramu mengirim pesan
 
     Admin
         01. Memperbaharui tampilan Data Pengguna di Dasbor dan menambahkan 'Total Admin'
@@ -14,6 +15,6 @@ Pembaharuan Setelah Sidang Terakhir
         06. Menghilangkan Aksi 'Riwayat Pembayaran' di 'Menu Pesanan Arsitek' dan menggantinya dengan menambahkan kolom 'total dibayar' dan 'status pembayaran'
 
     Arsitek
-        01. Memperbaharui tampilan 'Grafik'
+        01. Memperbaharui tampilan 'Grafik' di dasbor
 
     *Keterangan: Belum Ada SQL Baru untuk sekarang.
