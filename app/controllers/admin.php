@@ -342,10 +342,14 @@ class admin extends Controller
     // Semua Pesanan Arsitek
     public function pesanan_arsitek()
     {
-        $data = [
-            'pesanans' => $this->model('PesananModel')->semua_byadmin()
+        $this->view('dasbor/admin/pesanan-arsitek/index');
+    }
+    public function data_pesanan_arsitek($tanggal_awal, $tanggal_akhir)
+    {
+        $json = [
+            'data' => $this->model('PesananModel')->semua_byadmin($tanggal_awal, $tanggal_akhir)
         ];
-        $this->view('dasbor/admin/pesanan-arsitek/index', $data);
+        echo json_encode($json);
     }
 
     // CRUD Data Rekening Bank

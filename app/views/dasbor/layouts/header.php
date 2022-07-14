@@ -45,7 +45,15 @@
 
     <!-- jQuery -->
     <script src="<?= BASEURL; ?>/assets-admin/vendor/jquery.min.js"></script>
+
+    <!-- Date Range Picker -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
   
+    <style>
+        .nowrap {
+            white-space: nowrap;
+        }
+    </style>
 </head>
 
 <body class="layout-default">

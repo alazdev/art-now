@@ -223,8 +223,53 @@
   
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
 <script>
     (function() {
+        // datepicker
+        var hari_ini = new Date();
+        var tanggal_sekarang = ("0" + hari_ini.getDate()).slice(-2)+'/'+("0" + hari_ini.getMonth()).slice(-2)+'/'+hari_ini.getFullYear();
+        var setahun_lalu = ("0" + hari_ini.getDate()).slice(-2)+'/'+("0" + hari_ini.getMonth()).slice(-2)+'/'+(hari_ini.getFullYear()-1);
+        $('input[name="rentang_tanggal"]').daterangepicker({
+            "startDate": setahun_lalu,
+            "endDate": tanggal_sekarang,
+            "opens": "center",
+            "locale": {
+                "format": "DD/MM/YYYY",
+                "separator": " - ",
+                "applyLabel": "Selesai",
+                "cancelLabel": "Batal",
+                "fromLabel": "Dari",
+                "toLabel": "Ke",
+                "customRangeLabel": "Kustomisasi",
+                "daysOfWeek": [
+                    "Min",
+                    "Sen",
+                    "Sel",
+                    "Rab",
+                    "Kam",
+                    "Jum",
+                    "Sab"
+                ],
+                "monthNames": [
+                    "Januari",
+                    "Februari",
+                    "Maret",
+                    "April",
+                    "Mei",
+                    "Juni",
+                    "Juli",
+                    "Agustus",
+                    "September",
+                    "Oktober",
+                    "November",
+                    "Desember"
+                ],
+                "firstDay": 1
+            }
+        });
         // ENABLE sidebar menu tabs
         $('#sidebar-mini-tabs [data-toggle="tab"]').on('click', function(e) {
             e.preventDefault()

@@ -11,7 +11,7 @@ class PesananModel{
     }
 
     // Admin
-    public function semua_byadmin(){
+    public function semua_byadmin($tanggal_awal, $tanggal_akhir){
         $this->db->query(
             "SELECT pesanan.*, 
             pengguna.id_user as id_pengguna,
@@ -29,6 +29,7 @@ class PesananModel{
             LEFT JOIN produk ON produk.id_produk = pesanan.id_produk 
             LEFT JOIN user pengguna on pesanan.id_user = pengguna.id_user 
             LEFT JOIN user arsitek on produk.id_user = arsitek.id_user
+            WHERE DATE(pesanan.dibuat_pada) BETWEEN '$tanggal_awal' AND '$tanggal_akhir'
             ORDER BY pesanan.dibuat_pada DESC"
         );
         return $this->db->resultSet();
