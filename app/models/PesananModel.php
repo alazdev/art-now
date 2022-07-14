@@ -23,8 +23,8 @@ class PesananModel{
             arsitek.email as email_arsitek, 
             arsitek.telepon as telepon_arsitek, 
             produk.judul,
-            (SELECT pembayaran.status FROM pembayaran WHERE pembayaran.id_pesanan = pesanan.id_pesanan AND pembayaran.pembayaran=-1 LIMIT 1) as status_pembayaran_dp, 
-            (SELECT pembayaran.status FROM pembayaran WHERE pembayaran.id_pesanan = pesanan.id_pesanan AND pembayaran.pembayaran=1 LIMIT 1) as status_pembayaran 
+            (SELECT SUM(pembayaran.total_dibayar) FROM pembayaran WHERE pembayaran.id_pesanan = pesanan.id_pesanan AND pembayaran.status=1 GROUP BY pembayaran.id_pesanan) as total_dibayar, 
+            (SELECT COUNT(pembayaran.total_dibayar) FROM pembayaran WHERE pembayaran.id_pesanan = pesanan.id_pesanan AND pembayaran.status=1 GROUP BY pembayaran.id_pesanan) as status_pembayaran
             FROM pesanan 
             LEFT JOIN produk ON produk.id_produk = pesanan.id_produk 
             LEFT JOIN user pengguna on pesanan.id_user = pengguna.id_user 

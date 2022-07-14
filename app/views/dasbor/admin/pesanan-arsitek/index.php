@@ -33,9 +33,11 @@
                                     <th>Nama Pengguna</th>
                                     <th>Nama Arsitek</th>
                                     <th>Judul Produk</th>
+                                    <th>Total Dibayar</th>
+                                    <th>Status Pembayaran</th>
                                     <th>Dipesan Pada</th>
                                     <th>Terakhir Diperbaharui</th>
-                                    <th></th>
+                                    <!-- <th></th> -->
                                 </tr>
                             </thead>
                             <tbody class="list" id="staff02"></tbody>
@@ -97,11 +99,28 @@
                         {data : 'judul', render: function ( data, type, row ) {
                             return '<a href="../home/produk/'+row.id_produk+'" target="_blank">'+row.judul+'</a>';
                         }},
+                        {data : 'total_dibayar', render: function ( data, type, row ) {
+                            if(row.status == -1){
+                                return "-";
+                            }
+                            return 'Rp '+(Intl.NumberFormat('id-ID').format(row.total_dibayar));
+                        }},
+                        {data : 'status_pembayaran', render: function ( data, type, row ) {
+                            var status_pembayaran = '';
+                            if(row.status_pembayaran == 1) {
+                                status_pembayaran = 'Belum Penuh';
+                            } else if(row.status_pembayaran == 2) {
+                                status_pembayaran = 'Penuh';
+                            } else {
+                                status_pembayaran = '-';
+                            }
+                            return status_pembayaran;
+                        }},
                         {data : 'dibuat_pada'},
                         {data : 'diperbaharui_pada'},
-                        {data : 'id_pesanan', render: function ( data, type, row ) {
-                            return '<a href="riwayat_pembayaran_pengguna/'+row.id_pesanan+'" class="text-muted"><i class="material-icons">assignment_turned_in</i> Riwayat Pembayaran</a>';
-                        }, className: 'text-right nowrap', "searchable": false, "orderable": false},
+                        // {data : 'id_pesanan', render: function ( data, type, row ) {
+                        //     return '<a href="riwayat_pembayaran_pengguna/'+row.id_pesanan+'" class="text-muted"><i class="material-icons">assignment_turned_in</i> Riwayat Pembayaran</a>';
+                        // }, className: 'text-right nowrap', "searchable": false, "orderable": false},
                     ],
                     'aaSorting': [],
                     'order': [],

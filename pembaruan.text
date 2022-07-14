@@ -10,7 +10,8 @@ Pembaharuan Setelah Sidang Terakhir
         02. Menambahkan 'TOP 3 Pendapatan Terbanyak dan Pesanan Terbanyak Arsitek' di Dasbor
         03. Menambahkan 'Grafik Pendapatan dan Pesanan Seluruh Arsitek dalam 12 bulan Terakhir' di Dasbor
         04. Secara default semua tabel yang memiliki filter akan menampilkan rentang tanggal dari 1 tahun sebelum tanggal sekarang sampai tanggal sekarang
-        05. Pada 'Menu Pesanan', sekarang menampilkan data dalam 'rentang waktu' tertentu
+        05. Pada 'Menu Pesanan Arsitek', sekarang menampilkan data dalam 'rentang waktu' tertentu
+        06. Menghilangkan Aksi 'Riwayat Pembayaran' di 'Menu Pesanan Arsitek' dan menggantinya dengan menambahkan kolom 'total dibayar' dan 'status pembayaran'
 
     Arsitek
         01. Memperbaharui tampilan 'Grafik'
