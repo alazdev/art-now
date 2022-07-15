@@ -3,15 +3,18 @@ Pembaharuan Setelah 14/07/2022 20:00
         01. -
 
     Admin
-        01. Pada Menu Calon Arsitek, admin bisa memberikan alasan penolakan terhadap arsitek.
+        01. Pada Menu Calon Arsitek, admin bisa memberikan alasan penolakan terhadap arsitek yang akan dikirim ke menu notifikasi dan email
 
     Arsitek
-        01. Menambahkan notifikasi saat mendaftar menjadi arsitek baik itu diterima atau ditolak
+        01. Menambahkan notifikasi saat mendaftar menjadi arsitek baik itu diterima atau ditolak berupa notifikasi dan email
 
     Pelanggan
         01. -
 
-    *Keterangan: Belum ada SQL Baru untuk sekarang
+    *Keterangan: 
+        00. Belum ada SQL Baru untuk sekarang
+        01. Pengiriminan EMAIL masih menggunakan Mailtrap.io jadi tidak menggunakan email sungguhan (sudah tidak bisa)
+            dan Mailtrap.io juga memiliki limit. Jadi gunakan semaksimal mungkin.
 
 ============== [Update-an Sebelumnya] ==============
 Pembaharuan Setelah Sidang Terakhir

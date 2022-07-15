@@ -111,30 +111,33 @@ class admin extends Controller
         $this->model('UserModel')->update_level_byadmin($id_user, 1);
         
         // ==============[Notifikasi Diterima]===============
+        $judul_notifikasi = 'Selamat Datang di ArtNow';
+        $notifikasi = 'Selamat, datamu telah diverifikasi admin. Sekarang kamu bisa mengakses semua menu sebagai Arsitek. Jangan lupa buat Produkmu sekarang!';
         $pesan = [
             'id_user' => $id_user,
-            'judul' => 'Selamat Datang di ArtNow',
-            'keterangan' => 'Selamat, datamu telah diverifikasi admin sekarang kamu bisa mengakses semua menu sebagai Arsitek. Jangan lupa buat Produkmu sekarang',
+            'judul' => $judul_notifikasi,
+            'keterangan' => $notifikasi,
             'link' => '/arsitek/produk'
         ];
         $this->model('NotifikasiModel')->notifikasi($pesan);
+
+        $contentMail = '<h1>'.$judul_notifikasi.'</h1><p>'.$notifikasi.'</p>';
+        $arsitek = $this->model('UserModel')->profile_arsitek($id_user);
+        $this->kirim_mail($arsitek['email'], $judul_notifikasi, $contentMail);
 
         $this->route('admin/calon_arsitek');
     }
     public function tolak_calon_arsitek($id_user)
     {
         $alasan = $_POST['alasan'];
-        $judul_notifikasi = '';
+        $judul_notifikasi = 'Formulir Registrasi Sebagai Arsitek Ditolak';
         $notifikasi = $_POST['notifikasi'];
 
         if($alasan == 'deskripsi') {
-            $judul_notifikasi = 'Deskripsi Ditolak';
             $this->kosongkan_data_arsitek($id_user);
         } else if ($alasan == 'produk') {
-            $judul_notifikasi = 'Produk Ditolak';
             $this->model('ProdukModel')->update_status_byadmin($id_user, -1);
         } else if ($alasan == 'semua'){
-            $judul_notifikasi = 'Deskripsi dan Produk Ditolak';
             $this->kosongkan_data_arsitek($id_user);
             $this->model('ProdukModel')->update_status_byadmin($id_user, -1);
         }
@@ -147,6 +150,10 @@ class admin extends Controller
             'link' => '/arsitek/index'
         ];
         $this->model('NotifikasiModel')->notifikasi($pesan);
+
+        $contentMail = '<h1>'.$judul_notifikasi.'</h1><p>'.$notifikasi.'</p>';
+        $calon_arsitek = $this->model('UserModel')->profile_arsitek($id_user);
+        $this->kirim_mail($calon_arsitek['email'], $judul_notifikasi, $contentMail);
 
         $this->route('admin/calon_arsitek');
     }
@@ -170,6 +177,51 @@ class admin extends Controller
         if(file_exists($path.$sertifikasi_arsitek)){
             unlink($path.$sertifikasi_arsitek);
         }
+    }
+
+    public function kirim_mail($email, $subject, $content){
+        require '../public/PHPMailer/PHPMailerAutoload.php';
+        
+        $mail = new PHPMailer;
+
+        // Konfigurasi SMTP
+        // $mail->isSMTP();
+        // $mail->Host = 'smtp-mail.outlook.com';
+        // $mail->SMTPAuth = true;
+        // $mail->Username = 'alazim.dev@outlook.com';
+        // $mail->Password = 'Secret123';
+        // $mail->SMTPSecure = 'tls';
+        // $mail->Port = 587;
+        $mail->isSMTP();
+        $mail->Host = 'smtp.mailtrap.io';
+        $mail->SMTPAuth = true;
+        $mail->Username = '95e90a6e1ca640';
+        $mail->Password = '88d97866952c07';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+        
+
+        $mail->setFrom('no-reply@artnow.com', 'ArtNow');
+        $mail->addReplyTo('no-reply@artnow.com', 'ArtNow');
+
+        // Menambahkan penerima
+        $mail->addAddress($email);
+
+        // Menambahkan cc atau bcc 
+        $mail->addCC('cc@artnow.com');
+        $mail->addBCC('bcc@artnow.com');
+
+        // Subjek email
+        $mail->Subject = $subject;
+
+        // Mengatur format email ke HTML
+        $mail->isHTML(true);
+
+        // Konten/isi email
+        $mail->Body = $content;
+
+        // Kirim email
+        if(!$mail->send()){}else{}
     }
 
     // CRUD Data Admin

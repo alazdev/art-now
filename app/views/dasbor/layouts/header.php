@@ -263,7 +263,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="notifikasi-tolak-calon-arsitek">Alasan Penolakan:</label>
-                                        <textarea name="notifikasi" class="form-control" id="notifikasi-tolak-calon-arsitek" rows="4" required>Deksripsi dan Dokumen yang dimasukkan tidak memenuhi persyaratan.</textarea>
+                                        <textarea name="notifikasi" class="form-control" id="notifikasi-tolak-calon-arsitek" rows="4" required>Deskripsi dan Dokumen yang dimasukkan tidak memenuhi persyaratan.</textarea>
                                     </div>
                                 </div>
                             </div>
