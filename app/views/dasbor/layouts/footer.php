@@ -233,12 +233,12 @@
         $('#alasan-tolak-calon-arsitek').on('change', function(){
             var alasan = $('#alasan-tolak-calon-arsitek').val();
             if(alasan == 'deskripsi') {
-                $('#notifikasi-tolak-calon-arsitek').val('Deksripsi dan Dokumen yang dimasukkan tidak memenuhi persyaratan.');
+                $('#notifikasi-tolak-calon-arsitek').val('Deskripsi dan Dokumen yang dimasukkan tidak memenuhi persyaratan.');
             }else if(alasan == 'produk') {
                 $('#notifikasi-tolak-calon-arsitek').val('Produk yang dimasukkan tidak memenuhi persyaratan.');
             }
             if(alasan == 'semua') {
-                $('#notifikasi-tolak-calon-arsitek').val('Deksripsi, Dokumen, dan Produk yang dimasukkan tidak memenuhi persyaratan.');
+                $('#notifikasi-tolak-calon-arsitek').val('Deskripsi, Dokumen, dan Produk yang dimasukkan tidak memenuhi persyaratan.');
             }
         });
 
