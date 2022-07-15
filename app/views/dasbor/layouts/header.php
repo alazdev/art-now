@@ -239,6 +239,44 @@
             </div>
         </div>
     </div>
+    <div id="modal-tolak-calon-arsitek" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-large-title" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-large-title">Tolak Calon Arsitek</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST" id="form-tolak-calon-arsitek" action="<?= BASEURL.'/arsitek/tambah_produk'?>" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="card card-form">
+                            <div class="row no-gutters">
+                                <div class="col-lg-12 card-form__body card-body">
+                                    <div class="form-group">
+                                        <label for="alasan-tolak-calon-arsitek">Jenis Penolakan:</label>
+                                        <select name="alasan" class="form-control" id="alasan-tolak-calon-arsitek" required>
+                                            <option value="deskripsi">Deskripsi atau Dokumen Tidak Memenuhi Persyaratan</option>
+                                            <option value="produk">Produk Tidak Memenuhi Persyaratan</option>
+                                            <option value="semua">Deskripsi, Dokumen, dan Produk Tidak Memenuhi Persyaratan</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="notifikasi-tolak-calon-arsitek">Alasan Penolakan:</label>
+                                        <textarea name="notifikasi" class="form-control" id="notifikasi-tolak-calon-arsitek" rows="4" required>Deksripsi dan Dokumen yang dimasukkan tidak memenuhi persyaratan.</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary" name="tolak">Kirim</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div id="modal-delete" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-sm">
             <div class="modal-content bg-danger">

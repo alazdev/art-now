@@ -28,7 +28,7 @@
                             <textarea name="alamat" class="form-control" id="alamat" placeholder="Masukkan Alamat..." required></textarea>
                         </div>
                         <label>Deskripsi</label>
-                        <div style="height: 150px;" data-toggle="quill" id="deskripsi" data-quill-placeholder="Deskripsi Produk..."></div>
+                        <div style="height: 150px;" data-toggle="quill" id="deskripsi" data-quill-placeholder="Deskripsi..."></div>
                         <div class="form-group">
                             <label for="ktp">KTP<sup>(gambar/pdf/word)</sup>:</label>
                             <input type="file" name="ktp[]" class="form-control" id="ktp" accept="application/msword, application/pdf, image/jpg, image/jpeg, image/png" required>

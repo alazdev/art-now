@@ -109,12 +109,67 @@ class admin extends Controller
     {
         $this->model('ProdukModel')->update_status_byadmin($id_user, 0);
         $this->model('UserModel')->update_level_byadmin($id_user, 1);
+        
+        // ==============[Notifikasi Diterima]===============
+        $pesan = [
+            'id_user' => $id_user,
+            'judul' => 'Selamat Datang di ArtNow',
+            'keterangan' => 'Selamat, datamu telah diverifikasi admin sekarang kamu bisa mengakses semua menu sebagai Arsitek. Jangan lupa buat Produkmu sekarang',
+            'link' => '/arsitek/produk'
+        ];
+        $this->model('NotifikasiModel')->notifikasi($pesan);
+
         $this->route('admin/calon_arsitek');
     }
     public function tolak_calon_arsitek($id_user)
     {
-        $this->model('ProdukModel')->update_status_byadmin($id_user, -1);
+        $alasan = $_POST['alasan'];
+        $judul_notifikasi = '';
+        $notifikasi = $_POST['notifikasi'];
+
+        if($alasan == 'deskripsi') {
+            $judul_notifikasi = 'Deskripsi Ditolak';
+            $this->kosongkan_data_arsitek($id_user);
+        } else if ($alasan == 'produk') {
+            $judul_notifikasi = 'Produk Ditolak';
+            $this->model('ProdukModel')->update_status_byadmin($id_user, -1);
+        } else if ($alasan == 'semua'){
+            $judul_notifikasi = 'Deskripsi dan Produk Ditolak';
+            $this->kosongkan_data_arsitek($id_user);
+            $this->model('ProdukModel')->update_status_byadmin($id_user, -1);
+        }
+        
+        // ==============[Notifikasi Penolakan]===============
+        $pesan = [
+            'id_user' => $id_user,
+            'judul' => $judul_notifikasi,
+            'keterangan' => $judul_notifikasi.". ".$notifikasi,
+            'link' => '/arsitek/index'
+        ];
+        $this->model('NotifikasiModel')->notifikasi($pesan);
+
         $this->route('admin/calon_arsitek');
+    }
+
+    public function kosongkan_data_arsitek($id_user) {
+        $calon_arsitek = $this->model('UserModel')->profile_arsitek($id_user);
+
+        $ktp = $calon_arsitek['ktp'];
+        $ijazah = $calon_arsitek['ijazah'];
+        $sertifikasi_arsitek = $calon_arsitek['sertifikasi_arsitek'];
+
+        $this->model('UserModel')->hapus_arsitek($id_user);
+        $path = dirname(getcwd())."/public/dokumen/";
+
+        if(file_exists($path.$ktp)){
+            unlink($path.$ktp);
+        }
+        if(file_exists($path.$ijazah)){
+            unlink($path.$ijazah);
+        }
+        if(file_exists($path.$sertifikasi_arsitek)){
+            unlink($path.$sertifikasi_arsitek);
+        }
     }
 
     // CRUD Data Admin

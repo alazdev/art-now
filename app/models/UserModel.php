@@ -22,7 +22,7 @@ class UserModel{
 
     // Untuk admin
     public function semua_calon_arsitek(){
-        $this->db->query("SELECT user.*, (SELECT produk.status from produk WHERE produk.id_user = user.id_user ORDER BY dibuat_pada DESC LIMIT 1) AS status_produk, arsitek.ktp, arsitek.ijazah, arsitek.sertifikasi_arsitek FROM user LEFT JOIN arsitek ON arsitek.id_user = user.id_user WHERE level = -1");
+        $this->db->query("SELECT user.*, (SELECT produk.status from produk WHERE produk.id_user = user.id_user ORDER BY dibuat_pada DESC LIMIT 1) AS status_produk, arsitek.ktp, arsitek.ijazah, arsitek.sertifikasi_arsitek FROM user LEFT JOIN arsitek ON arsitek.id_user = user.id_user WHERE level = -1 HAVING status_produk > -1 AND ktp IS NOT NULL AND ijazah IS NOT NULL AND sertifikasi_arsitek IS NOT NULL");
         return $this->db->resultSet();
     }
     public function cek_user($id_user, $level = null){
@@ -76,10 +76,16 @@ class UserModel{
         $this->db->query("UPDATE user SET status = ".$status." WHERE id_user = '".$id_user."'");
         return $this->db->execute();
     }
-        // Delete user
+    // Delete user
     public function hapus_user($id_user){
         $this->db->query("DELETE FROM user WHERE id_user = '".$id_user."'");
         return $this->db->execute();
+    }
+
+    // Delete arsitek
+    public function hapus_arsitek($id_user){
+    $this->db->query("DELETE FROM arsitek WHERE id_user = '".$id_user."'");
+    return $this->db->execute();
     }
 
     public function register($data)

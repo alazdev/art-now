@@ -79,7 +79,7 @@
                         </div>
                     </div>
                     <?php if ($_SESSION['level'] == 2) { ?>
-                        <br><br>
+                        <br>
                         <div class="list-group list-group-flush mb-4">
                             <div class="list-group-item bg-transparent d-flex align-items-center px-0">
                                 <h5>Dokumen</h5>
@@ -115,10 +115,26 @@
                                 </div>
                             </div>
                         </div>
+                        <br>
+                        <div>
+                            <h5>Aksi</h5>
+                            <?php if(isset($data['produk']['status']) && $data['produk']['status'] != -1) { ?>
+                                <a href="../terima_calon_arsitek/<?= $data['calon_arsitek']['id_user']; ?>" class="btn btn-success btn-block">Terima</a>
+                            <?php } ?>
+                            <?php if($data['produk']['status'] != -1) { ?>
+                                <a data-toggle="modal" data-target="#modal-tolak-calon-arsitek" onclick="tolak()" data-url="../tolak_calon_arsitek/<?= $data['calon_arsitek']['id_user']; ?>" href="javascript:void(0)" class="btn btn-danger btn-block">Tolak</a>
+                            <?php } ?>
+                        </div>
                     <?php } ?>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    function tolak(){
+        var url = $(event.currentTarget).data('url');
+        $('#form-tolak-calon-arsitek').attr('action', url);
+    }
+</script>
 <?php include(__DIR__ . '/../../layouts/footer.php'); ?>

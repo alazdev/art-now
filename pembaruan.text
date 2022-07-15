@@ -1,10 +1,24 @@
 Pembaharuan Setelah 14/07/2022 20:00
+    semua
+        01. -
 
+    Admin
+        01. Pada Menu Calon Arsitek, admin bisa memberikan alasan penolakan terhadap arsitek.
+
+    Arsitek
+        01. Menambahkan notifikasi saat mendaftar menjadi arsitek baik itu diterima atau ditolak
+
+    Pelanggan
+        01. -
+
+    *Keterangan: Belum ada SQL Baru untuk sekarang
+
+============== [Update-an Sebelumnya] ==============
 Pembaharuan Setelah Sidang Terakhir
     Semua
         01. Memperbaharui Tampilan Navbar Dasbor
         02. Memperbaharui Tampilan Icon pada setiap Menu
-        03. Memperbaharui Tampilan Chat ketika kamu / lawan bicaramu mengirim pesan
+        03. Memperbaharui Tampilan Chat ketika kamu / lawan bicara mengirim pesan
 
     Admin
         01. Memperbaharui tampilan Data Pengguna di Dasbor dan menambahkan 'Total Admin'
