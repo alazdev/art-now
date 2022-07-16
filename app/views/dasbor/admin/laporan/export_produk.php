@@ -45,9 +45,9 @@
 			<th>Tautan Video</th>
 			<th>Kategori</th>
             <th>Status Jasa</th>
-            <th>Nama Arsitek</th>
+            <!-- <th>Nama Arsitek</th>
             <th>Email Arsitek</th>
-            <th>Telepon Arsitek</th>
+            <th>Telepon Arsitek</th> -->
             <th>Dibuat Pada</th>
             <th>Diperbaharui Pada</th>
 		</tr>
@@ -80,9 +80,9 @@
                         NONAKTIF
                     <?php } ?>
                 </td>
-                <td><?= $produk['nama_lengkap']; ?></td>
+                <!-- <td><?= $produk['nama_lengkap']; ?></td>
                 <td><?= $produk['email']; ?></td>
-                <td><?= $produk['telepon']; ?></td>
+                <td><?= $produk['telepon']; ?></td> -->
                 <td><?= date('Y-m-d H:i', strtotime($produk['dibuat_pada']));?></td>
                 <td><?= date('Y-m-d H:i', strtotime($produk['diperbaharui_pada']));?></td>
             </tr>

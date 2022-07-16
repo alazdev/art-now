@@ -4,6 +4,8 @@ Pembaharuan Setelah 14/07/2022 20:00
 
     Admin
         01. Pada Menu Calon Arsitek, admin bisa memberikan alasan penolakan terhadap arsitek yang akan dikirim ke menu notifikasi dan email
+        02. Pada Menu Laporan Produk, tidak menampilkan data arsitek lagi tetapi cuman menampilkan url link profil
+        03. Pada Menu Ekspor Laporan Produk, tidak menampilkan data arsitek lagi.
 
     Arsitek
         01. Menambahkan notifikasi saat mendaftar menjadi arsitek baik itu diterima atau ditolak berupa notifikasi dan email
@@ -13,7 +15,7 @@ Pembaharuan Setelah 14/07/2022 20:00
 
     *Keterangan: 
         00. Belum ada SQL Baru untuk sekarang
-        01. Pengiriminan EMAIL masih menggunakan Mailtrap.io jadi tidak menggunakan email sungguhan (sudah tidak bisa)
+        01. Pengiriminan EMAIL masih menggunakan faker email (Mailtrap.io) jadi tidak menggunakan email sungguhan (sudah tidak bisa)
             dan Mailtrap.io juga memiliki limit. Jadi gunakan semaksimal mungkin.
 
 ============== [Update-an Sebelumnya] ==============
