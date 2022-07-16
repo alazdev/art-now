@@ -41,8 +41,14 @@ class home extends Controller
 
     public function cari()
     {
-        $cari = $_POST["cari"];
-        $data = $this->model('ProdukModel')->cari_byguest($cari);
+        $data = [];
+        if(isset(parse_url(NOWURL)['query'])) {
+            parse_str(parse_url(NOWURL)['query'], $params);
+            $cari = isset($params['cari']) ? $params['cari']:'';
+            $kategori = isset($params['kategori']) ? $params['kategori']:'';
+            $bintang = isset($params['bintang']) ? $params['bintang']:'';
+            $data = $this->model('ProdukModel')->cari_byguest($cari, $kategori, $bintang);
+        }
         $this->view('Home/cari', $data);
     }
 

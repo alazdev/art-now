@@ -5,6 +5,58 @@
 			<div class="row">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-12">
 					<div class="blog_food_health blog_topheading_slider_nav blog_topheading_style2 blog_innerpages">
+                        <?php
+                            $params = [];
+                            if(isset(parse_url(NOWURL)['query'])){
+                                parse_str(parse_url(NOWURL)['query'], $params);
+                                $cari = isset($params['cari']) ? $params['cari']:'';
+                                $kategori = isset($params['kategori']) ? $params['kategori']:'';
+                                $bintang = isset($params['bintang']) ? $params['bintang']:'';
+                            }
+                        ?>
+                        <div class="card">
+                            <div class="card-header mb-4">
+                                <h4>Cari dan Filter</h4>
+                            </div>
+                            <div class="card-body mt-4">
+                                <div class="form">
+							        <form method="GET" action="<?= BASEURL?>/home/cari">
+                                        <div class="form-group">
+                                            <label for="">Kata Kunci :</label>
+                                            <input type="text" name="cari" class="form-control" value="<?= $cari ?>">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="">Kategori</label>
+                                                    <select name="kategori" class="form-control">
+                                                        <option value="-1">Semua</option>
+                                                        <option value="1" <?= $kategori == 1 ? 'selected':'' ?>>Desain Rumah Terbaru</option>
+                                                        <option value="2" <?= $kategori == 2 ? 'selected':'' ?>>Desain Rumah Minimalis</option>
+                                                        <option value="3" <?= $kategori == 3 ? 'selected':'' ?>>Desain Rumah Mewah</option>
+                                                        <option value="4" <?= $kategori == 4 ? 'selected':'' ?>>Desain Interior</option>
+                                                        <option value="0" <?= $kategori == 0 ? 'selected':'' ?>>Desain Bangunan Lainnya</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="">Bintang</label>
+                                                    <select name="bintang" class="form-control">
+                                                        <option value="0">Semua</option>
+                                                        <option value="4" <?= $bintang == 4 ? 'selected':'' ?>>4 bintang ke atas</option>
+                                                        <option value="3" <?= $bintang == 3 ? 'selected':'' ?>>3 bintang ke atas</option>
+                                                        <option value="2" <?= $bintang == 2 ? 'selected':'' ?>>2 bintang ke atas</option>
+                                                        <option value="1" <?= $bintang == 1 ? 'selected':'' ?>>1 bintang ke atas</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-success col-md-12">Cari dan Filter</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
 						<div class="blog_technology_slider">
                             <?php foreach($data as $produk) { ?>
                                 <div class="blog_post_style2 wow fadeInUp">
