@@ -5,6 +5,21 @@
 				<div class="col-lg-12 col-md-12 col-sm-12 col-12">
 					<div class="blog_post_style2 blog_single_div">
                         <h1><?= $data['judul'] ?></h1>
+                        <p class="text-muted">
+                            <?php if($data['kategori'] == "1") { ?>
+                                Desain Rumah Terbaru
+                            <?php } else if($data['kategori'] == "2") { ?>
+                                Desain Rumah Minimalis
+                            <?php } else if($data['kategori'] == "3") { ?>
+                                Desain Rumah Mewah
+                            <?php } else if($data['kategori'] == "4") { ?>
+                                Desain Interior
+                            <?php } else if($data['kategori'] == "0") { ?>
+                                Desain Bangunan Lainnya
+                            <?php } else { ?>
+
+                            <?php } ?>
+                        </p>
 						<div class="blog_post_style2_img wow fadeInUp">
                             <?php if($data['gambar'] != null ) {?>
 							    <img src="<?= BASEURL.'/image/produk/'.$data['gambar']?>" class="img-fluid col-12" alt="" style="">
@@ -19,30 +34,51 @@
                             <?php } ?>
 							<?= $data['deskripsi'] ?>
                             <br/>
-                            <p>- Kategori Produk: 
-                                <?php if($data['kategori'] == "1") { ?>
-                                    Desain Rumah Terbaru
-                                <?php } else if($data['kategori'] == "2") { ?>
-                                    Desain Rumah Minimalis
-                                <?php } else if($data['kategori'] == "3") { ?>
-                                    Desain Rumah Mewah
-                                <?php } else if($data['kategori'] == "4") { ?>
-                                    Desain Interior
-                                <?php } else if($data['kategori'] == "0") { ?>
-                                    Desain Bangunan Lainnya
+                            <p>- Harga Jasa: Rp <?= number_format($data['harga'],0,',','.') ?></p>
+                            <div class="mb-4">
+                                <?php if ($data['rating'] >= 1.0) { ?>
+                                    <i class="fa fa-star fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php } else if ($data['rating'] >= 0.1) { ?>
+                                    <i class="fa fa-star-half-o fa-2x" aria-hidden="true" style="color: yellow;"></i>
                                 <?php } else { ?>
-
+                                    <i class="fa fa-star-o fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php }
+                                    if ($data['rating'] >= 2.0) { ?>
+                                    <i class="fa fa-star fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php } else if ($data['rating'] >= 1.1) { ?>
+                                    <i class="fa fa-star-half-o fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php } else { ?>
+                                    <i class="fa fa-star-o fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php }
+                                    if ($data['rating'] >= 3.0) { ?>
+                                    <i class="fa fa-star fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php } else if ($data['rating'] >= 2.1) { ?>
+                                    <i class="fa fa-star-half-o fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php } else { ?>
+                                    <i class="fa fa-star-o fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php }
+                                    if ($data['rating'] >= 4.0) { ?>
+                                    <i class="fa fa-star fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php } else if ($data['rating'] >= 3.1) { ?>
+                                    <i class="fa fa-star-half-o fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php } else { ?>
+                                    <i class="fa fa-star-o fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php } if ($data['rating'] == 5) { ?>
+                                    <i class="fa fa-star fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php } else if ($data['rating'] >= 4.1) { ?>
+                                    <i class="fa fa-star-half-o fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php } else { ?>
+                                    <i class="fa fa-star-o fa-2x" aria-hidden="true" style="color: yellow;"></i>
                                 <?php } ?>
-                            </p>
-                            <p>- Penilaian Produk: <?= number_format($data['rating'],1,'.',',') ?>/5 dari total <?= $data['total_rating'] ?> penilaian.</p>
-                            <p>- Harga Jasa: <?= number_format($data['harga'],0,',','.') ?></p>
-                            <div class="col-md-12">
+                                <p><?= number_format($data['rating'],1,'.',',') ?>/5 dari total <?= $data['total_rating'] ?> penilaian.</p>
+                            </div>
+                            <div class="col-md-12 mt-4">
                                 <?php if (isset($_SESSION['email'])) { if($_SESSION['level'] == 0 && $data['status'] == 1) { ?>
                                     <a href="<?= BASEURL.'/pengguna/pesan/'.$data['id_produk']?>" class="btn btn-primary col-md-12">Pesan Sekarang</a>
                                 <?php } } if($data['status'] == 0) { ?>
                                     <a href="#" class="btn btn-danger col-md-12">Produk Tidak AKtif</a>
                                 <?php } ?>
-                            <a href="<?= BASEURL ?>/dokumen/produk/<?= $data['dokumen'] ?>" class="col-12 btn btn-light btn-block" download="Desain <?= $data['judul'] ?>">Unduh Desain</a>
+                            <a href="<?= BASEURL ?>/dokumen/produk/<?= $data['dokumen'] ?>" class="col-12 btn btn-light btn-block m-4" download="Desain <?= $data['judul'] ?>">Unduh Desain</a>
                             </div>
                         </div>
 					</div>

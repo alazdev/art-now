@@ -14,6 +14,10 @@
     <link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/assets-user/js/plugins/swiper/swiper.css">
     <link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/assets-user/js/plugins/magnific/magnific-popup.css">
     <link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/assets-user/css/style.css">
+    <!-- Font Awesome FREE Icons -->
+    <link type="text/css" href="<?= BASEURL; ?>/assets-admin/css/vendor-fontawesome-free.css" rel="stylesheet">
+    <link type="text/css" href="<?= BASEURL; ?>/assets-admin/css/vendor-fontawesome-free.rtl.css" rel="stylesheet">
+
     <!-- Favicon Link -->
     <link rel="shortcut icon" type="image/png" href="<?= BASEURL; ?>/assets-user/images/favicon.png">
 </head>

@@ -13,9 +13,46 @@
 						</div>
 						<div class="blog_author_content">
 							<h3><?= $data['nama_lengkap'] ?></h3>
-							<p><?= $data['nama_lengkap'] ?> memiliki penilaian <?= number_format($data['rating'], 1, '.', ',') ?>/5 dari <?= $data['total_rating'] ?> total penilaian. Telah berkontribusi dan bekerja sama dengan ArtNow sejak <?= date('d F Y', strtotime($data['dibuat_pada'])) ?></p>
+                            <div class="mb-4">
+                                <?php if ($data['rating'] >= 1.0) { ?>
+                                    <i class="fa fa-star fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php } else if ($data['rating'] >= 0.1) { ?>
+                                    <i class="fa fa-star-half-o fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php } else { ?>
+                                    <i class="fa fa-star-o fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php }
+                                    if ($data['rating'] >= 2.0) { ?>
+                                    <i class="fa fa-star fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php } else if ($data['rating'] >= 1.1) { ?>
+                                    <i class="fa fa-star-half-o fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php } else { ?>
+                                    <i class="fa fa-star-o fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php }
+                                    if ($data['rating'] >= 3.0) { ?>
+                                    <i class="fa fa-star fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php } else if ($data['rating'] >= 2.1) { ?>
+                                    <i class="fa fa-star-half-o fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php } else { ?>
+                                    <i class="fa fa-star-o fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php }
+                                    if ($data['rating'] >= 4.0) { ?>
+                                    <i class="fa fa-star fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php } else if ($data['rating'] >= 3.1) { ?>
+                                    <i class="fa fa-star-half-o fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php } else { ?>
+                                    <i class="fa fa-star-o fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php } if ($data['rating'] == 5) { ?>
+                                    <i class="fa fa-star fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php } else if ($data['rating'] >= 4.1) { ?>
+                                    <i class="fa fa-star-half-o fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php } else { ?>
+                                    <i class="fa fa-star-o fa-2x" aria-hidden="true" style="color: yellow;"></i>
+                                <?php } ?>
+                                <p><?= number_format($data['rating'],1,'.',',') ?>/5 dari total <?= $data['total_rating'] ?> penilaian.</p>
+                            </div>
+							<p><?= $data['nama_lengkap'] ?> telah berkontribusi dan bekerja sama dengan ArtNow sejak <?= date('d F Y', strtotime($data['dibuat_pada'])) ?></p>
                             <?php if(isset($_SESSION['email'])) { ?>
-                                <div class="col-md-12">
+                                <div class="col-md-12 mt-4">
                                     <?php if($_SESSION['level'] == 0){?>
                                         <a href="<?= BASEURL.'/chat/index?ke='.$data['id_user']?>" class="btn btn-warning col-md-12">Chat Arsitek</a>
                                     <?php } ?>
@@ -99,11 +136,8 @@
 									<ul class="blog_meta_tags">
 										<li>
 											<span class="blog_bg_blue" height="25px">
-												<svg xmlns="http://www.w3.org/2000/svg" width="21px" height="21px">
-													<path fill-rule="evenodd"  fill="rgb(255, 255, 255)" d="M0,0.054V20h21V0.054H0z M15.422,18.129l-5.264-2.768l-5.265,2.768l1.006-5.863L1.64,8.114l5.887-0.855
-														l2.632-5.334l2.633,5.334l5.885,0.855l-4.258,4.152L15.422,18.129z"/>
-												</svg>
-												 <?= number_format($produk['rating'], 1).'/5'?>
+                                                <i class="fa fa-star mx-4"></i>
+												  <?= number_format($produk['rating'], 1).'/5'?>
 											</span>
 										</li>
 									</ul>
