@@ -22,10 +22,10 @@ class ProdukModel{
     }
     public function cari_byguest($cari, $kategori, $bintang){
         $kategori_query = $bintang_query = '';
-        if($kategori >= 0 && $kategori <= 5){
-            $kategori_query = ' AND (kategori = '.$kategori.')';
+        if($kategori && $kategori >= 0 && $kategori <= 5){
+            $kategori_query = ' AND (kategori = "'.$kategori.'")';
         }
-        if($bintang > 0 && $bintang < 6){
+        if($bintang && $bintang > 0 && $bintang < 6){
             $bintang_query = ' HAVING rating >= '.$bintang.'';
         }
         $this->db->query("SELECT produk.*, user.nama_lengkap, user.foto, (SELECT avg(rating) FROM rating WHERE rating.id_produk = produk.id_produk ) AS rating, (SELECT count(rating) FROM rating WHERE rating.id_produk = produk.id_produk ) AS total_rating FROM produk LEFT JOIN user ON produk.id_user = user.id_user LEFT JOIN arsitek ON user.id_user = arsitek.id_arsitek WHERE (produk.status = 1 AND user.status = 1) AND (nama_lengkap LIKE '%".$cari."%' OR user.email LIKE '%".$cari."%' OR user.telepon LIKE '%".$cari."%' OR arsitek.alamat LIKE '%".$cari."%' OR arsitek.deskripsi LIKE '%".$cari."%' OR produk.deskripsi LIKE '%".$cari."%' OR produk.judul LIKE '%".$cari."%')".$kategori_query.$bintang_query);
