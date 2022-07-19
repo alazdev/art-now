@@ -61,10 +61,16 @@
                                     <td><a href="<?= BASEURL.'/user/profile_arsitek/'.$pesanan['id_arsitek'];?>"><?= $pesanan['nama_lengkap_arsitek']; ?></a></td>
                                     <td><a href="<?= BASEURL.'/home/produk/'.$pesanan['id_produk'];?>"><?= $pesanan['judul']; ?></a></td>
                                     <td align="center">
-                                        <?php if($pesanan['status'] == -1 ) { ?>
+                                        <?php if($pesanan['status'] == -2 ) { ?>
+                                            <span class="badge badge-danger">PESANAN DIBATALKAN</span>
+                                        <?php } else if($pesanan['status'] == -1 ) { ?>
                                             <span class="badge badge-danger">PERMINTAAN PESANAN DITOLAK ARSITEK</span>
                                         <?php } else if($pesanan['status'] == 0 ) { ?>
+                                            <?php if($pesanan['tawaran_harga'] <= 0 ) { ?>
                                             <span class="badge badge-info">MENUNGGU KONFIRMASI ARSITEK</span>
+                                            <?php } else { ?>
+                                            <span class="badge badge-info">MENUNGGU DIKONFIRMASI</span>
+                                            <?php } ?>
                                         <?php } else if($pesanan['status'] == 1 ) { ?>
                                             <span class="badge badge-warning">SEDANG MENGERJAKAN PROYEK DENGAN ARSITEK</span>
                                             <?php if($pesanan['status_pembayaran_dp'] == NULL) { ?>
@@ -99,11 +105,15 @@
                                         <?php } else if($pesanan['status'] == 2 ) { ?>
                                             <a href="pembayaran_pesanan/<?= $pesanan['id_pesanan']; ?>" class="text-warning"><i class="material-icons">payment</i> Bayar</a>
                                         <?php } else if($pesanan['status'] == 0 ) { ?>
-                                            <a onclick="deleteData()" href="#"
-                                                data-value="<?= $pesanan['id_pesanan']; ?>" data-judul="<?= $pesanan['judul']; ?>"
-                                                data-toggle="modal" data-target="#modal-delete" class="text-danger">
-                                                    <i class="material-icons">delete</i> Batalkan
-                                            </a>
+                                            <?php if($pesanan['tawaran_harga'] <= 0 ) { ?>
+                                                <a onclick="deleteData()" href="#"
+                                                    data-value="<?= $pesanan['id_pesanan']; ?>" data-judul="<?= $pesanan['judul']; ?>"
+                                                    data-toggle="modal" data-target="#modal-delete" class="text-danger">
+                                                        <i class="material-icons">delete</i> Batalkan
+                                                </a>
+                                            <?php } else { ?>
+                                                <a href="detail_pesanan/<?= $pesanan['id_pesanan']; ?>" class="text-muted"><i class="material-icons">receipt</i> Detail Tawaran</a>
+                                            <?php } ?>
                                         <?php } ?>
                                     </td>
                                 </tr>

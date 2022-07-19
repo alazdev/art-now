@@ -62,6 +62,10 @@ class PesananModel{
         $this->db->query("SELECT pesanan.*, user.nama_lengkap, produk.judul, (SELECT pembayaran.status FROM pembayaran WHERE pembayaran.id_pesanan = pesanan.id_pesanan AND pembayaran.pembayaran=-1 LIMIT 1) as status_pembayaran_dp, (SELECT pembayaran.status FROM pembayaran WHERE pembayaran.id_pesanan = pesanan.id_pesanan AND pembayaran.pembayaran=1 LIMIT 1) as status_pembayaran FROM pesanan LEFT JOIN user on user.id_user = pesanan.id_user LEFT JOIN produk ON produk.id_produk = pesanan.id_produk WHERE produk.id_user = '".$this->cek_user()['id_user']."' ORDER BY pesanan.dibuat_pada DESC");
         return $this->db->resultSet();
     }
+    public function detail($id_pesanan){
+        $this->db->query("SELECT pesanan.*, user.nama_lengkap, produk.judul, produk.harga, produk.kategori, (SELECT pembayaran.status FROM pembayaran WHERE pembayaran.id_pesanan = pesanan.id_pesanan AND pembayaran.pembayaran=-1 LIMIT 1) as status_pembayaran_dp, (SELECT pembayaran.status FROM pembayaran WHERE pembayaran.id_pesanan = pesanan.id_pesanan AND pembayaran.pembayaran=1 LIMIT 1) as status_pembayaran FROM pesanan LEFT JOIN user on user.id_user = pesanan.id_user LEFT JOIN produk ON produk.id_produk = pesanan.id_produk WHERE produk.id_user = '".$this->cek_user()['id_user']."' AND pesanan.id_pesanan = '".$id_pesanan."'");
+        return $this->db->single();
+    }
 
     // Untuk pengguna
     public function semua_bypengguna(){
@@ -73,7 +77,7 @@ class PesananModel{
         return $this->db->resultSet();
     }
     public function pesanan_bypengguna($id_pesanan){
-        $this->db->query("SELECT pesanan.*, user.nama_lengkap as nama_lengkap_arsitek, user.id_user as id_arsitek, produk.judul, produk.harga FROM pesanan LEFT JOIN produk ON produk.id_produk = pesanan.id_produk LEFT JOIN user on user.id_user = produk.id_user WHERE pesanan.id_user = '".$this->cek_user()['id_user']."' AND pesanan.id_pesanan = ".$id_pesanan."");
+        $this->db->query("SELECT pesanan.*, user.nama_lengkap as nama_lengkap_arsitek, user.id_user as id_arsitek, produk.judul, produk.harga, produk.kategori FROM pesanan LEFT JOIN produk ON produk.id_produk = pesanan.id_produk LEFT JOIN user on user.id_user = produk.id_user WHERE pesanan.id_user = '".$this->cek_user()['id_user']."' AND pesanan.id_pesanan = ".$id_pesanan."");
         return $this->db->single();
     }
     public function hapus($id_pesanan){
@@ -81,21 +85,28 @@ class PesananModel{
         return $this->db->execute();
     }
 
-    public function pesanan($id_produk){
-        $this->db->query("SELECT pesanan.*, user.nama_lengkap, produk.judul FROM pesanan LEFT JOIN user on user.id_user = pesanan.id_user LEFT JOIN produk ON produk.id_produk = pesanan.id_produk WHERE produk.id_user = '".$this->cek_user()['id_user']."'");
+    public function pesanan($id_pesanan){
+        $this->db->query("SELECT pesanan.*, user.nama_lengkap, produk.judul, produk.id_user as id_arsitek FROM pesanan LEFT JOIN user on user.id_user = pesanan.id_user LEFT JOIN produk ON produk.id_produk = pesanan.id_produk WHERE id_pesanan='".$id_pesanan."' AND produk.id_user = '".$this->cek_user()['id_user']."'");
         return $this->db->single();
     }
 
     public function tambah($data)
     {
         $user = $this->cek_user();
-        $this->db->query('INSERT INTO pesanan (id_user, id_produk, status, dibuat_pada, diperbaharui_pada) VALUES(:id_user, :id_produk, :status, :dibuat_pada, :diperbaharui_pada)');
+        $this->db->query('INSERT INTO pesanan (id_user, id_produk, luas_tanah, detail, status, dibuat_pada, diperbaharui_pada) VALUES(:id_user, :id_produk, :luas_tanah, :detail, :status, :dibuat_pada, :diperbaharui_pada)');
         $this->db->bind('id_user',$user['id_user']);
         $this->db->bind('id_produk',$data['id_produk']);
+        $this->db->bind('luas_tanah',$data['luas_tanah']);
+        $this->db->bind('detail',$data['detail']);
         $this->db->bind('status',$data['status']);
         $this->db->bind('dibuat_pada',date("Y-m-d H:i:s"));
         $this->db->bind('diperbaharui_pada',date("Y-m-d H:i:s"));
         $this->db->execute();
+    }
+
+    public function update_tawaran($id_pesanan, $tawaran_harga){
+        $this->db->query("UPDATE pesanan SET tawaran_harga = ".$tawaran_harga.", diperbaharui_pada = '".date("Y-m-d H:i:s")."' WHERE id_pesanan = '".$id_pesanan."'");
+        return $this->db->execute();
     }
 
     public function update_status($id_pesanan, $status){

@@ -34,7 +34,7 @@
                             <?php } ?>
 							<?= $data['deskripsi'] ?>
                             <br/>
-                            <p>- Harga Jasa: Rp <?= number_format($data['harga'],0,',','.') ?></p>
+                            <p>- Harga Jasa: mulai dari Rp <?= number_format($data['harga'],0,',','.') ?></p>
                             <div class="mb-4">
                                 <?php if ($data['rating'] >= 1.0) { ?>
                                     <i class="fa fa-star fa-2x" aria-hidden="true" style="color: yellow;"></i>
@@ -72,13 +72,37 @@
                                 <?php } ?>
                                 <p><?= number_format($data['rating'],1,'.',',') ?>/5 dari total <?= $data['total_rating'] ?> penilaian.</p>
                             </div>
-                            <div class="col-md-12 mt-4">
+                            <div class="col-md-12">
                                 <?php if (isset($_SESSION['email'])) { if($_SESSION['level'] == 0 && $data['status'] == 1) { ?>
-                                    <a href="<?= BASEURL.'/pengguna/pesan/'.$data['id_produk']?>" class="btn btn-primary col-md-12">Pesan Sekarang</a>
+                                    <a onclick="showForm()" href="javascript:void(0);" class="btn btn-primary col-md-12 btn-pesan" style="margin-bottom: 18px;">Pesan Sekarang</a>
+                                    <div class="form-pesan card" style="margin-bottom: 18px;">
+                                        <div class="card-body">
+                                            <form action="<?= BASEURL.'/pengguna/pesan/'.$data['id_produk']?>" method="post">
+                                                <h3>Formulir Pesanan</h3>
+                                                <div class="form-group">
+                                                    <label for="luas-tanah">Luas Tanah</label>
+                                                    <input type="number" name="luas_tanah" class="form-control" id="luas-tanah" placeholder="Masukkan luas tanah dalam ukuran meter persegi (m²)" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="detail">Detail</label>
+                                                    <textarea name="detail" class="form-control" id="detail" rows="8" placeholder="Masukkan detail lingkungan dan desain yang Kamu inginkan secara jelas dan sedetail mungkin" required></textarea>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6 col-12">
+                                                        <a onclick="hideForm()" href="javascript:void(0);" class="col-12 btn btn-light">Batalkan</a>
+                                                    </div>
+                                                    <div class="col-md-6 col-12">
+                                                        <button type="submit" class="col-12 btn btn-primary">Pesan</a>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <hr>
                                 <?php } } if($data['status'] == 0) { ?>
                                     <a href="#" class="btn btn-danger col-md-12">Produk Tidak AKtif</a>
                                 <?php } ?>
-                            <a href="<?= BASEURL ?>/dokumen/produk/<?= $data['dokumen'] ?>" class="col-12 btn btn-light btn-block m-4" download="Desain <?= $data['judul'] ?>">Unduh Desain</a>
+                                <a href="<?= BASEURL ?>/dokumen/produk/<?= $data['dokumen'] ?>" class="col-12 btn btn-secondary btn-block" download="Desain <?= $data['judul'] ?>">Unduh Sampel Desain</a>
                             </div>
                         </div>
 					</div>

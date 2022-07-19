@@ -44,6 +44,8 @@ class pengguna extends Controller
                 $data = [
                     'id_user' => $_SESSION['id_user'],
                     'id_produk' => $id_produk,
+                    'luas_tanah' => $_POST['luas_tanah'],
+                    'detail' => $_POST['detail'],
                     'status' => 0
                 ];
                 $this->model('PesananModel')->tambah($data);
@@ -56,6 +58,54 @@ class pengguna extends Controller
                 $this->model('NotifikasiModel')->notifikasi($pesan);
                 $this->alert('Berhasil memesan, harap tunggu konfirmasi dari arsitek.', 'pengguna/index');
             }
+        }else{
+            $this->controller('alert')->message('Not Found', '404 | Not Found');
+        }
+    }
+
+    public function detail_pesanan($id_pesanan)
+    {
+        $data = $this->model('PesananModel')->pesanan_bypengguna($id_pesanan);
+        $this->view('dasbor/pengguna/detail_pesanan', $data);
+    }
+
+    public function terima_pesanan($id_pesanan)
+    {
+        $pesanan = $this->model('PesananModel')->pesanan_bypengguna($id_pesanan);
+        if($pesanan != null){
+            if($this->model('PesananModel')->cek_pesanan(1) == null){
+                $this->model('PesananModel')->update_status($id_pesanan, 1);
+                
+                $pesan = [
+                    'id_user' => $pesanan['id_arsitek'],
+                    'judul' => 'Tawaran Pesananan Diterima Pelanggan',
+                    'keterangan' => 'Tawaran pesanan dengan Produk <a href="'.BASEURL.'/arsitek/detail_produk/'.$pesanan['id_produk'].'">'.$pesanan['judul'].'</a> diterima pelanggan. Cek menu pesanan sekarang dan lakukan aksi selanjutnya!',
+                    'link' => '/arsitek/pesanan'
+                ];
+                $this->model('NotifikasiModel')->notifikasi($pesan);
+                $this->route('arsitek/pesanan');
+            } else {
+                $this->alert('Anda hanya bisa memiliki 1 pesanan yang bisa diproses.', 'pengguna/index');
+            }
+        }else{
+            $this->controller('alert')->message('Not Found', '404 | Not Found');
+        }
+    }
+
+    public function tolak_pesanan($id_pesanan)
+    {
+        $pesanan = $this->model('PesananModel')->pesanan_bypengguna($id_pesanan);
+        if($pesanan != null){
+            $this->model('PesananModel')->update_status($id_pesanan, -2);
+
+            $pesan = [
+                'id_user' => $pesanan['id_arsitek'],
+                'judul' => 'Tawaran Dibatalkan Pleanggan',
+                'keterangan' => 'Tawaran pesanan dengan Produk <a href="'.BASEURL.'/arsitek/detail_produk/'.$pesanan['id_produk'].'">'.$pesanan['judul'].'</a> dibatalkan pelanggan.',
+                'link' => 'arsitek/pesanan'
+            ];
+            $this->model('NotifikasiModel')->notifikasi($pesan);
+            $this->route('pengguna/index');
         }else{
             $this->controller('alert')->message('Not Found', '404 | Not Found');
         }
@@ -118,7 +168,7 @@ class pengguna extends Controller
             }else{
                 $data += [
                     'id_pesanan' => $id_pesanan,
-                    'total_dibayar' => $this->model('PesananModel')->pesanan_bypengguna($id_pesanan)['harga']*20/100,
+                    'total_dibayar' => 2000000,
                     'pembayaran' => -1,
                     'status' => 0,
                 ];
@@ -184,7 +234,7 @@ class pengguna extends Controller
             }else{
                 $data += [
                     'id_pesanan' => $id_pesanan,
-                    'total_dibayar' => $this->model('PesananModel')->pesanan_bypengguna($id_pesanan)['harga']*80/100,
+                    'total_dibayar' => $this->model('PesananModel')->pesanan_bypengguna($id_pesanan)['tawaran_harga']-2000000,
                     'pembayaran' => 1,
                     'status' => 0,
                 ];

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 19, 2022 at 02:39 PM
+-- Generation Time: Jun 09, 2022 at 01:33 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.4.20
 
@@ -60,20 +60,6 @@ CREATE TABLE `artikel` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `desain`
---
-
-CREATE TABLE `desain` (
-  `id_desain` int(11) NOT NULL,
-  `id_pesanan` int(11) NOT NULL,
-  `dokumen` varchar(100) NOT NULL,
-  `tautan` text NOT NULL,
-  `dibuat_pada` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `komen`
 --
 
@@ -81,22 +67,6 @@ CREATE TABLE `komen` (
   `id_komen` int(11) NOT NULL,
   `id_reply_komen` int(11) DEFAULT NULL,
   `id_produk` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `komen` text NOT NULL,
-  `dibuat_pada` timestamp NULL DEFAULT NULL,
-  `diperbaharui_pada` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `komen_artikel`
---
-
-CREATE TABLE `komen_artikel` (
-  `id_komen` int(11) NOT NULL,
-  `id_reply_komen` int(11) DEFAULT NULL,
-  `id_artikel` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `komen` text NOT NULL,
   `dibuat_pada` timestamp NULL DEFAULT NULL,
@@ -143,9 +113,8 @@ CREATE TABLE `pembayaran` (
 --
 
 CREATE TABLE `permintaan_penarikan` (
-  `id_permintaan_penarikan` bigint(20) NOT NULL,
-  `id_user` bigint(20) NOT NULL,
-  `bukti` varchar(100) DEFAULT NULL,
+  `id_permintaan_penarikan` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
   `status` int(11) NOT NULL DEFAULT 0,
   `dibuat_pada` datetime DEFAULT current_timestamp(),
   `diperbaharui_pada` datetime DEFAULT current_timestamp()
@@ -177,9 +146,6 @@ CREATE TABLE `pesanan` (
   `id_pesanan` int(11) NOT NULL,
   `id_produk` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `luas_tanah` int(11) NOT NULL,
-  `detail` text NOT NULL,
-  `tawaran_harga` bigint(20) NOT NULL DEFAULT 0,
   `status` tinyint(1) NOT NULL,
   `dibuat_pada` timestamp NULL DEFAULT NULL,
   `diperbaharui_pada` timestamp NULL DEFAULT NULL
@@ -228,7 +194,7 @@ CREATE TABLE `rating` (
 --
 
 CREATE TABLE `rekening_bank` (
-  `id_rekening` bigint(20) NOT NULL,
+  `id_rekening` int(11) NOT NULL,
   `logo` varchar(100) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `nomor` bigint(20) NOT NULL,
@@ -251,8 +217,8 @@ INSERT INTO `rekening_bank` (`id_rekening`, `logo`, `nama`, `nomor`, `pemegang`,
 --
 
 CREATE TABLE `saldo` (
-  `id_saldo` bigint(20) NOT NULL,
-  `id_user` bigint(20) NOT NULL,
+  `id_saldo` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
   `nominal` bigint(20) NOT NULL,
   `keterangan` varchar(50) NOT NULL,
   `dibuat_pada` datetime NOT NULL DEFAULT current_timestamp()
@@ -282,7 +248,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `email`, `password`, `level`, `nama_lengkap`, `telepon`, `foto`, `status`, `dibuat_pada`, `diperbaharui_pada`) VALUES
-(1, 'admin@gmail.com', '5c90b96a75d4f9d5a1cfaa6f532afdc8', 2, 'Super Admin', '085156055277', NULL, 1, '2021-11-19 10:02:06', '2022-07-04 09:25:54');
+(1, 'admin@gmail.com', '5c90b96a75d4f9d5a1cfaa6f532afdc8', 2, 'Super Admin', '085156055277', NULL, 1, '2021-11-19 10:02:06', '2021-11-19 10:04:48');
 
 --
 -- Indexes for dumped tables
@@ -303,13 +269,6 @@ ALTER TABLE `artikel`
   ADD PRIMARY KEY (`id_artikel`);
 
 --
--- Indexes for table `desain`
---
-ALTER TABLE `desain`
-  ADD PRIMARY KEY (`id_desain`),
-  ADD KEY `id_pesanan` (`id_pesanan`);
-
---
 -- Indexes for table `komen`
 --
 ALTER TABLE `komen`
@@ -317,15 +276,6 @@ ALTER TABLE `komen`
   ADD KEY `id_reply_komen` (`id_reply_komen`),
   ADD KEY `id_produk` (`id_produk`),
   ADD KEY `id_user` (`id_user`);
-
---
--- Indexes for table `komen_artikel`
---
-ALTER TABLE `komen_artikel`
-  ADD PRIMARY KEY (`id_komen`),
-  ADD KEY `id_reply_komen` (`id_reply_komen`),
-  ADD KEY `id_user` (`id_user`),
-  ADD KEY `id_artikel` (`id_artikel`) USING BTREE;
 
 --
 -- Indexes for table `notifikasi`
@@ -345,7 +295,8 @@ ALTER TABLE `pembayaran`
 -- Indexes for table `permintaan_penarikan`
 --
 ALTER TABLE `permintaan_penarikan`
-  ADD PRIMARY KEY (`id_permintaan_penarikan`);
+  ADD PRIMARY KEY (`id_permintaan_penarikan`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indexes for table `pesan`
@@ -388,7 +339,8 @@ ALTER TABLE `rekening_bank`
 -- Indexes for table `saldo`
 --
 ALTER TABLE `saldo`
-  ADD PRIMARY KEY (`id_saldo`);
+  ADD PRIMARY KEY (`id_saldo`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indexes for table `user`
@@ -415,21 +367,9 @@ ALTER TABLE `artikel`
   MODIFY `id_artikel` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `desain`
---
-ALTER TABLE `desain`
-  MODIFY `id_desain` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `komen`
 --
 ALTER TABLE `komen`
-  MODIFY `id_komen` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `komen_artikel`
---
-ALTER TABLE `komen_artikel`
   MODIFY `id_komen` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -448,7 +388,7 @@ ALTER TABLE `pembayaran`
 -- AUTO_INCREMENT for table `permintaan_penarikan`
 --
 ALTER TABLE `permintaan_penarikan`
-  MODIFY `id_permintaan_penarikan` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_permintaan_penarikan` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pesan`
@@ -478,19 +418,19 @@ ALTER TABLE `rating`
 -- AUTO_INCREMENT for table `rekening_bank`
 --
 ALTER TABLE `rekening_bank`
-  MODIFY `id_rekening` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_rekening` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `saldo`
 --
 ALTER TABLE `saldo`
-  MODIFY `id_saldo` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_saldo` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- Constraints for dumped tables
@@ -503,24 +443,11 @@ ALTER TABLE `arsitek`
   ADD CONSTRAINT `arsitek_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `desain`
---
-ALTER TABLE `desain`
-  ADD CONSTRAINT `desain_ibfk_1` FOREIGN KEY (`id_pesanan`) REFERENCES `pesanan` (`id_pesanan`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `komen`
 --
 ALTER TABLE `komen`
   ADD CONSTRAINT `komen_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `komen_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `komen_artikel`
---
-ALTER TABLE `komen_artikel`
-  ADD CONSTRAINT `komen_artikel_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `komen_artikel_ibfk_2` FOREIGN KEY (`id_artikel`) REFERENCES `artikel` (`id_artikel`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `notifikasi`
@@ -533,6 +460,12 @@ ALTER TABLE `notifikasi`
 --
 ALTER TABLE `pembayaran`
   ADD CONSTRAINT `pembayaran_ibfk_1` FOREIGN KEY (`id_pesanan`) REFERENCES `pesanan` (`id_pesanan`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `permintaan_penarikan`
+--
+ALTER TABLE `permintaan_penarikan`
+  ADD CONSTRAINT `permintaan_penarikan_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
 
 --
 -- Constraints for table `pesan`
@@ -560,6 +493,12 @@ ALTER TABLE `produk`
 ALTER TABLE `rating`
   ADD CONSTRAINT `rating_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `rating_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `saldo`
+--
+ALTER TABLE `saldo`
+  ADD CONSTRAINT `saldo_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

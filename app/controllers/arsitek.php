@@ -315,6 +315,11 @@ class arsitek extends Controller
         $this->controller('pesanan')->index();
     }
 
+    public function detail_pesanan($id_pesanan)
+    {
+        $this->controller('pesanan')->detail($id_pesanan);
+    }
+
     public function laporan_pesanan()
     {
         $this->controller('pesanan')->laporan();
@@ -322,7 +327,7 @@ class arsitek extends Controller
 
     public function terima_pesanan($id_pesanan)
     {
-        $this->controller('pesanan')->terima($id_pesanan);
+        $this->controller('pesanan')->terima($id_pesanan, $_POST['tawaran_harga']);
     }
 
     public function tolak_pesanan($id_pesanan)

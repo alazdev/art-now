@@ -11,6 +11,12 @@ class pesanan extends arsitek
         $this->view('dasbor/arsitek/pesanan/index', $data);
     }
 
+    public function detail($id_pesanan)
+    {
+        $data = $this->model('PesananModel')->detail($id_pesanan);
+        $this->view('dasbor/arsitek/pesanan/detail', $data);
+    }
+
     public function laporan()
     {
         $data = [
@@ -19,17 +25,17 @@ class pesanan extends arsitek
         $this->view('dasbor/arsitek/pesanan/laporan', $data);
     }
 
-    public function terima($id_pesanan)
+    public function terima($id_pesanan, $tawaran_harga)
     {
         $pesanan = $this->model('PesananModel')->pesanan($id_pesanan);
         if($pesanan != null){
             if($this->model('PesananModel')->cek_pesanan(1) == null){
-                $this->model('PesananModel')->update_status($id_pesanan, 1);
+                $this->model('PesananModel')->update_tawaran($id_pesanan, $tawaran_harga, 1);
                 
                 $pesan = [
                     'id_user' => $pesanan['id_user'],
-                    'judul' => 'Pesanan Diterima',
-                    'keterangan' => 'Pesanan Anda kepada Arsitek dengan Produk <a href="'.BASEURL.'/home/produk/'.$pesanan['id_produk'].'">'.$pesanan['judul'].'</a> telah diterima. Cek menu pesanan sekarang!',
+                    'judul' => 'Tawaran Pesananan Sudah Ditentukan Arsitek',
+                    'keterangan' => 'Pesanan Anda kepada Arsitek dengan Produk <a href="'.BASEURL.'/home/produk/'.$pesanan['id_produk'].'">'.$pesanan['judul'].'</a> telah memiliki tawaran harga. Cek menu pesanan sekarang dan lakukan aksi selanjutnya!',
                     'link' => '/pengguna/index'
                 ];
                 $this->model('NotifikasiModel')->notifikasi($pesan);

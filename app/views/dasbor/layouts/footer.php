@@ -227,7 +227,7 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
 <script>
-    (function() {
+    $(function() {
         // Alasan Penolakan
         $('#alasan-tolak-calon-arsitek').val('deskripsi').change();
         $('#alasan-tolak-calon-arsitek').on('change', function(){

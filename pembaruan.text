@@ -6,14 +6,19 @@ Pembaharuan Setelah 16/07/2022 20:00
         01. Penambahan komentar di detail artikel
 
     Arsitek
-        01. 
+        01. Minimal harga produk sekarang adalah 5juta
+        02. Sekarang Arsitek perlu menyampaikan tawaran harga kepada pelanggan sebelum diterima pelanggan
+        03. DP sekarang bernilai absolut yaitu 2juta
+        04. Pembayaran kedua bernilai (tawaran harga dikurang 2 juta)
 
     Pelanggan
         01. Memperbaharui rating/bintang dihalaman depan
         02. Penambahan kolom komentar di artikel
+        03. Pelanggan harus mengisi form luas tanah dan detail desain yang diinginkan
+        04. Setelah mendapatkan tawaran harga dari arsitek, pelanggan perlu melakukan aksi lebih lanjut
 
     *Keterangan:
-        01. 
+        01. SQL Baru v6.0
 
 Pembaharuan Setelah 14/07/2022 20:00
     Semua

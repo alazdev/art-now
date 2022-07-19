@@ -77,7 +77,9 @@
                     "columns": [
                         {data : 'status', render: function ( data, type, row ) {
                             var status = '';
-                            if(row.status == -1) {
+                            if(row.status == -2) {
+                                status = '<span class="badge badge-danger">PESANAN DIBATALKAN PELANGGAN</span>';
+                            }else if(row.status == -1) {
                                 status = '<span class="badge badge-danger">PERMINTAAN PESANAN DITOLAK ARSITEK</span>';
                             } else if(row.status == 0) {
                                 status = '<span class="badge badge-info">MENUNGGU KONFRIMASI PERMINTAAN OLEH ARSITEK</span>';

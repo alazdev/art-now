@@ -20,6 +20,20 @@
 <script src="<?= BASEURL; ?>/assets-user/js/plugins/swiper/swiper.min.js"></script>
 <script src="<?= BASEURL; ?>/assets-user/js/plugins/magnific/jquery.magnific-popup.min.js"></script>
 <script src="<?= BASEURL; ?>/assets-user/js/wow.min.js"></script>
+<script>
+    $(function(){
+        // Pesanan
+        hideForm();
+    });
+    function showForm(){
+        $('.btn-pesan').hide();
+        $('.form-pesan').show();
+    }
+    function hideForm(){
+        $('.btn-pesan').show();
+        $('.form-pesan').hide();
+    }
+</script>
 <script src="<?= BASEURL; ?>/assets-user/js/custom.js"></script>
 <!--Main js file Style-->
 </body>

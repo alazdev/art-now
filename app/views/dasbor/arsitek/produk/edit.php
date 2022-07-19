@@ -28,7 +28,7 @@
                         </div>
                         <div class="form-group">
                             <label for="harga">Harga Jasa:</label>
-                            <input type="number" name="harga" class="form-control" id="harga" min="1000" value="<?= $data['harga']; ?>" placeholder="Masukkan Harga Jasa..." required readonly>
+                            <input type="number" name="harga" class="form-control" id="harga" min="5000000" value="<?= $data['harga']; ?>" placeholder="Masukkan Harga Jasa..." required readonly>
                         </div>
                         <div class="form-group">
                             <label for="dokumen">Desain<sup>(pilih dokumen untuk mengganti)</sup>:</label>

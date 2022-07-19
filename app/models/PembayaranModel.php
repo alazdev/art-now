@@ -120,7 +120,7 @@ class PembayaranModel{
             arsitek.telepon as telepon_arsitek, 
             produk.id_produk as id_produk,
             produk.judul as judul_produk,
-            produk.harga as harga_produk
+            pesanan.tawaran_harga
             FROM pembayaran 
             LEFT JOIN pesanan ON pembayaran.id_pesanan = pesanan.id_pesanan 
             LEFT JOIN produk ON produk.id_produk = pesanan.id_produk 
@@ -143,7 +143,7 @@ class PembayaranModel{
             arsitek.telepon as telepon_arsitek, 
             produk.id_produk as id_produk,
             produk.judul as judul_produk,
-            produk.harga as harga_produk
+            pesanan.tawaran_harga
             FROM pembayaran 
             LEFT JOIN pesanan ON pembayaran.id_pesanan = pesanan.id_pesanan 
             LEFT JOIN produk ON produk.id_produk = pesanan.id_produk 

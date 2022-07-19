@@ -81,7 +81,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="harga">Harga Jasa:</label>
-                                        <input type="number" name="harga" class="form-control" id="harga" min="1000" placeholder="Masukkan Harga Jasa..." required>
+                                        <input type="number" name="harga" class="form-control" id="harga" min="5000000" placeholder="Masukkan Harga Jasa..." required>
                                     </div>
                                     <div class="form-group">
                                         <label for="dokumen">Desain:</label>

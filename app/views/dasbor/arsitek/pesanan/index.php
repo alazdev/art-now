@@ -44,10 +44,16 @@
                                     <td><a href="<?= BASEURL.'/user/profile_pengguna/'.$pesanan['id_user'];?>"><?= $pesanan['nama_lengkap']; ?></a></td>
                                     <td><a href="<?= BASEURL.'/arsitek/detail_produk/'.$pesanan['id_produk'];?>"><?= $pesanan['judul']; ?></a></td>
                                     <td align="center">
-                                        <?php if($pesanan['status'] == -1 ) { ?>
+                                        <?php if($pesanan['status'] == -2 ) { ?>
+                                            <span class="badge badge-danger">PESANAN DIBATALKAN PELANGGAN</span>
+                                        <?php } else if($pesanan['status'] == -1 ) { ?>
                                             <span class="badge badge-danger">PESANAN DITOLAK</span>
                                         <?php } else if($pesanan['status'] == 0 ) { ?>
+                                            <?php if($pesanan['tawaran_harga'] <= 0 ) { ?>
                                             <span class="badge badge-info">MENUNGGU DIKONFIRMASI</span>
+                                            <?php } else { ?>
+                                            <span class="badge badge-info">MENUNGGU KONFIRMASI PELANGGAN</span>
+                                            <?php } ?>
                                         <?php } else if($pesanan['status'] == 1 ) { ?>
                                             <span class="badge badge-warning">SEDANG MENGERJAKAN PROYEK</span>
                                             <?php if($pesanan['status_pembayaran_dp'] == NULL) { ?>
@@ -70,8 +76,9 @@
                                     <td align="right" style="white-space: nowrap;">
                                             <a href="../chat/index?ke=<?= $pesanan['id_user']; ?>" class="text-success"><i class="material-icons">chat</i> Kirim Pesan</a>
                                         <?php if($pesanan['status'] == 0 ) { ?>
-                                            <a href="terima_pesanan/<?= $pesanan['id_pesanan']; ?>" class="text-success"><i class="material-icons">check</i> Terima</a>
-                                            <a href="tolak_pesanan/<?= $pesanan['id_pesanan']; ?>" class="text-danger"><i class="material-icons">block</i> Tolak</a>
+                                            <?php if($pesanan['tawaran_harga'] <= 0 ) { ?>
+                                                <a href="detail_pesanan/<?= $pesanan['id_pesanan']; ?>" class="text-muted"><i class="material-icons">receipt</i> Detail Formulir</a>
+                                            <?php } ?>
                                         <?php } ?>
                                     </td>
                                 </tr>

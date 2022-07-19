@@ -31,8 +31,8 @@
                             <div class="ml-auto"><a href="../../home/produk/<?= $data['id_produk'] ?>" target="_blank"><?= $data['judul_produk'] ?></a></div>
                         </div>
                         <div class="list-group-item bg-transparent d-flex align-items-center px-0">
-                            <strong>Total Harga Jasa</strong>
-                            <div class="ml-auto">Rp <?= number_format($data['harga_produk'], 0 ,",", ".") ?></div>
+                            <strong>Tawaran Harga</strong>
+                            <div class="ml-auto">Rp <?= number_format($data['tawaran_harga'], 0 ,",", ".") ?></div>
                         </div>
                     </div>
                     <div class="list-group list-group-flush mb-4">

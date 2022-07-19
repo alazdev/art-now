@@ -51,7 +51,9 @@
                 <td><?= $pesanan['nama_lengkap']; ?></td>
                 <td><?= $pesanan['judul']; ?></td>
                 <td>
-                    <?php if($pesanan['status'] == -1 ) { ?>
+                    <?php if($pesanan['status'] == -2 ) { ?>
+                        dibatalkan
+                    <?php } else if($pesanan['status'] == -1 ) { ?>
                         ditolak
                     <?php } else if($pesanan['status'] == 0 ) { ?>
                         menunggu
