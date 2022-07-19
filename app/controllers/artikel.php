@@ -70,6 +70,8 @@ class artikel extends Controller
     {
         if($this->model('ArtikelModel')->artikel($id_artikel) != null){
             $data = $this->model('ArtikelModel')->artikel($id_artikel);
+            $data['komens'] = $this->model('KomenArtikelModel')->semua($id_artikel);    
+            $data['reply_komens'] = $this->model('KomenArtikelModel')->semua($id_artikel, 1);
             $this->view('dasbor/artikel/detail', $data);
         }else{
             $this->controller('alert')->message('Not Found', '404 | Not Found');
@@ -175,5 +177,23 @@ class artikel extends Controller
         }else{
             $this->controller('alert')->message('Not Found', '404 | Not Found');
         }
+    }
+
+    // Komentar
+    public function komen()
+    {
+        $komen = ($_POST['id_reply_komen'] == 'NULL') ? NULL:$_POST['id_reply_komen'];
+        $data = [
+            'id_artikel' => $_POST['id_artikel'],
+            'id_reply_komen' => $komen,
+            'komen' => $_POST['komen']
+        ];
+        $this->model('KomenArtikelModel')->tambah($data);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+    }
+    public function hapus_komen($id_komen)
+    {
+        $this->model('KomenArtikelModel')->hapus($id_komen);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
 }
