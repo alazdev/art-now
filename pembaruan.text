@@ -9,13 +9,15 @@ Pembaharuan Setelah 16/07/2022 20:00
         01. Minimal harga produk sekarang adalah 5juta
         02. Sekarang Arsitek perlu menyampaikan tawaran harga kepada pelanggan sebelum diterima pelanggan
         03. DP sekarang bernilai absolut yaitu 2juta
-        04. Pembayaran kedua bernilai (tawaran harga dikurang 2 juta)
+        04. Pembayaran kedua bernilai hasil kalkulasi tawaran harga dikurang 2 juta
+        05. Aksi baru, berupa desain yang bisa ditambahkan dan dihapus jika status pesanan sedang dikerjakan (1)
 
     Pelanggan
         01. Memperbaharui rating/bintang dihalaman depan
         02. Penambahan kolom komentar di artikel
         03. Pelanggan harus mengisi form luas tanah dan detail desain yang diinginkan
         04. Setelah mendapatkan tawaran harga dari arsitek, pelanggan perlu melakukan aksi lebih lanjut
+        05. Aksi baru, berupa desain yang dikirimkan oleh arsitek
 
     *Keterangan:
         01. SQL Baru v6.0

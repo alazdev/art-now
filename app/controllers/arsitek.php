@@ -334,4 +334,19 @@ class arsitek extends Controller
     {
         $this->controller('pesanan')->tolak($id_pesanan);
     }
+
+    public function desain_pesanan($id_pesanan)
+    {
+        $this->controller('desain')->index_desain($id_pesanan);
+    }
+
+    public function tambah_desain()
+    {
+        $this->controller('desain')->tambah_desain();
+    }
+
+    public function hapus_desain($id_pesanan, $id_desain)
+    {
+        $this->controller('desain')->hapus_desain($id_pesanan, $id_desain);
+    }
 }

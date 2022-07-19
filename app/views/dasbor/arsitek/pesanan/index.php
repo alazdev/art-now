@@ -74,12 +74,14 @@
                                     <td><?= date('d F Y H:i', strtotime($pesanan['dibuat_pada']));?></td>
                                     <td><?= date('d F Y H:i', strtotime($pesanan['diperbaharui_pada']));?></td>
                                     <td align="right" style="white-space: nowrap;">
-                                            <a href="../chat/index?ke=<?= $pesanan['id_user']; ?>" class="text-success"><i class="material-icons">chat</i> Kirim Pesan</a>
                                         <?php if($pesanan['status'] == 0 ) { ?>
                                             <?php if($pesanan['tawaran_harga'] <= 0 ) { ?>
                                                 <a href="detail_pesanan/<?= $pesanan['id_pesanan']; ?>" class="text-muted"><i class="material-icons">receipt</i> Detail Formulir</a>
                                             <?php } ?>
+                                        <?php } else if($pesanan['status'] >=0 && $pesanan['status_pembayaran_dp'] != NULL) { ?>
+                                            <a href="../arsitek/desain_pesanan/<?= $pesanan['id_pesanan']; ?>" class="text-muted"><i class="material-icons">home</i> Desain</a>
                                         <?php } ?>
+                                        <a href="../chat/index?ke=<?= $pesanan['id_user']; ?>" class="text-success"><i class="material-icons">chat</i> Kirim Pesan</a>
                                     </td>
                                 </tr>
                                 <?php } ?>

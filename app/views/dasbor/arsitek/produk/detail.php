@@ -37,7 +37,7 @@
                     <div class="mb-4">
                         <a href="../../home/produk/<?= $data['id_produk'];?>" class="btn btn-light btn-block">Lihat Komen</a>
                         <a href="../rating_produk/<?= $data['id_produk'];?>" class="btn btn-light btn-block">Lihat Penilaian</a>
-                        <a href="<?= BASEURL ?>/dokumen/produk/<?= $data['dokumen'] ?>" class="btn btn-light btn-block" download="Desain Lengkap <?= $data['judul'] ?>">Lihat Desain Lengkap</a>
+                        <a href="<?= BASEURL ?>/dokumen/produk/<?= $data['dokumen'] ?>" class="btn btn-light btn-block" target="_BLANK">Lihat Desain Lengkap</a>
                     </div>
 
                     <div class="mb-4 text-center">

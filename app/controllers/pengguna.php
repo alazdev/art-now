@@ -111,6 +111,15 @@ class pengguna extends Controller
         }
     }
     
+    public function desain_pesanan($id_pesanan)
+    {
+        $data = [
+            'desains' => $this->model('DesainModel')->semua($id_pesanan),
+            'pesanan' => $this->model('PesananModel')->detail($id_pesanan)
+        ];
+        $this->view('dasbor/pengguna/desain_pesanan', $data);
+    }
+    
     public function selesaikan_pesanan($id_pesanan)
     {
         $data = $this->model('PesananModel')->update_status($id_pesanan, 2);

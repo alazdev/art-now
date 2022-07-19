@@ -97,7 +97,6 @@
                                     <td><?= date('d F Y H:i', strtotime($pesanan['dibuat_pada']));?></td>
                                     <td><?= date('d F Y H:i', strtotime($pesanan['diperbaharui_pada']));?></td>
                                     <td align="right" style="white-space: nowrap;">
-                                        <a href="../chat/index?ke=<?= $pesanan['id_arsitek']; ?>" class="text-success"><i class="material-icons">chat</i> Pesan</a>
                                         <?php if($pesanan['status'] == 1 && ($pesanan['status_pembayaran_dp'] == NULL OR $pesanan['status_pembayaran_dp'] < 1) ) { ?>
                                             <a href="pembayaran_dp/<?= $pesanan['id_pesanan']; ?>" class="text-warning"><i class="material-icons">payment</i> Bayar Uang Muka</a>
                                         <?php } else if($pesanan['status'] == 1 && $pesanan['status_pembayaran_dp'] != NULL ) { ?>
@@ -115,6 +114,10 @@
                                                 <a href="detail_pesanan/<?= $pesanan['id_pesanan']; ?>" class="text-muted"><i class="material-icons">receipt</i> Detail Tawaran</a>
                                             <?php } ?>
                                         <?php } ?>
+                                        <?php if($pesanan['status'] >=0 && $pesanan['status_pembayaran_dp'] != NULL) { ?>
+                                            <a href="../pengguna/desain_pesanan/<?= $pesanan['id_pesanan']; ?>" class="text-muted"><i class="material-icons">home</i> Desain</a>
+                                        <?php } ?>
+                                        <a href="../chat/index?ke=<?= $pesanan['id_arsitek']; ?>" class="text-success"><i class="material-icons">chat</i> Pesan</a>
                                     </td>
                                 </tr>
                                 <?php } ?>

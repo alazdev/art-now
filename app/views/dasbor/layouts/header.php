@@ -277,6 +277,41 @@
             </div>
         </div>
     </div>
+    <div id="modal-tambah-desain" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-large-title" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-large-title">Tambah Desain</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST" action="<?= BASEURL.'/arsitek/tambah_desain'?>" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="card card-form">
+                            <div class="row no-gutters">
+                                <div class="col-lg-12 card-form__body card-body">
+                                    <input type="hidden" name="id_pesanan" value="<?php if(isset($data['pesanan'])){echo $data['pesanan']['id_pesanan'];} ?>">
+                                    <div class="form-group">
+                                        <label for="dokumen">Dokumen:</label>
+                                        <input type="file" name="dokumen[]" class="form-control" id="dokumen" accept="application/pdf" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tautan">Tautan:</label>
+                                        <input type="text" name="tautan" class="form-control" id="tautan" placeholder="Masukkan tautan" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary" name="tambah">Tambahkan Desain</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div id="modal-delete" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-sm">
             <div class="modal-content bg-danger">
