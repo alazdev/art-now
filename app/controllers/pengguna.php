@@ -83,7 +83,7 @@ class pengguna extends Controller
                     'link' => '/arsitek/pesanan'
                 ];
                 $this->model('NotifikasiModel')->notifikasi($pesan);
-                $this->route('arsitek/pesanan');
+                $this->route('pengguna/index');
             } else {
                 $this->alert('Anda hanya bisa memiliki 1 pesanan yang bisa diproses.', 'pengguna/index');
             }

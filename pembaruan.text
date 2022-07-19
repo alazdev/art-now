@@ -20,6 +20,7 @@ Pembaharuan Setelah 16/07/2022 20:00
     *Keterangan:
         01. SQL Baru v6.0
 
+============== [Update-an Sebelumnya] ==============
 Pembaharuan Setelah 14/07/2022 20:00
     Semua
         01. -
@@ -40,7 +41,6 @@ Pembaharuan Setelah 14/07/2022 20:00
         01. Pengiriminan EMAIL masih menggunakan faker email (Mailtrap.io) jadi tidak menggunakan email sungguhan (sudah tidak bisa)
             dan Mailtrap.io juga memiliki limit. Jadi gunakan semaksimal mungkin.
 
-============== [Update-an Sebelumnya] ==============
 Pembaharuan Setelah Sidang Terakhir
     Semua
         01. Memperbaharui Tampilan Navbar Dasbor
