@@ -123,7 +123,7 @@ class admin extends Controller
 
         $contentMail = '<h1>'.$judul_notifikasi.'</h1><p>'.$notifikasi.'</p>';
         $arsitek = $this->model('UserModel')->profile_arsitek($id_user);
-        $this->kirim_mail($arsitek['email'], $judul_notifikasi, $contentMail);
+        // $this->kirim_mail($arsitek['email'], $judul_notifikasi, $contentMail);
 
         $this->route('admin/calon_arsitek');
     }
@@ -153,7 +153,7 @@ class admin extends Controller
 
         $contentMail = '<h1>'.$judul_notifikasi.'</h1><p>'.$notifikasi.'</p>';
         $calon_arsitek = $this->model('UserModel')->profile_arsitek($id_user);
-        $this->kirim_mail($calon_arsitek['email'], $judul_notifikasi, $contentMail);
+        // $this->kirim_mail($calon_arsitek['email'], $judul_notifikasi, $contentMail);
 
         $this->route('admin/calon_arsitek');
     }
