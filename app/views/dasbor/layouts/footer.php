@@ -107,6 +107,11 @@
                                             <span class="sidebar-menu-text">Transaksi</span>
                                         </a>
                                     </li>
+                                    <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/admin/laporan_keuangan' ? 'active':'' ?>">
+                                        <a class="sidebar-menu-button" href="<?= BASEURL.'/admin/laporan_keuangan'; ?>">
+                                            <span class="sidebar-menu-text">Keuangan</span>
+                                        </a>
+                                    </li>
                                     <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/admin/laporan_saldo' ? 'active':'' ?>">
                                         <a class="sidebar-menu-button" href="<?= BASEURL.'/admin/laporan_saldo'; ?>">
                                             <span class="sidebar-menu-text">Saldo</span>
