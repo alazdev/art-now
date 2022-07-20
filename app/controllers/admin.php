@@ -677,6 +677,20 @@ class admin extends Controller
         ];
         $this->view('dasbor/admin/laporan/export_transaksi', $data);
     }
+    public function laporan_keuangan()
+    {
+        $data = [
+            'keuangans' => $this->model('SaldoModel')->laporan_keuangan()
+        ];
+        $this->view('dasbor/admin/laporan/keuangan', $data);
+    }
+    public function export_keuangan()
+    {
+        $data = [
+            'keuangans' => $this->model('SaldoModel')->laporan_keuangan()
+        ];
+        $this->view('dasbor/admin/laporan/export_keuangan', $data);
+    }
     public function laporan_saldo()
     {
         $data = [

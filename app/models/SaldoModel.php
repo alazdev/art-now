@@ -35,9 +35,15 @@ class SaldoModel{
         $this->db->query("UPDATE arsitek SET saldo = ".($arsitek['saldo']+$data['nominal'])." WHERE id_user = '".$data['id_user']."'");
         return $this->db->execute();
     }
+
+    
+    public function laporan_keuangan(){
+        $this->db->query("SELECT user.*, saldo.* FROM saldo LEFT JOIN user ON user.id_user = saldo.id_user WHERE keterangan != 'Biaya admin penarikan saldo' ORDER BY saldo.dibuat_pada ASC");
+        return $this->db->resultSet();
+    }
     
     public function laporan(){
-        $this->db->query("SELECT SUM(saldo.nominal) as saldo, user.*, COUNT(IF(saldo.keterangan = 'Penarikan saldo', 1, NULL)) as jumlah_penarikan, SUM(CASE WHEN saldo.keterangan = 'Biaya admin penarikan saldo' THEN (nominal * -1) ELSE 0 END) as biaya_admin FROM saldo LEFT JOIN user ON user.id_user = saldo.id_user GROUP BY saldo.id_user ORDER BY saldo.dibuat_pada DESC");
+        $this->db->query("SELECT SUM(saldo.nominal) as saldo, user.*, COUNT(IF(saldo.keterangan = 'Penarikan saldo', 1, NULL)) as jumlah_penarikan, SUM(CASE WHEN saldo.keterangan = 'Biaya admin penarikan saldo' THEN (nominal * -1) ELSE 0 END) as biaya_admin, SUM(CASE WHEN saldo.keterangan = 'Penarikan saldo' THEN (nominal * -1) ELSE 0 END) as total_penarikan FROM saldo LEFT JOIN user ON user.id_user = saldo.id_user GROUP BY saldo.id_user ORDER BY saldo.dibuat_pada DESC");
         return $this->db->resultSet();
     }
     

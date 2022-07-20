@@ -46,7 +46,9 @@
 		<tr>
             <th>Nama Arsitek</th>
             <th>Email Arsitek</th>
-            <th>Saldo Sekarang</th>
+            <th>Total Pendapatan (bruto)</th>
+            <th>Saldo Sekarang (neto)</th>
+            <th>Saldo Sudah Ditarik (neto)</th>
             <th>Jumlah Penarikan</th>
             <th>Pemasukan Kotor Perusahaan</th>
 		</tr>
@@ -54,7 +56,9 @@
         <tr>
             <td><?= $saldo['nama_lengkap']; ?></td>
             <td><?= $saldo['email']; ?></td>
+            <td>Rp <?= number_format($saldo['saldo']+$saldo['total_penarikan']+$saldo['biaya_admin'], 0, ',', '.'); ?></td>
             <td>Rp <?= number_format($saldo['saldo'], 0, ',', '.'); ?></td>
+            <td>Rp <?= number_format($saldo['total_penarikan'], 0, ',', '.'); ?></td>
             <td><?= $saldo['jumlah_penarikan']; ?></td>
             <td>Rp <?= number_format($saldo['biaya_admin'], 0, ',', '.'); ?></td>
         </tr>
