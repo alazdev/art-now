@@ -380,7 +380,8 @@ class admin extends Controller
             $saldo = [
                 'id_user' => $data['id_arsitek'],
                 'nominal' => $data['total_dibayar'],
-                'keterangan' => 'Bayaran dari produk '.$data['judul_produk'].' oleh '.$data['nama_lengkap_pengguna']
+                'keterangan' => 'Bayaran dari produk '.$data['judul_produk'].' oleh '.$data['nama_lengkap_pengguna'],
+                'bukti' => NULL
             ];
             $this->model('SaldoModel')->tambah($saldo);
 
@@ -422,19 +423,39 @@ class admin extends Controller
     public function tandai_permintaan_selesai($id_permintaan_penarikan) {
         $pp = $this->model('PermintaanPenarikanModel')->detail($id_permintaan_penarikan);
         if($pp != null){
+            $output_dir = dirname(getcwd())."/public/dokumen/bukti/";
+            $RandomNum  = time();
+            $DokumenName  = str_replace(' ','-',strtolower($_FILES['bukti']['name'][0]));
+            $DokumenType  = $_FILES['bukti']['type'][0];
+        
+            $DokumenExt   = substr($DokumenName, strrpos($DokumenName, '.'));
+            $DokumenExt   = str_replace('.','',$DokumenExt);
+            $DokumenName  = preg_replace("/\.[^.\s]{3,4}$/", "", $DokumenName);
+            $NewDokumenName = $DokumenName.'-'.$RandomNum.'.'.$DokumenExt;
+            $ret[$NewDokumenName] = $output_dir.$NewDokumenName;
+
+            if (!file_exists($output_dir))
+            {
+                @mkdir($output_dir, 0777);
+            }     
+
+            move_uploaded_file($_FILES["bukti"]["tmp_name"][0], $output_dir.$NewDokumenName );
+
             // Logika Penarikan uang
             $pajak = (ceil(($pp['saldo'] * 0.025) / 100) * 100);
             $saldo = [
                 'id_user' => $pp['id_user'],
                 'nominal' => ($pp['saldo'] - $pajak) * -1,
-                'keterangan' => 'Penarikan saldo'
+                'keterangan' => 'Penarikan saldo',
+                'bukti'    => $NewDokumenName
             ];
             $this->model('SaldoModel')->tambah($saldo);
             
             $saldo = [
                 'id_user' => $pp['id_user'],
                 'nominal' => $pajak * -1,
-                'keterangan' => 'Biaya admin penarikan saldo'
+                'keterangan' => 'Biaya admin penarikan saldo',
+                'bukti'    => NULL
             ];
             $this->model('SaldoModel')->tambah($saldo);
 

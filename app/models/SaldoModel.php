@@ -23,10 +23,11 @@ class SaldoModel{
     public function tambah($data)
     {
         $user = $this->cek_user();
-        $this->db->query('INSERT INTO '.$this->table.' (id_user, nominal, keterangan, dibuat_pada) VALUES(:id_user, :nominal, :keterangan, :dibuat_pada)');
+        $this->db->query('INSERT INTO '.$this->table.' (id_user, nominal, keterangan, bukti, dibuat_pada) VALUES(:id_user, :nominal, :keterangan, :bukti, :dibuat_pada)');
         $this->db->bind('id_user',$data['id_user']);
         $this->db->bind('nominal',$data['nominal']);
         $this->db->bind('keterangan',$data['keterangan']);
+        $this->db->bind('bukti',$data['bukti']);
         $this->db->bind('dibuat_pada',date("Y-m-d H:i:s"));
         $this->db->execute();
 

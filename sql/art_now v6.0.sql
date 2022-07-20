@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 19, 2022 at 02:39 PM
+-- Generation Time: Jul 20, 2022 at 02:05 AM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.4.20
 
@@ -145,7 +145,6 @@ CREATE TABLE `pembayaran` (
 CREATE TABLE `permintaan_penarikan` (
   `id_permintaan_penarikan` bigint(20) NOT NULL,
   `id_user` bigint(20) NOT NULL,
-  `bukti` varchar(100) DEFAULT NULL,
   `status` int(11) NOT NULL DEFAULT 0,
   `dibuat_pada` datetime DEFAULT current_timestamp(),
   `diperbaharui_pada` datetime DEFAULT current_timestamp()
@@ -255,6 +254,7 @@ CREATE TABLE `saldo` (
   `id_user` bigint(20) NOT NULL,
   `nominal` bigint(20) NOT NULL,
   `keterangan` varchar(50) NOT NULL,
+  `bukti` varchar(255) DEFAULT NULL,
   `dibuat_pada` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

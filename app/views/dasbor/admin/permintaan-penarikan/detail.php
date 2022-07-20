@@ -83,7 +83,13 @@
                     <?php if($data['status_permintaan'] == 0) { ?>
                     <div class="mb-4">
                         <h5>Aksi</h5>
-                        <a href="../tandai_permintaan_selesai/<?= $data['id_permintaan_penarikan'];?>" class="btn btn-success btn-block">Tandai Selesai</a>
+                        <form action="../tandai_permintaan_selesai/<?= $data['id_permintaan_penarikan'];?>" method="post" class="form" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="bukti">Bukti Transfer</label>
+                                <input type="file" name="bukti[]" class="form-control" id="bukti" required>
+                            </div>
+                            <button type="submit" class="btn btn-success btn-block"><i class="material-icons">check</i> Tandai Selesai</button>
+                        </form>
                     </div>
                     <?php } ?>
                 </div>

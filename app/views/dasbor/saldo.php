@@ -51,9 +51,16 @@
                                                 <i class="text-danger"><?= number_format($saldo['nominal'], 0, ',', '.') ?></i>
                                                 <?php } ?>
                                             </div>
-                                            <small class="text-muted"><?= date('d-m-Y H:i', strtotime($saldo['dibuat_pada'])) ?></small>
+                                            <small class="text-muted">
+                                                <?= date('d-m-Y H:i', strtotime($saldo['dibuat_pada'])) ?>
+                                            </small>
                                         </div>
                                         <div><?= $saldo['keterangan'] ?></div>
+                                        <div>
+                                            <?php if($saldo['bukti']) { ?>
+                                                <a href="<?= BASEURL ?>/dokumen/bukti/<?= $saldo['bukti'] ?>" target="_BlANK">lihat bukti transfer</a> 
+                                            <?php } ?>
+                                        </div>
                                     </div>
                                 </div>
                     <?php if ($jr > 6 && $jr == $i) { ?>

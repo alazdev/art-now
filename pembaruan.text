@@ -4,6 +4,7 @@ Pembaharuan Setelah 16/07/2022 20:00
 
     Admin
         01. Penambahan komentar di detail artikel
+        02. Penyertakan bukti transfer ketika menyelesaikan permintaan penarikan saldo arsitek
 
     Arsitek
         01. Minimal harga produk sekarang adalah 5juta
@@ -11,6 +12,7 @@ Pembaharuan Setelah 16/07/2022 20:00
         03. DP sekarang bernilai absolut yaitu 2juta
         04. Pembayaran kedua bernilai hasil kalkulasi tawaran harga dikurang 2 juta
         05. Aksi baru, berupa desain yang bisa ditambahkan dan dihapus jika status pesanan sedang dikerjakan (1)
+        06. Arsitek bisa melihat bukti transfer di menu saldo
 
     Pelanggan
         01. Memperbaharui rating/bintang dihalaman depan
