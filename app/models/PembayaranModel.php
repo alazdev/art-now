@@ -58,7 +58,7 @@ class PembayaranModel{
             WHERE pembayaran.status = ".$status);
         return $this->db->resultSet();
     }
-    public function laporan($status){
+    public function laporan($status, $tanggal_awal, $tanggal_akhir){
         $this->db->query("SELECT
             SUM(pembayaran.total_dibayar) as total_telah_dibayar,
             SUM(pembayaran.pembayaran) as status_pembayaran, 
@@ -77,12 +77,13 @@ class PembayaranModel{
             LEFT JOIN produk ON produk.id_produk = pesanan.id_produk 
             LEFT JOIN user pengguna on pesanan.id_user = pengguna.id_user 
             LEFT JOIN user arsitek on produk.id_user = arsitek.id_user 
-            WHERE pembayaran.status = ".$status."
+            WHERE pembayaran.status = '$status'
+            AND DATE(pembayaran.dibuat_pada) BETWEEN '$tanggal_awal' AND '$tanggal_akhir'
             GROUP BY pembayaran.id_pesanan
         ");
         return $this->db->resultSet();
     }
-    public function detail_laporan($status){
+    public function detail_laporan($status, $tanggal_awal, $tanggal_akhir){
         $this->db->query("SELECT
             pembayaran.total_dibayar as total_telah_dibayar,
             pembayaran.pembayaran as status_pembayaran, 
@@ -101,7 +102,8 @@ class PembayaranModel{
             LEFT JOIN produk ON produk.id_produk = pesanan.id_produk 
             LEFT JOIN user pengguna on pesanan.id_user = pengguna.id_user 
             LEFT JOIN user arsitek on produk.id_user = arsitek.id_user 
-            WHERE pembayaran.status = ".$status."
+            WHERE pembayaran.status = '$status'
+            AND DATE(pembayaran.dibuat_pada) BETWEEN '$tanggal_awal' AND '$tanggal_akhir'
             ORDER BY pembayaran.id_pesanan
         ");
         return $this->db->resultSet();

@@ -51,8 +51,8 @@
 <script>
     $(document).ready( function () {
         var hari_ini = new Date();
-        var tanggal_sekarang = ("0" + hari_ini.getDate()).slice(-2)+'/'+("0" + hari_ini.getMonth()).slice(-2)+'/'+hari_ini.getFullYear();
-        var setahun_lalu = ("0" + hari_ini.getDate()).slice(-2)+'/'+("0" + hari_ini.getMonth()).slice(-2)+'/'+(hari_ini.getFullYear()-1);
+        var tanggal_sekarang = ("0" + hari_ini.getDate()).slice(-2)+'/'+("0" + (hari_ini.getMonth()+1)).slice(-2)+'/'+hari_ini.getFullYear();
+        var setahun_lalu = ("0" + hari_ini.getDate()).slice(-2)+'/'+("0" + (hari_ini.getMonth()+1)).slice(-2)+'/'+(hari_ini.getFullYear()-1);
         datatables(setahun_lalu+' - '+tanggal_sekarang);
 
         $('#rentang-tanggal').on('change',function(){

@@ -47,6 +47,11 @@
             <td>Level</td>
             <td>: <?=$data['level']?></td>
         </tr>
+        <tr>
+            <td></td>
+            <td>Tanggal</td>
+            <td>: <?=$data['rentang_tanggal']?></td>
+        </tr>
     </table>
 	<table border="1">
 		<tr>

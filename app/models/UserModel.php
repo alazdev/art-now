@@ -34,8 +34,15 @@ class UserModel{
         return $this->db->single();
     }
         // data user
-    public function semua_tanpa_owner($query = null){
-        $this->db->query("SELECT * FROM user WHERE NOT id_user = 1 ".$query);
+    public function semua_tanpa_owner($tanggal_awal, $tanggal_akhir, $status, $level){
+        $status_query = $level_query = '';
+        if($status != -10){
+            $status_query = " AND status = '$status'";
+        }
+        if($level != -10){
+            $level_query = " AND level = '$level'";
+        }
+        $this->db->query("SELECT * FROM user WHERE NOT id_user = 1 AND DATE(dibuat_pada) BETWEEN '$tanggal_awal' AND '$tanggal_akhir'".$status_query.$level_query);
         return $this->db->resultSet();
     }
     public function semua_admin(){

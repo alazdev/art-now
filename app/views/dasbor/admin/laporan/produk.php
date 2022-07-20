@@ -18,11 +18,15 @@
                 <div class="col-lg-12 card-body">
                     <form action="<?= BASEURL ?>/admin/export_produk" method="post">
                         <div class="card-body">
+                            <div class="form-group">
+                                <label>Filter Berdasarkan Tanggal</label>
+                                <input type="text" class="form-control pull-right" name="rentang_tanggal" id="rentang-tanggal" required="" placeholder="Date range" value=""> 
+                            </div>
                             <button type="submit" class="btn btn-info form-control col-md-12">Ekspor Laporan</button>
                         </div>
                     </form>
                     <div class="table-responsive border-bottom" data-toggle="lists" data-lists-values='["js-lists-values-employee-name"]'>
-                        <table class="table mb-0 thead-border-top-0">
+                        <table class="table mb-0 thead-border-top-0 datatables">
                             <thead>
                                 <tr>
                                     <th>Judul Produk</th>
@@ -36,41 +40,7 @@
                                     <th>Diperbaharui Pada</th>
                                 </tr>
                             </thead>
-                            <tbody class="list" id="staff02">
-                                <?php foreach($data['produks'] as $produk) { ?>
-                                <tr>
-                                    <td><?= $produk['judul']; ?></td>
-                                    <td>Rp <?= number_format($produk['harga'], 0, ',', '.'); ?></td>
-                                    <td><span class="badge badge-warning"><?= number_format($produk['rating'], 1); ?></span></td>
-                                    <td><?= $produk['tautan_video']; ?></td>
-                                    <td>
-                                        <?php if($produk['kategori'] == "1") { ?>
-                                            Desain Rumah Terbaru
-                                        <?php } else if($produk['kategori'] == "2") { ?>
-                                            Desain Rumah Minimalis
-                                        <?php } else if($produk['kategori'] == "3") { ?>
-                                            Desain Rumah Mewah
-                                        <?php } else if($produk['kategori'] == "4") { ?>
-                                            Desain Interior
-                                        <?php } else if($produk['kategori'] == "0") { ?>
-                                            Desain Bangunan Lainnya
-                                        <?php } else { ?>
-
-                                        <?php } ?>
-                                    </td>
-                                    <td align="center">
-                                        <?php if($produk['status'] == 1 ) { ?>
-                                            <span class="badge badge-success">AKTIF</span>
-                                        <?php } else { ?>
-                                            <span class="badge badge-danger">NONAKTIF</span>
-                                        <?php } ?>
-                                    </td>
-                                    <td><a href="<?= BASEURL.'/user/profile_arsitek/'.$produk['id_user']; ?>" target="_blank"><?= $produk['nama_lengkap']; ?></a></td>
-                                    <td><?= date('Y-m-d H:i', strtotime($produk['dibuat_pada']));?></td>
-                                    <td><?= date('Y-m-d H:i', strtotime($produk['diperbaharui_pada']));?></td>
-                                </tr>
-                                <?php } ?>
-                            </tbody>
+                            <tbody class="list" id="staff02"></tbody>
                         </table>
                     </div>
                 </div>
@@ -80,14 +50,82 @@
 </div>
 <script>
     $(document).ready( function () {
-        $('.table').DataTable({
-            "searching":false,
-            'aaSorting': [],
-            'order': [],
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Indonesian.json"
-            }
+        var hari_ini = new Date();
+        var tanggal_sekarang = ("0" + hari_ini.getDate()).slice(-2)+'/'+("0" + (hari_ini.getMonth()+1)).slice(-2)+'/'+hari_ini.getFullYear();
+        var setahun_lalu = ("0" + hari_ini.getDate()).slice(-2)+'/'+("0" + (hari_ini.getMonth()+1)).slice(-2)+'/'+(hari_ini.getFullYear()-1);
+        datatables(setahun_lalu+' - '+tanggal_sekarang);
+
+        $('#rentang-tanggal').on('change',function(){
+            datatables($('#rentang-tanggal').val());
         });
+        function datatables(rentang) {
+            var rentang = rentang.split(" - ");
+            var awal = rentang[0].substring(6, 10)+"-"+rentang[0].substring(3, 5)+"-"+rentang[0].substring(0, 2);
+            var akhir = rentang[1].substring(6, 10)+"-"+rentang[1].substring(3, 5)+"-"+rentang[1].substring(0, 2);
+            console.log(awal);
+            console.log(akhir);
+            if ( $.fn.dataTable.isDataTable( '.datatables' ) ) {
+                $('.datatables').dataTable().fnClearTable();
+                $('.datatables').dataTable().fnDestroy();
+            }
+            // else {
+                table = $('.datatables').DataTable({
+                    "ajax": {
+                        "url": "<?=BASEURL?>/admin/data_laporan_produk/"+awal+"/"+akhir,
+                        method:"GET",
+                    },
+                    "columns": [
+                        {data : 'judul'},
+                        {data : 'harga', render: function ( data, type, row ) {
+                            return 'Rp '+(row.harga).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".");
+                        }},
+                        {data : 'rating', render: function ( data, type, row ) {
+                            if(row.rating) {
+                                return '<span class="badge badge-warning">'+parseFloat((row.rating)).toFixed(1)+'</span>'
+                            }
+                            return '<span class="badge badge-warning">0.0</span>';
+                        }},
+                        {data : 'tautan_video'},
+                        {data : 'kategori', render: function ( data, type, row ) {
+                            var kategori = '';
+                            if(row.kategori == "1") {
+                                kategori = 'Desain Rumah Terbaru';
+                            } else if(row.kategori == "2") {
+                                kategori = 'Desain Rumah Minimalis';
+                            } else if(row.kategori == "3") {
+                                kategori = 'Desain Rumah Mewah';
+                            } else if(row.kategori == "4") {
+                                kategori = 'Desain Interior';
+                            } else if(row.kategori == "0") {
+                                kategori = 'Desain Bangunan Lainnya';
+                            } else {
+
+                            }
+                            return kategori;
+                        }},
+                        {data : 'status', render: function ( data, type, row ) {
+                            var status = '';
+                            if(row.status == 1 ) {
+                                status = '<span class="badge badge-success">AKTIF</span>';
+                            } else {
+                                status = '<span class="badge badge-danger">NONAKTIF</span>';
+                            }
+                            return status;
+                        }},
+                        {data : 'nama_lengkap', render: function ( data, type, row ) {
+                            return '<a href="../user/profile_arsitek/'+row.id_user+'" target="_BLANk">'+row.nama_lengkap+'</a>';
+                        }},
+                        {data : 'dibuat_pada'},
+                        {data : 'diperbaharui_pada'},
+                    ],
+                    'aaSorting': [],
+                    'order': [],
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Indonesian.json"
+                    }
+                });
+            // }
+        }
     } );
 </script>
 <?php include(__DIR__ . '/../../layouts/footer.php'); ?>

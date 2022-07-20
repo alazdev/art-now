@@ -36,6 +36,13 @@
 		<h3>Laporan Transaksi</h3>
 	</center>
  
+    <table>
+        <tr>
+            <td></td>
+            <td>Tanggal</td>
+            <td>: <?=$data['rentang_tanggal']?></td>
+        </tr>
+    </table>
 	<table border="1">
 		<tr>
             <th>No</th>

@@ -610,21 +610,29 @@ class admin extends Controller
     // Laporan
     public function laporan_user()
     {
-        $data = [
-            'users' => $this->model('UserModel')->semua_tanpa_owner()
+        $this->view('dasbor/admin/laporan/user');
+    }
+    public function data_laporan_user($tanggal_awal, $tanggal_akhir, $status, $level)
+    {
+        $json = [
+            'data' => $this->model('UserModel')->semua_tanpa_owner($tanggal_awal, $tanggal_akhir, $status, $level)
         ];
-        $this->view('dasbor/admin/laporan/user', $data);
+        echo json_encode($json);
     }
     public function export_user()
     {
+        $rentang_tanggal = $_POST['rentang_tanggal'];
         $status = $_POST['status'];
         $level = $_POST['level'];
 
-        $query = "";
+        $rentang = explode(' - ',$rentang_tanggal);
+        $tanggal_awal = substr($rentang[0], 6, 10)."-".substr($rentang[0], 3, 2)."-".substr($rentang[0], 0, 2);
+        $tanggal_akhir = substr($rentang[1], 6, 10)."-".substr($rentang[1], 3, 2)."-".substr($rentang[1], 0, 2);
+
+        $data['rentang_tanggal'] = $rentang_tanggal;
         $data['status'] = 'Semua Status';
         $data['level'] = 'Semua Level';
         if($status != '' ){
-            $query .= "AND status = ".$status." ";
             if ($status == 1){
                 $data['status'] = 'Aktif';
             }else if ($status == 0){
@@ -632,7 +640,6 @@ class admin extends Controller
             }
         }
         if($level != '' ){
-            $query .= "AND level = ".$level." ";
             if ($level == -1){
                 $data['level'] = 'Calon Arsitek';
             }else if ($level == 0){
@@ -643,51 +650,80 @@ class admin extends Controller
                 $data['level'] = 'Admin';
             }
         }
-        $query .= "ORDER BY dibuat_pada DESC ";
         $data += [
-            'users' => $this->model('UserModel')->semua_tanpa_owner($query)
+            'users' => $this->model('UserModel')->semua_tanpa_owner($tanggal_awal, $tanggal_akhir, $status, $level)
         ];
         $this->view('dasbor/admin/laporan/export_user', $data);
     }
     public function laporan_produk()
     {
-        $data = [
-            'produks' => $this->model('ProdukModel')->semua_byadmin()
+        $this->view('dasbor/admin/laporan/produk');
+    }
+    public function data_laporan_produk($tanggal_awal, $tanggal_akhir)
+    {
+        $json = [
+            'data' => $this->model('ProdukModel')->semua_byadmin($tanggal_awal, $tanggal_akhir)
         ];
-        $this->view('dasbor/admin/laporan/produk', $data);
+        echo json_encode($json);
     }
     public function export_produk()
     {
-        $data = [
-            'produks' => $this->model('ProdukModel')->semua_byadmin()
+        $rentang_tanggal = $_POST['rentang_tanggal'];
+        $rentang = explode(' - ',$rentang_tanggal);
+        $tanggal_awal = substr($rentang[0], 6, 10)."-".substr($rentang[0], 3, 2)."-".substr($rentang[0], 0, 2);
+        $tanggal_akhir = substr($rentang[1], 6, 10)."-".substr($rentang[1], 3, 2)."-".substr($rentang[1], 0, 2);
+
+        $data['rentang_tanggal'] = $rentang_tanggal;
+        $data += [
+            'produks' => $this->model('ProdukModel')->semua_byadmin($tanggal_awal, $tanggal_akhir)
         ];
         $this->view('dasbor/admin/laporan/export_produk', $data);
     }
     public function laporan_transaksi()
     {
-        $data = [
-            'transaksis' => $this->model('PembayaranModel')->laporan(1)
+        $this->view('dasbor/admin/laporan/transaksi');
+    }
+    public function data_laporan_transaksi($tanggal_awal, $tanggal_akhir)
+    {
+        $json = [
+            'data' => $this->model('PembayaranModel')->laporan(1, $tanggal_awal, $tanggal_akhir)
         ];
-        $this->view('dasbor/admin/laporan/transaksi', $data);
+        echo json_encode($json);
     }
     public function export_transaksi()
     {
-        $data = [
-            'transaksis' => $this->model('PembayaranModel')->detail_laporan(1)
+        $rentang_tanggal = $_POST['rentang_tanggal'];
+        $rentang = explode(' - ',$rentang_tanggal);
+        $tanggal_awal = substr($rentang[0], 6, 10)."-".substr($rentang[0], 3, 2)."-".substr($rentang[0], 0, 2);
+        $tanggal_akhir = substr($rentang[1], 6, 10)."-".substr($rentang[1], 3, 2)."-".substr($rentang[1], 0, 2);
+
+        $data['rentang_tanggal'] = $rentang_tanggal;
+        $data += [
+            'transaksis' => $this->model('PembayaranModel')->detail_laporan(1, $tanggal_awal, $tanggal_akhir)
         ];
         $this->view('dasbor/admin/laporan/export_transaksi', $data);
     }
     public function laporan_keuangan()
     {
-        $data = [
-            'keuangans' => $this->model('SaldoModel')->laporan_keuangan()
+        $this->view('dasbor/admin/laporan/keuangan');
+    }
+    public function data_laporan_keuangan($tanggal_awal, $tanggal_akhir)
+    {
+        $json = [
+            'data' => $this->model('SaldoModel')->laporan_keuangan($tanggal_awal, $tanggal_akhir)
         ];
-        $this->view('dasbor/admin/laporan/keuangan', $data);
+        echo json_encode($json);
     }
     public function export_keuangan()
     {
-        $data = [
-            'keuangans' => $this->model('SaldoModel')->laporan_keuangan()
+        $rentang_tanggal = $_POST['rentang_tanggal'];
+        $rentang = explode(' - ',$rentang_tanggal);
+        $tanggal_awal = substr($rentang[0], 6, 10)."-".substr($rentang[0], 3, 2)."-".substr($rentang[0], 0, 2);
+        $tanggal_akhir = substr($rentang[1], 6, 10)."-".substr($rentang[1], 3, 2)."-".substr($rentang[1], 0, 2);
+
+        $data['rentang_tanggal'] = $rentang_tanggal;
+        $data += [
+            'keuangans' => $this->model('SaldoModel')->laporan_keuangan($tanggal_awal, $tanggal_akhir)
         ];
         $this->view('dasbor/admin/laporan/export_keuangan', $data);
     }

@@ -18,11 +18,15 @@
                 <div class="col-lg-12 card-body">
                     <form action="<?= BASEURL ?>/admin/export_transaksi" method="post">
                         <div class="card-body">
+                            <div class="form-group">
+                                <label>Filter Berdasarkan Tanggal</label>
+                                <input type="text" class="form-control pull-right" name="rentang_tanggal" id="rentang-tanggal" required="" placeholder="Date range" value=""> 
+                            </div>
                             <button type="submit" class="btn btn-info form-control col-md-12">Ekspor Laporan</button>
                         </div>
                     </form>
                     <div class="table-responsive border-bottom" data-toggle="lists" data-lists-values='["js-lists-values-employee-name"]'>
-                        <table class="table mb-0 thead-border-top-0">
+                        <table class="table mb-0 thead-border-top-0 datatables">
                             <thead>
                                 <tr>
                                     <th>Total Dibayar</th>
@@ -35,20 +39,7 @@
                                     <th>Waktu</th>
                                 </tr>
                             </thead>
-                            <tbody class="list" id="staff02">
-                                <?php foreach($data['transaksis'] as $transaksi) { ?>
-                                <tr>
-                                    <td>Rp <?= number_format($transaksi['total_telah_dibayar'], 0, ',', '.'); ?></td>
-                                    <td><?= ($transaksi['status_pembayaran']==0) ? 'Penuh':'Belum Penuh' ?></td>
-                                    <td><?= $transaksi['nama_lengkap_pengguna']; ?></td>
-                                    <td><?= $transaksi['email_pengguna']; ?></td>
-                                    <td><?= $transaksi['nama_lengkap_arsitek']; ?></td>
-                                    <td><?= $transaksi['email_arsitek']; ?></td>
-                                    <td><?= $transaksi['judul_produk']; ?></td>
-                                    <td><?= date('Y-m-d H:i', strtotime($transaksi['dibuat_pada']));?></td>
-                                </tr>
-                                <?php } ?>
-                            </tbody>
+                            <tbody class="list" id="staff02"></tbody>
                         </table>
                     </div>
                 </div>
@@ -58,14 +49,58 @@
 </div>
 <script>
     $(document).ready( function () {
-        $('.table').DataTable({
-            "searching":false,
-            'aaSorting': [],
-            'order': [],
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Indonesian.json"
-            }
+        var hari_ini = new Date();
+        var tanggal_sekarang = ("0" + hari_ini.getDate()).slice(-2)+'/'+("0" + (hari_ini.getMonth()+1)).slice(-2)+'/'+hari_ini.getFullYear();
+        var setahun_lalu = ("0" + hari_ini.getDate()).slice(-2)+'/'+("0" + (hari_ini.getMonth()+1)).slice(-2)+'/'+(hari_ini.getFullYear()-1);
+        datatables(setahun_lalu+' - '+tanggal_sekarang);
+
+        $('#rentang-tanggal').on('change',function(){
+            datatables($('#rentang-tanggal').val());
         });
+        function datatables(rentang) {
+            var rentang = rentang.split(" - ");
+            var awal = rentang[0].substring(6, 10)+"-"+rentang[0].substring(3, 5)+"-"+rentang[0].substring(0, 2);
+            var akhir = rentang[1].substring(6, 10)+"-"+rentang[1].substring(3, 5)+"-"+rentang[1].substring(0, 2);
+            console.log(awal);
+            console.log(akhir);
+            if ( $.fn.dataTable.isDataTable( '.datatables' ) ) {
+                $('.datatables').dataTable().fnClearTable();
+                $('.datatables').dataTable().fnDestroy();
+            }
+            // else {
+                table = $('.datatables').DataTable({
+                    "ajax": {
+                        "url": "<?=BASEURL?>/admin/data_laporan_transaksi/"+awal+"/"+akhir,
+                        method:"GET",
+                    },
+                    "columns": [
+                        {data : 'total_telah_dibayar', render: function ( data, type, row ) {
+                            return 'Rp '+(row.total_telah_dibayar).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".");
+                        }},
+                        {data : 'status_pembayaran', render: function ( data, type, row ) {
+                            var status_pembayaran = '';
+                            if(row.status_pembayaran == 0 ) {
+                                status_pembayaran = 'Penuh';
+                            } else {
+                                status_pembayaran = 'Belum Penuh';
+                            }
+                            return status_pembayaran;
+                        }},
+                        {data : 'nama_lengkap_pengguna'},
+                        {data : 'email_pengguna'},
+                        {data : 'nama_lengkap_arsitek'},
+                        {data : 'email_arsitek'},
+                        {data : 'judul_produk'},
+                        {data : 'dibuat_pada'},
+                    ],
+                    'aaSorting': [],
+                    'order': [],
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Indonesian.json"
+                    }
+                });
+            // }
+        }
     } );
 </script>
 <?php include(__DIR__ . '/../../layouts/footer.php'); ?>

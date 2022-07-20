@@ -83,13 +83,13 @@
                                     </a>
                                 </li>
                             <?php } ?>
-                            <li class="sidebar-menu-item <?= in_array(NOWURL, [BASEURL.'/admin/laporan_user',BASEURL.'/admin/laporan_produk',BASEURL.'/admin/laporan_transaksi',BASEURL.'/admin/laporan_saldo']) ? 'open active':'' ?> ">
+                            <li class="sidebar-menu-item <?= in_array(NOWURL, [BASEURL.'/admin/laporan_user',BASEURL.'/admin/laporan_produk',BASEURL.'/admin/laporan_transaksi',BASEURL.'/admin/laporan_keuangan',BASEURL.'/admin/laporan_saldo']) ? 'open active':'' ?> ">
                                 <a class="sidebar-menu-button" data-toggle="collapse" href="#menu_laporan">
                                     <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">library_books</i>
                                     <span class="sidebar-menu-text">Laporan</span>
                                     <span class="ml-auto sidebar-menu-toggle-icon"></span>
                                 </a>
-                                <ul class="sidebar-submenu collapse <?= in_array(NOWURL, [BASEURL.'/admin/laporan_user',BASEURL.'/admin/laporan_produk',BASEURL.'/admin/laporan_transaksi',BASEURL.'/admin/laporan_saldo']) ? 'show':'' ?> " id="menu_laporan">
+                                <ul class="sidebar-submenu collapse <?= in_array(NOWURL, [BASEURL.'/admin/laporan_user',BASEURL.'/admin/laporan_produk',BASEURL.'/admin/laporan_transaksi',BASEURL.'/admin/laporan_keuangan',BASEURL.'/admin/laporan_saldo']) ? 'show':'' ?> " id="menu_laporan">
                                     <?php if($_SESSION['id_user'] == 1){ ?>
                                         <li class="sidebar-menu-item <?= NOWURL == BASEURL.'/admin/laporan_user' ? 'active':'' ?>">
                                             <a class="sidebar-menu-button" href="<?= BASEURL.'/admin/laporan_user'; ?>">
@@ -249,8 +249,8 @@
 
         // datepicker
         var hari_ini = new Date();
-        var tanggal_sekarang = ("0" + hari_ini.getDate()).slice(-2)+'/'+("0" + hari_ini.getMonth()).slice(-2)+'/'+hari_ini.getFullYear();
-        var setahun_lalu = ("0" + hari_ini.getDate()).slice(-2)+'/'+("0" + hari_ini.getMonth()).slice(-2)+'/'+(hari_ini.getFullYear()-1);
+        var tanggal_sekarang = ("0" + hari_ini.getDate()).slice(-2)+'/'+("0" + (hari_ini.getMonth()+1)).slice(-2)+'/'+hari_ini.getFullYear();
+        var setahun_lalu = ("0" + hari_ini.getDate()).slice(-2)+'/'+("0" + (hari_ini.getMonth()+1)).slice(-2)+'/'+(hari_ini.getFullYear()-1);
         $('input[name="rentang_tanggal"]').daterangepicker({
             "startDate": setahun_lalu,
             "endDate": tanggal_sekarang,

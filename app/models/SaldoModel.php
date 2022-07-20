@@ -37,8 +37,8 @@ class SaldoModel{
     }
 
     
-    public function laporan_keuangan(){
-        $this->db->query("SELECT user.*, saldo.* FROM saldo LEFT JOIN user ON user.id_user = saldo.id_user WHERE keterangan != 'Biaya admin penarikan saldo' ORDER BY saldo.dibuat_pada ASC");
+    public function laporan_keuangan($tanggal_awal, $tanggal_akhir){
+        $this->db->query("SELECT user.*, saldo.*, saldo.dibuat_pada as dibuat_pada FROM saldo LEFT JOIN user ON user.id_user = saldo.id_user WHERE keterangan != 'Biaya admin penarikan saldo' AND DATE(saldo.dibuat_pada) BETWEEN '$tanggal_awal' AND '$tanggal_akhir'");
         return $this->db->resultSet();
     }
     
