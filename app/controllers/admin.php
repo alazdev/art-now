@@ -393,8 +393,20 @@ class admin extends Controller
 
     public function tolak_pembayaran_pengguna($id_pembayaran)
     {
-        if($this->model('PembayaranModel')->pembayaran_byadmin($id_pembayaran) != null){
+        $pembayaran = $this->model('PembayaranModel')->pembayaran_byadmin($id_pembayaran);
+        if($pembayaran != null){
             $this->model('PembayaranModel')->update_status($id_pembayaran, -1);
+
+            $judul_notifikasi = 'Pembayaran Ditolak';
+            $notifikasi = $_POST['notifikasi'];
+            // ==============[Notifikasi Penolakan]===============
+            $pesan = [
+                'id_user' => $pembayaran['id_pengguna'],
+                'judul' => $judul_notifikasi,
+                'keterangan' => $judul_notifikasi.". ".$notifikasi,
+                'link' => '/pengguna/index'
+            ];
+            $this->model('NotifikasiModel')->notifikasi($pesan);
             $this->alert('Pembayaran ditolak.', 'admin/validasi_pembayaran_pengguna');
         }else{
             $this->controller('alert')->message('Not Found', '404 | Not Found');

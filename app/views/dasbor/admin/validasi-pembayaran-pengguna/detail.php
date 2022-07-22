@@ -74,7 +74,7 @@
                     <div class="mb-4">
                         <h5>Aksi</h5>
                         <a href="../terima_pembayaran_pengguna/<?= $data['id_pembayaran'];?>" class="btn btn-success btn-block">Terima</a>
-                        <a href="../tolak_pembayaran_pengguna/<?= $data['id_pembayaran'];?>" class="btn btn-danger btn-block">Tolak</a>
+                        <a data-toggle="modal" data-target="#modal-tolak-pembayaran-pelanggan" onclick="tolak()" data-url="../tolak_pembayaran_pengguna/<?= $data['id_pembayaran'];?>" href="javascript:void(0)" class="btn btn-danger btn-block">Tolak</a>
                     </div>
                     <?php } ?>
                 </div>
@@ -82,4 +82,10 @@
         </div>
     </div>
 </div>
+<script>
+    function tolak(){
+        var url = $(event.currentTarget).data('url');
+        $('#form-tolak-pembayaran-pelanggan').attr('action', url);
+    }
+</script>
 <?php include(__DIR__ . '/../../layouts/footer.php'); ?>
